@@ -1,0 +1,18 @@
+<div class="container">
+  <header>
+    <mat-toolbar color="primary">
+      <span>Мероприятия</span>
+      <span class="spacer"></span>
+      <button class="white-icon" mat-icon-button routerLink="/feedback">
+        <mat-icon>mail</mat-icon>
+      </button>
+    </mat-toolbar>
+  </header>
+
+  <main>
+    <events-list></events-list>
+    <button routerLink="/events/new" mat-fab class="add-event-button">
+      <mat-icon>add</mat-icon>
+    </button>
+  </main>
+</div>

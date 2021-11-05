@@ -1,0 +1,15 @@
+.empty-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 320px;
+
+  .large-icon {
+    font-size: 12rem;
+    height: 12rem;
+    width: 12rem;
+    color: #ccc;
+    margin-bottom: 2rem;
+  }
+}

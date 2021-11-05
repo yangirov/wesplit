@@ -1,1 +1,47 @@
 /* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.white-icon {
+  cursor: pointer;
+  color: white;
+
+  svg {
+    fill: white;
+  }
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+button[mat-icon-button] {
+  outline: none !important;
+  border: 0 !important;
+  border-radius: 0px;
+  outline-style: none !important;
+  background-color: Transparent;
+}
+
+.form {
+  padding: 1rem;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.grey-text {
+  color: dimgrey;
+  text-align: center;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

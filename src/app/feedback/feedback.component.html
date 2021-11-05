@@ -1,0 +1,28 @@
+<div class="container">
+  <header>
+    <mat-toolbar color="primary">
+      <button class="white-icon" mat-icon-button routerLink="/">
+        <mat-icon>close</mat-icon>
+      </button>
+      <span>Написать разработчикам</span>
+      <span class="spacer"></span>
+      <button class="white-icon" mat-icon-button>
+        <mat-icon>check</mat-icon>
+      </button>
+    </mat-toolbar>
+  </header>
+
+  <main>
+    <form class="form">
+      <mat-form-field class="full-width">
+        <mat-label>Ваш отзыв</mat-label>
+        <input matInput required="true" />
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <mat-label>Электронная почта (необязательно)</mat-label>
+        <textarea matInput></textarea>
+      </mat-form-field>
+    </form>
+  </main>
+</div>
