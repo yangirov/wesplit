@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MomentPipe } from '../shared/moment.pipe';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { EventPageModule } from './event-page/event-page.module';
+import { EventPageModule } from './event/event-page.module';
 import { FeedbackModule } from './feedback/feedback.module';
 import { environment } from '../environments/environment';
 import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
@@ -17,12 +17,13 @@ import { getFirestore, provideFirestore } from '@angular/fire/firestore';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    EventPageModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => getFirestore()),
+    EventPageModule,
     FeedbackModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
+  exports: [MomentPipe],
 })
 export class AppModule {}

@@ -1,20 +1,16 @@
-export interface LocalEvents {
-  [name: string]: string;
-}
-
-export interface Events {
-  [events: string]: Event;
+export interface LocalEvent {
+  id: string;
+  organizer: string;
 }
 
 export interface Event {
-  id?: string;
-  purchases: Purchases;
-  participants: string[];
-  rePayedDebts: RePayedDebts;
-}
-
-export interface Purchases {
-  [purchase: string]: Purchase;
+  id: string;
+  date: string;
+  name: string;
+  organizer: string;
+  members: string[];
+  purchases: Purchase[];
+  rePayedDebts: RePayedDebt[];
 }
 
 export interface Purchase {
@@ -22,22 +18,27 @@ export interface Purchase {
   name: string;
   payer: string;
   amount: number;
-  participants: string[];
+  members: string[];
 }
 
-export interface RePayedDebts {
-  [rePayedDebt: string]: number;
-}
-
-export interface ParticipantDebt {
-  from: string;
-  to: string;
-  debt?: number;
+export interface RePayedDebt {
+  name: string;
   sum?: number;
 }
 
-export interface ParticipantsBalance {
-  [participant: string]: number;
+export interface MemberDebt {
+  from: string;
+  to: string;
+  sum?: number;
+}
+
+export interface MemberBalance {
+  name: string;
+  sum: number;
+}
+
+export interface EventMember {
+  name: string;
 }
 
 export interface EventAction {}

@@ -1,0 +1,28 @@
+<mat-accordion>
+  <mat-expansion-panel
+    (opened)="checkOpenState = true"
+    (closed)="checkOpenState = false"
+  >
+    <mat-expansion-panel-header>
+      <mat-panel-title><mat-icon>payment</mat-icon></mat-panel-title>
+      <mat-panel-description>
+        <p class="panel-title">Чек</p>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <div class="balance-check-content">
+      <div class="balance-check-content__debts">
+        <p *ngFor="let row of check()">{{ row }}</p>
+      </div>
+    </div>
+
+    <button
+      class="balance-check-button"
+      (click)="copyCheck()"
+      mat-raised-button
+      color="basic"
+    >
+      <mat-icon>content_copy</mat-icon>Скопировать чек
+    </button>
+  </mat-expansion-panel>
+</mat-accordion>

@@ -1,0 +1,28 @@
+.mat-expansion-panel-header-title {
+  flex-grow: 0;
+}
+
+.panel-title {
+  font-size: 1.1em;
+  color: #000;
+}
+
+.balance-check-content {
+  font-size: 1.1em;
+  line-height: 1.4;
+  border: 1px solid #e1e4e7;
+  background-color: #f8f8f9;
+
+  &__debts {
+    padding: 1em 1em 0 1em;
+    font-size: 0.9em;
+    user-select: text;
+  }
+}
+
+.balance-check-button {
+  margin: 2em 0 1em 0;
+  padding: 0.3em 0.6em;
+  display: flex;
+  align-items: center;
+}

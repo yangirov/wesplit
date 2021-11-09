@@ -12,7 +12,10 @@ describe('Sum format test', function () {
     ];
 
     testCases.forEach(({ value, expected }) => {
-      const actual = sumFormat(value);
+      const actual = sumFormat(value)
+        .replace(/\xa0/g, ' ')
+        .replace(/\u202f/g, ' ');
+
       expect(actual).toEqual(expected);
     });
   });

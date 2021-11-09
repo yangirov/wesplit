@@ -11,6 +11,7 @@ export const environment = {
     storageBucket: 'wesplit-840b9.appspot.com',
     messagingSenderId: '190723137399',
     appId: '1:190723137399:web:7b98bfe021caaec1054b72',
+    localEmulator: true,
   },
 };
 

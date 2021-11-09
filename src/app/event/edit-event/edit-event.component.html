@@ -1,0 +1,25 @@
+<header *ngIf="event">
+  <mat-toolbar color="primary">
+    <button class="router-button" mat-icon-button routerLink="/">
+      <mat-icon>arrow_backward</mat-icon>
+    </button>
+    <span>{{ event.name }}</span>
+    <span class="spacer"></span>
+    <button (click)="openShareModal()" mat-icon-button>
+      <mat-icon>share</mat-icon>
+    </button>
+    <button mat-icon-button>
+      <mat-icon>menu</mat-icon>
+    </button>
+  </mat-toolbar>
+</header>
+
+<main *ngIf="event">
+  <mat-tab-group mat-stretch-tabs [selectedIndex]="1">
+    <mat-tab label="Покупки"> Content 1 </mat-tab>
+    <mat-tab label="Баланс">
+      <debt-tab [event]="event"></debt-tab>
+    </mat-tab>
+    <mat-tab label="Действия"> Content 3 </mat-tab>
+  </mat-tab-group>
+</main>

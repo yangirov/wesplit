@@ -6,7 +6,8 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "unit-tests": "ng test --include=src/utils/*.spec.ts"
   },
   "private": true,
   "dependencies": {

@@ -1,0 +1,40 @@
+<header>
+  <mat-toolbar color="primary">
+    <span>События</span>
+    <span class="spacer"></span>
+    <button mat-icon-button routerLink="/feedback">
+      <mat-icon>mail</mat-icon>
+    </button>
+  </mat-toolbar>
+</header>
+
+<main>
+  <div *ngIf="!loading; else spinner">
+    <div *ngIf="events.length; else noEvents">
+      <events-list-item
+        *ngFor="let event of events"
+        [event]="event"
+      ></events-list-item>
+    </div>
+
+    <ng-template #noEvents>
+      <empty-items
+        icon="event"
+        text="У вас пока нет мероприятий, создайте первым свое мероприятие и добавьте участников"
+      ></empty-items>
+    </ng-template>
+  </div>
+
+  <ng-template #spinner>
+    <spinner></spinner>
+  </ng-template>
+
+  <button
+    mat-fab
+    routerLink="/events/new"
+    class="add-event-button"
+    color="primary"
+  >
+    <mat-icon>add</mat-icon>
+  </button>
+</main>

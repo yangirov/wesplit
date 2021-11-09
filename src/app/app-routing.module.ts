@@ -5,14 +5,14 @@ const routes: Routes = [
   {
     path: '',
     loadChildren: () =>
-      import('./events-page/events-page.module').then(
+      import('./events-list/events-page.module').then(
         (m) => m.EventsPageModule
       ),
   },
   {
     path: 'events',
     loadChildren: () =>
-      import('./event-page/event-page.module').then((m) => m.EventPageModule),
+      import('./event/event-page.module').then((m) => m.EventPageModule),
   },
   {
     path: 'feedback',

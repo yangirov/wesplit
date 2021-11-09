@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Event, EventAction, Events, Purchase } from '../models/Event';
+import { Event, EventAction, Purchase } from '../models/Event';
+import { getLocalEvents } from './localStorage.service';
 import { Feedback } from '../models/Feedback';
 import {
   Firestore,
@@ -10,9 +10,10 @@ import {
   deleteDoc,
   updateDoc,
   setDoc,
+  docData,
 } from '@angular/fire/firestore';
-import { getLocalEvents } from '../utils/LocalStorageEvents';
-import { docData } from 'rxfire/firestore';
+import { mergeMap, toArray } from 'rxjs/operators';
+import { from, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -20,17 +21,14 @@ import { docData } from 'rxfire/firestore';
 export class DataService {
   constructor(private firestore: Firestore) {}
 
-  readEvents(): Events {
+  getEvents(): Observable<Event> {
     const localEvents = getLocalEvents();
-    const result: Events = {};
+    return from(localEvents).pipe(mergeMap((x) => this.getEventById(x.id)));
+  }
 
-    Object.keys(localEvents).map(async (eventId) => {
-      this.loadEvent(eventId).subscribe((event) => {
-        result[eventId] = event;
-      });
-    });
-
-    return result;
+  getEventById(eventId: string): Observable<Event> {
+    const ref = doc(this.firestore, `events/${eventId}`);
+    return docData(ref, { idField: 'id' }) as Observable<Event>;
   }
 
   saveEvent(event: Event) {
@@ -41,11 +39,6 @@ export class DataService {
   updateEvent(event: Event) {
     const ref = doc(this.firestore, `events/${event.id}`);
     return updateDoc(ref, event);
-  }
-
-  loadEvent(eventId: string): Observable<Event> {
-    const ref = doc(this.firestore, `events/${eventId}`);
-    return docData(ref, { idField: 'id' }) as Observable<Event>;
   }
 
   addPurchase(eventId: string, data: Purchase) {
@@ -79,13 +72,13 @@ export class DataService {
     return deleteDoc(purchaseRef);
   }
 
-  fetchUpdateParticipants(eventId: string, participantsList: number[]) {
-    const ref = doc(this.firestore, `events/${eventId}/participants`);
-    return setDoc(ref, participantsList);
+  fetchUpdateMembers(eventId: string, members: string[]) {
+    const ref = doc(this.firestore, `events/${eventId}/members`);
+    return setDoc(ref, members);
   }
 
-  saveFeedback(feedback: Feedback) {
+  async saveFeedback(feedback: Feedback) {
     const feedbackCollection = collection(this.firestore, 'feedbacks');
-    return addDoc(feedbackCollection, feedback);
+    return await addDoc(feedbackCollection, feedback);
   }
 }
