@@ -1,0 +1,133 @@
+<div *ngIf="actionType === 'CreateEvent'">
+  <p class="event-action__text">
+    <b class="event-action__text_bold">{{ action.manager }}</b>
+    создал(-а) мероприятие
+  </p>
+</div>
+
+<div *ngIf="actionType === 'ChangeEventName'">
+  <p class="event-action__text">
+    <b class="event-action__text_bold">{{ action.currentUser }}</b>
+    изменил(-а) название мероприятия на
+    <b class="event-action__text_bold"> {{ action.eventName }}</b>
+  </p>
+</div>
+
+<div *ngIf="actionType === 'ChangeEventDate'">
+  <p class="event-action__text">
+    <b class="event-action__text_bold">{{ action.currentUser }}</b>
+    изменил(-а) дату проведения мероприятия на
+    <b class="event-action__text_bold"> {{ action.date }}</b>
+  </p>
+</div>
+
+<div *ngIf="actionType === 'AddParticipantToEvent'">
+  <p class="event-action__text">
+    <b class="event-action__text_bold">{{ action.currentUser }}</b>
+    добавил(-а) в мероприятие
+    <b class="event-action__text_bold"> {{ action.memberName }}</b>
+  </p>
+</div>
+
+<div *ngIf="actionType === 'AddParticipantsToEvent'">
+  <p class="event-action__text">
+    <b class="event-action__text_bold">{{ action.manager }}</b>
+    добавил(-а)
+    <b class="event-action__text_bold">{{ action.eventMembersCount }}</b>
+    человек в мероприятие
+  </p>
+</div>
+
+<div *ngIf="actionType === 'RemoveParticipantFromEvent'">
+  <p class="event-action__text">
+    <b class="event-action__text_bold">{{ action.currentUser }}</b>
+    исключил(-а)
+    <b class="event-action__text_bold"> {{ action.memberName }}</b>
+    из мероприятия
+  </p>
+</div>
+
+<div *ngIf="actionType === 'AddPurchase'">
+  <p class="event-action__text">
+    <b class="event-action__text_bold">{{ action.currentUser }}</b>
+    добавил(-а) покупку
+    <b class="event-action__text_bold"> {{ action.purchaseName }}</b>
+    на сумму {{ action.sum }}
+  </p>
+</div>
+
+<div *ngIf="actionType === 'DeletePurchase'">
+  <p class="event-action__text">
+    <b class="event-action__text_bold">{{ action.currentUser }}</b>
+    удалил(-а) покупку
+    <b class="event-action__text_bold"> {{ action.purchaseName }}</b>
+  </p>
+</div>
+
+<div *ngIf="actionType === 'AddParticipantsToPurchase'">
+  <p class="event-action__text">
+    <b class="event-action__text_bold">{{ action.currentUser }}</b>
+    добавил(-а)
+    <b class="event-action__text_bold">{{ action.purchaseMembersCount }}</b>
+    человек в покупку
+    <b class="event-action__text_bold"> {{ action.purchaseName }}</b>
+  </p>
+</div>
+
+<div *ngIf="actionType === 'AddParticipantToPurchase'">
+  <span
+    *ngIf="action.payerName === action.currentUser"
+    class="event-action__text"
+  >
+    себя
+  </span>
+  <span
+    *ngIf="action.payerName !== action.currentUser"
+    class="event-action__text_bold"
+  >
+    {{ action.payerName }}
+  </span>
+
+  <p class="event-action__text">
+    <b class="event-action__text_bold">{{ action.currentUser }}</b>
+    добавил(-а) {{ action.payerName }}в покупку
+    <b class="event-action__text_bold">{{ action.purchaseName }}</b>
+  </p>
+</div>
+
+<div *ngIf="actionType === 'RemoveParticipantFromPurchase'">
+  <span
+    *ngIf="action.payerName === action.currentUser"
+    class="event-action__text"
+  >
+    себя
+  </span>
+  <span
+    *ngIf="action.payerName !== action.currentUser"
+    class="event-action__text_bold"
+  >
+    {{ action.payerName }}
+  </span>
+
+  <p class="event-action__text">
+    <b class="event-action__text_bold">{{ action.currentUser }}</b>
+    исключил(-а) {{ action.payerName }} из покупки
+    <b class="event-action__text_bold">{{ action.purchaseName }}</b>
+  </p>
+</div>
+
+<div *ngIf="actionType === 'GiveBackPartially'">
+  <p class="event-action__text">
+    <b class="event-action__text_bold">{{ action.currentUser }}</b> отметил(-а)
+    долг <b class="event-action__text_bold">{{ action.payerName }}</b> частично
+    возращенным
+  </p>
+</div>
+
+<div *ngIf="actionType === 'GiveBack'">
+  <p class="event-action__text">
+    <b class="event-action__text_bold">{{ action.currentUser }}</b> отметил(-а)
+    долг <b class="event-action__text_bold">{{ action.payerName }}</b> полностью
+    возращенным
+  </p>
+</div>

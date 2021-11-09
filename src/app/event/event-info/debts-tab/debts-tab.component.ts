@@ -6,11 +6,11 @@ import {
 } from '../../../../utils/BalanceCalculator';
 
 @Component({
-  selector: 'debt-tab',
-  templateUrl: './debt-tab.component.html',
-  styleUrls: ['./debt-tab.component.scss'],
+  selector: 'debts-tab',
+  templateUrl: './debts-tab.component.html',
+  styleUrls: ['./debts-tab.component.scss'],
 })
-export class DebtTabComponent implements OnInit {
+export class DebtsTabComponent implements OnInit {
   @Input() public event!: Event;
 
   public debts!: MemberDebt[];
@@ -19,6 +19,7 @@ export class DebtTabComponent implements OnInit {
 
   ngOnInit(): void {
     const balance = getEventBalance(this.event);
-    this.debts = getEventsMembersDebts(balance, this.event);
+    const debts = getEventsMembersDebts(balance, this.event);
+    this.debts = debts;
   }
 }

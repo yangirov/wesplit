@@ -6,11 +6,11 @@ import { MatDialog } from '@angular/material/dialog';
 import { ShareEventComponent } from './share-event/share-event.component';
 
 @Component({
-  selector: 'app-edit-event',
-  templateUrl: './edit-event.component.html',
-  styleUrls: ['./edit-event.component.scss'],
+  selector: 'event-info',
+  templateUrl: './event-info.component.html',
+  styleUrls: ['./event-info.component.scss'],
 })
-export class EditEventComponent implements OnInit {
+export class EventInfoComponent implements OnInit {
   id: string;
   event!: Event;
 

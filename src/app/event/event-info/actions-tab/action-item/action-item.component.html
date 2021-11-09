@@ -1,0 +1,22 @@
+<div class="event-action">
+  <div class="event-action__icon-wrapper">
+    <div class="event-action__icon event-action__icon">
+      <mat-icon>{{ actionIcon() }}</mat-icon>
+    </div>
+  </div>
+  <div class="event-action__info">
+    <div class="event-action__content">
+      <div class="event-action__text-wrapper">
+        <action-type [action]="action"></action-type>
+      </div>
+      <div class="event-action__sum" *ngIf="action.sum">{{ action.sum }} Р</div>
+      <div class="event-action__debt-sum" *ngIf="action.debtSum">
+        <mat-icon>arrow_forward</mat-icon>
+        {{ action.debtSum }} Р
+      </div>
+    </div>
+    <div class="event-action__date" *ngIf="action.date">
+      {{ actionDate() }}
+    </div>
+  </div>
+</div>

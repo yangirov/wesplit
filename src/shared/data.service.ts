@@ -12,7 +12,7 @@ import {
   setDoc,
   docData,
 } from '@angular/fire/firestore';
-import { mergeMap, toArray } from 'rxjs/operators';
+import { mergeMap } from 'rxjs/operators';
 import { from, Observable } from 'rxjs';
 
 @Injectable({

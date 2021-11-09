@@ -3,12 +3,20 @@ import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { debounceTime, pairwise } from 'rxjs/operators';
 import { DataService } from '../../../shared/data.service';
-import { Event, EventMember } from '../../../models/Event';
+import {
+  ActionTypes,
+  Event,
+  EventAction,
+  EventMember,
+  Purchase,
+  RePayedDebt,
+} from '../../../models/Event';
 import { setLocalEvents } from '../../../shared/localStorage.service';
 import {
   duplicateMembersValidator,
   organizerInMembersValidation,
 } from '../../../utils/FormValidators';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-new-event',
@@ -81,7 +89,7 @@ export class NewEventComponent implements OnInit {
         id: '',
         name,
         organizer,
-        date: date.toString(),
+        date: moment.utc(date).valueOf(),
         purchases: [],
         rePayedDebts: [],
         members: [
@@ -91,6 +99,85 @@ export class NewEventComponent implements OnInit {
             .map((x: EventMember) => x.name),
         ],
       };
+
+      const purchases: Purchase[] = [
+        {
+          id: '3',
+          title: 'Пиво',
+          payer: 'Эмиль',
+          sum: 1000,
+          members: ['Эмиль', 'Диана', 'Глеб', 'Даша', 'Дима'],
+        },
+        {
+          id: '3',
+          title: 'Бургеры',
+          payer: 'Диана',
+          sum: 1000,
+          members: ['Эмиль', 'Диана', 'Глеб', 'Даша', 'Дима'],
+        },
+        {
+          id: '3',
+          title: 'Аренда дома',
+          payer: 'Глеб',
+          sum: 5000,
+          members: ['Эмиль', 'Диана', 'Глеб', 'Даша', 'Дима'],
+        },
+      ];
+
+      const rePayedDebts: RePayedDebt[] = [
+        { name: 'Эмиль', sum: 1000 },
+        { name: 'Дима', sum: 500 },
+        { name: 'Даша', sum: 750 },
+      ];
+
+      const actions: EventAction[] = [
+        {
+          type: ActionTypes.AddPurchase,
+          currentUser: 'Эмиль',
+          date: 1636389685329,
+          purchaseName: 'Пиво',
+          sum: 1000,
+        },
+        {
+          type: ActionTypes.AddParticipantsToPurchase,
+          currentUser: 'Эмиль',
+          date: 1636389685330,
+          purchaseName: 'Пиво',
+          eventMembersCount: 4,
+        },
+        {
+          type: ActionTypes.AddPurchase,
+          currentUser: 'Диана',
+          date: 1636389705277,
+          purchaseName: 'Аренда боулинга',
+          sum: 2000,
+        },
+        {
+          type: ActionTypes.AddParticipantsToPurchase,
+          currentUser: 'Эмиль',
+          date: 1636389705278,
+          purchaseName: 'Аренда боулинга',
+          eventMembersCount: 4,
+        },
+        {
+          type: ActionTypes.GiveBack,
+          currentUser: 'Эмиль',
+          date: 1636389738105,
+          debtSum: 250,
+          payerName: 'Даша',
+        },
+        {
+          type: ActionTypes.GiveBack,
+          currentUser: 'Даша',
+          date: 1636399418983,
+          debtSum: 500,
+          payerName: 'Диана',
+        },
+      ];
+
+      event.purchases = purchases;
+      event.rePayedDebts = rePayedDebts;
+      event.actions = actions;
 
       await this.dataService.saveEvent(event).then((res: any) => {
         const id = res._key.path.segments[1];

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Event } from '../../models/Event';
 import { DataService } from '../../shared/data.service';
+import { defaultIfEmpty } from 'rxjs/operators';
 
 @Component({
   selector: 'app-events-page',
@@ -14,9 +15,13 @@ export class EventsPageComponent implements OnInit {
   constructor(private dataService: DataService) {}
 
   ngOnInit(): void {
-    this.dataService.getEvents().subscribe((event: Event) => {
-      this.events.push(event);
-      this.loading = false;
-    });
+    this.dataService.getEvents().subscribe(
+      (event: Event) => {
+        this.events.push(event);
+        this.loading = false;
+      },
+      (err) => console.error(err),
+      () => (this.loading = false)
+    );
   }
 }

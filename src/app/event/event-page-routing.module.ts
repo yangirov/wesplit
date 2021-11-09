@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { NewEventComponent } from './new-event/new-event.component';
-import { EditEventComponent } from './edit-event/edit-event.component';
+import { EventInfoComponent } from './event-info/event-info.component';
 
 const routes: Routes = [
   {
@@ -10,7 +10,7 @@ const routes: Routes = [
   },
   {
     path: ':id',
-    component: EditEventComponent,
+    component: EventInfoComponent,
   },
 ];
 

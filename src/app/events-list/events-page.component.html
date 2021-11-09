@@ -16,14 +16,14 @@
         [event]="event"
       ></events-list-item>
     </div>
-
-    <ng-template #noEvents>
-      <empty-items
-        icon="event"
-        text="У вас пока нет мероприятий, создайте первым свое мероприятие и добавьте участников"
-      ></empty-items>
-    </ng-template>
   </div>
+
+  <ng-template #noEvents>
+    <empty-items
+      icon="event"
+      text="У вас пока нет мероприятий, создайте первым свое мероприятие и добавьте участников"
+    ></empty-items>
+  </ng-template>
 
   <ng-template #spinner>
     <spinner></spinner>

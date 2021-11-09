@@ -15,11 +15,15 @@
 </header>
 
 <main *ngIf="event">
-  <mat-tab-group mat-stretch-tabs [selectedIndex]="1">
-    <mat-tab label="Покупки"> Content 1 </mat-tab>
-    <mat-tab label="Баланс">
-      <debt-tab [event]="event"></debt-tab>
+  <mat-tab-group mat-stretch-tabs>
+    <mat-tab label="Покупки">
+      <purchases-tab [event]="event"></purchases-tab>
     </mat-tab>
-    <mat-tab label="Действия"> Content 3 </mat-tab>
+    <mat-tab label="Баланс">
+      <debts-tab [event]="event"></debts-tab>
+    </mat-tab>
+    <mat-tab label="Действия">
+      <actions-tab [event]="event"></actions-tab>
+    </mat-tab>
   </mat-tab-group>
 </main>

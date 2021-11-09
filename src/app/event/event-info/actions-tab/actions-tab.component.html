@@ -1,0 +1,9 @@
+<div *ngIf="event.actions; else noActions">
+  <div *ngFor="let action of event.actions">
+    <action-item [action]="action"></action-item>
+  </div>
+</div>
+
+<ng-template #noActions>
+  <empty-items icon="history" text="Действий нет"></empty-items>
+</ng-template>

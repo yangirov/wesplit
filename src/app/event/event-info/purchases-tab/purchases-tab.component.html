@@ -1,0 +1,12 @@
+<div *ngIf="event.purchases; else noPurchases">
+  <div *ngFor="let purchase of event.purchases">
+    <purchase-item [purchase]="purchase" [event]="event"></purchase-item>
+  </div>
+</div>
+
+<ng-template #noPurchases>
+  <empty-items
+    icon="add_shopping_cart"
+    text="У вас пока нет покупок"
+  ></empty-items>
+</ng-template>

@@ -21,19 +21,19 @@ export function getEventBalance(event: Event): MemberBalance[] {
   event?.purchases?.forEach((purchase) => {
     purchase.members.forEach((memberName) => {
       const memberIndex = getIndex(balance, memberName);
-      const debt = memberName === purchase.payer && purchase.amount;
+      const debt = memberName === purchase.payer && purchase.sum;
 
       if (!balance[memberIndex]) {
         balance[memberIndex] = { name: memberName, sum: 0 };
       }
 
       balance[memberIndex].sum +=
-        Number(debt) - purchase.amount / purchase.members.length;
+        Number(debt) - purchase.sum / purchase.members.length;
     });
 
     const payerIndex = getIndex(balance, purchase.payer);
     if (!purchase.members.includes(purchase.payer)) {
-      balance[payerIndex].sum += purchase.amount;
+      balance[payerIndex].sum += purchase.sum;
     }
   });
 

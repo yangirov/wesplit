@@ -1,0 +1,8 @@
+<div class="purchase-list-item" [routerLink]="purchaseLink()">
+  <div class="purchase-list-item__descr">
+    <div class="purchase-list-item__title">{{ purchase.title }}</div>
+    <div class="purchase-list-item__buyer">{{ purchase.payer }}</div>
+    <div class="purchase-list-item__subtitle">{{ purchaseSubtitle() }}</div>
+  </div>
+  <div class="purchase-list-item__price">{{ purchaseSum() }} р</div>
+</div>

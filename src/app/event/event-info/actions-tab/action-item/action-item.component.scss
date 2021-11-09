@@ -1,0 +1,59 @@
+.event-action {
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #e1e4e7;
+}
+.event-action__text-wrapper {
+  margin-bottom: 4px;
+}
+.event-action__text {
+  font-size: 14px;
+  font-weight: 400;
+  color: #1d1e1f;
+}
+.event-action__text_bold {
+  font-weight: 500;
+}
+.event-action__date {
+  font-size: 13px;
+  font-weight: normal;
+  line-height: 1.23;
+  color: #818f99;
+}
+.event-action__sum {
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.22;
+  color: #1d1e1f;
+}
+.event-action__debt-sum {
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.22;
+  color: #1d1e1f;
+}
+.event-action__debt-icon {
+  width: 18px;
+  height: 12px;
+  display: inline-block;
+  margin-right: 8px;
+}
+.event-action__icon-wrapper {
+  flex-shrink: 0;
+  margin-right: 16px;
+  background-color: #eff0f2;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+.event-action__icon-wrapper_yellow {
+  background-color: #fff5c4;
+}
+.event-action__icon {
+  width: 24px;
+  height: 24px;
+}
