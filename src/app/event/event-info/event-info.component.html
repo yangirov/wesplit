@@ -1,29 +1,46 @@
-<header *ngIf="event">
-  <mat-toolbar color="primary">
-    <button class="router-button" mat-icon-button routerLink="/">
-      <mat-icon>arrow_backward</mat-icon>
-    </button>
-    <span>{{ event.name }}</span>
-    <span class="spacer"></span>
-    <button (click)="openShareModal()" mat-icon-button>
-      <mat-icon>share</mat-icon>
-    </button>
-    <button mat-icon-button>
-      <mat-icon>menu</mat-icon>
-    </button>
-  </mat-toolbar>
-</header>
+<mat-sidenav-container
+  class="sidenav-container"
+  (backdropClick)="closeSidenav()"
+>
+  <mat-sidenav
+    (keydown.escape)="closeSidenav()"
+    [(opened)]="opened"
+    [fixedInViewport]="true"
+    position="end"
+    disableClose
+  >
+    <event-sidenav [event]="event"></event-sidenav>
+  </mat-sidenav>
 
-<main *ngIf="event">
-  <mat-tab-group mat-stretch-tabs>
-    <mat-tab label="Покупки">
-      <purchases-tab [event]="event"></purchases-tab>
-    </mat-tab>
-    <mat-tab label="Баланс">
-      <debts-tab [event]="event"></debts-tab>
-    </mat-tab>
-    <mat-tab label="Действия">
-      <actions-tab [event]="event"></actions-tab>
-    </mat-tab>
-  </mat-tab-group>
-</main>
+  <mat-sidenav-content *ngIf="event">
+    <header>
+      <mat-toolbar color="primary">
+        <button class="router-button" mat-icon-button routerLink="/">
+          <mat-icon>arrow_backward</mat-icon>
+        </button>
+        <span>{{ event.name }}</span>
+        <span class="spacer"></span>
+        <button (click)="openShareModal()" mat-icon-button>
+          <mat-icon>share</mat-icon>
+        </button>
+        <button mat-icon-button (click)="opened = !opened">
+          <mat-icon>menu</mat-icon>
+        </button>
+      </mat-toolbar>
+    </header>
+
+    <main>
+      <mat-tab-group mat-stretch-tabs>
+        <mat-tab label="Покупки">
+          <purchases-tab [event]="event"></purchases-tab>
+        </mat-tab>
+        <mat-tab label="Баланс">
+          <debts-tab [event]="event"></debts-tab>
+        </mat-tab>
+        <mat-tab label="Действия">
+          <actions-tab [event]="event"></actions-tab>
+        </mat-tab>
+      </mat-tab-group>
+    </main>
+  </mat-sidenav-content>
+</mat-sidenav-container>

@@ -13,6 +13,7 @@ import { ShareEventComponent } from './share-event/share-event.component';
 export class EventInfoComponent implements OnInit {
   id: string;
   event!: Event;
+  opened: boolean = false;
 
   constructor(
     private activateRoute: ActivatedRoute,
@@ -26,6 +27,10 @@ export class EventInfoComponent implements OnInit {
     this.dataService.getEventById(this.id).subscribe((event: Event) => {
       this.event = event;
     });
+  }
+
+  closeSidenav() {
+    this.opened = false;
   }
 
   openShareModal() {

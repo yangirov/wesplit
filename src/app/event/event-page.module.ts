@@ -26,6 +26,9 @@ import { ActionItemComponent } from './event-info/actions-tab/action-item/action
 import { ActionTypeComponent } from './event-info/actions-tab/action-type/action-type.component';
 import { PurchasesTabComponent } from './event-info/purchases-tab/purchases-tab.component';
 import { PurchaseItemComponent } from './event-info/purchases-tab/purchase-item/purchase-item.component';
+import { EventSidenavComponent } from './event-info/event-sidenav/event-sidenav.component';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatDividerModule } from '@angular/material/divider';
 
 @NgModule({
   declarations: [
@@ -40,6 +43,7 @@ import { PurchaseItemComponent } from './event-info/purchases-tab/purchase-item/
     ActionTypeComponent,
     PurchasesTabComponent,
     PurchaseItemComponent,
+    EventSidenavComponent,
   ],
   imports: [
     CommonModule,
@@ -58,6 +62,8 @@ import { PurchaseItemComponent } from './event-info/purchases-tab/purchase-item/
     ClipboardModule,
     MatButtonModule,
     EmptyItemsModule,
+    MatSidenavModule,
+    MatDividerModule,
   ],
 })
 export class EventPageModule {}

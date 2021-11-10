@@ -1,0 +1,83 @@
+.sidenav {
+  overflow-y: scroll;
+
+  &_header {
+    padding: 1.2em 1em;
+
+    .event_actions {
+      display: flex;
+
+      .actions_item {
+        margin-right: 1em;
+        cursor: pointer;
+      }
+    }
+  }
+
+  &_main {
+    margin-top: 0.5em;
+
+    .event_description {
+      padding: 0 1.2em;
+      margin-bottom: 1em;
+
+      .event_title {
+        font-size: 24px;
+        font-weight: 500;
+        word-wrap: break-word;
+        padding-bottom: 0;
+        margin-bottom: 0;
+      }
+
+      .event_subtitle {
+        font-size: 13px;
+        font-weight: normal;
+        color: #83888d;
+        line-height: 1.2;
+      }
+    }
+
+    .event_members {
+      padding: 0 1.2em;
+      margin: 1em 0 0.5em 0;
+
+      .members_title {
+        text-transform: uppercase;
+        line-height: 1.38;
+        letter-spacing: 1px;
+        color: #83888d;
+        margin-bottom: 0.6em;
+      }
+
+      .members_item {
+        padding: 0.8em 0;
+        font-size: 1.2em;
+      }
+    }
+
+    .event_login {
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      padding: 1em 1.2em;
+
+      .login_icon {
+        margin-right: 1.8em;
+        margin-top: 5px;
+
+        mat-icon {
+          font-size: 2em;
+        }
+      }
+
+      .login_button {
+        font-size: 1.2em;
+      }
+    }
+
+    .event_organizer {
+      padding: 0 1.2em;
+      margin-top: 1em;
+    }
+  }
+}
