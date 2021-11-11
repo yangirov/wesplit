@@ -15,21 +15,25 @@
   </mat-toolbar>
 </header>
 
-<main>
-  <form
-    class="form"
-    [formGroup]="feedbackForm"
-    (ngSubmit)="sendFeedback()"
-    id="feedbackForm"
-  >
+<main class="container" *ngIf="!loading; else spinner">
+  <form [formGroup]="feedbackForm" (ngSubmit)="onSubmit()" id="feedbackForm">
     <mat-form-field class="full-width">
-      <mat-label>Ваш отзыв</mat-label>
-      <input matInput formControlName="message" required="true" />
+      <mat-label>Электронная почта (необязательно)</mat-label>
+      <input matInput formControlName="email" />
     </mat-form-field>
 
     <mat-form-field class="full-width">
-      <mat-label>Электронная почта (необязательно)</mat-label>
-      <input matInput formControlName="email" type="email" />
+      <mat-label>Ваш отзыв</mat-label>
+      <textarea
+        matInput
+        formControlName="message"
+        rows="10"
+        required
+      ></textarea>
     </mat-form-field>
   </form>
 </main>
+
+<ng-template #spinner>
+  <spinner></spinner>
+</ng-template>

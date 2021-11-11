@@ -1,5 +1,11 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import {
+  FormArray,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import { debounceTime, pairwise } from 'rxjs/operators';
 import { DataService } from '../../../shared/data.service';
@@ -25,7 +31,8 @@ import * as moment from 'moment';
   styleUrls: ['./new-event.component.scss'],
 })
 export class NewEventComponent implements OnInit {
-  public eventForm!: FormGroup;
+  eventForm!: FormGroup;
+  loading: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -36,9 +43,9 @@ export class NewEventComponent implements OnInit {
   ngOnInit(): void {
     this.eventForm = this.formBuilder.group(
       {
-        name: '',
+        name: ['', Validators.required],
         date: new FormControl(new Date()),
-        organizer: '',
+        organizer: ['', Validators.required],
         members: this.formBuilder.array([], duplicateMembersValidator()),
       },
       {
@@ -47,7 +54,7 @@ export class NewEventComponent implements OnInit {
     );
 
     this.members()
-      ?.valueChanges.pipe(debounceTime(200), pairwise())
+      ?.valueChanges.pipe(debounceTime(100), pairwise())
       .subscribe(([prev, curr]: [EventMember[], EventMember[]]) => {
         if (
           prev[prev.length - 1].name === '' &&
@@ -81,8 +88,10 @@ export class NewEventComponent implements OnInit {
     this.members().push(newMember);
   }
 
-  async saveEvent() {
+  async onSubmit() {
     if (this.eventForm.valid) {
+      this.loading = true;
+
       let { name, date, organizer } = this.eventForm.value;
 
       const event: Event = {
@@ -182,6 +191,7 @@ export class NewEventComponent implements OnInit {
       await this.dataService.saveEvent(event).then((res: any) => {
         const id = res._key.path.segments[1];
         setLocalEvents(id, event.organizer);
+        this.loading = false;
         this.router.navigate([`/events/${id}`]);
       });
     }

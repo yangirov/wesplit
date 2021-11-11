@@ -20,6 +20,7 @@ export class DebtsTabComponent implements OnInit {
   ngOnInit(): void {
     const balance = getEventBalance(this.event);
     const debts = getEventsMembersDebts(balance, this.event);
+
     this.debts = debts;
   }
 }

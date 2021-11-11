@@ -1,32 +1,36 @@
-.purchase-list-item {
+.purchase-item {
   display: flex;
   padding: 16px;
-  border-bottom: 1px solid #e1e4e7;
-}
-.purchase-list-item__descr {
-  flex-grow: 1;
-}
-.purchase-list-item__buyer {
-  height: 16px;
-  color: #1d1e1f;
-  font-size: 14px;
-  margin-bottom: 2px;
-  line-height: 16px;
-}
-.purchase-list-item__title {
-  color: #1d1e1f;
-  font-size: 18px;
-  margin-bottom: 6px;
-  line-height: 1.2;
-}
-.purchase-list-item__subtitle {
-  height: 16px;
-  color: #83888d;
-  font-size: 14px;
-  line-height: 16px;
-}
-.purchase-list-item__price {
-  font-weight: 700;
-  color: #1d1e1f;
-  text-transform: uppercase;
+
+  &__description {
+    flex-grow: 1;
+  }
+
+  &__title {
+    color: #1d1e1f;
+    font-size: 18px;
+    margin-bottom: 6px;
+    line-height: 1.2;
+  }
+
+  &__payer {
+    height: 16px;
+    color: #1d1e1f;
+    font-size: 14px;
+    margin-bottom: 2px;
+    line-height: 16px;
+  }
+
+  &__subtitle {
+    height: 16px;
+    color: #83888d;
+    font-size: 14px;
+    line-height: 16px;
+  }
+
+  &__sum {
+    font-weight: 700;
+    color: #1d1e1f;
+    text-transform: uppercase;
+  }
 }

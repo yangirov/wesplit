@@ -1,0 +1,73 @@
+.event-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 1em;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &__description {
+    flex-grow: 1;
+    flex-shrink: 1;
+
+    .description-title {
+      font-size: 20px;
+      font-weight: normal;
+      line-height: 1.1;
+      color: #1d1e1f;
+      margin: 0 0 8px 0;
+    }
+
+    .description-subtitle {
+      font-size: 14px;
+      line-height: 1.14;
+      color: #83888d;
+
+      .subtitle-date {
+        margin-bottom: 4px;
+      }
+    }
+  }
+
+  &__debt {
+    display: flex;
+    flex-direction: column-reverse;
+    flex-grow: 0;
+    flex-shrink: 0;
+
+    .debt-status {
+      text-align: right;
+
+      &.negative {
+        color: #f1353b;
+      }
+      &.positive {
+        color: #34c082;
+      }
+      &.neutral {
+        color: #1d1e1f;
+      }
+    }
+
+    .debt-status {
+      font-size: 20px;
+      font-weight: 500;
+      line-height: 1.1;
+    }
+
+    .status {
+      font-size: 13px;
+      font-weight: normal;
+      line-height: 1.23;
+
+      &.positive {
+        color: #2fb678;
+      }
+
+      &.negative {
+        color: #e94f33;
+      }
+    }
+  }
+}

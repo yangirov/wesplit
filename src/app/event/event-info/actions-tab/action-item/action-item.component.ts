@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ActionTypes, Event, EventAction } from '../../../../../models/Event';
+import { ActionTypes, EventAction } from '../../../../../models/Event';
 import * as moment from 'moment';
 
 export const actionIcons: { [key: string]: string } = {

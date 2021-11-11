@@ -1,15 +1,19 @@
-<h1 mat-dialog-title>Пригласить друзей</h1>
+<h2 mat-dialog-title>Пригласить друзей</h2>
+
 <div mat-dialog-content>
   <p>
     Поделитесь ссылкой на мероприятие с друзьями, чтобы они могли вести учёт
     покупок вместе с вами:
   </p>
+
   <div class="share-link">{{ eventLink() }}</div>
 </div>
-<div mat-dialog-actions align="end">
-  <button color="basic" mat-raised-button (click)="onLatetClick()">
+
+<div mat-dialog-actions class="buttons">
+  <button color="basic" mat-raised-button (click)="onLaterClick()">
     Позже
   </button>
+
   <button
     color="primary"
     mat-raised-button

@@ -1,0 +1,13 @@
+.separator {
+  width: calc(100% + 1em);
+  margin-left: -1em;
+  height: 8px;
+  overflow: hidden;
+  background: #eef1f5;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 -1px 1px 0 rgb(0 0 0 / 26%);
+
+  &.outer {
+    width: calc(100% + 2em);
+  }
+}

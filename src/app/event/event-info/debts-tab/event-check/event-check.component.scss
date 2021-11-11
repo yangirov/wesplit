@@ -1,8 +1,11 @@
-.mat-expansion-panel-header-title {
-  flex-grow: 0;
+.mat-expansion-panel-header {
+  &-title {
+    flex-grow: 0;
+  }
 }
 
 .panel-title {
+  margin-top: 2px;
   font-size: 1.1em;
   color: #000;
 }

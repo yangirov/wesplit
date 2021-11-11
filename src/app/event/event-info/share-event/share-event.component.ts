@@ -20,7 +20,7 @@ export class ShareEventComponent implements OnInit {
     return `${window.location.origin}/events/${this.id}`;
   }
 
-  onLatetClick() {
+  onLaterClick() {
     this.dialogRef.close();
   }
 

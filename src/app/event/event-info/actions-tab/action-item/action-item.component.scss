@@ -2,58 +2,76 @@
   padding: 16px;
   display: flex;
   align-items: center;
-  border-bottom: 1px solid #e1e4e7;
-}
-.event-action__text-wrapper {
-  margin-bottom: 4px;
-}
-.event-action__text {
-  font-size: 14px;
-  font-weight: 400;
-  color: #1d1e1f;
-}
-.event-action__text_bold {
-  font-weight: 500;
-}
-.event-action__date {
-  font-size: 13px;
-  font-weight: normal;
-  line-height: 1.23;
-  color: #818f99;
-}
-.event-action__sum {
-  font-size: 18px;
-  font-weight: 500;
-  line-height: 1.22;
-  color: #1d1e1f;
-}
-.event-action__debt-sum {
-  font-size: 18px;
-  font-weight: 500;
-  line-height: 1.22;
-  color: #1d1e1f;
-}
-.event-action__debt-icon {
-  width: 18px;
-  height: 12px;
-  display: inline-block;
-  margin-right: 8px;
-}
-.event-action__icon-wrapper {
-  flex-shrink: 0;
-  margin-right: 16px;
-  background-color: #eff0f2;
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-}
-.event-action__icon-wrapper_yellow {
-  background-color: #fff5c4;
-}
-.event-action__icon {
-  width: 24px;
-  height: 24px;
+
+  &__icon-wrapper {
+    flex-shrink: 0;
+    margin-right: 16px;
+    background-color: #eff0f2;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+  }
+
+  &__icon {
+    width: 24px;
+    height: 24px;
+
+    mat-icon {
+      color: #83888d;
+    }
+
+    &.icon_check {
+      mat-icon {
+        color: #34c082;
+      }
+    }
+  }
+
+  &__text-wrapper {
+    margin-bottom: 4px;
+  }
+
+  &__text {
+    font-size: 14px;
+    font-weight: 400;
+    color: #1d1e1f;
+  }
+
+  &__text_bold {
+    font-weight: 500;
+  }
+
+  &__date {
+    font-size: 13px;
+    font-weight: normal;
+    line-height: 1.23;
+    color: #818f99;
+  }
+
+  &__sum {
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 1.22;
+    color: #1d1e1f;
+  }
+
+  &__debt-sum {
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 1.22;
+    color: #1d1e1f;
+    margin-bottom: 0.2em;
+
+    mat-icon {
+      font-size: 1.3em;
+      margin-top: -0.1em;
+      margin-right: 0.1em;
+      color: #83888d;
+    }
+  }
 }

@@ -1,6 +1,7 @@
 <mat-sidenav-container
   class="sidenav-container"
   (backdropClick)="closeSidenav()"
+  *ngIf="event"
 >
   <mat-sidenav
     (keydown.escape)="closeSidenav()"
@@ -12,7 +13,7 @@
     <event-sidenav [event]="event"></event-sidenav>
   </mat-sidenav>
 
-  <mat-sidenav-content *ngIf="event">
+  <mat-sidenav-content>
     <header>
       <mat-toolbar color="primary">
         <button class="router-button" mat-icon-button routerLink="/">
@@ -31,7 +32,7 @@
 
     <main>
       <mat-tab-group mat-stretch-tabs>
-        <mat-tab label="Покупки">
+        <mat-tab label="Покупки" style="height: 100%">
           <purchases-tab [event]="event"></purchases-tab>
         </mat-tab>
         <mat-tab label="Баланс">

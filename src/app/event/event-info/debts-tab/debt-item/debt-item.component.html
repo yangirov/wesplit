@@ -1,6 +1,6 @@
-<div class="root root_{{ debtType() }}">
+<div class="debt-item {{ debtType() }}">
   <div class="wrapper">
-    <div class="direction">
+    <div class="info">
       <div class="from">{{ debt.from }}</div>
       <mat-icon class="icon">arrow_forward</mat-icon>
       <div class="to">{{ debt.to }}</div>
@@ -8,3 +8,4 @@
   </div>
   <div class="sum">{{ sum() }} P</div>
 </div>
+<mat-divider></mat-divider>

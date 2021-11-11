@@ -10,11 +10,12 @@ body {
 }
 
 .container {
-  padding: 1em 1em 0 1em;
+  padding: 1em;
 }
 
 button[mat-icon-button] {
   &:disabled {
+    color: #ffffff !important;
     opacity: 0.6;
   }
 }
@@ -23,10 +24,6 @@ button {
   &:hover {
     cursor: pointer;
   }
-}
-
-.form {
-  padding: 1rem;
 }
 
 .mat-form-field-invalid {
@@ -54,4 +51,8 @@ snack-bar-container.mat-snack-bar-container {
   color: #155724 !important;
   background-color: #d4edda !important;
   border-color: #c3e6cb !important;
+}
+
+.mat-tab-body-wrapper {
+  height: 100%;
 }

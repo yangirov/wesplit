@@ -1,6 +1,6 @@
 <div class="event-action">
   <div class="event-action__icon-wrapper">
-    <div class="event-action__icon event-action__icon">
+    <div class="event-action__icon icon_{{ actionIcon() }}">
       <mat-icon>{{ actionIcon() }}</mat-icon>
     </div>
   </div>
@@ -12,7 +12,7 @@
       <div class="event-action__sum" *ngIf="action.sum">{{ action.sum }} Р</div>
       <div class="event-action__debt-sum" *ngIf="action.debtSum">
         <mat-icon>arrow_forward</mat-icon>
-        {{ action.debtSum }} Р
+        <span>{{ action.debtSum }} Р</span>
       </div>
     </div>
     <div class="event-action__date" *ngIf="action.date">
@@ -20,3 +20,4 @@
     </div>
   </div>
 </div>
+<mat-divider></mat-divider>

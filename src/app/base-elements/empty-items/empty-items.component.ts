@@ -6,8 +6,8 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./empty-items.component.scss'],
 })
 export class EmptyItemsComponent implements OnInit {
-  @Input() icon: string = 'arrow-right';
-  @Input() text: string = 'text';
+  @Input() icon!: string;
+  @Input() text!: string;
 
   constructor() {}
 

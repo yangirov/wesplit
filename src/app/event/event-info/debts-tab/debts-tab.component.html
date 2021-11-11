@@ -1,11 +1,15 @@
-<event-check *ngIf="debts" [event]="event" [debts]="debts"></event-check>
+<div *ngIf="debts; else noDebts">
+  <event-check [event]="event" [debts]="debts"></event-check>
 
-<div class="container">
-  <h3 *ngIf="debts; else noDebts">Текущие долги</h3>
-</div>
+  <separator></separator>
 
-<div *ngFor="let debt of debts">
-  <debt-item [debt]="debt" [event]="event"></debt-item>
+  <div class="title_wrapper">
+    <grey-title text="Текущие долги"></grey-title>
+  </div>
+
+  <div *ngFor="let debt of debts">
+    <debt-item [debt]="debt" [event]="event"></debt-item>
+  </div>
 </div>
 
 <ng-template #noDebts>

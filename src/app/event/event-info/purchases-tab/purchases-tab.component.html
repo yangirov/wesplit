@@ -1,7 +1,14 @@
-<div *ngIf="event.purchases; else noPurchases">
-  <div *ngFor="let purchase of event.purchases">
-    <purchase-item [purchase]="purchase" [event]="event"></purchase-item>
-  </div>
+<div class="new-event" *ngIf="event.purchases; else noPurchases">
+  <purchase-item
+    *ngFor="let purchase of event.purchases"
+    [purchase]="purchase"
+    [event]="event"
+  ></purchase-item>
+
+  <fab-button
+    link="/events/{{ event.id }}/purchases/new"
+    icon="add_shopping_cart"
+  ></fab-button>
 </div>
 
 <ng-template #noPurchases>

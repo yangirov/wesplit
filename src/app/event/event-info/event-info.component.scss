@@ -9,3 +9,10 @@
 mat-sidenav {
   width: 260px;
 }
+
+main {
+  height: calc(100% - 64px);
+  mat-tab-group {
+    height: 100%;
+  }
+}

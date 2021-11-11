@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Event } from '../../models/Event';
 import { DataService } from '../../shared/data.service';
-import { defaultIfEmpty } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-events-page',
-  templateUrl: './events-page.component.html',
-  styleUrls: ['./events-page.component.scss'],
+  selector: 'events-list',
+  templateUrl: './events-list.component.html',
+  styleUrls: ['./events-list.component.scss'],
 })
-export class EventsPageComponent implements OnInit {
+export class EventsListComponent implements OnInit {
   loading: boolean = true;
   events: Event[] = [];
 

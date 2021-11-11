@@ -20,7 +20,6 @@ import { ShareEventComponent } from './event-info/share-event/share-event.compon
 import { MatDialogModule } from '@angular/material/dialog';
 import { ClipboardModule } from '@angular/cdk/clipboard';
 import { MatButtonModule } from '@angular/material/button';
-import { EmptyItemsModule } from '../empty-items/empty-items.module';
 import { ActionsTabComponent } from './event-info/actions-tab/actions-tab.component';
 import { ActionItemComponent } from './event-info/actions-tab/action-item/action-item.component';
 import { ActionTypeComponent } from './event-info/actions-tab/action-type/action-type.component';
@@ -29,6 +28,7 @@ import { PurchaseItemComponent } from './event-info/purchases-tab/purchase-item/
 import { EventSidenavComponent } from './event-info/event-sidenav/event-sidenav.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatDividerModule } from '@angular/material/divider';
+import { BaseElementsModule } from '../base-elements/base-elements.module';
 
 @NgModule({
   declarations: [
@@ -61,9 +61,9 @@ import { MatDividerModule } from '@angular/material/divider';
     MatDialogModule,
     ClipboardModule,
     MatButtonModule,
-    EmptyItemsModule,
     MatSidenavModule,
     MatDividerModule,
+    BaseElementsModule,
   ],
 })
 export class EventPageModule {}

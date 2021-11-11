@@ -1,12 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../../shared/data.service';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Feedback } from '../../models/Feedback';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-feedback',
@@ -14,30 +10,34 @@ import { Feedback } from '../../models/Feedback';
   styleUrls: ['./feedback.component.scss'],
 })
 export class FeedbackComponent implements OnInit {
-  public feedbackForm!: FormGroup;
+  feedbackForm!: FormGroup;
+  loading: boolean = false;
 
   constructor(
     private dataService: DataService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
     this.feedbackForm = this.formBuilder.group({
-      message: '',
-      email: new FormControl(
+      message: ['', Validators.required],
+      email: [
         '',
-        Validators.compose([
-          Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$'),
-        ])
-      ),
+        Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$'),
+      ],
     });
   }
 
-  async sendFeedback() {
+  async onSubmit() {
     if (this.feedbackForm.valid) {
       const form = <Feedback>this.feedbackForm.value;
+      this.loading = true;
+
       await this.dataService.saveFeedback(form).then((res) => {
         this.feedbackForm.reset();
+        this.loading = false;
+        this.router.navigate(['/']);
       });
     }
   }

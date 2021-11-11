@@ -1,7 +1,8 @@
 <div *ngIf="event.actions; else noActions">
-  <div *ngFor="let action of event.actions">
-    <action-item [action]="action"></action-item>
-  </div>
+  <action-item
+    *ngFor="let action of event.actions"
+    [action]="action"
+  ></action-item>
 </div>
 
 <ng-template #noActions>

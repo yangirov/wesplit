@@ -3,6 +3,5 @@ export default function sumFormat(sum: number) {
 }
 
 export function formatStatus(sum: number) {
-  if (sum === 0) return null;
-  return `${sum > 0 ? 'вам должны' : 'вы должны'}`;
+  return sum !== 0 ? `${sum > 0 ? 'вам должны' : 'вы должны'}` : null;
 }

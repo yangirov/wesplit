@@ -5,9 +5,7 @@ const routes: Routes = [
   {
     path: '',
     loadChildren: () =>
-      import('./events-list/events-page.module').then(
-        (m) => m.EventsPageModule
-      ),
+      import('./events/events-list.module').then((m) => m.EventsListModule),
   },
   {
     path: 'events',

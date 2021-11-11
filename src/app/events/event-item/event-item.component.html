@@ -1,0 +1,21 @@
+<div class="event-item" routerLink="events/{{ event.id }}">
+  <div class="event-item__description">
+    <div class="description-title">{{ event.name }}</div>
+    <div class="description-subtitle">
+      <div class="subtitle-date">{{ date }}</div>
+      <div class="subtitle-members">{{ event.members.length }} участников</div>
+    </div>
+  </div>
+  <div class="event-item__debt">
+    <div class="debt-status {{ debtType }}">
+      <div class="debt-sum">
+        {{ sum }}
+      </div>
+      <div class="status {{ debtType }}">
+        {{ debtStatus }}
+      </div>
+    </div>
+  </div>
+</div>
+
+<mat-divider></mat-divider>

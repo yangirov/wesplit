@@ -1,0 +1,19 @@
+.empty-items {
+  min-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  &__wrapper {
+    max-width: 320px;
+    text-align: center;
+  }
+
+  mat-icon {
+    font-size: 12rem;
+    color: #83888d;
+    height: 100%;
+    width: 100%;
+  }
+}
