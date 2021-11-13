@@ -15,9 +15,13 @@ export function getLocalEvents(): LocalEvent[] {
 export function setLocalEvents(id: string, organizer: string) {
   const newLocalEventToSave: LocalEvent = { id, organizer };
 
-  const oldLocalEvents = <LocalEvent[]>(
+  let oldLocalEvents = <LocalEvent[]>(
     JSON.parse(localStorage.getItem('localEvents') || '[]')
   );
+
+  if (oldLocalEvents.some((x) => x.id === id)) {
+    oldLocalEvents = oldLocalEvents.filter((x) => x.id !== id);
+  }
 
   const newLocalEvents = [...oldLocalEvents, newLocalEventToSave];
   localStorage.setItem('localEvents', JSON.stringify(newLocalEvents));

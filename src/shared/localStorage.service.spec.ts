@@ -30,7 +30,23 @@ describe('Local storage events test', function () {
 
     // Assert
     expect(newEvents).toEqual(events);
+    expect(events[0].id).toBe('test-id');
+    expect(events[0].organizer).toBe('Emil');
+  });
+
+  it('should save event correctly if same event exists', () => {
+    // Arrange
+    const id = 'test-id';
+    const organizer = 'Emil';
+
+    // Act
+    setLocalEvents(id, organizer);
+    setLocalEvents(id, 'Ivan');
+    const events = getLocalEvents();
+
+    // Assert
+    expect(events.length).toBe(1);
     expect(events[0].id).toEqual('test-id');
-    expect(events[0].organizer).toEqual('Emil');
+    expect(events[0].organizer).toEqual('Ivan');
   });
 });

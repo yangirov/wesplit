@@ -239,12 +239,23 @@ export class EventFormComponent implements OnInit {
       event.rePayedDebts = rePayedDebts;
       event.actions = actions;
 
-      await this.dataService.saveEvent(event).then((res: any) => {
-        const id = res._key.path.segments[1];
-        setLocalEvents(id, event.organizer);
-        this.loading$.next(false);
-        this.router.navigate([`/events/${id}`]);
-      });
+      if (this.isEdit && this.eventId) {
+        event.id = this.eventId;
+        await this.dataService.updateEvent(event).then(async (res: any) => {
+          await this.onChange(event.id, event.organizer);
+        });
+      } else {
+        await this.dataService.saveEvent(event).then(async (res: any) => {
+          const id = res._key.path.segments[1];
+          await this.onChange(id, event.organizer);
+        });
+      }
     }
+  }
+
+  async onChange(id: string, organizer: string) {
+    setLocalEvents(id, organizer);
+    this.loading$.next(false);
+    await this.router.navigate(['events', id]);
   }
 }
