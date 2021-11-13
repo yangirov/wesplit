@@ -10,10 +10,17 @@
     text-align: center;
   }
 
-  mat-icon {
-    font-size: 12rem;
+  &__icon {
+    mat-icon {
+      font-size: 10rem;
+      color: var(--medium-grey);
+      height: 100%;
+      width: 100%;
+    }
+  }
+
+  &__text {
+    margin-top: 1em;
     color: var(--grey);
-    height: 100%;
-    width: 100%;
   }
 }

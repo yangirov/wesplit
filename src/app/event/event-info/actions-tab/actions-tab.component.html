@@ -1,4 +1,4 @@
-<div *ngIf="event.actions; else noActions">
+<div *ngIf="event.actions?.length; else noActions">
   <action-item
     *ngFor="let action of event.actions"
     [action]="action"

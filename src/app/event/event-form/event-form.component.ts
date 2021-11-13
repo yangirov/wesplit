@@ -151,6 +151,7 @@ export class EventFormComponent implements OnInit {
         date: moment.utc(date).valueOf(),
         purchases: [],
         rePayedDebts: [],
+        actions: [],
         members: [
           organizer,
           ...this.members()

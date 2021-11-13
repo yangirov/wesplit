@@ -1,4 +1,4 @@
-<div *ngIf="debts; else noDebts">
+<div *ngIf="debts?.length; else noDebts">
   <event-check [event]="event" [debts]="debts"></event-check>
 
   <separator></separator>

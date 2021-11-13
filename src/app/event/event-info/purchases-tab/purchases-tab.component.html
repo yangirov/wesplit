@@ -1,4 +1,4 @@
-<div class="new-event" *ngIf="event.purchases; else noPurchases">
+<div class="new-event" *ngIf="event.purchases?.length; else noPurchases">
   <purchase-item
     *ngFor="let purchase of event.purchases"
     [purchase]="purchase"

@@ -18,6 +18,7 @@ html,
 body {
   height: 100%;
 }
+
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
@@ -40,10 +41,6 @@ button {
   }
 }
 
-.mat-form-field-invalid {
-  color: var(--red);
-}
-
 .full-width {
   width: 100%;
 }
@@ -52,13 +49,14 @@ button {
   flex: 1 1 auto;
 }
 
-.grey-text {
-  color: var(--medium-grey);
-  text-align: center;
-}
-
 .router-button {
   margin-right: 1em;
+}
+
+// Material theme customization
+
+.mat-form-field-invalid {
+  color: var(--red);
 }
 
 snack-bar-container.mat-snack-bar-container {
