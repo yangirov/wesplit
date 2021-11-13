@@ -29,8 +29,4 @@ export class PurchaseItemComponent implements OnInit {
       ? `1 из ${eventMembersCount} участвует`
       : `${purchaseMembersCount} из ${eventMembersCount} участвуют`;
   }
-
-  purchaseLink() {
-    return [`/events/${this.event.id}/purchases/${this.purchase.id}`];
-  }
 }

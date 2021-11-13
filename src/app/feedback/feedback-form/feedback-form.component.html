@@ -7,8 +7,8 @@
     <span class="spacer"></span>
     <button
       mat-icon-button
-      form="purchaseForm"
-      [disabled]="purchaseForm.invalid"
+      form="feedbackForm"
+      [disabled]="feedbackForm.invalid"
     >
       <mat-icon>check</mat-icon>
     </button>
@@ -21,7 +21,7 @@
 
 <ng-template #form>
   <main class="container">
-    <form [formGroup]="purchaseForm" (ngSubmit)="onSubmit()" id="purchaseForm">
+    <form [formGroup]="feedbackForm" (ngSubmit)="onSubmit()" id="feedbackForm">
       <mat-form-field class="full-width">
         <mat-label>Электронная почта (необязательно)</mat-label>
         <input matInput formControlName="email" />

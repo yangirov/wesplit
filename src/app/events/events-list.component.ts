@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Event } from '../../models/Event';
 import { DataService } from '../../shared/data.service';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'events-list',
@@ -8,7 +9,7 @@ import { DataService } from '../../shared/data.service';
   styleUrls: ['./events-list.component.scss'],
 })
 export class EventsListComponent implements OnInit {
-  loading: boolean = true;
+  loading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
   events: Event[] = [];
 
   constructor(private dataService: DataService) {}
@@ -17,10 +18,10 @@ export class EventsListComponent implements OnInit {
     this.dataService.getEvents().subscribe(
       (event: Event) => {
         this.events.push(event);
-        this.loading = false;
+        this.loading$.next(false);
       },
       (err) => console.error(err),
-      () => (this.loading = false)
+      () => this.loading$.next(false)
     );
   }
 }

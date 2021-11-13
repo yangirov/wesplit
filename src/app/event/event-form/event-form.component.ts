@@ -6,7 +6,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { debounceTime, pairwise } from 'rxjs/operators';
 import { DataService } from '../../../shared/data.service';
 import {
@@ -23,20 +23,25 @@ import {
   organizerInMembersValidation,
 } from '../../../utils/FormValidators';
 import * as moment from 'moment';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Component({
-  selector: 'app-new-event',
+  selector: 'event-form',
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './event-form.component.html',
   styleUrls: ['./event-form.component.scss'],
 })
 export class EventFormComponent implements OnInit {
+  isEdit!: boolean;
+  eventId!: string;
+
   eventForm!: FormGroup;
-  loading: boolean = false;
+  loading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor(
     private formBuilder: FormBuilder,
     private dataService: DataService,
+    private route: ActivatedRoute,
     private router: Router
   ) {}
 
@@ -53,6 +58,45 @@ export class EventFormComponent implements OnInit {
       }
     );
 
+    this.isEdit = this.route.snapshot.data['isEdit'];
+    this.eventId = this.route.snapshot.paramMap.get('id') ?? '';
+
+    if (this.isEdit && this.eventId) {
+      this.loading$.next(true);
+
+      this.dataService.getEventById(this.eventId).subscribe((event) => {
+        if (event) {
+          this.fillForm(event);
+          this.subscribeMembersChanges();
+          this.loading$.next(false);
+        }
+      });
+    } else {
+      this.subscribeMembersChanges();
+    }
+  }
+
+  fillForm(event: Event) {
+    const { name, date, organizer, members } = event;
+
+    this.eventForm.patchValue({
+      name,
+      date: new Date(date),
+      organizer,
+    });
+
+    this.eventForm.setControl(
+      'members',
+      this.formBuilder.array(
+        members
+          .filter((x) => x !== organizer)
+          .map((name) => this.formBuilder.group({ name })) || [],
+        duplicateMembersValidator()
+      )
+    );
+  }
+
+  subscribeMembersChanges() {
     this.members()
       ?.valueChanges.pipe(debounceTime(100), pairwise())
       .subscribe(([prev, curr]: [EventMember[], EventMember[]]) => {
@@ -67,6 +111,12 @@ export class EventFormComponent implements OnInit {
       });
 
     this.addMember();
+  }
+
+  title() {
+    return this.isEdit && this.eventId
+      ? 'Редактирование события'
+      : 'Новое событие';
   }
 
   removeEmptyMembers(members: EventMember[]) {
@@ -90,7 +140,7 @@ export class EventFormComponent implements OnInit {
 
   async onSubmit() {
     if (this.eventForm.valid) {
-      this.loading = true;
+      this.loading$.next(true);
 
       let { name, date, organizer } = this.eventForm.value;
 
@@ -136,6 +186,7 @@ export class EventFormComponent implements OnInit {
       const rePayedDebts: RePayedDebt[] = [
         { name: 'Эмиль', sum: 1000 },
         { name: 'Дима', sum: 500 },
+        { name: 'Даша', sum: 750 },
         { name: 'Даша', sum: 750 },
       ];
 
@@ -191,7 +242,7 @@ export class EventFormComponent implements OnInit {
       await this.dataService.saveEvent(event).then((res: any) => {
         const id = res._key.path.segments[1];
         setLocalEvents(id, event.organizer);
-        this.loading = false;
+        this.loading$.next(false);
         this.router.navigate([`/events/${id}`]);
       });
     }

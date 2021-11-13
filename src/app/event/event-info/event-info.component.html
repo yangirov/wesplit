@@ -16,7 +16,7 @@
   <mat-sidenav-content>
     <header>
       <mat-toolbar color="primary">
-        <button class="router-button" mat-icon-button routerLink="/">
+        <button class="router-button" mat-icon-button [routerLink]="['/']">
           <mat-icon>arrow_backward</mat-icon>
         </button>
         <span>{{ event.name }}</span>

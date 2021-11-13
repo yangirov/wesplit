@@ -23,7 +23,7 @@ let defaultEvent: Event = {
       members: ['Emil', 'Ivan'],
     },
   ],
-  members: ['Emil', 'Ivan'],
+  members: ['Emil', 'Ivan', 'Fedor'],
   rePayedDebts: [],
 };
 

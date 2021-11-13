@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { FeedbackComponent } from './feedback.component';
+import { FeedbackFormComponent } from './feedback-form/feedback-form.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: FeedbackComponent,
+    component: FeedbackFormComponent,
   },
 ];
 

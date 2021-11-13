@@ -11,7 +11,7 @@ const routes: Routes = [
   {
     path: ':id/edit',
     data: { isEdit: true },
-    component: EventInfoComponent,
+    component: EventFormComponent,
   },
   {
     path: ':id',

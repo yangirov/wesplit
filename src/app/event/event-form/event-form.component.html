@@ -1,9 +1,9 @@
 <header>
   <mat-toolbar color="primary">
-    <button class="router-button" mat-icon-button routerLink="/">
+    <button class="router-button" mat-icon-button [routerLink]="['/']">
       <mat-icon>close</mat-icon>
     </button>
-    <h1>Новое событие</h1>
+    <h1>{{ title() }}</h1>
     <span class="spacer"></span>
     <button mat-icon-button form="eventForm" [disabled]="eventForm.invalid">
       <mat-icon>check</mat-icon>
@@ -11,67 +11,69 @@
   </mat-toolbar>
 </header>
 
-<main class="container" *ngIf="!loading; else spinner">
-  <form [formGroup]="eventForm" (ngSubmit)="onSubmit()" id="eventForm">
-    <mat-form-field class="full-width">
-      <mat-label>Название</mat-label>
-      <input matInput formControlName="name" required />
-    </mat-form-field>
+<div *ngIf="loading$ | async; else form">
+  <spinner></spinner>
+</div>
 
-    <mat-form-field class="full-width">
-      <mat-label>Дата проведения</mat-label>
-      <input
-        matInput
-        [matDatepicker]="picker"
-        formControlName="date"
-        required="true"
-      />
-      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
-    </mat-form-field>
+<ng-template #form>
+  <main class="container">
+    <form [formGroup]="eventForm" (ngSubmit)="onSubmit()" id="eventForm">
+      <mat-form-field class="full-width">
+        <mat-label>Название</mat-label>
+        <input matInput formControlName="name" required />
+      </mat-form-field>
 
-    <separator position="outer"></separator>
-    <grey-title text="Добавить участников"></grey-title>
-
-    <mat-form-field class="full-width">
-      <input
-        matInput
-        formControlName="organizer"
-        required="true"
-        placeholder="Ваше имя"
-      />
-    </mat-form-field>
-
-    <div
-      *ngIf="members().errors?.hasMembersDuplicates"
-      class="mat-form-field-invalid"
-    >
-      Имена участников не должны повторяться
-    </div>
-
-    <div
-      *ngIf="eventForm.errors?.organizerInMembers"
-      class="mat-form-field-invalid"
-    >
-      Организатор уже есть в списке участников
-    </div>
-
-    <div formArrayName="members">
-      <mat-form-field
-        class="full-width"
-        *ngFor="let participant of members().controls; let i = index"
-        [formGroupName]="i"
-      >
+      <mat-form-field class="full-width">
+        <mat-label>Дата проведения</mat-label>
         <input
           matInput
-          formControlName="name"
-          placeholder="Добавить участника"
+          [matDatepicker]="picker"
+          formControlName="date"
+          required="true"
+        />
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+      <separator position="outer"></separator>
+      <grey-title text="Добавить участников"></grey-title>
+
+      <mat-form-field class="full-width">
+        <input
+          matInput
+          formControlName="organizer"
+          required="true"
+          placeholder="Ваше имя"
         />
       </mat-form-field>
-    </div>
-  </form>
-</main>
 
-<ng-template #spinner>
-  <spinner></spinner>
+      <div
+        *ngIf="members().errors?.hasMembersDuplicates"
+        class="mat-form-field-invalid"
+      >
+        Имена участников не должны повторяться
+      </div>
+
+      <div
+        *ngIf="eventForm.errors?.organizerInMembers"
+        class="mat-form-field-invalid"
+      >
+        Организатор уже есть в списке участников
+      </div>
+
+      <div formArrayName="members">
+        <mat-form-field
+          class="full-width"
+          *ngFor="let participant of members().controls; let i = index"
+          [formGroupName]="i"
+        >
+          <input
+            matInput
+            formControlName="name"
+            placeholder="Добавить участника"
+          />
+        </mat-form-field>
+      </div>
+    </form>
+  </main>
 </ng-template>

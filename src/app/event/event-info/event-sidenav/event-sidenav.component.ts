@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Event, LocalEvent } from '../../../../models/Event';
 import * as moment from 'moment';
 import { getLocalEvents } from '../../../../shared/localStorage.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'event-sidenav',
@@ -11,7 +12,7 @@ import { getLocalEvents } from '../../../../shared/localStorage.service';
 export class EventSidenavComponent implements OnInit {
   @Input() event!: Event;
 
-  constructor() {}
+  constructor(private router: Router) {}
 
   ngOnInit(): void {}
 

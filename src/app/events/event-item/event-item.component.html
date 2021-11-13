@@ -1,4 +1,4 @@
-<div class="event-item" routerLink="events/{{ event.id }}">
+<div class="event-item" [routerLink]="['events', event.id]">
   <div class="event-item__description">
     <div class="description-title">{{ event.name }}</div>
     <div class="description-subtitle">

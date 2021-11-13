@@ -1,17 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { DataService } from '../../shared/data.service';
+import { DataService } from '../../../shared/data.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Feedback } from '../../models/Feedback';
+import { Feedback } from '../../../models/Feedback';
 import { Router } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
-  selector: 'app-feedback',
-  templateUrl: './feedback.component.html',
-  styleUrls: ['./feedback.component.scss'],
+  selector: 'feedback',
+  templateUrl: './feedback-form.component.html',
+  styleUrls: ['./feedback-form.component.scss'],
 })
-export class FeedbackComponent implements OnInit {
+export class FeedbackFormComponent implements OnInit {
   feedbackForm!: FormGroup;
-  loading: boolean = false;
+  loading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor(
     private dataService: DataService,
@@ -32,11 +33,11 @@ export class FeedbackComponent implements OnInit {
   async onSubmit() {
     if (this.feedbackForm.valid) {
       const form = <Feedback>this.feedbackForm.value;
-      this.loading = true;
+      this.loading$.next(true);
 
       await this.dataService.saveFeedback(form).then((res) => {
         this.feedbackForm.reset();
-        this.loading = false;
+        this.loading$.next(false);
         this.router.navigate(['/']);
       });
     }

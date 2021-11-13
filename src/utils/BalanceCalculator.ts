@@ -92,9 +92,17 @@ export function getEventsMembersDebts(
   return event?.members?.reduce((acc, lender) => {
     const lenderIndex = getIndex(balance, lender);
 
+    if (!balance[lenderIndex]) {
+      balance[lenderIndex] = { name: lender, sum: 0 };
+    }
+
     if (balance[lenderIndex].sum > 0) {
       event?.members?.forEach((payer) => {
         const payerIndex = getIndex(balance, payer);
+
+        if (!balance[payerIndex]) {
+          balance[payerIndex] = { name: payer, sum: 0 };
+        }
 
         if (balance[payerIndex].sum < 0) {
           const debt =
