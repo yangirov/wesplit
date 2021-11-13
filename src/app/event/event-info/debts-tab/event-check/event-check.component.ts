@@ -1,6 +1,6 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { Event, MemberDebt } from '../../../../../models/Event';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { NotificationService } from '../../../../../shared/notification.service';
 
 @Component({
   selector: 'event-check',
@@ -13,7 +13,10 @@ export class EventCheckComponent implements OnInit {
 
   checkOpenState: boolean = false;
 
-  constructor(private snackBar: MatSnackBar, private elRef: ElementRef) {}
+  constructor(
+    private notificationService: NotificationService,
+    private elRef: ElementRef
+  ) {}
 
   ngOnInit(): void {}
 
@@ -36,17 +39,13 @@ export class EventCheckComponent implements OnInit {
     selection?.addRange(range);
 
     if (!document.execCommand('copy')) {
-      this.openAlert(
+      this.notificationService.open(
         'Устройство не поддерживает автоматическое копирование. Пожалуйста, скопируйте выделенный текст сами'
       );
     } else {
-      this.openAlert('Чек скопирован в буфер обмена');
+      this.notificationService.open('Чек скопирован в буфер обмена');
     }
 
     selection?.removeAllRanges();
-  }
-
-  openAlert(message: string, action: string = 'Закрыть') {
-    this.snackBar.open(message, action, { duration: 2000 });
   }
 }

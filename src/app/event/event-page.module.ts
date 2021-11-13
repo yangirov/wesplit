@@ -15,7 +15,6 @@ import { DebtItemComponent } from './event-info/debts-tab/debt-item/debt-item.co
 import { DebtsTabComponent } from './event-info/debts-tab/debts-tab.component';
 import { EventCheckComponent } from './event-info/debts-tab/event-check/event-check.component';
 import { MatExpansionModule } from '@angular/material/expansion';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ShareEventComponent } from './event-info/share-event/share-event.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ClipboardModule } from '@angular/cdk/clipboard';
@@ -57,7 +56,6 @@ import { BaseElementsModule } from '../base-elements/base-elements.module';
     MatNativeDateModule,
     MatTabsModule,
     MatExpansionModule,
-    MatSnackBarModule,
     MatDialogModule,
     ClipboardModule,
     MatButtonModule,

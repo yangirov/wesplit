@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { NotificationService } from '../../../../shared/notification.service';
 
 @Component({
   selector: 'share-event',
@@ -9,7 +9,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class ShareEventComponent implements OnInit {
   constructor(
-    private snackBar: MatSnackBar,
+    private notificationService: NotificationService,
     public dialogRef: MatDialogRef<ShareEventComponent>,
     @Inject(MAT_DIALOG_DATA) public id: string
   ) {}
@@ -26,8 +26,6 @@ export class ShareEventComponent implements OnInit {
 
   onCopyClick() {
     this.dialogRef.close();
-    this.snackBar.open('Ссылка скопирована в буфер обмена', 'Закрыть  ', {
-      duration: 2000,
-    });
+    this.notificationService.open('Ссылка скопирована в буфер обмена');
   }
 }
