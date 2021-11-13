@@ -7,14 +7,14 @@
 .panel-title {
   margin-top: 2px;
   font-size: 1.1em;
-  color: #000;
+  color: var(--dark);
 }
 
 .balance-check-content {
   font-size: 1.1em;
   line-height: 1.4;
-  border: 1px solid #e1e4e7;
-  background-color: #f8f8f9;
+  border: 1px solid var(--medium-grey);
+  background-color: var(--light-grey);
 
   &__debts {
     padding: 1em 1em 0 1em;

@@ -15,14 +15,14 @@
       font-size: 20px;
       font-weight: normal;
       line-height: 1.1;
-      color: #1d1e1f;
+      color: var(--dark);
       margin: 0 0 8px 0;
     }
 
     .description-subtitle {
       font-size: 14px;
       line-height: 1.14;
-      color: #83888d;
+      color: var(--grey);
 
       .subtitle-date {
         margin-bottom: 4px;
@@ -40,13 +40,15 @@
       text-align: right;
 
       &.negative {
-        color: #f1353b;
+        color: var(--red);
       }
+
       &.positive {
-        color: #34c082;
+        color: var(--medium-green);
       }
+
       &.neutral {
-        color: #1d1e1f;
+        color: var(--dark);
       }
     }
 
@@ -62,11 +64,11 @@
       line-height: 1.23;
 
       &.positive {
-        color: #2fb678;
+        color: var(--medium-green);
       }
 
       &.negative {
-        color: #e94f33;
+        color: var(--red);
       }
     }
   }

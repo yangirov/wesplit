@@ -5,29 +5,29 @@
 
   &.returned {
     .info {
-      color: #83888d;
+      color: var(--grey);
     }
     .sum {
       display: none;
-      color: #83888d;
+      color: var(--grey);
     }
   }
 
   &.negative {
     .sum {
-      color: #f1353b;
+      color: var(--red);
     }
   }
 
   &.positive {
     .sum {
-      color: #34c082;
+      color: var(--light-green);
     }
   }
 
   &.neutral {
     .sum {
-      color: #1d1e1f;
+      color: var(--dark);
     }
   }
 
@@ -47,7 +47,7 @@
       font-size: 1.2em;
       font-weight: normal;
       line-height: 1.11;
-      color: #1d1e1f;
+      color: var(--dark);
 
       .from,
       .to {
@@ -61,7 +61,7 @@
         font-size: 1em;
         top: 4px;
         left: 4px;
-        color: #83888d;
+        color: var(--grey);
         padding: 0 0.2em;
       }
     }

@@ -1,5 +1,19 @@
 /* You can add global styles to this file, and also import other style files */
 
+:root {
+  --white: #ffffff;
+  --dark: #1d1e1f;
+  --red: #f44336;
+
+  --green: #155724;
+  --light-green: #c3e6cb;
+  --medium-green: #34c082;
+
+  --grey: #83888d;
+  --light-grey: #eef1f5;
+  --medium-grey: #cccccc;
+}
+
 html,
 body {
   height: 100%;
@@ -15,7 +29,7 @@ body {
 
 button[mat-icon-button] {
   &:disabled {
-    color: #ffffff !important;
+    color: var(--white) !important;
     opacity: 0.6;
   }
 }
@@ -27,7 +41,7 @@ button {
 }
 
 .mat-form-field-invalid {
-  color: #f44336;
+  color: var(--red);
 }
 
 .full-width {
@@ -39,7 +53,7 @@ button {
 }
 
 .grey-text {
-  color: dimgrey;
+  color: var(--medium-grey);
   text-align: center;
 }
 
@@ -48,9 +62,9 @@ button {
 }
 
 snack-bar-container.mat-snack-bar-container {
-  color: #155724 !important;
-  background-color: #d4edda !important;
-  border-color: #c3e6cb !important;
+  color: var(--green) !important;
+  background-color: var(--light-green) !important;
+  border-color: var(--medium-green) !important;
 }
 
 .mat-tab-body-wrapper {

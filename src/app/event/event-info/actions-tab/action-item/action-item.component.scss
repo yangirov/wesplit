@@ -6,7 +6,7 @@
   &__icon-wrapper {
     flex-shrink: 0;
     margin-right: 16px;
-    background-color: #eff0f2;
+    background-color: var(--light-grey);
     width: 40px;
     height: 40px;
     display: flex;
@@ -20,12 +20,12 @@
     height: 24px;
 
     mat-icon {
-      color: #83888d;
+      color: var(--grey);
     }
 
     &.icon_check {
       mat-icon {
-        color: #34c082;
+        color: var(--medium-green);
       }
     }
   }
@@ -37,7 +37,7 @@
   &__text {
     font-size: 14px;
     font-weight: 400;
-    color: #1d1e1f;
+    color: var(--dark);
   }
 
   &__text_bold {
@@ -48,14 +48,14 @@
     font-size: 13px;
     font-weight: normal;
     line-height: 1.23;
-    color: #818f99;
+    color: var(--grey);
   }
 
   &__sum {
     font-size: 18px;
     font-weight: 500;
     line-height: 1.22;
-    color: #1d1e1f;
+    color: var(--dark);
   }
 
   &__debt-sum {
@@ -64,14 +64,14 @@
     font-size: 18px;
     font-weight: 500;
     line-height: 1.22;
-    color: #1d1e1f;
+    color: var(--dark);
     margin-bottom: 0.2em;
 
     mat-icon {
       font-size: 1.3em;
       margin-top: -0.1em;
       margin-right: 0.1em;
-      color: #83888d;
+      color: var(--grey);
     }
   }
 }

@@ -7,7 +7,7 @@
   }
 
   &__title {
-    color: #1d1e1f;
+    color: var(--dark);
     font-size: 18px;
     margin-bottom: 6px;
     line-height: 1.2;
@@ -15,7 +15,7 @@
 
   &__payer {
     height: 16px;
-    color: #1d1e1f;
+    color: var(--dark);
     font-size: 14px;
     margin-bottom: 2px;
     line-height: 16px;
@@ -23,14 +23,14 @@
 
   &__subtitle {
     height: 16px;
-    color: #83888d;
+    color: var(--grey);
     font-size: 14px;
     line-height: 16px;
   }
 
   &__sum {
     font-weight: 700;
-    color: #1d1e1f;
+    color: var(--dark);
     text-transform: uppercase;
   }
 }

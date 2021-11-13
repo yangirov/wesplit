@@ -32,7 +32,7 @@
       .event_subtitle {
         font-size: 13px;
         font-weight: normal;
-        color: #83888d;
+        color: var(--grey);
         line-height: 1.2;
       }
     }
@@ -45,7 +45,7 @@
         text-transform: uppercase;
         line-height: 1.38;
         letter-spacing: 1px;
-        color: #83888d;
+        color: var(--grey);
         margin-bottom: 0.6em;
       }
 
