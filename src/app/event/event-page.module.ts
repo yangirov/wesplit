@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { EventPageRoutingModule } from './event-page-routing.module';
-import { NewEventComponent } from './new-event/new-event.component';
+import { EventFormComponent } from './event-form/event-form.component';
 import { EventInfoComponent } from './event-info/event-info.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -32,7 +32,7 @@ import { BaseElementsModule } from '../base-elements/base-elements.module';
 
 @NgModule({
   declarations: [
-    NewEventComponent,
+    EventFormComponent,
     EventInfoComponent,
     DebtItemComponent,
     DebtsTabComponent,

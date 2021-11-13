@@ -27,10 +27,10 @@ import * as moment from 'moment';
 @Component({
   selector: 'app-new-event',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: './new-event.component.html',
-  styleUrls: ['./new-event.component.scss'],
+  templateUrl: './event-form.component.html',
+  styleUrls: ['./event-form.component.scss'],
 })
-export class NewEventComponent implements OnInit {
+export class EventFormComponent implements OnInit {
   eventForm!: FormGroup;
   loading: boolean = false;
 

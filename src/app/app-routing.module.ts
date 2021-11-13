@@ -13,6 +13,11 @@ const routes: Routes = [
       import('./event/event-page.module').then((m) => m.EventPageModule),
   },
   {
+    path: 'events/:id/purchases',
+    loadChildren: () =>
+      import('./purchase/purchase.module').then((m) => m.PurchaseModule),
+  },
+  {
     path: 'feedback',
     loadChildren: () =>
       import('./feedback/feedback.module').then((m) => m.FeedbackModule),
