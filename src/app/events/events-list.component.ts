@@ -21,7 +21,9 @@ export class EventsListComponent implements OnInit {
         this.loading$.next(false);
       },
       (err) => console.error(err),
-      () => this.loading$.next(false)
+      () => {
+        this.loading$.next(false);
+      }
     );
   }
 }

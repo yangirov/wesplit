@@ -1,9 +1,13 @@
 <header>
   <mat-toolbar color="primary">
-    <button class="router-button" mat-icon-button [routerLink]="['/']">
+    <button
+      class="router-button"
+      mat-icon-button
+      [routerLink]="['/events', eventId]"
+    >
       <mat-icon>close</mat-icon>
     </button>
-    <span>Написать разработчикам</span>
+    <span>{{ title() }}</span>
     <span class="spacer"></span>
     <button
       mat-icon-button
@@ -21,21 +25,10 @@
 
 <ng-template #form>
   <main class="container">
-    <form [formGroup]="purchaseForm" (ngSubmit)="onSubmit()" id="purchaseForm">
-      <mat-form-field class="full-width">
-        <mat-label>Электронная почта (необязательно)</mat-label>
-        <input matInput formControlName="email" />
-      </mat-form-field>
-
-      <mat-form-field class="full-width">
-        <mat-label>Ваш отзыв</mat-label>
-        <textarea
-          matInput
-          formControlName="message"
-          rows="10"
-          required
-        ></textarea>
-      </mat-form-field>
-    </form>
+    <form
+      [formGroup]="purchaseForm"
+      (ngSubmit)="onSubmit()"
+      id="purchaseForm"
+    ></form>
   </main>
 </ng-template>

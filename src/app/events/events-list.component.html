@@ -15,7 +15,10 @@
 <ng-template #form>
   <main>
     <div *ngIf="events.length; else noEvents">
-      <event-item *ngFor="let event of events" [event]="event"></event-item>
+      <event-item
+        *ngFor="let event of events.reverse()"
+        [event]="event"
+      ></event-item>
     </div>
 
     <ng-template #noEvents>

@@ -8,7 +8,7 @@ const routes: Routes = [
     component: PurchaseFormComponent,
   },
   {
-    path: ':id',
+    path: ':purchaseId/edit',
     data: { isEdit: true },
     component: PurchaseFormComponent,
   },

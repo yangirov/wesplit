@@ -3,26 +3,26 @@ import {
   EventAction,
   Purchase,
   RePayedDebt,
-} from '../../../../../models/Event';
+} from '../../../models/Event';
 
 export const purchases: Purchase[] = [
   {
     id: '3',
-    title: 'Пиво',
+    title: 'Напитки',
     payer: 'Эмиль',
     sum: 1000,
     members: ['Эмиль', 'Диана', 'Глеб', 'Даша', 'Дима'],
   },
   {
     id: '3',
-    title: 'Бургеры',
+    title: 'Еда',
     payer: 'Диана',
     sum: 1000,
     members: ['Эмиль', 'Диана', 'Глеб', 'Даша', 'Дима'],
   },
   {
     id: '3',
-    title: 'Аренда дома',
+    title: 'Аренда площадки',
     payer: 'Глеб',
     sum: 5000,
     members: ['Эмиль', 'Диана', 'Глеб', 'Даша', 'Дима'],

@@ -9,14 +9,7 @@ import {
 import { ActivatedRoute, Router } from '@angular/router';
 import { debounceTime, pairwise } from 'rxjs/operators';
 import { DataService } from '../../../shared/data.service';
-import {
-  ActionTypes,
-  Event,
-  EventAction,
-  EventMember,
-  Purchase,
-  RePayedDebt,
-} from '../../../models/Event';
+import { ActionTypes, Event, EventMember } from '../../../models/Event';
 import { setLocalEvents } from '../../../shared/localStorage.service';
 import {
   duplicateMembersValidator,
@@ -25,6 +18,7 @@ import {
 import * as moment from 'moment';
 import { BehaviorSubject } from 'rxjs';
 import { EventActionService } from '../../../shared/eventAction.service';
+import { actions, purchases, rePayedDebts } from './mock';
 
 @Component({
   selector: 'event-form',
@@ -176,6 +170,14 @@ export class EventFormComponent implements OnInit {
             date: moment().utc().valueOf(),
           },
         ];
+      }
+
+      if (this.route.snapshot.queryParams['isMock']) {
+        //for await (const v of actions) {
+        //  event.actions?.push(v);
+        //}
+        event.purchases = purchases;
+        //event.rePayedDebts = rePayedDebts;
       }
 
       if (this.isEdit && this.eventId) {

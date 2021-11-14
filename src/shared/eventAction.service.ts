@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ActionTypes, EventAction, Event } from '../models/Event';
+import { ActionTypes, EventAction } from '../models/Event';
 import { DataService } from './data.service';
 
 @Injectable({
@@ -8,8 +8,8 @@ import { DataService } from './data.service';
 export class EventActionService {
   constructor(private dataService: DataService) {}
 
-  async createEventAction(eventId: string, action: EventAction) {
-    await this.dataService.addEventAction(eventId, action);
+  async createEventAction(eventId: string, action: EventAction): Promise<any> {
+    return await this.dataService.addEventAction(eventId, action);
   }
 
   changeEventName(
