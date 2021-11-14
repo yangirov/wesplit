@@ -1,11 +1,11 @@
-<div *ngIf="actionType === 'CreateEvent'">
+<div *ngIf="action.type === actionTypes.CreateEvent">
   <p class="event-action__text">
     <b class="event-action__text_bold">{{ action.manager }}</b>
     создал(-а) мероприятие
   </p>
 </div>
 
-<div *ngIf="actionType === 'ChangeEventName'">
+<div *ngIf="action.type === actionTypes.ChangeEventName">
   <p class="event-action__text">
     <b class="event-action__text_bold">{{ action.currentUser }}</b>
     изменил(-а) название мероприятия на
@@ -13,7 +13,7 @@
   </p>
 </div>
 
-<div *ngIf="actionType === 'ChangeEventDate'">
+<div *ngIf="action.type === actionTypes.ChangeEventDate">
   <p class="event-action__text">
     <b class="event-action__text_bold">{{ action.currentUser }}</b>
     изменил(-а) дату проведения мероприятия на
@@ -21,7 +21,7 @@
   </p>
 </div>
 
-<div *ngIf="actionType === 'AddParticipantToEvent'">
+<div *ngIf="action.type === actionTypes.AddMemberToEvent">
   <p class="event-action__text">
     <b class="event-action__text_bold">{{ action.currentUser }}</b>
     добавил(-а) в мероприятие
@@ -29,7 +29,7 @@
   </p>
 </div>
 
-<div *ngIf="actionType === 'AddParticipantsToEvent'">
+<div *ngIf="action.type === actionTypes.AddMembersToEvent">
   <p class="event-action__text">
     <b class="event-action__text_bold">{{ action.manager }}</b>
     добавил(-а)
@@ -38,7 +38,7 @@
   </p>
 </div>
 
-<div *ngIf="actionType === 'RemoveParticipantFromEvent'">
+<div *ngIf="action.type === actionTypes.RemoveMemberFromEvent">
   <p class="event-action__text">
     <b class="event-action__text_bold">{{ action.currentUser }}</b>
     исключил(-а)
@@ -47,7 +47,7 @@
   </p>
 </div>
 
-<div *ngIf="actionType === 'AddPurchase'">
+<div *ngIf="action.type === actionTypes.AddPurchase">
   <p class="event-action__text">
     <b class="event-action__text_bold">{{ action.currentUser }}</b>
     добавил(-а) покупку
@@ -56,7 +56,7 @@
   </p>
 </div>
 
-<div *ngIf="actionType === 'DeletePurchase'">
+<div *ngIf="action.type === actionTypes.DeletePurchase">
   <p class="event-action__text">
     <b class="event-action__text_bold">{{ action.currentUser }}</b>
     удалил(-а) покупку
@@ -64,7 +64,7 @@
   </p>
 </div>
 
-<div *ngIf="actionType === 'AddParticipantsToPurchase'">
+<div *ngIf="action.type === actionTypes.AddMembersToPurchase">
   <p class="event-action__text">
     <b class="event-action__text_bold">{{ action.currentUser }}</b>
     добавил(-а)
@@ -74,7 +74,7 @@
   </p>
 </div>
 
-<div *ngIf="actionType === 'AddParticipantToPurchase'">
+<div *ngIf="action.type === actionTypes.AddMemberToPurchase">
   <span
     *ngIf="action.payerName === action.currentUser"
     class="event-action__text"
@@ -95,7 +95,7 @@
   </p>
 </div>
 
-<div *ngIf="actionType === 'RemoveParticipantFromPurchase'">
+<div *ngIf="action.type === actionTypes.RemoveMemberFromPurchase">
   <span
     *ngIf="action.payerName === action.currentUser"
     class="event-action__text"
@@ -116,7 +116,7 @@
   </p>
 </div>
 
-<div *ngIf="actionType === 'GiveBackPartially'">
+<div *ngIf="action.type === actionTypes.GiveBackPartially">
   <p class="event-action__text">
     <b class="event-action__text_bold">{{ action.currentUser }}</b> отметил(-а)
     долг <b class="event-action__text_bold">{{ action.payerName }}</b> частично
@@ -124,7 +124,7 @@
   </p>
 </div>
 
-<div *ngIf="actionType === 'GiveBack'">
+<div *ngIf="action.type === actionTypes.GiveBack">
   <p class="event-action__text">
     <b class="event-action__text_bold">{{ action.currentUser }}</b> отметил(-а)
     долг <b class="event-action__text_bold">{{ action.payerName }}</b> полностью

@@ -9,11 +9,11 @@ import { ActionTypes, EventAction } from '../../../../../models/Event';
 export class ActionTypeComponent implements OnInit {
   @Input() public action!: EventAction;
 
-  public actionType!: string;
+  public get actionTypes(): typeof ActionTypes {
+    return ActionTypes;
+  }
 
   constructor() {}
 
-  ngOnInit(): void {
-    this.actionType = ActionTypes[this.action.type];
-  }
+  ngOnInit(): void {}
 }

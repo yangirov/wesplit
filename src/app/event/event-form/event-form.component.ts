@@ -23,7 +23,8 @@ import {
   organizerInMembersValidation,
 } from '../../../utils/FormValidators';
 import * as moment from 'moment';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
+import { EventActionService } from '../../../shared/eventAction.service';
 
 @Component({
   selector: 'event-form',
@@ -41,6 +42,7 @@ export class EventFormComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private dataService: DataService,
+    private eventActionService: EventActionService,
     private route: ActivatedRoute,
     private router: Router
   ) {}
@@ -142,7 +144,7 @@ export class EventFormComponent implements OnInit {
     if (this.eventForm.valid) {
       this.loading$.next(true);
 
-      let { name, date, organizer } = this.eventForm.value;
+      let { name, date, organizer, members } = this.eventForm.value;
 
       const event: Event = {
         id: '',
@@ -160,85 +162,21 @@ export class EventFormComponent implements OnInit {
         ],
       };
 
-      const purchases: Purchase[] = [
-        {
-          id: '3',
-          title: 'Пиво',
-          payer: 'Эмиль',
-          sum: 1000,
-          members: ['Эмиль', 'Диана', 'Глеб', 'Даша', 'Дима'],
-        },
-        {
-          id: '3',
-          title: 'Бургеры',
-          payer: 'Диана',
-          sum: 1000,
-          members: ['Эмиль', 'Диана', 'Глеб', 'Даша', 'Дима'],
-        },
-        {
-          id: '3',
-          title: 'Аренда дома',
-          payer: 'Глеб',
-          sum: 5000,
-          members: ['Эмиль', 'Диана', 'Глеб', 'Даша', 'Дима'],
-        },
-      ];
-
-      const rePayedDebts: RePayedDebt[] = [
-        { name: 'Эмиль', sum: 1000 },
-        { name: 'Дима', sum: 500 },
-        { name: 'Даша', sum: 750 },
-        { name: 'Даша', sum: 750 },
-      ];
-
-      const actions: EventAction[] = [
-        {
-          type: ActionTypes.AddPurchase,
-          currentUser: 'Эмиль',
-          date: 1636389685329,
-          purchaseName: 'Пиво',
-          sum: 1000,
-        },
-        {
-          type: ActionTypes.AddParticipantsToPurchase,
-          currentUser: 'Эмиль',
-          date: 1636389685330,
-          purchaseName: 'Пиво',
-          eventMembersCount: 4,
-        },
-        {
-          type: ActionTypes.AddPurchase,
-          currentUser: 'Диана',
-          date: 1636389705277,
-          purchaseName: 'Аренда боулинга',
-          sum: 2000,
-        },
-        {
-          type: ActionTypes.AddParticipantsToPurchase,
-          currentUser: 'Эмиль',
-          date: 1636389705278,
-          purchaseName: 'Аренда боулинга',
-          eventMembersCount: 4,
-        },
-        {
-          type: ActionTypes.GiveBack,
-          currentUser: 'Эмиль',
-          date: 1636389738105,
-          debtSum: 250,
-          payerName: 'Даша',
-        },
-        {
-          type: ActionTypes.GiveBack,
-          currentUser: 'Даша',
-          date: 1636399418983,
-          debtSum: 500,
-          payerName: 'Диана',
-        },
-      ];
-
-      event.purchases = purchases;
-      event.rePayedDebts = rePayedDebts;
-      event.actions = actions;
+      if (!this.isEdit && !this.eventId) {
+        event.actions = [
+          {
+            type: ActionTypes.CreateEvent,
+            manager: organizer,
+            date: moment().utc().valueOf(),
+          },
+          {
+            type: ActionTypes.AddMembersToEvent,
+            manager: organizer,
+            eventMembersCount: members.length,
+            date: moment().utc().valueOf(),
+          },
+        ];
+      }
 
       if (this.isEdit && this.eventId) {
         event.id = this.eventId;
@@ -246,7 +184,7 @@ export class EventFormComponent implements OnInit {
           await this.onChange(event.id, event.organizer);
         });
       } else {
-        await this.dataService.saveEvent(event).then(async (res: any) => {
+        await this.dataService.addEvent(event).then(async (res: any) => {
           const id = res._key.path.segments[1];
           await this.onChange(id, event.organizer);
         });

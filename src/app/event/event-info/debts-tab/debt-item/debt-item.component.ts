@@ -1,10 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Event, MemberDebt } from '../../../../../models/Event';
-import sumFormat, { formatStatus } from '../../../../../utils/Formatters';
-import {
-  getDebtType,
-  getEventBalance,
-} from '../../../../../utils/BalanceCalculator';
+import { formatDebtType, formatSum } from '../../../../../utils/Formatters';
+import { getEventBalance } from '../../../../../utils/BalanceCalculator';
 
 @Component({
   selector: 'debt-item',
@@ -20,13 +17,13 @@ export class DebtItemComponent implements OnInit {
   ngOnInit(): void {}
 
   sum() {
-    return sumFormat(this.debt?.sum || 0);
+    return formatSum(this.debt?.sum || 0);
   }
 
   debtType() {
     const eventBalance = getEventBalance(this.event);
     const currentBalance =
       eventBalance.find((x) => x.name === this.event.organizer)?.sum || 0;
-    return getDebtType(currentBalance);
+    return formatDebtType(currentBalance);
   }
 }

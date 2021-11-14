@@ -1,7 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Event } from '../../../models/Event';
-import { getDebtType, getEventBalance } from '../../../utils/BalanceCalculator';
-import sumFormat, { formatStatus } from '../../../utils/Formatters';
+import { getEventBalance } from '../../../utils/BalanceCalculator';
+import {
+  formatSum,
+  formatDebtType,
+  formatStatus,
+} from '../../../utils/Formatters';
 import * as moment from 'moment';
 
 @Component({
@@ -31,8 +35,8 @@ export class EventItemComponent implements OnInit {
       eventBalance.find((x) => x.name === organizer)?.sum || 0;
     const sum = Math.round(currentBalance);
 
-    this.sum = sum == 0 ? null : `${sumFormat(Math.abs(sum))}`;
+    this.sum = sum == 0 ? null : `${formatSum(Math.abs(sum))}`;
     this.debtStatus = formatStatus(sum);
-    this.debtType = getDebtType(currentBalance);
+    this.debtType = formatDebtType(currentBalance);
   }
 }

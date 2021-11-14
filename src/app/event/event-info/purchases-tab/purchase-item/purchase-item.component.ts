@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Purchase, Event } from '../../../../../models/Event';
-import sumFormat from '../../../../../utils/Formatters';
+import { formatSum } from '../../../../../utils/Formatters';
 
 @Component({
   selector: 'purchase-item',
@@ -18,7 +18,7 @@ export class PurchaseItemComponent implements OnInit {
   onClick() {}
 
   purchaseSum() {
-    return sumFormat(this.purchase.sum);
+    return formatSum(this.purchase.sum);
   }
 
   purchaseSubtitle() {

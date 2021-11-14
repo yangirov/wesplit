@@ -5,16 +5,6 @@ function getIndex(acc: Array<{ name: string }>, name: string) {
   return index !== -1 ? index : acc.length;
 }
 
-export function getDebtType(balance: number) {
-  return balance > 0
-    ? 'positive'
-    : balance < 0
-    ? 'negative'
-    : !balance
-    ? 'neutral'
-    : '';
-}
-
 export function getEventBalance(event: Event): MemberBalance[] {
   const balance: MemberBalance[] = [];
 

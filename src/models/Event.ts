@@ -45,9 +45,9 @@ export interface EventMember {
 export interface EventAction {
   type: ActionTypes;
   date: number;
-  currentUser: string;
+  currentUser?: string;
   eventMembersCount?: number;
-  memberName?: number;
+  memberName?: string;
   sum?: number;
   debtSum?: number;
   purchaseName?: string;
@@ -61,14 +61,14 @@ export enum ActionTypes {
   CreateEvent,
   ChangeEventName,
   ChangeEventDate,
-  AddParticipantToEvent,
-  AddParticipantsToEvent,
-  RemoveParticipantFromEvent,
+  AddMemberToEvent,
+  AddMembersToEvent,
+  RemoveMemberFromEvent,
   AddPurchase,
   DeletePurchase,
-  AddParticipantsToPurchase,
-  AddParticipantToPurchase,
-  RemoveParticipantFromPurchase,
+  AddMembersToPurchase,
+  AddMemberToPurchase,
+  RemoveMemberFromPurchase,
   GiveBackPartially,
   GiveBack,
 }

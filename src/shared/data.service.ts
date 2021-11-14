@@ -31,7 +31,7 @@ export class DataService {
     return docData(ref, { idField: 'id' }) as Observable<Event>;
   }
 
-  saveEvent(event: Event) {
+  addEvent(event: Event) {
     const ref = collection(this.firestore, 'events');
     return addDoc(ref, event);
   }
@@ -46,22 +46,12 @@ export class DataService {
     return addDoc(ref, data);
   }
 
-  addEventAction(eventId: string, data: EventAction) {
-    const ref = collection(this.firestore, `events/${eventId}/actions`);
-    return addDoc(ref, data);
-  }
-
-  changePurchase(eventId: string, purchaseId: string, purchase: Purchase) {
+  updatePurchase(eventId: string, purchaseId: string, purchase: Purchase) {
     const ref = doc(
       this.firestore,
       `events/${eventId}/purchases/${purchaseId}`
     );
     return setDoc(ref, purchase);
-  }
-
-  repayDebt(eventId: string, sum: number, name: string) {
-    const ref = doc(this.firestore, `events/${eventId}/repayedDebts/${name}`);
-    return setDoc(ref, { sum });
   }
 
   deletePurchase(eventId: string, purchaseId: string) {
@@ -72,12 +62,22 @@ export class DataService {
     return deleteDoc(purchaseRef);
   }
 
-  fetchUpdateMembers(eventId: string, members: string[]) {
+  addEventAction(eventId: string, data: EventAction) {
+    const ref = collection(this.firestore, `events/${eventId}/actions`);
+    return addDoc(ref, data);
+  }
+
+  updateRePayDebt(eventId: string, sum: number, name: string) {
+    const ref = doc(this.firestore, `events/${eventId}/rePayedDebts/${name}`);
+    return setDoc(ref, { sum });
+  }
+
+  getUpdateMembers(eventId: string, members: string[]) {
     const ref = doc(this.firestore, `events/${eventId}/members`);
     return setDoc(ref, members);
   }
 
-  async saveFeedback(feedback: Feedback) {
+  async addFeedback(feedback: Feedback) {
     const feedbackCollection = collection(this.firestore, 'feedbacks');
     return await addDoc(feedbackCollection, feedback);
   }

@@ -35,7 +35,7 @@ export class FeedbackFormComponent implements OnInit {
       const form = <Feedback>this.feedbackForm.value;
       this.loading$.next(true);
 
-      await this.dataService.saveFeedback(form).then((res) => {
+      await this.dataService.addFeedback(form).then((res) => {
         this.feedbackForm.reset();
         this.loading$.next(false);
         this.router.navigate(['/']);

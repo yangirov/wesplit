@@ -2,20 +2,20 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ActionTypes, EventAction } from '../../../../../models/Event';
 import * as moment from 'moment';
 
-export const actionIcons: { [key: string]: string } = {
-  CreateEvent: 'calendar_today',
-  ChangeEventName: 'create',
-  ChangeEventDate: 'create',
-  AddParticipantToEvent: 'person',
-  AddParticipantsToEvent: 'person',
-  RemoveParticipantFromEvent: 'delete_sweep',
-  AddPurchase: 'add_shopping_cart',
-  DeletePurchase: 'create',
-  AddParticipantToPurchase: 'create',
-  AddParticipantsToPurchase: 'create',
-  RemoveParticipantFromPurchase: 'create',
-  GiveBackPartially: 'check_circle',
-  GiveBack: 'check',
+export const actionIcons: { [key in ActionTypes]: string } = {
+  [ActionTypes.CreateEvent]: 'calendar_today',
+  [ActionTypes.ChangeEventName]: 'create',
+  [ActionTypes.ChangeEventDate]: 'create',
+  [ActionTypes.AddMemberToEvent]: 'person',
+  [ActionTypes.AddMembersToEvent]: 'person',
+  [ActionTypes.RemoveMemberFromEvent]: 'delete_sweep',
+  [ActionTypes.AddPurchase]: 'add_shopping_cart',
+  [ActionTypes.DeletePurchase]: 'create',
+  [ActionTypes.AddMemberToPurchase]: 'create',
+  [ActionTypes.AddMembersToPurchase]: 'create',
+  [ActionTypes.RemoveMemberFromPurchase]: 'create',
+  [ActionTypes.GiveBackPartially]: 'check_circle',
+  [ActionTypes.GiveBack]: 'check',
 };
 
 @Component({
@@ -26,16 +26,12 @@ export const actionIcons: { [key: string]: string } = {
 export class ActionItemComponent implements OnInit {
   @Input() public action!: EventAction;
 
-  public actionType!: string;
-
   constructor() {}
 
-  ngOnInit(): void {
-    this.actionType = ActionTypes[this.action.type];
-  }
+  ngOnInit(): void {}
 
   actionIcon(): string {
-    return actionIcons[this.actionType];
+    return actionIcons[this.action.type];
   }
 
   actionDate(): string {
