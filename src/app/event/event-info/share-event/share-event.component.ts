@@ -16,7 +16,7 @@ export class ShareEventComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  eventLink() {
+  get eventLink(): string {
     return `${window.location.origin}/events/${this.id}`;
   }
 

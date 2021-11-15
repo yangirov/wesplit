@@ -9,6 +9,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { FabButtonComponent } from './fab-button/fab-button.component';
 import { RouterModule } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
+import { NumericDirective } from '../../shared/numeric.directive';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { MatButtonModule } from '@angular/material/button';
     SeparatorComponent,
     SpinnerComponent,
     FabButtonComponent,
+    NumericDirective,
   ],
   imports: [
     CommonModule,
@@ -31,6 +33,7 @@ import { MatButtonModule } from '@angular/material/button';
     SeparatorComponent,
     SpinnerComponent,
     FabButtonComponent,
+    NumericDirective,
   ],
 })
 export class BaseElementsModule {}

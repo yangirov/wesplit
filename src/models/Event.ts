@@ -15,7 +15,6 @@ export interface Event {
 }
 
 export interface Purchase {
-  id: string;
   title: string;
   payer: string;
   sum: number;
@@ -40,6 +39,11 @@ export interface MemberBalance {
 
 export interface EventMember {
   name: string;
+}
+
+export interface PurchaseMember {
+  name: string;
+  selected: boolean;
 }
 
 export interface EventAction {

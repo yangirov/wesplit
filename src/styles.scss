@@ -57,6 +57,7 @@ button {
 
 .mat-form-field-invalid {
   color: var(--red);
+  margin-bottom: 0.5em;
 }
 
 snack-bar-container.mat-snack-bar-container {
@@ -67,4 +68,16 @@ snack-bar-container.mat-snack-bar-container {
 
 .mat-tab-body-wrapper {
   height: 100%;
+}
+
+mat-checkbox {
+  .mat-checkbox-inner-container {
+    width: 1.8em !important;
+    height: 1.8em !important;
+    margin-bottom: 1em !important;
+  }
+
+  .label {
+    font-size: 1.2em !important;
+  }
 }

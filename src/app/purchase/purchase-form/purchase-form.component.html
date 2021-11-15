@@ -7,7 +7,7 @@
     >
       <mat-icon>close</mat-icon>
     </button>
-    <span>{{ title() }}</span>
+    <span>{{ title }}</span>
     <span class="spacer"></span>
     <button
       mat-icon-button
@@ -24,11 +24,54 @@
 </div>
 
 <ng-template #form>
-  <main class="container">
-    <form
-      [formGroup]="purchaseForm"
-      (ngSubmit)="onSubmit()"
-      id="purchaseForm"
-    ></form>
+  <main class="container" *ngIf="event">
+    <form [formGroup]="purchaseForm" (ngSubmit)="onSubmit()" id="purchaseForm">
+      <mat-form-field class="full-width">
+        <mat-label>Название покупки</mat-label>
+        <input matInput formControlName="title" type="text" required />
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <mat-label>Сумма, Р</mat-label>
+        <input matInput formControlName="sum" numbersOnly required />
+      </mat-form-field>
+
+      <div
+        *ngIf="purchaseForm.errors?.minimalSum"
+        class="mat-form-field-invalid"
+      >
+        Минимальная сумма покупки должна быть больше 1 рубля
+      </div>
+
+      <mat-form-field class="full-width">
+        <mat-label>Кто оплачивает</mat-label>
+        <mat-select formControlName="payer" required>
+          <mat-option *ngFor="let member of event.members" [value]="member">
+            {{ member }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <separator position="outer"></separator>
+      <grey-title text="Участники покупки"></grey-title>
+
+      <div formArrayName="members">
+        <div
+          *ngIf="purchaseForm.errors?.minimalMembersCount"
+          class="mat-form-field-invalid"
+        >
+          Нужен хотя бы один участник
+        </div>
+
+        <div
+          *ngFor="let member of members.controls; let i = index"
+          [formGroupName]="i"
+        >
+          <mat-checkbox color="primary" formControlName="selected">
+            <span class="label">{{ member.get("name")?.value }}</span>
+          </mat-checkbox>
+        </div>
+      </div>
+    </form>
   </main>
 </ng-template>

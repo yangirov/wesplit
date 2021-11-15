@@ -30,11 +30,11 @@ export class ActionItemComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  actionIcon(): string {
+  get actionIcon(): string {
     return actionIcons[this.action.type];
   }
 
-  actionDate(): string {
+  get actionDate(): string {
     return this.action?.date
       ? moment(this.action?.date).locale('ru').fromNow()
       : '';

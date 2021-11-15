@@ -20,7 +20,7 @@ export class EventCheckComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  check() {
+  get check(): string[] {
     return this.debts?.map(
       (debt) => `${debt.from} → ${debt.to}   ${Math.abs(debt?.sum || 0)} руб.`
     );

@@ -16,7 +16,7 @@ export class EventSidenavComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  eventSubtitle() {
+  get eventSubtitle(): string {
     const memberStatus = `${this.event.members.length} участников`;
     const formattedDate = moment(this.event.date)
       .locale('ru')

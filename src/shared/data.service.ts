@@ -11,6 +11,7 @@ import {
   updateDoc,
   setDoc,
   docData,
+  arrayUnion,
 } from '@angular/fire/firestore';
 import { mergeMap } from 'rxjs/operators';
 import { from, Observable } from 'rxjs';
@@ -42,16 +43,20 @@ export class DataService {
   }
 
   addPurchase(eventId: string, data: Purchase) {
-    const ref = collection(this.firestore, 'purchase');
-    return addDoc(ref, data);
+    const ref = doc(this.firestore, `events/${eventId}`);
+
+    return updateDoc(ref, {
+      purchases: arrayUnion(data),
+    });
   }
 
-  updatePurchase(eventId: string, purchaseId: string, purchase: Purchase) {
-    const ref = doc(
-      this.firestore,
-      `events/${eventId}/purchases/${purchaseId}`
-    );
-    return setDoc(ref, purchase);
+  updatePurchase(event: Event, index: number, purchase: Purchase) {
+    const ref = doc(this.firestore, `events/${event.id}`);
+
+    const purchases = event.purchases;
+    purchases[index] = purchase;
+
+    return updateDoc(ref, { purchases });
   }
 
   deletePurchase(eventId: string, purchaseId: string) {
@@ -63,8 +68,11 @@ export class DataService {
   }
 
   addEventAction(eventId: string, data: EventAction) {
-    const ref = collection(this.firestore, `events/${eventId}/actions`);
-    return addDoc(ref, data);
+    const ref = doc(this.firestore, `events/${eventId}`);
+
+    return updateDoc(ref, {
+      actions: arrayUnion(data),
+    });
   }
 
   updateRePayDebt(eventId: string, sum: number, name: string) {

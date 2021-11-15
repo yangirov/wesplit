@@ -10,6 +10,7 @@ import { formatSum } from '../../../../../utils/Formatters';
 export class PurchaseItemComponent implements OnInit {
   @Input() purchase!: Purchase;
   @Input() event!: Event;
+  @Input() index!: number;
 
   constructor() {}
 
@@ -17,11 +18,11 @@ export class PurchaseItemComponent implements OnInit {
 
   onClick() {}
 
-  purchaseSum() {
+  get purchaseSum(): string {
     return formatSum(this.purchase.sum);
   }
 
-  purchaseSubtitle() {
+  get purchaseSubtitle(): string {
     const purchaseMembersCount = this.purchase.members.length;
     const eventMembersCount = this.event.members.length;
 

@@ -1,15 +1,16 @@
 <div class="new-event" *ngIf="event.purchases?.length; else noPurchases">
   <purchase-item
-    *ngFor="let purchase of event.purchases"
+    *ngFor="let purchase of event.purchases; let i = index"
     [purchase]="purchase"
+    [index]="i"
     [event]="event"
   ></purchase-item>
-
-  <fab-button
-    link="/events/{{ event.id }}/purchases/new"
-    icon="add_shopping_cart"
-  ></fab-button>
 </div>
+
+<fab-button
+  link="/events/{{ event.id }}/purchases/new"
+  icon="add_shopping_cart"
+></fab-button>
 
 <ng-template #noPurchases>
   <empty-items

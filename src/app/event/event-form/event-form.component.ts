@@ -18,7 +18,6 @@ import {
 import * as moment from 'moment';
 import { BehaviorSubject } from 'rxjs';
 import { EventActionService } from '../../../shared/eventAction.service';
-import { actions, purchases, rePayedDebts } from './mock';
 
 @Component({
   selector: 'event-form',
@@ -29,7 +28,7 @@ import { actions, purchases, rePayedDebts } from './mock';
 export class EventFormComponent implements OnInit {
   isEdit!: boolean;
   eventId!: string;
-
+  event!: Event;
   eventForm!: FormGroup;
   loading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
@@ -47,10 +46,13 @@ export class EventFormComponent implements OnInit {
         name: ['', Validators.required],
         date: new FormControl(new Date()),
         organizer: ['', Validators.required],
-        members: this.formBuilder.array([], duplicateMembersValidator()),
+        members: this.formBuilder.array([]),
       },
       {
-        validators: [organizerInMembersValidation()],
+        validators: [
+          organizerInMembersValidation(),
+          duplicateMembersValidator(),
+        ],
       }
     );
 
@@ -62,7 +64,8 @@ export class EventFormComponent implements OnInit {
 
       this.dataService.getEventById(this.eventId).subscribe((event) => {
         if (event) {
-          this.fillForm(event);
+          this.event = event;
+          this.fillFormFromEvent(event);
           this.subscribeMembersChanges();
           this.loading$.next(false);
         }
@@ -72,29 +75,39 @@ export class EventFormComponent implements OnInit {
     }
   }
 
-  fillForm(event: Event) {
+  get title(): string {
+    return this.isEdit && this.eventId
+      ? 'Редактирование события'
+      : 'Новое событие';
+  }
+
+  get members(): FormArray {
+    return this.eventForm.get('members') as FormArray;
+  }
+
+  fillFormFromEvent(event: Event) {
     const { name, date, organizer, members } = event;
 
     this.eventForm.patchValue({
       name,
-      date: new Date(date),
       organizer,
+      date: new Date(date),
     });
 
-    this.eventForm.setControl(
-      'members',
-      this.formBuilder.array(
-        members
-          .filter((x) => x !== organizer)
-          .map((name) => this.formBuilder.group({ name })) || [],
-        duplicateMembersValidator()
-      )
+    this.fillFormArray(
+      members
+        .filter((x) => x !== organizer)
+        .map((name) => this.formBuilder.group({ name })) || []
     );
   }
 
+  fillFormArray(config: any) {
+    this.eventForm.setControl('members', this.formBuilder.array(config || []));
+  }
+
   subscribeMembersChanges() {
-    this.members()
-      ?.valueChanges.pipe(debounceTime(100), pairwise())
+    this.members?.valueChanges
+      .pipe(debounceTime(100), pairwise())
       .subscribe(([prev, curr]: [EventMember[], EventMember[]]) => {
         if (
           prev[prev.length - 1].name === '' &&
@@ -109,29 +122,19 @@ export class EventFormComponent implements OnInit {
     this.addMember();
   }
 
-  title() {
-    return this.isEdit && this.eventId
-      ? 'Редактирование события'
-      : 'Новое событие';
-  }
-
   removeEmptyMembers(members: EventMember[]) {
     members
       .map(({ name }, i) => (name === '' && i != members.length - 1 ? i : null))
       .forEach((n) => {
         if (n !== null) {
-          this.members().removeAt(n);
+          this.members.removeAt(n);
         }
       });
   }
 
-  members(): FormArray {
-    return this.eventForm.get('members') as FormArray;
-  }
-
   addMember() {
     const newMember = this.formBuilder.group({ name: '' });
-    this.members().push(newMember);
+    this.members.push(newMember);
   }
 
   async onSubmit() {
@@ -144,19 +147,26 @@ export class EventFormComponent implements OnInit {
         id: '',
         name,
         organizer,
-        date: moment.utc(date).valueOf(),
         purchases: [],
         rePayedDebts: [],
-        actions: [],
+        date: moment.utc(date).valueOf(),
         members: [
           organizer,
-          ...this.members()
-            ?.value.filter((n: EventMember) => n.name !== '')
+          ...this.members?.value
+            .filter((n: EventMember) => n.name !== '')
             .map((x: EventMember) => x.name),
         ],
       };
 
-      if (!this.isEdit && !this.eventId) {
+      if (this.isEdit && this.eventId) {
+        event.id = this.eventId;
+        event.purchases = this.event.purchases;
+        event.rePayedDebts = this.event.rePayedDebts;
+
+        await this.dataService.updateEvent(event).then(async (res: any) => {
+          await this.onChange(event.id, event.organizer);
+        });
+      } else {
         event.actions = [
           {
             type: ActionTypes.CreateEvent,
@@ -170,22 +180,7 @@ export class EventFormComponent implements OnInit {
             date: moment().utc().valueOf(),
           },
         ];
-      }
 
-      if (this.route.snapshot.queryParams['isMock']) {
-        //for await (const v of actions) {
-        //  event.actions?.push(v);
-        //}
-        event.purchases = purchases;
-        //event.rePayedDebts = rePayedDebts;
-      }
-
-      if (this.isEdit && this.eventId) {
-        event.id = this.eventId;
-        await this.dataService.updateEvent(event).then(async (res: any) => {
-          await this.onChange(event.id, event.organizer);
-        });
-      } else {
         await this.dataService.addEvent(event).then(async (res: any) => {
           const id = res._key.path.segments[1];
           await this.onChange(id, event.organizer);

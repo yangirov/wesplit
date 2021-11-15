@@ -16,11 +16,11 @@ export class DebtItemComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  sum() {
+  get debtSum(): string {
     return formatSum(this.debt?.sum || 0);
   }
 
-  debtType() {
+  get debtType(): string {
     const eventBalance = getEventBalance(this.event);
     const currentBalance =
       eventBalance.find((x) => x.name === this.event.organizer)?.sum || 0;

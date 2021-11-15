@@ -1,7 +1,7 @@
 <div class="event-action">
   <div class="event-action__icon-wrapper">
-    <div class="event-action__icon icon_{{ actionIcon() }}">
-      <mat-icon>{{ actionIcon() }}</mat-icon>
+    <div class="event-action__icon icon_{{ actionIcon }}">
+      <mat-icon>{{ actionIcon }}</mat-icon>
     </div>
   </div>
   <div class="event-action__info">
@@ -16,7 +16,7 @@
       </div>
     </div>
     <div class="event-action__date" *ngIf="action.date">
-      {{ actionDate() }}
+      {{ actionDate }}
     </div>
   </div>
 </div>

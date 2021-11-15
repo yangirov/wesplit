@@ -3,7 +3,7 @@
     <button class="router-button" mat-icon-button [routerLink]="['/']">
       <mat-icon>close</mat-icon>
     </button>
-    <h1>{{ title() }}</h1>
+    <h1>{{ title }}</h1>
     <span class="spacer"></span>
     <button mat-icon-button form="eventForm" [disabled]="eventForm.invalid">
       <mat-icon>check</mat-icon>
@@ -48,7 +48,7 @@
       </mat-form-field>
 
       <div
-        *ngIf="members().errors?.hasMembersDuplicates"
+        *ngIf="eventForm.errors?.hasMembersDuplicates"
         class="mat-form-field-invalid"
       >
         Имена участников не должны повторяться
@@ -64,7 +64,7 @@
       <div formArrayName="members">
         <mat-form-field
           class="full-width"
-          *ngFor="let participant of members().controls; let i = index"
+          *ngFor="let member of members.controls; let i = index"
           [formGroupName]="i"
         >
           <input

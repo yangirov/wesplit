@@ -1,21 +1,17 @@
 import { Injectable } from '@angular/core';
 import { ActionTypes, EventAction } from '../models/Event';
-import { DataService } from './data.service';
+import * as moment from 'moment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class EventActionService {
-  constructor(private dataService: DataService) {}
-
-  async createEventAction(eventId: string, action: EventAction): Promise<any> {
-    return await this.dataService.addEventAction(eventId, action);
-  }
+  constructor() {}
 
   changeEventName(
     currentUser: string,
     eventName: string,
-    date: number
+    date: number = moment().utc().valueOf()
   ): EventAction {
     return {
       currentUser,
@@ -36,7 +32,7 @@ export class EventActionService {
   addMemberToEvent(
     currentUser: string,
     memberName: string,
-    date: number
+    date: number = moment().utc().valueOf()
   ): EventAction {
     return {
       currentUser,
@@ -49,7 +45,7 @@ export class EventActionService {
   removeMemberFromEvent(
     currentUser: string,
     memberName: string,
-    date: number
+    date: number = moment().utc().valueOf()
   ): EventAction {
     return {
       currentUser,
@@ -63,7 +59,7 @@ export class EventActionService {
     currentUser: string,
     purchaseName: string,
     sum: number,
-    date: number
+    date: number = moment().utc().valueOf()
   ): EventAction {
     return {
       currentUser,
@@ -77,7 +73,7 @@ export class EventActionService {
   deletePurchase(
     currentUser: string,
     purchaseName: string,
-    date: number
+    date: number = moment().utc().valueOf()
   ): EventAction {
     return {
       currentUser,
@@ -91,7 +87,7 @@ export class EventActionService {
     currentUser: string,
     payerName: string,
     purchaseName: string,
-    date: number
+    date: number = moment().utc().valueOf()
   ): EventAction {
     return {
       currentUser,
@@ -106,7 +102,7 @@ export class EventActionService {
     currentUser: string,
     purchaseMembersCount: number,
     purchaseName: string,
-    date: number
+    date: number = moment().utc().valueOf()
   ): EventAction {
     return {
       currentUser,
@@ -121,7 +117,7 @@ export class EventActionService {
     currentUser: string,
     payerName: string,
     purchaseName: string,
-    date: number
+    date: number = moment().utc().valueOf()
   ): EventAction {
     return {
       currentUser,
@@ -136,7 +132,7 @@ export class EventActionService {
     currentUser: string,
     payerName: string,
     debtSum: number,
-    date: number
+    date: number = moment().utc().valueOf()
   ): EventAction {
     return {
       currentUser,
@@ -151,7 +147,7 @@ export class EventActionService {
     currentUser: string,
     payerName: string,
     debtSum: number,
-    date: number
+    date: number = moment().utc().valueOf()
   ): EventAction {
     return {
       currentUser,

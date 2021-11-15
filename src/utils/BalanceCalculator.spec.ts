@@ -9,14 +9,12 @@ let defaultEvent: Event = {
   date: moment.utc().startOf('day').valueOf(),
   purchases: [
     {
-      id: '1',
       title: 'Beer',
       payer: 'Ivan',
       sum: 200,
       members: ['Emil', 'Ivan'],
     },
     {
-      id: '2',
       title: 'Burgers',
       payer: 'Emil',
       sum: 500,
@@ -95,21 +93,18 @@ describe('Balance lite functions test', function () {
       date: moment.utc().startOf('day').valueOf(),
       purchases: [
         {
-          id: '1',
           title: 'Beer',
           payer: 'Emil',
           sum: 1000,
           members: ['Emil', 'Ivan', 'Fedor', 'Artem', 'Mark'],
         },
         {
-          id: '3',
           title: 'Burgers',
           payer: 'Fedor',
           sum: 1000,
           members: ['Emil', 'Ivan', 'Fedor', 'Artem', 'Mark'],
         },
         {
-          id: '3',
           title: 'Rental house',
           payer: 'Mark',
           sum: 5000,
@@ -142,21 +137,18 @@ describe('Balance lite functions test', function () {
       date: moment.utc().startOf('day').valueOf(),
       purchases: [
         {
-          id: '3',
           title: 'Beer',
           payer: 'Emil',
           sum: 1000,
           members: ['Emil', 'Ivan', 'Fedor', 'Artem', 'Mark'],
         },
         {
-          id: '3',
           title: 'Burgers',
           payer: 'Fedor',
           sum: 1000,
           members: ['Emil', 'Ivan', 'Fedor', 'Artem', 'Mark'],
         },
         {
-          id: '3',
           title: 'Rental house',
           payer: 'Mark',
           sum: 5000,
