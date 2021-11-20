@@ -73,5 +73,17 @@
         </div>
       </div>
     </form>
+
+    <div *ngIf="!hasRePayedDebts && isEdit">
+      <separator position="outer"></separator>
+      <button
+        class="delete-purchase-button"
+        (click)="onDeletePurchase()"
+        mat-raised-button
+        color="basic"
+      >
+        <mat-icon>close</mat-icon>Удалить покупку
+      </button>
+    </div>
   </main>
 </ng-template>

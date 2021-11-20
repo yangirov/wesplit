@@ -12,6 +12,7 @@ import { PurchaseFormComponent } from './purchase-form/purchase-form.component';
 import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [PurchaseFormComponent],
@@ -28,6 +29,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     MatSelectModule,
     MatOptionModule,
     MatCheckboxModule,
+    MatDialogModule,
   ],
 })
 export class PurchaseModule {}

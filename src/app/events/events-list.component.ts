@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Event } from '../../models/Event';
+import { EventDto } from '../../models/Event';
 import { DataService } from '../../shared/data.service';
 import { BehaviorSubject } from 'rxjs';
 
@@ -10,13 +10,13 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class EventsListComponent implements OnInit {
   loading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
-  events: Event[] = [];
+  events: EventDto[] = [];
 
   constructor(private dataService: DataService) {}
 
   ngOnInit(): void {
     this.dataService.getEvents().subscribe(
-      (event: Event) => {
+      (event: EventDto) => {
         this.events.push(event);
         this.loading$.next(false);
       },

@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Event, MemberDebt } from '../../../../models/Event';
+import { EventDto, MemberDebt } from '../../../../models/Event';
 import {
   getEventBalance,
   getEventsMembersDebts,
@@ -11,7 +11,7 @@ import {
   styleUrls: ['./debts-tab.component.scss'],
 })
 export class DebtsTabComponent implements OnInit {
-  @Input() public event!: Event;
+  @Input() public event!: EventDto;
 
   public debts!: MemberDebt[];
 

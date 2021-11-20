@@ -10,14 +10,14 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { debounceTime, pairwise } from 'rxjs/operators';
 import { DataService } from '../../../shared/data.service';
 import { ActionTypes, Event, EventMember } from '../../../models/Event';
-import { setLocalEvents } from '../../../shared/localStorage.service';
+import { setLocalEvents } from '../../../shared/local-storage.service';
 import {
   duplicateMembersValidator,
   organizerInMembersValidation,
 } from '../../../utils/FormValidators';
 import * as moment from 'moment';
 import { BehaviorSubject } from 'rxjs';
-import { EventActionService } from '../../../shared/eventAction.service';
+import { EventActionCreator } from '../../../shared/event-action-creator';
 
 @Component({
   selector: 'event-form',
@@ -35,7 +35,7 @@ export class EventFormComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private dataService: DataService,
-    private eventActionService: EventActionService,
+    private eventActionCreator: EventActionCreator,
     private route: ActivatedRoute,
     private router: Router
   ) {}
@@ -147,8 +147,6 @@ export class EventFormComponent implements OnInit {
         id: '',
         name,
         organizer,
-        purchases: [],
-        rePayedDebts: [],
         date: moment.utc(date).valueOf(),
         members: [
           organizer,
@@ -160,29 +158,28 @@ export class EventFormComponent implements OnInit {
 
       if (this.isEdit && this.eventId) {
         event.id = this.eventId;
-        event.purchases = this.event.purchases;
-        event.rePayedDebts = this.event.rePayedDebts;
 
         await this.dataService.updateEvent(event).then(async (res: any) => {
-          await this.onChange(event.id, event.organizer);
+          await this.onChange(this.eventId, event.organizer);
         });
       } else {
-        event.actions = [
-          {
-            type: ActionTypes.CreateEvent,
-            manager: organizer,
-            date: moment().utc().valueOf(),
-          },
-          {
-            type: ActionTypes.AddMembersToEvent,
-            manager: organizer,
-            eventMembersCount: members.length,
-            date: moment().utc().valueOf(),
-          },
-        ];
-
         await this.dataService.addEvent(event).then(async (res: any) => {
           const id = res._key.path.segments[1];
+
+          [
+            {
+              type: ActionTypes.CreateEvent,
+              manager: organizer,
+              date: moment().utc().valueOf(),
+            },
+            {
+              type: ActionTypes.AddMembersToEvent,
+              manager: organizer,
+              eventMembersCount: members.length,
+              date: moment().utc().valueOf(),
+            },
+          ].forEach((action) => this.dataService.addEventAction(id, action));
+
           await this.onChange(id, event.organizer);
         });
       }

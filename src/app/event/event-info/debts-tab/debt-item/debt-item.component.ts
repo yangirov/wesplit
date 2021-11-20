@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Event, MemberDebt } from '../../../../../models/Event';
+import { EventDto, MemberDebt } from '../../../../../models/Event';
 import { formatDebtType, formatSum } from '../../../../../utils/Formatters';
 import { getEventBalance } from '../../../../../utils/BalanceCalculator';
 
@@ -10,7 +10,7 @@ import { getEventBalance } from '../../../../../utils/BalanceCalculator';
 })
 export class DebtItemComponent implements OnInit {
   @Input() public debt!: MemberDebt;
-  @Input() public event!: Event;
+  @Input() public event!: EventDto;
 
   constructor() {}
 

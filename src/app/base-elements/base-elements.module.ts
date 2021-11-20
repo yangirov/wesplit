@@ -10,6 +10,7 @@ import { FabButtonComponent } from './fab-button/fab-button.component';
 import { RouterModule } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { NumericDirective } from '../../shared/numeric.directive';
+import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { NumericDirective } from '../../shared/numeric.directive';
     SpinnerComponent,
     FabButtonComponent,
     NumericDirective,
+    ConfirmDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -34,6 +36,7 @@ import { NumericDirective } from '../../shared/numeric.directive';
     SpinnerComponent,
     FabButtonComponent,
     NumericDirective,
+    ConfirmDialogComponent,
   ],
 })
 export class BaseElementsModule {}

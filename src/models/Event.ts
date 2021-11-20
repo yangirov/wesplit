@@ -9,12 +9,22 @@ export interface Event {
   name: string;
   organizer: string;
   members: string[];
+}
+
+export interface EventDto {
+  id: string;
+  date: number;
+  name: string;
+  organizer: string;
+  members: string[];
   purchases: Purchase[];
   rePayedDebts: RePayedDebt[];
   actions?: EventAction[];
 }
 
 export interface Purchase {
+  id?: string;
+  date: number;
   title: string;
   payer: string;
   sum: number;
@@ -22,6 +32,7 @@ export interface Purchase {
 }
 
 export interface RePayedDebt {
+  id?: string;
   name: string;
   sum?: number;
 }
@@ -47,6 +58,7 @@ export interface PurchaseMember {
 }
 
 export interface EventAction {
+  id?: string;
   type: ActionTypes;
   date: number;
   currentUser?: string;

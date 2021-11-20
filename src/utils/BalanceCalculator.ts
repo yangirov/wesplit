@@ -1,11 +1,11 @@
-import { Event, MemberDebt, MemberBalance } from '../models/Event';
+import { EventDto, MemberDebt, MemberBalance } from '../models/Event';
 
 function getIndex(acc: Array<{ name: string }>, name: string) {
   const index = acc.findIndex((x) => x.name === name);
   return index !== -1 ? index : acc.length;
 }
 
-export function getEventBalance(event: Event): MemberBalance[] {
+export function getEventBalance(event: EventDto): MemberBalance[] {
   const balance: MemberBalance[] = [];
 
   event?.purchases?.forEach((purchase) => {
@@ -77,7 +77,7 @@ export function getEventBalance(event: Event): MemberBalance[] {
 
 export function getEventsMembersDebts(
   balance: MemberBalance[],
-  event: Event
+  event: EventDto
 ): MemberDebt[] {
   return event?.members?.reduce((acc, lender) => {
     const lenderIndex = getIndex(balance, lender);

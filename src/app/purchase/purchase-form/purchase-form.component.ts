@@ -3,20 +3,15 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DataService } from '../../../shared/data.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
-import {
-  Event,
-  LocalEvent,
-  Purchase,
-  PurchaseMember,
-} from '../../../models/Event';
-import { EventActionService } from '../../../shared/eventAction.service';
+import { EventDto, Purchase, PurchaseMember } from '../../../models/Event';
+import { EventActionCreator } from '../../../shared/event-action-creator';
 import {
   minMembersCountInPurchase,
-  organizerInMembersValidation,
   sumGreaterZero,
 } from '../../../utils/FormValidators';
-import { getLocalEvents } from '../../../shared/localStorage.service';
-
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { ConfirmDialogComponent } from '../../base-elements/confirm-dialog/confirm-dialog.component';
+import * as moment from 'moment';
 @Component({
   selector: 'purchase-form',
   templateUrl: './purchase-form.component.html',
@@ -25,23 +20,26 @@ import { getLocalEvents } from '../../../shared/localStorage.service';
 export class PurchaseFormComponent implements OnInit {
   isEdit!: boolean;
   eventId!: string;
-  purchaseIndex!: string;
-  event!: Event;
+  event!: EventDto;
+  purchaseId!: string;
+  purchase!: Purchase;
   purchaseForm!: FormGroup;
   loading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
+  dialogRef!: MatDialogRef<ConfirmDialogComponent>;
 
   constructor(
     private dataService: DataService,
-    private eventActionService: EventActionService,
+    private eventActionCreator: EventActionCreator,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
     this.isEdit = this.route.snapshot.data['isEdit'];
     this.eventId = this.route.snapshot.paramMap.get('id') ?? '';
-    this.purchaseIndex = this.route.snapshot.paramMap.get('purchaseId') ?? '';
+    this.purchaseId = this.route.snapshot.paramMap.get('purchaseId') ?? '';
 
     this.purchaseForm = this.formBuilder.group(
       {
@@ -64,8 +62,8 @@ export class PurchaseFormComponent implements OnInit {
     this.dataService.getEventById(this.eventId).subscribe((event) => {
       this.event = event;
 
-      if (this.isEdit && this.purchaseIndex) {
-        this.fillFormFromEvent(event);
+      if (this.isEdit && this.purchaseId) {
+        this.fillFormFromEvent();
       } else {
         this.checkAllMembers(true);
       }
@@ -79,29 +77,36 @@ export class PurchaseFormComponent implements OnInit {
   }
 
   get title(): string {
-    return this.isEdit && this.purchaseIndex
+    return this.isEdit && this.purchaseId
       ? 'Редактирование покупки'
       : 'Новая покупка';
   }
 
-  fillFormFromEvent(event: Event) {
-    const { title, payer, sum, members } =
-      event.purchases[Number(this.purchaseIndex)];
+  get hasRePayedDebts(): boolean {
+    return this.event?.rePayedDebts?.length > 0;
+  }
 
-    this.purchaseForm.patchValue({
-      title,
-      payer,
-      sum,
-    });
+  fillFormFromEvent() {
+    const purchase = this.event.purchases.find((x) => x.id === this.purchaseId);
 
-    this.fillFormArray(
-      event.members.map((name) =>
-        this.formBuilder.group({
-          name,
-          selected: members.some((x) => x === name),
-        })
-      )
-    );
+    if (purchase) {
+      this.purchase = purchase;
+
+      this.purchaseForm.patchValue({
+        title: purchase.title,
+        payer: purchase.payer,
+        sum: purchase.sum,
+      });
+
+      this.fillFormArray(
+        this.event.members.map((name) =>
+          this.formBuilder.group({
+            name,
+            selected: purchase.members.some((x) => x === name),
+          })
+        )
+      );
+    }
   }
 
   checkAllMembers(selected: boolean) {
@@ -123,13 +128,12 @@ export class PurchaseFormComponent implements OnInit {
     if (this.purchaseForm.valid) {
       this.loading$.next(true);
 
-      const currentUser =
-        getLocalEvents().find((x: LocalEvent) => x.id === this.event.id)
-          ?.organizer ?? '';
+      const currentUser = this.dataService.getCurrentUser(this.event.id);
 
-      const { title, payer, sum, members } = this.purchaseForm.value;
+      const { title, payer, sum } = this.purchaseForm.value as Purchase;
 
       const purchase: Purchase = {
+        date: this.isEdit ? this.purchase.date : moment().utc().valueOf(),
         title,
         payer,
         sum,
@@ -138,10 +142,10 @@ export class PurchaseFormComponent implements OnInit {
           .map((x: PurchaseMember) => x.name),
       };
 
-      if (this.isEdit && this.purchaseIndex) {
+      if (this.isEdit && this.purchaseId) {
         await this.dataService.updatePurchase(
-          this.event,
-          Number(this.purchaseIndex),
+          this.event.id,
+          this.purchaseId,
           purchase
         );
 
@@ -149,7 +153,7 @@ export class PurchaseFormComponent implements OnInit {
       } else {
         await this.dataService.addPurchase(this.eventId, purchase);
 
-        const action = this.eventActionService.addPurchase(
+        const action = this.eventActionCreator.addPurchase(
           currentUser,
           title,
           sum
@@ -159,6 +163,30 @@ export class PurchaseFormComponent implements OnInit {
         await this.onChange();
       }
     }
+  }
+
+  async onDeletePurchase() {
+    this.dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      disableClose: false,
+    });
+
+    await this.dialogRef.afterClosed().subscribe(async (result) => {
+      if (result) {
+        this.loading$.next(true);
+        await this.dataService.deletePurchase(this.eventId, this.purchaseId);
+
+        const currentUser = this.dataService.getCurrentUser(this.eventId);
+        const action = await this.eventActionCreator.deletePurchase(
+          currentUser,
+          this.purchase.title
+        );
+        await this.dataService.addEventAction(this.eventId, action);
+
+        await this.onChange();
+      }
+
+      this.dialogRef = null as any;
+    });
   }
 
   async onChange() {

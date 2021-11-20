@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Event } from '../../../../models/Event';
+import { EventDto } from '../../../../models/Event';
 
 @Component({
   selector: 'purchases-tab',
@@ -7,7 +7,7 @@ import { Event } from '../../../../models/Event';
   styleUrls: ['./purchases-tab.component.scss'],
 })
 export class PurchasesTabComponent implements OnInit {
-  @Input() event!: Event;
+  @Input() event!: EventDto;
 
   constructor() {}
 

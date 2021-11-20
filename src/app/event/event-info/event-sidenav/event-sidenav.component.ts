@@ -1,8 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Event, LocalEvent } from '../../../../models/Event';
+import { EventDto, LocalEvent } from '../../../../models/Event';
 import * as moment from 'moment';
-import { getLocalEvents } from '../../../../shared/localStorage.service';
+import { getLocalEvents } from '../../../../shared/local-storage.service';
 import { Router } from '@angular/router';
+import { DataService } from '../../../../shared/data.service';
 
 @Component({
   selector: 'event-sidenav',
@@ -10,9 +11,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./event-sidenav.component.scss'],
 })
 export class EventSidenavComponent implements OnInit {
-  @Input() event!: Event;
+  @Input() event!: EventDto;
 
-  constructor(private router: Router) {}
+  constructor(private dataService: DataService, private router: Router) {}
 
   ngOnInit(): void {}
 
@@ -25,14 +26,14 @@ export class EventSidenavComponent implements OnInit {
     return `${memberStatus} • ${formattedDate}`;
   }
 
-  getMemberName(name: string) {
-    const currentUser = getLocalEvents().find(
-      (x: LocalEvent) => x.id === this.event.id
-    )?.organizer;
+  get hasRePayedDebts(): boolean {
+    return this.event?.rePayedDebts?.length > 0;
+  }
 
+  getMemberName(name: string) {
     let memberName: string = name;
 
-    if (name === currentUser) {
+    if (name === this.dataService.getCurrentUser(this.event.id)) {
       memberName += ' (Вы)';
     }
 

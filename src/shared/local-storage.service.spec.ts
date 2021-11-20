@@ -1,4 +1,4 @@
-import { getLocalEvents, setLocalEvents } from './localStorage.service';
+import { getLocalEvents, setLocalEvents } from './local-storage.service';
 
 export interface LocalStorage {
   [key: string]: any;

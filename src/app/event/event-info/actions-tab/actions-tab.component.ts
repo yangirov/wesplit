@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Event, EventAction } from '../../../../models/Event';
+import { EventDto, EventAction } from '../../../../models/Event';
 
 @Component({
   selector: 'actions-tab',
@@ -7,7 +7,7 @@ import { Event, EventAction } from '../../../../models/Event';
   styleUrls: ['./actions-tab.component.scss'],
 })
 export class ActionsTabComponent implements OnInit {
-  @Input() public event!: Event;
+  @Input() public event!: EventDto;
 
   public actions: EventAction[] = [];
 

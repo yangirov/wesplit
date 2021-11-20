@@ -1,6 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Event, EventAction, Purchase } from '../models/Event';
-import { getLocalEvents } from './localStorage.service';
+import {
+  Event,
+  EventDto,
+  EventAction,
+  Purchase,
+  RePayedDebt,
+} from '../models/Event';
+import { getLocalEvents } from './local-storage.service';
 import { Feedback } from '../models/Feedback';
 import {
   Firestore,
@@ -11,10 +17,10 @@ import {
   updateDoc,
   setDoc,
   docData,
-  arrayUnion,
+  collectionData,
 } from '@angular/fire/firestore';
-import { mergeMap } from 'rxjs/operators';
-import { from, Observable } from 'rxjs';
+import { map, mergeMap, take } from 'rxjs/operators';
+import { forkJoin, from, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -22,14 +28,39 @@ import { from, Observable } from 'rxjs';
 export class DataService {
   constructor(private firestore: Firestore) {}
 
-  getEvents(): Observable<Event> {
+  getCurrentUser(eventId: string) {
+    return getLocalEvents().find((x) => x.id === eventId)?.organizer || '';
+  }
+
+  getEvents(): Observable<EventDto> {
     const localEvents = getLocalEvents();
     return from(localEvents).pipe(mergeMap((x) => this.getEventById(x.id)));
   }
 
-  getEventById(eventId: string): Observable<Event> {
+  getEventById(eventId: string): Observable<EventDto> {
     const ref = doc(this.firestore, `events/${eventId}`);
-    return docData(ref, { idField: 'id' }) as Observable<Event>;
+
+    return forkJoin({
+      event: (docData(ref, { idField: 'id' }) as Observable<Event>).pipe(
+        take(1)
+      ),
+      purchases: this.getPurchases(eventId).pipe(
+        map((items) => items.sort((a, b) => b.date - a.date)),
+        take(1)
+      ),
+      actions: this.getActions(eventId).pipe(
+        map((items) => items.sort((a, b) => a.date - b.date)),
+        take(1)
+      ),
+      rePayedDebts: this.getRePayedDebts(eventId).pipe(take(1)),
+    }).pipe(
+      map((x) => ({
+        ...x.event,
+        purchases: x.purchases,
+        actions: x.actions,
+        rePayedDebts: x.rePayedDebts,
+      }))
+    );
   }
 
   addEvent(event: Event) {
@@ -42,21 +73,22 @@ export class DataService {
     return updateDoc(ref, event);
   }
 
-  addPurchase(eventId: string, data: Purchase) {
-    const ref = doc(this.firestore, `events/${eventId}`);
-
-    return updateDoc(ref, {
-      purchases: arrayUnion(data),
-    });
+  getPurchases(eventId: string) {
+    const ref = collection(this.firestore, `events/${eventId}/purchases`);
+    return collectionData(ref, { idField: 'id' }) as Observable<Purchase[]>;
   }
 
-  updatePurchase(event: Event, index: number, purchase: Purchase) {
-    const ref = doc(this.firestore, `events/${event.id}`);
+  addPurchase(eventId: string, purchase: Purchase) {
+    const ref = collection(this.firestore, `events/${eventId}/purchases`);
+    return addDoc(ref, purchase);
+  }
 
-    const purchases = event.purchases;
-    purchases[index] = purchase;
-
-    return updateDoc(ref, { purchases });
+  updatePurchase(eventId: string, purchaseId: string, purchase: Purchase) {
+    const ref = doc(
+      this.firestore,
+      `events/${eventId}/purchases/${purchaseId}`
+    );
+    return updateDoc(ref, purchase);
   }
 
   deletePurchase(eventId: string, purchaseId: string) {
@@ -67,22 +99,24 @@ export class DataService {
     return deleteDoc(purchaseRef);
   }
 
-  addEventAction(eventId: string, data: EventAction) {
-    const ref = doc(this.firestore, `events/${eventId}`);
-
-    return updateDoc(ref, {
-      actions: arrayUnion(data),
-    });
+  getActions(eventId: string) {
+    const ref = collection(this.firestore, `events/${eventId}/actions`);
+    return collectionData(ref, { idField: 'id' }) as Observable<EventAction[]>;
   }
 
-  updateRePayDebt(eventId: string, sum: number, name: string) {
+  addEventAction(eventId: string, eventAction: EventAction) {
+    const ref = collection(this.firestore, `events/${eventId}/actions`);
+    return addDoc(ref, eventAction);
+  }
+
+  getRePayedDebts(eventId: string) {
+    const ref = collection(this.firestore, `events/${eventId}/rePayedDebts`);
+    return collectionData(ref, { idField: 'id' }) as Observable<RePayedDebt[]>;
+  }
+
+  updateRePayedDebt(eventId: string, sum: number, name: string) {
     const ref = doc(this.firestore, `events/${eventId}/rePayedDebts/${name}`);
     return setDoc(ref, { sum });
-  }
-
-  getUpdateMembers(eventId: string, members: string[]) {
-    const ref = doc(this.firestore, `events/${eventId}/members`);
-    return setDoc(ref, members);
   }
 
   async addFeedback(feedback: Feedback) {

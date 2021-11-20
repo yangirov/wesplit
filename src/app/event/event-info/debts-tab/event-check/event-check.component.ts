@@ -1,5 +1,5 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
-import { Event, MemberDebt } from '../../../../../models/Event';
+import { EventDto, MemberDebt } from '../../../../../models/Event';
 import { NotificationService } from '../../../../../shared/notification.service';
 
 @Component({
@@ -8,7 +8,7 @@ import { NotificationService } from '../../../../../shared/notification.service'
   styleUrls: ['./event-check.component.scss'],
 })
 export class EventCheckComponent implements OnInit {
-  @Input() public event!: Event;
+  @Input() public event!: EventDto;
   @Input() public debts!: MemberDebt[];
 
   checkOpenState: boolean = false;

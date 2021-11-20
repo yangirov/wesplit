@@ -5,7 +5,7 @@ import * as moment from 'moment';
 @Injectable({
   providedIn: 'root',
 })
-export class EventActionService {
+export class EventActionCreator {
   constructor() {}
 
   changeEventName(

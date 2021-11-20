@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Purchase, Event } from '../../../../../models/Event';
+import { Purchase, EventDto } from '../../../../../models/Event';
 import { formatSum } from '../../../../../utils/Formatters';
 
 @Component({
@@ -8,9 +8,8 @@ import { formatSum } from '../../../../../utils/Formatters';
   styleUrls: ['./purchase-item.component.scss'],
 })
 export class PurchaseItemComponent implements OnInit {
+  @Input() event!: EventDto;
   @Input() purchase!: Purchase;
-  @Input() event!: Event;
-  @Input() index!: number;
 
   constructor() {}
 

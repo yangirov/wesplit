@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Event } from '../../../models/Event';
+import { EventDto } from '../../../models/Event';
 import { getEventBalance } from '../../../utils/BalanceCalculator';
 import {
   formatSum,
@@ -14,7 +14,7 @@ import * as moment from 'moment';
   styleUrls: ['./event-item.component.scss'],
 })
 export class EventItemComponent implements OnInit {
-  @Input() public event!: Event;
+  @Input() public event!: EventDto;
 
   public date!: string;
   public sum!: string | null;

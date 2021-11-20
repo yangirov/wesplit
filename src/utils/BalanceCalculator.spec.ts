@@ -1,8 +1,8 @@
 import { getEventBalance, getEventsMembersDebts } from './BalanceCalculator';
-import { Event } from '../models/Event';
+import { EventDto } from '../models/Event';
 import * as moment from 'moment';
 
-let defaultEvent: Event = {
+let defaultEvent: EventDto = {
   id: '111',
   name: 'Beer party',
   organizer: 'Emil',
@@ -13,12 +13,14 @@ let defaultEvent: Event = {
       payer: 'Ivan',
       sum: 200,
       members: ['Emil', 'Ivan'],
+      date: 1,
     },
     {
       title: 'Burgers',
       payer: 'Emil',
       sum: 500,
       members: ['Emil', 'Ivan'],
+      date: 1,
     },
   ],
   members: ['Emil', 'Ivan', 'Fedor'],
@@ -37,7 +39,7 @@ describe('Balance lite functions test', function () {
 
   it('should get balance for two peoples with re-payed debts', () => {
     // Arrange
-    const event: Event = {
+    const event: EventDto = {
       ...defaultEvent,
       rePayedDebts: [{ name: 'Ivan', sum: 150 }],
     };
@@ -54,7 +56,7 @@ describe('Balance lite functions test', function () {
 
   it('should get balance for event without purchases', () => {
     // Arrange
-    const event: Event = {
+    const event: EventDto = {
       ...defaultEvent,
       purchases: [],
       rePayedDebts: [],
@@ -69,7 +71,7 @@ describe('Balance lite functions test', function () {
 
   it('should get balance for two peoples with re-payed debts', () => {
     // Arrange
-    const event: Event = {
+    const event: EventDto = {
       ...defaultEvent,
       rePayedDebts: [{ name: 'Ivan', sum: 150 }],
     };
@@ -86,7 +88,7 @@ describe('Balance lite functions test', function () {
 
   it('should get balance for five peoples with debts', () => {
     // Arrange
-    const event: Event = {
+    const event: EventDto = {
       id: '111',
       name: 'Beer party',
       organizer: 'Emil',
@@ -97,18 +99,21 @@ describe('Balance lite functions test', function () {
           payer: 'Emil',
           sum: 1000,
           members: ['Emil', 'Ivan', 'Fedor', 'Artem', 'Mark'],
+          date: 1,
         },
         {
           title: 'Burgers',
           payer: 'Fedor',
           sum: 1000,
           members: ['Emil', 'Ivan', 'Fedor', 'Artem', 'Mark'],
+          date: 1,
         },
         {
           title: 'Rental house',
           payer: 'Mark',
           sum: 5000,
           members: ['Emil', 'Ivan', 'Fedor', 'Artem', 'Mark'],
+          date: 1,
         },
       ],
       members: ['Emil', 'Ivan', 'Fedor', 'Artem', 'Mark'],
@@ -130,7 +135,7 @@ describe('Balance lite functions test', function () {
 
   it('should get balance for five peoples with re-payed debts', () => {
     // Arrange
-    const event: Event = {
+    const event: EventDto = {
       id: '111',
       name: 'Beer party',
       organizer: 'Emil',
@@ -141,18 +146,21 @@ describe('Balance lite functions test', function () {
           payer: 'Emil',
           sum: 1000,
           members: ['Emil', 'Ivan', 'Fedor', 'Artem', 'Mark'],
+          date: 1,
         },
         {
           title: 'Burgers',
           payer: 'Fedor',
           sum: 1000,
           members: ['Emil', 'Ivan', 'Fedor', 'Artem', 'Mark'],
+          date: 1,
         },
         {
           title: 'Rental house',
           payer: 'Mark',
           sum: 5000,
           members: ['Emil', 'Ivan', 'Fedor', 'Artem', 'Mark'],
+          date: 1,
         },
       ],
       members: ['Emil', 'Ivan', 'Fedor', 'Artem', 'Mark'],
