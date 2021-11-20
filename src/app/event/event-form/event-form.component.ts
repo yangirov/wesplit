@@ -7,7 +7,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { debounceTime, pairwise } from 'rxjs/operators';
+import { debounceTime, pairwise, take } from 'rxjs/operators';
 import { DataService } from '../../../shared/data.service';
 import { ActionTypes, Event, EventMember } from '../../../models/Event';
 import { setLocalEvents } from '../../../shared/local-storage.service';
@@ -16,7 +16,7 @@ import {
   organizerInMembersValidation,
 } from '../../../utils/FormValidators';
 import * as moment from 'moment';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, forkJoin } from 'rxjs';
 import { EventActionCreator } from '../../../shared/event-action-creator';
 
 @Component({
@@ -30,6 +30,7 @@ export class EventFormComponent implements OnInit {
   eventId!: string;
   event!: Event;
   eventForm!: FormGroup;
+  hasRePayedDebts: boolean = false;
   loading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor(
@@ -62,13 +63,25 @@ export class EventFormComponent implements OnInit {
     if (this.isEdit && this.eventId) {
       this.loading$.next(true);
 
-      this.dataService.getEventById(this.eventId).subscribe((event) => {
-        if (event) {
-          this.event = event;
-          this.fillFormFromEvent(event);
-          this.subscribeMembersChanges();
-          this.loading$.next(false);
+      forkJoin({
+        event: this.dataService.getEventById(this.eventId).pipe(take(1)),
+        rePayedDebts: this.dataService
+          .getRePayedDebts(this.eventId)
+          .pipe(take(1)),
+      }).subscribe((x) => {
+        this.event = x.event;
+        this.fillFormFromEvent();
+        this.subscribeMembersChanges();
+
+        this.hasRePayedDebts = x.rePayedDebts?.length > 0;
+        if (this.hasRePayedDebts) {
+          this.eventForm.disable();
+          this.members.controls.forEach((control) => {
+            control.disable();
+          });
         }
+
+        this.loading$.next(false);
       });
     } else {
       this.subscribeMembersChanges();
@@ -85,8 +98,8 @@ export class EventFormComponent implements OnInit {
     return this.eventForm.get('members') as FormArray;
   }
 
-  fillFormFromEvent(event: Event) {
-    const { name, date, organizer, members } = event;
+  fillFormFromEvent() {
+    const { name, date, organizer, members } = this.event;
 
     this.eventForm.patchValue({
       name,

@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  FormArray,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { DataService } from '../../../shared/data.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
@@ -44,14 +50,17 @@ export class PurchaseFormComponent implements OnInit {
     this.purchaseForm = this.formBuilder.group(
       {
         title: ['', Validators.required],
-        payer: ['', Validators.required],
-        sum: [
-          0,
+        payer: new FormControl(
+          { value: '', disabled: this.hasRePayedDebts },
+          Validators.required
+        ),
+        sum: new FormControl(
+          { value: 0, disabled: this.hasRePayedDebts },
           Validators.compose([
             Validators.required,
             Validators.pattern('^[0-9]*$'),
-          ]),
-        ],
+          ])
+        ),
         members: this.formBuilder.array([]),
       },
       {
@@ -106,6 +115,12 @@ export class PurchaseFormComponent implements OnInit {
           })
         )
       );
+
+      if (this.hasRePayedDebts) {
+        this.members.controls.forEach((control) => {
+          control.disable();
+        });
+      }
     }
   }
 
@@ -124,23 +139,35 @@ export class PurchaseFormComponent implements OnInit {
     );
   }
 
+  mapPurchase(): Purchase {
+    const { title, payer, sum } = this.purchaseForm.value as Purchase;
+
+    if (this.hasRePayedDebts && this.isEdit) {
+      return {
+        title,
+        date: this.purchase.date,
+        payer: this.purchase.payer,
+        sum: this.purchase.sum,
+        members: this.purchase.members,
+      };
+    }
+
+    return {
+      date: this.isEdit ? this.purchase.date : moment().utc().valueOf(),
+      title,
+      payer,
+      sum,
+      members: this.members?.value
+        .filter((x: PurchaseMember) => x.selected)
+        .map((x: PurchaseMember) => x.name),
+    };
+  }
+
   async onSubmit() {
     if (this.purchaseForm.valid) {
       this.loading$.next(true);
 
-      const currentUser = this.dataService.getCurrentUser(this.event.id);
-
-      const { title, payer, sum } = this.purchaseForm.value as Purchase;
-
-      const purchase: Purchase = {
-        date: this.isEdit ? this.purchase.date : moment().utc().valueOf(),
-        title,
-        payer,
-        sum,
-        members: this.members?.value
-          .filter((x: PurchaseMember) => x.selected)
-          .map((x: PurchaseMember) => x.name),
-      };
+      const purchase = this.mapPurchase();
 
       if (this.isEdit && this.purchaseId) {
         await this.dataService.updatePurchase(
@@ -153,13 +180,14 @@ export class PurchaseFormComponent implements OnInit {
       } else {
         await this.dataService.addPurchase(this.eventId, purchase);
 
+        const currentUser = this.dataService.getCurrentUser(this.event.id);
         const action = this.eventActionCreator.addPurchase(
           currentUser,
-          title,
-          sum
+          purchase.title,
+          purchase.sum
         );
-        await this.dataService.addEventAction(this.eventId, action);
 
+        await this.dataService.addEventAction(this.eventId, action);
         await this.onChange();
       }
     }

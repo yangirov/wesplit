@@ -25,6 +25,11 @@
 
 <ng-template #form>
   <main class="container" *ngIf="event">
+    <div *ngIf="hasRePayedDebts" class="mat-form-field-invalid hasRePayedDebts">
+      После начала возвращения долгов можно редактировать только название
+      покупки.
+    </div>
+
     <form [formGroup]="purchaseForm" (ngSubmit)="onSubmit()" id="purchaseForm">
       <mat-form-field class="full-width">
         <mat-label>Название покупки</mat-label>
@@ -74,7 +79,7 @@
       </div>
     </form>
 
-    <div *ngIf="!hasRePayedDebts && isEdit">
+    <div *ngIf="this.isEdit && !hasRePayedDebts">
       <separator position="outer"></separator>
       <button
         class="delete-purchase-button"
