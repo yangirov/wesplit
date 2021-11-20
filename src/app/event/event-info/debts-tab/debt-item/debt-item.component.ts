@@ -1,7 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { EventDto, MemberDebt } from '../../../../../models/Event';
+import { DebtDto, EventDto, MemberDebt } from '../../../../../models/Event';
 import { formatDebtType, formatSum } from '../../../../../utils/Formatters';
 import { getEventBalance } from '../../../../../utils/BalanceCalculator';
+import { MatDialog } from '@angular/material/dialog';
+import { RepayDebtComponent } from '../repay-debt/repay-debt.component';
 
 @Component({
   selector: 'debt-item',
@@ -12,7 +14,7 @@ export class DebtItemComponent implements OnInit {
   @Input() public debt!: MemberDebt;
   @Input() public event!: EventDto;
 
-  constructor() {}
+  constructor(private dialog: MatDialog) {}
 
   ngOnInit(): void {}
 
@@ -25,5 +27,17 @@ export class DebtItemComponent implements OnInit {
     const currentBalance =
       eventBalance.find((x) => x.name === this.event.organizer)?.sum || 0;
     return formatDebtType(currentBalance);
+  }
+
+  openRePayDebtModal() {
+    const debtDto: DebtDto = {
+      eventId: this.event.id,
+      debt: this.debt,
+    };
+
+    this.dialog.open(RepayDebtComponent, {
+      width: '350px',
+      data: debtDto,
+    });
   }
 }

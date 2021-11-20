@@ -1,0 +1,19 @@
+.repay-debt__direction {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1em;
+}
+
+.repay-debt__icon {
+  margin: 0 0.5em 0 0.3em;
+
+  mat-icon {
+    font-size: 1.7em;
+    color: var(--grey);
+  }
+}
+
+.buttons {
+  display: flex;
+  justify-content: flex-end;
+}

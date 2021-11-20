@@ -7,14 +7,12 @@ import { NotificationService } from '../../../../shared/notification.service';
   templateUrl: './share-event.component.html',
   styleUrls: ['./share-event.component.scss'],
 })
-export class ShareEventComponent implements OnInit {
+export class ShareEventComponent {
   constructor(
     private notificationService: NotificationService,
-    public dialogRef: MatDialogRef<ShareEventComponent>,
+    private dialogRef: MatDialogRef<ShareEventComponent>,
     @Inject(MAT_DIALOG_DATA) public id: string
   ) {}
-
-  ngOnInit(): void {}
 
   get eventLink(): string {
     return `${window.location.origin}/events/${this.id}`;

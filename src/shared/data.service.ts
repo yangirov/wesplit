@@ -114,9 +114,17 @@ export class DataService {
     return collectionData(ref, { idField: 'id' }) as Observable<RePayedDebt[]>;
   }
 
-  updateRePayedDebt(eventId: string, sum: number, name: string) {
-    const ref = doc(this.firestore, `events/${eventId}/rePayedDebts/${name}`);
-    return setDoc(ref, { sum });
+  addRePayedDebt(eventId: string, rePayedDebt: RePayedDebt) {
+    const ref = collection(this.firestore, `events/${eventId}/rePayedDebts`);
+    return addDoc(ref, rePayedDebt);
+  }
+
+  updateRePayedDebt(eventId: string, rePayedDebt: RePayedDebt) {
+    const ref = doc(
+      this.firestore,
+      `events/${eventId}/rePayedDebts/${rePayedDebt.id}`
+    );
+    return updateDoc(ref, rePayedDebt);
   }
 
   async addFeedback(feedback: Feedback) {

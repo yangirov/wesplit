@@ -18,7 +18,7 @@ export class EventInfoComponent implements OnInit {
   constructor(
     private activateRoute: ActivatedRoute,
     private dataService: DataService,
-    public dialog: MatDialog
+    private dialog: MatDialog
   ) {
     this.eventId = activateRoute.snapshot.params['id'];
   }
@@ -34,7 +34,7 @@ export class EventInfoComponent implements OnInit {
   }
 
   openShareModal() {
-    const dialogRef = this.dialog.open(ShareEventComponent, {
+    this.dialog.open(ShareEventComponent, {
       width: '350px',
       data: this.eventId,
     });

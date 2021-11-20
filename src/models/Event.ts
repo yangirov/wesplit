@@ -43,6 +43,11 @@ export interface MemberDebt {
   sum?: number;
 }
 
+export interface DebtDto {
+  eventId: string;
+  debt: MemberDebt;
+}
+
 export interface MemberBalance {
   name: string;
   sum: number;

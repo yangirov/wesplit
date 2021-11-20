@@ -28,6 +28,7 @@ import { EventSidenavComponent } from './event-info/event-sidenav/event-sidenav.
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatDividerModule } from '@angular/material/divider';
 import { BaseElementsModule } from '../base-elements/base-elements.module';
+import { RepayDebtComponent } from './event-info/debts-tab/repay-debt/repay-debt.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { BaseElementsModule } from '../base-elements/base-elements.module';
     PurchasesTabComponent,
     PurchaseItemComponent,
     EventSidenavComponent,
+    RepayDebtComponent,
   ],
   imports: [
     CommonModule,

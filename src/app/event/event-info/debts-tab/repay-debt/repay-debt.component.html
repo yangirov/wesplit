@@ -1,0 +1,23 @@
+<h2 mat-dialog-title>Отметить долг возвращенным</h2>
+
+<div mat-dialog-content>
+  <div class="repay-debt__direction">
+    {{ payload.debt.from }}
+    <div class="repay-debt__icon">
+      <mat-icon>arrow_forward</mat-icon>
+    </div>
+    {{ payload.debt.to }}
+  </div>
+
+  <form [formGroup]="rePayDebtForm" (ngSubmit)="onSubmit()" id="rePayDebtForm">
+    <mat-form-field class="full-width">
+      <mat-label>Сколько, Р</mat-label>
+      <input matInput formControlName="sum" numbersOnly required />
+    </mat-form-field>
+  </form>
+</div>
+
+<div mat-dialog-actions class="buttons">
+  <button color="basic" mat-raised-button (click)="onCancel()">Отмена</button>
+  <button color="primary" mat-raised-button form="rePayDebtForm">Ок</button>
+</div>
