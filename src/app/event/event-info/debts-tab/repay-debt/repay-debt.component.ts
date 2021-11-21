@@ -1,7 +1,10 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { DebtDto } from '../../../../../models/Event';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { sumGreaterZero } from '../../../../../utils/FormValidators';
+import {
+  sumGreaterZero,
+  sumLessOrEqualDebt,
+} from '../../../../../utils/FormValidators';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { DataService } from '../../../../../shared/data.service';
 import { EventActionCreator } from '../../../../../shared/event-action-creator';
@@ -36,7 +39,10 @@ export class RepayDebtComponent implements OnInit {
         ],
       },
       {
-        validators: [sumGreaterZero()],
+        validators: [
+          sumGreaterZero(),
+          sumLessOrEqualDebt(this.payload.debt.sum),
+        ],
       }
     );
   }
@@ -51,36 +57,38 @@ export class RepayDebtComponent implements OnInit {
 
     const currentDebtSum = this.rePayDebtForm.value.sum;
 
-    let debtFrom = debt.from;
-    if (currentUser === debtFrom) {
-      debtFrom = debt.to;
-    }
-
     const action =
       Math.abs(currentDebtSum) === debt.sum
         ? this.eventActionCreator.giveBack(
             currentUser,
-            debtFrom,
+            debt.from,
             currentDebtSum
           )
         : this.eventActionCreator.giveBackPartially(
             currentUser,
-            debtFrom,
+            debt.from,
             currentDebtSum
           );
 
-    await this.dataService.addEventAction(event.id, action);
+    Promise.all<any, any, any>([
+      this.dataService.addEventAction(event.id, action),
+      this.dataService.updateRePayedDebt(event.id, {
+        sum: Number(currentDebtSum),
+        name: this.getName(debt.from),
+      }),
+      this.dataService.updateRePayedDebt(event.id, {
+        sum: Number(currentDebtSum * -1),
+        name: this.getName(debt.to),
+      }),
+    ]).then((res) => {
+      this.loading$.next(false);
+      this.dialogRef.close();
+      location.reload();
+    });
+  }
 
-    await this.dataService
-      .addRePayedDebt(event.id, {
-        sum: currentDebtSum,
-        name: debtFrom.replace(' (Вы)', ''),
-      })
-      .then((res) => {
-        this.loading$.next(false);
-        this.dialogRef.close();
-        location.reload();
-      });
+  getName(name: string): string {
+    return name.replace(' (Вы)', '');
   }
 
   onCancel() {

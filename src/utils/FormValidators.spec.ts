@@ -4,6 +4,7 @@ import {
   minMembersCountInPurchase,
   organizerInMembersValidation,
   sumGreaterZero,
+  sumLessOrEqualDebt,
 } from './FormValidators';
 import { fakeAsync } from '@angular/core/testing';
 
@@ -59,5 +60,26 @@ describe('Form custom validators test', function () {
     expect(false).toEqual(form.valid);
     expect(true).toEqual(minimalSum);
     expect(true).toEqual(minimalMembersCount);
+  }));
+
+  it('should validate the number not be equal or greater debt sum', fakeAsync(() => {
+    // Arrange
+    const formBuilder = new FormBuilder();
+    const form = formBuilder.group(
+      {
+        sum: [250],
+        members: formBuilder.array([]),
+      },
+      {
+        validators: [sumLessOrEqualDebt(200)],
+      }
+    );
+
+    // Act
+    const error = form.errors?.sumLessOrEqualDebt;
+
+    // Assert
+    expect(false).toEqual(form.valid);
+    expect(true).toEqual(error);
   }));
 });

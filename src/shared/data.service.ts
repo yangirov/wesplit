@@ -17,6 +17,9 @@ import {
   updateDoc,
   docData,
   collectionData,
+  query,
+  where,
+  getDocs,
 } from '@angular/fire/firestore';
 import { map, mergeMap, take } from 'rxjs/operators';
 import { forkJoin, from, Observable } from 'rxjs';
@@ -113,17 +116,30 @@ export class DataService {
     return collectionData(ref, { idField: 'id' }) as Observable<RePayedDebt[]>;
   }
 
-  addRePayedDebt(eventId: string, rePayedDebt: RePayedDebt) {
+  async updateRePayedDebt(eventId: string, rePayedDebt: RePayedDebt) {
     const ref = collection(this.firestore, `events/${eventId}/rePayedDebts`);
-    return addDoc(ref, rePayedDebt);
-  }
+    const findDebtQuery = query(ref, where('name', '==', rePayedDebt.name));
+    const rePayedDebtExists = await getDocs(findDebtQuery);
 
-  updateRePayedDebt(eventId: string, rePayedDebt: RePayedDebt) {
-    const ref = doc(
-      this.firestore,
-      `events/${eventId}/rePayedDebts/${rePayedDebt.id}`
-    );
-    return updateDoc(ref, rePayedDebt);
+    if (rePayedDebtExists.empty) {
+      return addDoc(ref, rePayedDebt);
+    }
+
+    return rePayedDebtExists.forEach((debt) => {
+      const oldDebtId = debt.id;
+      const oldDebt = debt.data() as RePayedDebt;
+
+      if (oldDebt.sum && rePayedDebt.sum) {
+        rePayedDebt.sum += oldDebt.sum;
+      }
+
+      const debtRef = doc(
+        this.firestore,
+        `events/${eventId}/rePayedDebts/${oldDebtId}`
+      );
+
+      return updateDoc(debtRef, rePayedDebt);
+    });
   }
 
   async addFeedback(feedback: Feedback) {

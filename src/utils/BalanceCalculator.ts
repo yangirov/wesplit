@@ -6,7 +6,8 @@ function getIndex(acc: Array<{ name: string }>, name: string) {
   return index !== -1 ? index : acc.length;
 }
 
-export function getEventBalance(event: EventDto): MemberBalance[] {
+export function getEventBalance(currentEvent: EventDto): MemberBalance[] {
+  const event = cloneDeep(currentEvent);
   const balance: MemberBalance[] = [];
 
   event?.purchases?.forEach((purchase) => {
@@ -44,9 +45,9 @@ export function getEventBalance(event: EventDto): MemberBalance[] {
     }
 
     balance[memberIndex].sum +=
-      (event.rePayedDebts && event.rePayedDebts[rePayedMemberIndex]?.sum) ||
-      0 ||
-      0;
+      Number(
+        event.rePayedDebts && event.rePayedDebts[rePayedMemberIndex]?.sum
+      ) || 0;
 
     if (balance[memberIndex]?.sum % 1 !== 0) {
       const pointPosition = balance[memberIndex].sum

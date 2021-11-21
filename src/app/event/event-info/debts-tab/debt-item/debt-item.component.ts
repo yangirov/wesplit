@@ -39,7 +39,7 @@ export class DebtItemComponent implements OnInit {
       };
 
       this.dialog.open(RepayDebtComponent, {
-        width: '350px',
+        width: '400px',
         data: debtDto,
       });
     }

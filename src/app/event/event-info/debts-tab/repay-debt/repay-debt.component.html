@@ -14,6 +14,14 @@
       <mat-label>Сколько, Р</mat-label>
       <input matInput formControlName="sum" numbersOnly required />
     </mat-form-field>
+
+    <div
+      *ngIf="rePayDebtForm.errors?.sumLessOrEqualDebt"
+      class="mat-form-field-invalid"
+    >
+      Число не может превышать сумму долга
+      <span class="bold">{{ this.payload.debt.sum }} Р</span>
+    </div>
   </form>
 </div>
 
@@ -30,7 +38,7 @@
     color="primary"
     mat-raised-button
     form="rePayDebtForm"
-    [disabled]="loading$ | async"
+    [disabled]="rePayDebtForm.invalid || (loading$ | async)"
   >
     Ок
   </button>

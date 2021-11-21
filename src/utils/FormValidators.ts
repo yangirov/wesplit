@@ -38,3 +38,10 @@ export function minMembersCountInPurchase(): ValidatorFn {
     return members?.length === 0 ? { minimalMembersCount: true } : null;
   };
 }
+
+export function sumLessOrEqualDebt(debtSum: number): ValidatorFn {
+  return (form: AbstractControl): ValidationErrors | null => {
+    const sum = form.get('sum')?.value;
+    return Number(sum) > debtSum ? { sumLessOrEqualDebt: true } : null;
+  };
+}
