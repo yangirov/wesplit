@@ -17,7 +17,10 @@ export class EventsListComponent implements OnInit {
   ngOnInit(): void {
     this.dataService.getEvents().subscribe(
       (event: EventDto) => {
-        this.events.push(event);
+        if (event.id) {
+          this.events.push(event);
+        }
+
         this.loading$.next(false);
       },
       (err) => console.error(err),
