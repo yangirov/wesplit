@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { EventDto } from '../../../models/Event';
+import { DebtTypes, EventDto } from '../../../models/Event';
 import { getEventBalance } from '../../../utils/BalanceCalculator';
 import {
   formatSum,
@@ -37,6 +37,6 @@ export class EventItemComponent implements OnInit {
 
     this.sum = sum == 0 ? null : `${formatSum(Math.abs(sum))}`;
     this.debtStatus = formatStatus(sum);
-    this.debtType = formatDebtType(currentBalance);
+    this.debtType = DebtTypes[formatDebtType(currentBalance)].toLowerCase();
   }
 }

@@ -1,4 +1,5 @@
 import { EventDto, MemberDebt, MemberBalance } from '../models/Event';
+import { cloneDeep } from 'lodash/fp';
 
 function getIndex(acc: Array<{ name: string }>, name: string) {
   const index = acc.findIndex((x) => x.name === name);
@@ -9,7 +10,7 @@ export function getEventBalance(event: EventDto): MemberBalance[] {
   const balance: MemberBalance[] = [];
 
   event?.purchases?.forEach((purchase) => {
-    purchase.members.forEach((memberName) => {
+    purchase.members?.forEach((memberName) => {
       const memberIndex = getIndex(balance, memberName);
       const debt = memberName === purchase.payer && purchase.sum;
 
@@ -30,15 +31,21 @@ export function getEventBalance(event: EventDto): MemberBalance[] {
   let positiveSum = 0;
   let negativeSum = 0;
 
-  balance.forEach((member, memberIndex) => {
+  balance.forEach((member) => {
+    const memberIndex = getIndex(balance, member.name);
+
     if (!balance[memberIndex]) {
       balance[memberIndex] = { name: member.name, sum: 0 };
     }
 
     const rePayedMemberIndex = getIndex(event.rePayedDebts, member.name);
+    if (!event.rePayedDebts[rePayedMemberIndex]) {
+      event.rePayedDebts[rePayedMemberIndex] = { name: member.name, sum: 0 };
+    }
+
     balance[memberIndex].sum +=
-      (event.rePayedDebts.length &&
-        event.rePayedDebts[rePayedMemberIndex]?.sum) ||
+      (event.rePayedDebts && event.rePayedDebts[rePayedMemberIndex]?.sum) ||
+      0 ||
       0;
 
     if (balance[memberIndex]?.sum % 1 !== 0) {
@@ -65,7 +72,9 @@ export function getEventBalance(event: EventDto): MemberBalance[] {
 
   let sumDiff = positiveSum + negativeSum;
 
-  balance.forEach((member, memberIndex) => {
+  balance.forEach((member) => {
+    const memberIndex = getIndex(balance, member.name);
+
     if (balance[memberIndex].sum < 0 && sumDiff > 0) {
       balance[memberIndex].sum -= 1;
       sumDiff--;
@@ -76,9 +85,11 @@ export function getEventBalance(event: EventDto): MemberBalance[] {
 }
 
 export function getEventsMembersDebts(
-  balance: MemberBalance[],
+  membersBalance: MemberBalance[],
   event: EventDto
 ): MemberDebt[] {
+  const balance = cloneDeep(membersBalance);
+
   return event?.members?.reduce((acc, lender) => {
     const lenderIndex = getIndex(balance, lender);
 

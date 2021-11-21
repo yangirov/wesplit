@@ -1,5 +1,5 @@
-<div *ngIf="debts?.length; else noDebts">
-  <event-check [event]="event" [debts]="debts"></event-check>
+<div *ngIf="allDebts.length">
+  <event-check [debts]="allDebts"></event-check>
 
   <separator></separator>
 
@@ -7,14 +7,39 @@
     <grey-title text="Текущие долги"></grey-title>
   </div>
 
-  <div *ngFor="let debt of debts">
-    <debt-item [debt]="debt" [event]="event"></debt-item>
+  <div *ngFor="let debt of positiveDebts">
+    <debt-item
+      [event]="event"
+      [debt]="debt"
+      [debtType]="debtTypes.Positive"
+    ></debt-item>
+  </div>
+
+  <div *ngFor="let debt of negativeDebts">
+    <debt-item
+      [event]="event"
+      [debt]="debt"
+      [debtType]="debtTypes.Negative"
+    ></debt-item>
+  </div>
+
+  <div *ngFor="let debt of othersDebts">
+    <debt-item
+      [event]="event"
+      [debt]="debt"
+      [debtType]="debtTypes.Neutral"
+    ></debt-item>
   </div>
 </div>
 
-<ng-template #noDebts>
-  <empty-items
-    icon="add_shopping_cart"
-    text="Баланс появится когда вы заведете покупки"
-  ></empty-items>
-</ng-template>
+<empty-items
+  *ngIf="allDebts.length === 0 && !hasReturnedDebts"
+  icon="add_shopping_cart"
+  text="Баланс появится когда вы заведете покупки"
+></empty-items>
+
+<empty-items
+  *ngIf="allDebts.length === 0 && hasReturnedDebts"
+  icon="check"
+  text="Все долги возвращены"
+></empty-items>

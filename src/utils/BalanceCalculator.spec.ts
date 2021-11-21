@@ -2,32 +2,115 @@ import { getEventBalance, getEventsMembersDebts } from './BalanceCalculator';
 import { EventDto } from '../models/Event';
 import * as moment from 'moment';
 
-let defaultEvent: EventDto = {
-  id: '111',
-  name: 'Beer party',
-  organizer: 'Emil',
-  date: moment.utc().startOf('day').valueOf(),
-  purchases: [
-    {
-      title: 'Beer',
-      payer: 'Ivan',
-      sum: 200,
-      members: ['Emil', 'Ivan'],
-      date: 1,
-    },
-    {
-      title: 'Burgers',
-      payer: 'Emil',
-      sum: 500,
-      members: ['Emil', 'Ivan'],
-      date: 1,
-    },
-  ],
-  members: ['Emil', 'Ivan', 'Fedor'],
-  rePayedDebts: [],
-};
+describe('Balance calculation repayment debts test', function () {
+  let event!: EventDto;
 
-describe('Balance lite functions test', function () {
+  beforeEach(() => {
+    event = {
+      id: '111',
+      name: 'Test',
+      organizer: 'Emil',
+      date: 111,
+      purchases: [
+        {
+          title: 'Test',
+          payer: 'Emil',
+          sum: 1000,
+          members: ['Emil', 'Ivan', 'Mark', 'Sam'],
+          date: 1,
+        },
+        {
+          title: 'Test',
+          payer: 'Mark',
+          sum: 1500,
+          members: ['Emil', 'Ivan', 'Mark', 'Sam'],
+          date: 1,
+        },
+      ],
+      members: ['Emil', 'Ivan', 'Mark', 'Sam'],
+      rePayedDebts: [],
+    };
+  });
+
+  it('should get balance for two purchases', () => {
+    // Act
+    const balance = getEventBalance(event);
+    const eventDebts = getEventsMembersDebts(balance, event);
+
+    // Assert
+    expect(balance).toEqual([
+      { name: 'Emil', sum: 375 },
+      { name: 'Ivan', sum: -625 },
+      { name: 'Mark', sum: 875 },
+      { name: 'Sam', sum: -625 },
+    ]);
+
+    expect(eventDebts).toEqual([
+      { from: 'Ivan', to: 'Emil', sum: -375 },
+      { from: 'Ivan', to: 'Mark', sum: -250 },
+      { from: 'Sam', to: 'Mark', sum: -625 },
+    ]);
+  });
+
+  it('should get repayment debts for two purchases', () => {
+    // Arrange
+    event.rePayedDebts = [
+      {
+        name: 'Ivan',
+        sum: 375,
+      },
+    ];
+
+    // Act
+    const balance = getEventBalance(event);
+    const eventDebts = getEventsMembersDebts(balance, event);
+
+    // Assert
+    expect(balance).toEqual([
+      { name: 'Emil', sum: 375 },
+      { name: 'Ivan', sum: -251 },
+      { name: 'Mark', sum: 875 },
+      { name: 'Sam', sum: -626 },
+    ]);
+
+    expect(eventDebts).toEqual([
+      { from: 'Ivan', to: 'Emil', sum: -251 },
+      { from: 'Sam', to: 'Emil', sum: -124 },
+      { from: 'Sam', to: 'Mark', sum: -502 },
+    ]);
+  });
+});
+
+describe('Balance calculation functions test', function () {
+  let defaultEvent!: EventDto;
+
+  beforeEach(() => {
+    defaultEvent = {
+      id: '111',
+      name: 'Beer party',
+      organizer: 'Emil',
+      date: moment.utc().startOf('day').valueOf(),
+      purchases: [
+        {
+          title: 'Beer',
+          payer: 'Ivan',
+          sum: 200,
+          members: ['Emil', 'Ivan'],
+          date: 1,
+        },
+        {
+          title: 'Burgers',
+          payer: 'Emil',
+          sum: 500,
+          members: ['Emil', 'Ivan'],
+          date: 1,
+        },
+      ],
+      members: ['Emil', 'Ivan', 'Fedor'],
+      rePayedDebts: [],
+    };
+  });
+
   it('should get balance for two peoples', () => {
     const result = getEventBalance(defaultEvent);
 

@@ -1,9 +1,14 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { DebtDto, EventDto, MemberDebt } from '../../../../../models/Event';
-import { formatDebtType, formatSum } from '../../../../../utils/Formatters';
-import { getEventBalance } from '../../../../../utils/BalanceCalculator';
+import {
+  ActionTypes,
+  DebtDto,
+  DebtTypes,
+  EventDto,
+  MemberDebt,
+} from '../../../../../models/Event';
 import { MatDialog } from '@angular/material/dialog';
 import { RepayDebtComponent } from '../repay-debt/repay-debt.component';
+import { DataService } from '../../../../../shared/data.service';
 
 @Component({
   selector: 'debt-item',
@@ -11,33 +16,32 @@ import { RepayDebtComponent } from '../repay-debt/repay-debt.component';
   styleUrls: ['./debt-item.component.scss'],
 })
 export class DebtItemComponent implements OnInit {
-  @Input() public debt!: MemberDebt;
   @Input() public event!: EventDto;
+  @Input() public debt!: MemberDebt;
+  @Input() public debtType!: DebtTypes;
 
-  constructor(private dialog: MatDialog) {}
+  constructor(private dialog: MatDialog, private dataService: DataService) {}
 
   ngOnInit(): void {}
 
-  get debtSum(): string {
-    return formatSum(this.debt?.sum || 0);
-  }
-
-  get debtType(): string {
-    const eventBalance = getEventBalance(this.event);
-    const currentBalance =
-      eventBalance.find((x) => x.name === this.event.organizer)?.sum || 0;
-    return formatDebtType(currentBalance);
+  get debtTypeName() {
+    return DebtTypes[this.debtType].toLowerCase();
   }
 
   openRePayDebtModal() {
-    const debtDto: DebtDto = {
-      eventId: this.event.id,
-      debt: this.debt,
-    };
+    if (this.debtType !== DebtTypes.Neutral) {
+      const currentUser = this.dataService.getCurrentUser(this.event.id);
 
-    this.dialog.open(RepayDebtComponent, {
-      width: '350px',
-      data: debtDto,
-    });
+      const debtDto: DebtDto = {
+        event: this.event,
+        debt: this.debt,
+        currentUser,
+      };
+
+      this.dialog.open(RepayDebtComponent, {
+        width: '350px',
+        data: debtDto,
+      });
+    }
   }
 }

@@ -40,12 +40,13 @@ export interface RePayedDebt {
 export interface MemberDebt {
   from: string;
   to: string;
-  sum?: number;
+  sum: number;
 }
 
 export interface DebtDto {
-  eventId: string;
+  event: EventDto;
   debt: MemberDebt;
+  currentUser: string;
 }
 
 export interface MemberBalance {
@@ -60,6 +61,13 @@ export interface EventMember {
 export interface PurchaseMember {
   name: string;
   selected: boolean;
+}
+
+export enum DebtTypes {
+  Positive,
+  Negative,
+  Neutral,
+  Other,
 }
 
 export interface EventAction {

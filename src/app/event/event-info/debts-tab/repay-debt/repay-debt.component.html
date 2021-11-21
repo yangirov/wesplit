@@ -18,6 +18,20 @@
 </div>
 
 <div mat-dialog-actions class="buttons">
-  <button color="basic" mat-raised-button (click)="onCancel()">Отмена</button>
-  <button color="primary" mat-raised-button form="rePayDebtForm">Ок</button>
+  <button
+    color="basic"
+    mat-raised-button
+    (click)="onCancel()"
+    [disabled]="loading$ | async"
+  >
+    Отмена
+  </button>
+  <button
+    color="primary"
+    mat-raised-button
+    form="rePayDebtForm"
+    [disabled]="loading$ | async"
+  >
+    Ок
+  </button>
 </div>
