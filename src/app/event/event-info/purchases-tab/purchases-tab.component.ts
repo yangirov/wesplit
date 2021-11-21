@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { EventDto } from '../../../../models/Event';
 
 @Component({
@@ -6,10 +6,6 @@ import { EventDto } from '../../../../models/Event';
   templateUrl: './purchases-tab.component.html',
   styleUrls: ['./purchases-tab.component.scss'],
 })
-export class PurchasesTabComponent implements OnInit {
+export class PurchasesTabComponent {
   @Input() event!: EventDto;
-
-  constructor() {}
-
-  ngOnInit(): void {}
 }

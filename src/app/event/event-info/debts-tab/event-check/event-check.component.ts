@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input } from '@angular/core';
 import { EventDto, MemberDebt } from '../../../../../models/Event';
 import { NotificationService } from '../../../../../shared/notification.service';
 
@@ -7,7 +7,7 @@ import { NotificationService } from '../../../../../shared/notification.service'
   templateUrl: './event-check.component.html',
   styleUrls: ['./event-check.component.scss'],
 })
-export class EventCheckComponent implements OnInit {
+export class EventCheckComponent {
   @Input() public event!: EventDto;
   @Input() public debts!: MemberDebt[];
 
@@ -17,8 +17,6 @@ export class EventCheckComponent implements OnInit {
     private notificationService: NotificationService,
     private elRef: ElementRef
   ) {}
-
-  ngOnInit(): void {}
 
   get check(): string[] {
     return this.debts?.map(

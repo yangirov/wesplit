@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Purchase, EventDto } from '../../../../../models/Event';
 import { formatSum } from '../../../../../utils/Formatters';
 
@@ -7,15 +7,9 @@ import { formatSum } from '../../../../../utils/Formatters';
   templateUrl: './purchase-item.component.html',
   styleUrls: ['./purchase-item.component.scss'],
 })
-export class PurchaseItemComponent implements OnInit {
+export class PurchaseItemComponent {
   @Input() event!: EventDto;
   @Input() purchase!: Purchase;
-
-  constructor() {}
-
-  ngOnInit(): void {}
-
-  onClick() {}
 
   get purchaseSum(): string {
     return formatSum(this.purchase.sum);

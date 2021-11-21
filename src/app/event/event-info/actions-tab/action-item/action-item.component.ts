@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ActionTypes, EventAction } from '../../../../../models/Event';
 import * as moment from 'moment';
 
@@ -23,12 +23,8 @@ export const actionIcons: { [key in ActionTypes]: string } = {
   templateUrl: './action-item.component.html',
   styleUrls: ['./action-item.component.scss'],
 })
-export class ActionItemComponent implements OnInit {
+export class ActionItemComponent {
   @Input() public action!: EventAction;
-
-  constructor() {}
-
-  ngOnInit(): void {}
 
   get actionIcon(): string {
     return actionIcons[this.action.type];

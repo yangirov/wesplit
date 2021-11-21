@@ -1,7 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { EventDto, LocalEvent } from '../../../../models/Event';
+import { Component, Input } from '@angular/core';
+import { EventDto } from '../../../../models/Event';
 import * as moment from 'moment';
-import { getLocalEvents } from '../../../../shared/local-storage.service';
 import { Router } from '@angular/router';
 import { DataService } from '../../../../shared/data.service';
 
@@ -10,12 +9,10 @@ import { DataService } from '../../../../shared/data.service';
   templateUrl: './event-sidenav.component.html',
   styleUrls: ['./event-sidenav.component.scss'],
 })
-export class EventSidenavComponent implements OnInit {
+export class EventSidenavComponent {
   @Input() event!: EventDto;
 
   constructor(private dataService: DataService, private router: Router) {}
-
-  ngOnInit(): void {}
 
   get eventSubtitle(): string {
     const memberStatus = `${this.event.members.length} участников`;

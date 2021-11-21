@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import {
   ActionTypes,
   DebtDto,
@@ -15,14 +15,12 @@ import { DataService } from '../../../../../shared/data.service';
   templateUrl: './debt-item.component.html',
   styleUrls: ['./debt-item.component.scss'],
 })
-export class DebtItemComponent implements OnInit {
+export class DebtItemComponent {
   @Input() public event!: EventDto;
   @Input() public debt!: MemberDebt;
   @Input() public debtType!: DebtTypes;
 
   constructor(private dialog: MatDialog, private dataService: DataService) {}
-
-  ngOnInit(): void {}
 
   get debtTypeName() {
     return DebtTypes[this.debtType].toLowerCase();

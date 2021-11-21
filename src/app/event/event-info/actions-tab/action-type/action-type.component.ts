@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ActionTypes, EventAction } from '../../../../../models/Event';
 
 @Component({
@@ -6,14 +6,10 @@ import { ActionTypes, EventAction } from '../../../../../models/Event';
   templateUrl: './action-type.component.html',
   styleUrls: ['./action-type.component.scss'],
 })
-export class ActionTypeComponent implements OnInit {
+export class ActionTypeComponent {
   @Input() public action!: EventAction;
 
   public get actionTypes(): typeof ActionTypes {
     return ActionTypes;
   }
-
-  constructor() {}
-
-  ngOnInit(): void {}
 }

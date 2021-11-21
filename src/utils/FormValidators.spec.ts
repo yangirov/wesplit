@@ -1,4 +1,4 @@
-import { FormArray, FormBuilder, Validators } from '@angular/forms';
+import { FormArray, FormBuilder } from '@angular/forms';
 import {
   duplicateMembersValidator,
   minMembersCountInPurchase,

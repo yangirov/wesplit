@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 import { EventsListRoutingModule } from './events-list-routing.module';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
-import { FeedbackFormComponent } from '../feedback/feedback-form/feedback-form.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { EventsListComponent } from './events-list.component';

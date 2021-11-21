@@ -1,15 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'fab-button',
   templateUrl: './fab-button.component.html',
   styleUrls: ['./fab-button.component.scss'],
 })
-export class FabButtonComponent implements OnInit {
+export class FabButtonComponent {
   @Input() link!: string;
   @Input() icon!: string;
-
-  constructor() {}
-
-  ngOnInit(): void {}
 }

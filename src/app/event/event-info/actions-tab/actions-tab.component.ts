@@ -11,8 +11,6 @@ export class ActionsTabComponent implements OnInit {
 
   public actions: EventAction[] = [];
 
-  constructor() {}
-
   ngOnInit(): void {
     if (this.event?.actions) {
       this.actions = this.event?.actions.reverse();
