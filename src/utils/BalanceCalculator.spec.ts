@@ -59,6 +59,10 @@ describe('Balance calculation repayment debts test', function () {
         name: 'Ivan',
         sum: 375,
       },
+      {
+        name: 'Emil',
+        sum: -375,
+      },
     ];
 
     // Act
@@ -67,16 +71,15 @@ describe('Balance calculation repayment debts test', function () {
 
     // Assert
     expect(balance).toEqual([
-      { name: 'Emil', sum: 375 },
-      { name: 'Ivan', sum: -251 },
+      { name: 'Emil', sum: 0 },
+      { name: 'Ivan', sum: -250 },
       { name: 'Mark', sum: 875 },
-      { name: 'Sam', sum: -626 },
+      { name: 'Sam', sum: -625 },
     ]);
 
     expect(eventDebts).toEqual([
-      { from: 'Ivan', to: 'Emil', sum: -251 },
-      { from: 'Sam', to: 'Emil', sum: -124 },
-      { from: 'Sam', to: 'Mark', sum: -502 },
+      { from: 'Ivan', to: 'Mark', sum: -250 },
+      { from: 'Sam', to: 'Mark', sum: -625 },
     ]);
   });
 });
