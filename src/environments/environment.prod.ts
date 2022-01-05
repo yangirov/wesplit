@@ -1,7 +1,7 @@
 export const environment = {
   name: 'WeSplit',
   production: true,
-  config: {
+  firebase: {
     apiKey: 'AIzaSyB0bNmQ3UAfLjXvpwGrJFssjlf74xZqSB4',
     authDomain: 'wesplit-840b9.firebaseapp.com',
     projectId: 'wesplit-840b9',
