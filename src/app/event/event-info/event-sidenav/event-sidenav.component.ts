@@ -3,6 +3,9 @@ import { EventDto } from '../../../../models/Event';
 import * as moment from 'moment';
 import { Router } from '@angular/router';
 import { DataService } from '../../../../shared/data.service';
+import { AddMemberComponent } from '../../event-login/add-member/add-member.component';
+import { MatDialog } from '@angular/material/dialog';
+import { PwaInstallComponent } from './pwa-install/pwa-install.component';
 
 @Component({
   selector: 'event-sidenav',
@@ -12,16 +15,7 @@ import { DataService } from '../../../../shared/data.service';
 export class EventSidenavComponent {
   @Input() event!: EventDto;
 
-  constructor(private dataService: DataService, private router: Router) {}
-
-  get eventSubtitle(): string {
-    const memberStatus = `${this.event.members.length} участников`;
-    const formattedDate = moment(this.event.date)
-      .locale('ru')
-      .format('DD MMMM');
-
-    return `${memberStatus} • ${formattedDate}`;
-  }
+  constructor(private dataService: DataService, public dialog: MatDialog) {}
 
   get hasRePayedDebts(): boolean {
     return this.event?.rePayedDebts?.length > 0;
@@ -39,5 +33,12 @@ export class EventSidenavComponent {
     }
 
     return memberName;
+  }
+
+  openPwaDialog(): void {
+    const dialogRef = this.dialog.open(PwaInstallComponent, {
+      width: '80vw',
+      height: '60vh',
+    });
   }
 }

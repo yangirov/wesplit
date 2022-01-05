@@ -1,4 +1,5 @@
 export const environment = {
+  name: 'WeSplit',
   production: true,
   config: {
     apiKey: 'AIzaSyB0bNmQ3UAfLjXvpwGrJFssjlf74xZqSB4',

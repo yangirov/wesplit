@@ -3,7 +3,7 @@
     <button class="router-button" mat-icon-button [routerLink]="['/']">
       <mat-icon>close</mat-icon>
     </button>
-    <span>Написать разработчикам</span>
+    <h1>{{ this.titleService.getTitle() }}</h1>
     <span class="spacer"></span>
     <button
       mat-icon-button

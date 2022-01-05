@@ -18,12 +18,14 @@ import {
 import * as moment from 'moment';
 import { BehaviorSubject, forkJoin } from 'rxjs';
 import { EventActionCreator } from '../../../shared/event-action-creator';
+import { TitleService } from '../../../shared/title.service';
 
 @Component({
   selector: 'event-form',
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './event-form.component.html',
   styleUrls: ['./event-form.component.scss'],
+  providers: [TitleService],
 })
 export class EventFormComponent implements OnInit {
   isEdit!: boolean;
@@ -38,7 +40,8 @@ export class EventFormComponent implements OnInit {
     private dataService: DataService,
     private eventActionCreator: EventActionCreator,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    public titleService: TitleService
   ) {}
 
   ngOnInit(): void {
@@ -86,12 +89,6 @@ export class EventFormComponent implements OnInit {
     } else {
       this.subscribeMembersChanges();
     }
-  }
-
-  get title(): string {
-    return this.isEdit && this.eventId
-      ? 'Редактирование события'
-      : 'Новое событие';
   }
 
   get members(): FormArray {
@@ -202,6 +199,6 @@ export class EventFormComponent implements OnInit {
   async onChange(id: string, organizer: string) {
     setLocalEvents(id, organizer);
     this.loading$.next(false);
-    await this.router.navigate(['events', id]);
+    await this.router.navigate(['events', id], { state: { isCreated: true } });
   }
 }

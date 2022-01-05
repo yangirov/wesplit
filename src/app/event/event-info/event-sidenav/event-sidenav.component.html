@@ -9,16 +9,13 @@
         <mat-icon>edit</mat-icon>
       </div>
       <div class="actions_item">
-        <mat-icon>add_to_home_screen</mat-icon>
+        <mat-icon (click)="openPwaDialog()">add_to_home_screen</mat-icon>
       </div>
     </div>
   </header>
 
   <main class="sidenav_main">
-    <div class="event_description">
-      <h2 class="event_title">{{ event?.name }}</h2>
-      <span class="event_subtitle">{{ eventSubtitle }}</span>
-    </div>
+    <event-header [event]="event" class="event_header"></event-header>
 
     <mat-divider></mat-divider>
 
@@ -35,7 +32,9 @@
       <div class="login_icon">
         <mat-icon>login</mat-icon>
       </div>
-      <div class="login_button">Войти под другим именем</div>
+      <div [routerLink]="['login']" class="login_button">
+        Войти под другим именем
+      </div>
     </div>
 
     <mat-divider></mat-divider>

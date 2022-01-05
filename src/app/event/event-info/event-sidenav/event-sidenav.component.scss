@@ -17,24 +17,10 @@
   &_main {
     margin-top: 0.5em;
 
-    .event_description {
+    .event_header {
+      display: block;
       padding: 0 1.2em;
       margin-bottom: 1em;
-
-      .event_title {
-        font-size: 24px;
-        font-weight: 500;
-        word-wrap: break-word;
-        padding-bottom: 0;
-        margin-bottom: 0;
-      }
-
-      .event_subtitle {
-        font-size: 13px;
-        font-weight: normal;
-        color: var(--grey);
-        line-height: 1.2;
-      }
     }
 
     .event_members {

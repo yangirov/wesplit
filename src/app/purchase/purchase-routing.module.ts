@@ -6,11 +6,17 @@ const routes: Routes = [
   {
     path: 'new',
     component: PurchaseFormComponent,
+    data: {
+      title: 'Новая покупка',
+    },
   },
   {
     path: ':purchaseId/edit',
-    data: { isEdit: true },
     component: PurchaseFormComponent,
+    data: {
+      isEdit: true,
+      title: 'Редактирование покупки',
+    },
   },
 ];
 

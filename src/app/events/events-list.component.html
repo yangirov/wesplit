@@ -1,6 +1,6 @@
 <header>
   <mat-toolbar color="primary">
-    <h1>События</h1>
+    <h1>{{ this.titleService.getTitle() }}</h1>
     <span class="spacer"></span>
     <button mat-icon-button [routerLink]="['feedback']">
       <mat-icon>mail</mat-icon>

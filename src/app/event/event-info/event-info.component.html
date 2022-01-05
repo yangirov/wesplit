@@ -19,7 +19,7 @@
         <button class="router-button" mat-icon-button [routerLink]="['/']">
           <mat-icon>arrow_backward</mat-icon>
         </button>
-        <span>{{ event.name }}</span>
+        <h1>{{ titleService.getCustomTitle(event.name) }}</h1>
         <span class="spacer"></span>
         <button (click)="openShareModal()" mat-icon-button>
           <mat-icon>share</mat-icon>

@@ -15,7 +15,7 @@ export class ShareEventComponent {
   ) {}
 
   get eventLink(): string {
-    return `${window.location.origin}/events/${this.id}`;
+    return `${window.location.origin}/events/${this.id}/login`;
   }
 
   onLaterClick() {

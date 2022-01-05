@@ -6,6 +6,9 @@ const routes: Routes = [
   {
     path: '',
     component: FeedbackFormComponent,
+    data: {
+      title: 'Обратная связь',
+    },
   },
 ];
 

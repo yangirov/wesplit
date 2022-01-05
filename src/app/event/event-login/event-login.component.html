@@ -1,0 +1,32 @@
+<div class="event-login" *ngIf="event">
+  <div class="event-login__header">
+    <div class="header__invite">
+      <span class="author">{{ event.organizer }}</span>
+      прислал(-а) вам приглашение на мероприятие
+    </div>
+
+    <event-header [event]="event" class="header__info"></event-header>
+  </div>
+
+  <div class="event-login__selector">
+    <grey-title
+      class="selector__title"
+      text="Выберите себя среди участников"
+    ></grey-title>
+
+    <div class="selector__members">
+      <button
+        class="member_item"
+        *ngFor="let member of event.members"
+        (click)="setEventMember(member)"
+        mat-stroked-button
+      >
+        {{ member }}
+      </button>
+
+      <button class="member_item" (click)="openDialog()" mat-stroked-button>
+        <span class="add-member-text">Добавить себя</span>
+      </button>
+    </div>
+  </div>
+</div>

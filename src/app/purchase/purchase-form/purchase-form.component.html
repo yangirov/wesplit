@@ -7,7 +7,7 @@
     >
       <mat-icon>close</mat-icon>
     </button>
-    <span>{{ title }}</span>
+    <h1>{{ titleService.getTitle() }}</h1>
     <span class="spacer"></span>
     <button
       mat-icon-button
@@ -79,7 +79,7 @@
       </div>
     </form>
 
-    <div *ngIf="this.isEdit && !hasRePayedDebts">
+    <div *ngIf="isEdit && !hasRePayedDebts">
       <separator position="outer"></separator>
       <button
         class="delete-purchase-button"

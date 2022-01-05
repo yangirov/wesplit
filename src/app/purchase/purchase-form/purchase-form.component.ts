@@ -18,10 +18,13 @@ import {
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '../../base-elements/confirm-dialog/confirm-dialog.component';
 import * as moment from 'moment';
+import { TitleService } from '../../../shared/title.service';
+
 @Component({
   selector: 'purchase-form',
   templateUrl: './purchase-form.component.html',
   styleUrls: ['./purchase-form.component.scss'],
+  providers: [TitleService],
 })
 export class PurchaseFormComponent implements OnInit {
   isEdit!: boolean;
@@ -39,7 +42,8 @@ export class PurchaseFormComponent implements OnInit {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    public titleService: TitleService
   ) {}
 
   ngOnInit(): void {
@@ -51,11 +55,11 @@ export class PurchaseFormComponent implements OnInit {
       {
         title: ['', Validators.required],
         payer: new FormControl(
-          { value: '', disabled: this.hasRePayedDebts },
+          { value: '', disabled: this.isEdit && this.hasRePayedDebts },
           Validators.required
         ),
         sum: new FormControl(
-          { value: 0, disabled: this.hasRePayedDebts },
+          { value: 0, disabled: this.isEdit && this.hasRePayedDebts },
           Validators.compose([
             Validators.required,
             Validators.pattern('^[0-9]*$'),
@@ -83,12 +87,6 @@ export class PurchaseFormComponent implements OnInit {
 
   get members(): FormArray {
     return this.purchaseForm.get('members') as FormArray;
-  }
-
-  get title(): string {
-    return this.isEdit && this.purchaseId
-      ? 'Редактирование покупки'
-      : 'Новая покупка';
   }
 
   get hasRePayedDebts(): boolean {

@@ -1,0 +1,35 @@
+.event-login {
+  &__header {
+    background-color: var(--light-grey);
+    padding: 2em 2em 0 2em;
+
+    .header {
+      &__invite {
+        .author {
+          font-weight: bold;
+        }
+      }
+
+      &__info {
+        display: block;
+        margin-top: 1.5em;
+        padding: 2em 0;
+      }
+    }
+  }
+
+  &__selector {
+    padding: 1em 2em;
+
+    .selector__members {
+      .member_item {
+        margin-right: 1em;
+        margin-bottom: 1em;
+
+        .add-member-text {
+          color: var(--grey);
+        }
+      }
+    }
+  }
+}

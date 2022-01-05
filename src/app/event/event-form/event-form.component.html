@@ -3,7 +3,7 @@
     <button class="router-button" mat-icon-button [routerLink]="['/']">
       <mat-icon>close</mat-icon>
     </button>
-    <h1>{{ title }}</h1>
+    <h1>{{ titleService.getTitle() }}</h1>
     <span class="spacer"></span>
     <button
       mat-icon-button
@@ -22,7 +22,10 @@
 
 <ng-template #form>
   <main class="container">
-    <div *ngIf="hasRePayedDebts" class="mat-form-field-invalid hasRePayedDebts">
+    <div
+      *ngIf="isEdit && hasRePayedDebts"
+      class="mat-form-field-invalid hasRePayedDebts"
+    >
       После начала возвращения долгов можно редактировать только название
       покупки.
     </div>

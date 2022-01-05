@@ -6,7 +6,7 @@ import {
   Purchase,
   RePayedDebt,
 } from '../models/Event';
-import { getLocalEvents } from './local-storage.service';
+import { getLocalEvents, setLocalEvents } from './local-storage.service';
 import { Feedback } from '../models/Feedback';
 import {
   Firestore,
@@ -32,6 +32,10 @@ export class DataService {
 
   getCurrentUser(eventId: string) {
     return getLocalEvents().find((x) => x.id === eventId)?.organizer || '';
+  }
+
+  setEventUser(eventId: string, member: string) {
+    setLocalEvents(eventId, member);
   }
 
   getEvents(): Observable<EventDto> {

@@ -29,6 +29,10 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatDividerModule } from '@angular/material/divider';
 import { BaseElementsModule } from '../base-elements/base-elements.module';
 import { RepayDebtComponent } from './event-info/debts-tab/repay-debt/repay-debt.component';
+import { EventLoginComponent } from './event-login/event-login.component';
+import { EventHeaderComponent } from './event-info/event-sidenav/event-header/event-header.component';
+import { AddMemberComponent } from './event-login/add-member/add-member.component';
+import { PwaInstallComponent } from './event-info/event-sidenav/pwa-install/pwa-install.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +49,10 @@ import { RepayDebtComponent } from './event-info/debts-tab/repay-debt/repay-debt
     PurchaseItemComponent,
     EventSidenavComponent,
     RepayDebtComponent,
+    EventLoginComponent,
+    EventHeaderComponent,
+    AddMemberComponent,
+    PwaInstallComponent,
   ],
   imports: [
     CommonModule,

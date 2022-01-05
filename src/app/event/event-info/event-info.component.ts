@@ -4,11 +4,13 @@ import { EventDto } from '../../../models/Event';
 import { DataService } from '../../../shared/data.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ShareEventComponent } from './share-event/share-event.component';
+import { TitleService } from '../../../shared/title.service';
 
 @Component({
   selector: 'event-info',
   templateUrl: './event-info.component.html',
   styleUrls: ['./event-info.component.scss'],
+  providers: [TitleService],
 })
 export class EventInfoComponent implements OnInit {
   eventId: string;
@@ -18,12 +20,17 @@ export class EventInfoComponent implements OnInit {
   constructor(
     private activateRoute: ActivatedRoute,
     private dataService: DataService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    public titleService: TitleService
   ) {
     this.eventId = activateRoute.snapshot.params['id'];
   }
 
   ngOnInit(): void {
+    if (history.state.isCreated) {
+      this.openShareModal();
+    }
+
     this.dataService.getEventById(this.eventId).subscribe((event: EventDto) => {
       this.event = event;
     });
