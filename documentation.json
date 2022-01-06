@@ -2583,7 +2583,7 @@
         },
         {
             "name": "AppComponent",
-            "id": "component-AppComponent-f70b8dc5e0d56266343fb75a66320b8e2f66cb3fd271695a6147da28229a9a96eae5c248afcc4d455837ef71ce949bf7f80e6b95cd49c05fda9f7f803d1a1d47",
+            "id": "component-AppComponent-894355d2937f09cc0fa367ce1778b752c7f2a80b757bf2ed09617c79715db585546ffc26e3bd99ba7bec79d0b77dec0e2750e34a3f6a70b215312c4c9305b2bb",
             "file": "src/app/app.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -2610,7 +2610,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component } from '@angular/core';\n\n@Component({\n  selector: 'app-root',\n  templateUrl: './app.component.html',\n  styleUrls: ['./app.component.scss'],\n})\nexport class AppComponent {\n  constructor() {}\n}\n",
+            "sourceCode": "import { Component } from '@angular/core';\n\n@Component({\n  selector: 'app-root',\n  templateUrl: './app.component.html',\n  styleUrls: ['./app.component.scss'],\n})\nexport class AppComponent {}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -2619,14 +2619,6 @@
                 }
             ],
             "stylesData": "",
-            "constructorObj": {
-                "name": "constructor",
-                "description": "",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "args": [],
-                "line": 8
-            },
             "templateData": "<router-outlet></router-outlet>\n"
         },
         {
@@ -6415,16 +6407,6 @@
                 "name": "Default",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/base-elements/confirm-dialog/confirm-dialog.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "",
-                "defaultValue": "Template.bind({})"
-            },
-            {
-                "name": "Default",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "src/app/base-elements/empty-items/empty-items.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -6436,16 +6418,6 @@
                 "ctype": "miscellaneous",
                 "subtype": "variable",
                 "file": "src/app/base-elements/fab-button/fab-button.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "",
-                "defaultValue": "Template.bind({})"
-            },
-            {
-                "name": "Default",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/app/base-elements/separator/separator.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
@@ -6472,6 +6444,26 @@
                 "defaultValue": "Template.bind({})"
             },
             {
+                "name": "Default",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/base-elements/separator/separator.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "Default",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/base-elements/confirm-dialog/confirm-dialog.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
                 "name": "environment",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -6479,7 +6471,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "object",
-                "defaultValue": "{\n  name: 'WeSplit',\n  production: true,\n  config: {\n    apiKey: 'AIzaSyB0bNmQ3UAfLjXvpwGrJFssjlf74xZqSB4',\n    authDomain: 'wesplit-840b9.firebaseapp.com',\n    projectId: 'wesplit-840b9',\n    storageBucket: 'wesplit-840b9.appspot.com',\n    messagingSenderId: '190723137399',\n    appId: '1:190723137399:web:7b98bfe021caaec1054b72',\n  },\n}"
+                "defaultValue": "{\n  name: 'WeSplit',\n  production: true,\n  firebase: {\n    apiKey: 'AIzaSyB0bNmQ3UAfLjXvpwGrJFssjlf74xZqSB4',\n    authDomain: 'wesplit-840b9.firebaseapp.com',\n    projectId: 'wesplit-840b9',\n    storageBucket: 'wesplit-840b9.appspot.com',\n    messagingSenderId: '190723137399',\n    appId: '1:190723137399:web:7b98bfe021caaec1054b72',\n  },\n}"
             },
             {
                 "name": "environment",
@@ -6514,16 +6506,6 @@
                 "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/base-elements/confirm-dialog/confirm-dialog.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story<ConfirmDialogComponent>",
-                "defaultValue": "(\n  args: ConfirmDialogComponent\n) => ({\n  props: args,\n})"
-            },
-            {
-                "name": "Template",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "src/app/base-elements/empty-items/empty-items.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -6544,16 +6526,6 @@
                 "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/base-elements/separator/separator.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story<SeparatorComponent>",
-                "defaultValue": "(args: SeparatorComponent) => ({\n  props: args,\n})"
-            },
-            {
-                "name": "Template",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "src/app/base-elements/grey-title/grey-title.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -6569,6 +6541,26 @@
                 "deprecationMessage": "",
                 "type": "Story<SpinnerComponent>",
                 "defaultValue": "(args: SpinnerComponent) => ({\n  props: args,\n})"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/base-elements/separator/separator.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<SeparatorComponent>",
+                "defaultValue": "(args: SeparatorComponent) => ({\n  props: args,\n})"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/base-elements/confirm-dialog/confirm-dialog.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<ConfirmDialogComponent>",
+                "defaultValue": "(\n  args: ConfirmDialogComponent\n) => ({\n  props: args,\n})"
             }
         ],
         "functions": [
@@ -7043,28 +7035,6 @@
                     "type": "literal type"
                 }
             ],
-            "src/app/base-elements/confirm-dialog/confirm-dialog.stories.ts": [
-                {
-                    "name": "Default",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/app/base-elements/confirm-dialog/confirm-dialog.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "",
-                    "defaultValue": "Template.bind({})"
-                },
-                {
-                    "name": "Template",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/app/base-elements/confirm-dialog/confirm-dialog.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story<ConfirmDialogComponent>",
-                    "defaultValue": "(\n  args: ConfirmDialogComponent\n) => ({\n  props: args,\n})"
-                }
-            ],
             "src/app/base-elements/empty-items/empty-items.stories.ts": [
                 {
                     "name": "Default",
@@ -7107,38 +7077,6 @@
                     "deprecationMessage": "",
                     "type": "Story<FabButtonComponent>",
                     "defaultValue": "(args: FabButtonComponent) => ({\n  props: args,\n})"
-                }
-            ],
-            "src/app/base-elements/separator/separator.stories.ts": [
-                {
-                    "name": "Default",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/app/base-elements/separator/separator.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "",
-                    "defaultValue": "Template.bind({})"
-                },
-                {
-                    "name": "Full",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/app/base-elements/separator/separator.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "",
-                    "defaultValue": "Template.bind({})"
-                },
-                {
-                    "name": "Template",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/app/base-elements/separator/separator.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story<SeparatorComponent>",
-                    "defaultValue": "(args: SeparatorComponent) => ({\n  props: args,\n})"
                 }
             ],
             "src/app/base-elements/grey-title/grey-title.stories.ts": [
@@ -7185,6 +7123,60 @@
                     "defaultValue": "(args: SpinnerComponent) => ({\n  props: args,\n})"
                 }
             ],
+            "src/app/base-elements/separator/separator.stories.ts": [
+                {
+                    "name": "Default",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/base-elements/separator/separator.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Full",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/base-elements/separator/separator.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Template",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/base-elements/separator/separator.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story<SeparatorComponent>",
+                    "defaultValue": "(args: SeparatorComponent) => ({\n  props: args,\n})"
+                }
+            ],
+            "src/app/base-elements/confirm-dialog/confirm-dialog.stories.ts": [
+                {
+                    "name": "Default",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/base-elements/confirm-dialog/confirm-dialog.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Template",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/base-elements/confirm-dialog/confirm-dialog.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story<ConfirmDialogComponent>",
+                    "defaultValue": "(\n  args: ConfirmDialogComponent\n) => ({\n  props: args,\n})"
+                }
+            ],
             "src/environments/environment.prod.ts": [
                 {
                     "name": "environment",
@@ -7194,7 +7186,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "object",
-                    "defaultValue": "{\n  name: 'WeSplit',\n  production: true,\n  config: {\n    apiKey: 'AIzaSyB0bNmQ3UAfLjXvpwGrJFssjlf74xZqSB4',\n    authDomain: 'wesplit-840b9.firebaseapp.com',\n    projectId: 'wesplit-840b9',\n    storageBucket: 'wesplit-840b9.appspot.com',\n    messagingSenderId: '190723137399',\n    appId: '1:190723137399:web:7b98bfe021caaec1054b72',\n  },\n}"
+                    "defaultValue": "{\n  name: 'WeSplit',\n  production: true,\n  firebase: {\n    apiKey: 'AIzaSyB0bNmQ3UAfLjXvpwGrJFssjlf74xZqSB4',\n    authDomain: 'wesplit-840b9.firebaseapp.com',\n    projectId: 'wesplit-840b9',\n    storageBucket: 'wesplit-840b9.appspot.com',\n    messagingSenderId: '190723137399',\n    appId: '1:190723137399:web:7b98bfe021caaec1054b72',\n  },\n}"
                 }
             ],
             "src/environments/environment.ts": [
@@ -7819,7 +7811,7 @@
                 "linktype": "component",
                 "name": "AppComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/2",
+                "coverageCount": "0/1",
                 "status": "low"
             },
             {

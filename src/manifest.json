@@ -43,7 +43,7 @@
       "type": "image/png"
     }
   ],
-  "start_url": "/",
+  "start_url": "./index.html?source=pwa",
   "display": "standalone",
   "orientation": "portrait"
 }
