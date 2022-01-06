@@ -19,6 +19,9 @@ export class AppComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    const lang = localStorage.getItem('lang') ?? 'ru';
+    this.translocoService.setActiveLang(lang);
+
     this.router.events
       .pipe(
         filter((event) => event instanceof NavigationEnd),

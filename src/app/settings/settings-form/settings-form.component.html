@@ -1,0 +1,31 @@
+<header>
+  <mat-toolbar color="primary">
+    <button class="router-button" mat-icon-button [routerLink]="['/']">
+      <mat-icon>close</mat-icon>
+    </button>
+    <h1>{{ "settings.title" | transloco }}</h1>
+    <span class="spacer"></span>
+  </mat-toolbar>
+</header>
+
+<div *ngIf="loading$ | async; else settingForm">
+  <spinner></spinner>
+</div>
+
+<ng-template #settingForm>
+  <main class="container">
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Language</mat-label>
+      <select
+        matNativeControl
+        required
+        name="all"
+        (change)="onChange($event)"
+        [(ngModel)]="selectedLanguage"
+      >
+        <option value="en">English</option>
+        <option value="ru">Russian</option>
+      </select>
+    </mat-form-field>
+  </main>
+</ng-template>

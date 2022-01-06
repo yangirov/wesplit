@@ -18,6 +18,11 @@ const routes: Routes = [
       import('./purchase/purchase.module').then((m) => m.PurchaseModule),
   },
   {
+    path: 'settings',
+    loadChildren: () =>
+      import('./settings/settings.module').then((m) => m.SettingsModule),
+  },
+  {
     path: 'feedback',
     loadChildren: () =>
       import('./feedback/feedback.module').then((m) => m.FeedbackModule),

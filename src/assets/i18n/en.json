@@ -24,6 +24,9 @@
   "feedback": {
     "title": "Feedback"
   },
+  "settings": {
+    "title": "Settings"
+  },
   "events-list": {
     "title": "Events",
     "noEvents": "You don't have any events yet, create your event first and add participants"
