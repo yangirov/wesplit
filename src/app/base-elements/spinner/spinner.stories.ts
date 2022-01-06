@@ -1,4 +1,4 @@
-import { Story, Meta } from '@storybook/angular/types-6-0';
+import { Meta, Story } from '@storybook/angular/types-6-0';
 import { SpinnerComponent } from './spinner.component';
 import { moduleMetadata } from '@storybook/angular';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';

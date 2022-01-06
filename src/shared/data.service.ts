@@ -1,25 +1,25 @@
 import { Injectable } from '@angular/core';
 import {
   Event,
-  EventDto,
   EventAction,
+  EventDto,
   Purchase,
   RePayedDebt,
 } from '../models/Event';
 import { getLocalEvents, setLocalEvents } from './local-storage.service';
 import { Feedback } from '../models/Feedback';
 import {
-  Firestore,
-  collection,
-  doc,
   addDoc,
-  deleteDoc,
-  updateDoc,
-  docData,
+  collection,
   collectionData,
-  query,
-  where,
+  deleteDoc,
+  doc,
+  docData,
+  Firestore,
   getDocs,
+  query,
+  updateDoc,
+  where,
 } from '@angular/fire/firestore';
 import { map, mergeMap, take } from 'rxjs/operators';
 import { forkJoin, from, Observable } from 'rxjs';

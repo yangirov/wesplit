@@ -2,9 +2,9 @@ import { Component, Input, OnInit } from '@angular/core';
 import { DebtTypes, EventDto } from '../../../models/Event';
 import { getEventBalance } from '../../../utils/BalanceCalculator';
 import {
-  formatSum,
   formatDebtType,
   formatStatus,
+  formatSum,
 } from '../../../utils/Formatters';
 import * as moment from 'moment';
 

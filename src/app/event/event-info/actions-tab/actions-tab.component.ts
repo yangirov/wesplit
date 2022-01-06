@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { EventDto, EventAction } from '../../../../models/Event';
+import { EventAction, EventDto } from '../../../../models/Event';
 
 @Component({
   selector: 'actions-tab',

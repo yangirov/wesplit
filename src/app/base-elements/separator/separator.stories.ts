@@ -1,4 +1,4 @@
-import { Story, Meta } from '@storybook/angular/types-6-0';
+import { Meta, Story } from '@storybook/angular/types-6-0';
 import { SeparatorComponent } from './separator.component';
 
 export default {

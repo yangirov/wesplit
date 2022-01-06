@@ -1,4 +1,4 @@
-import { Story, Meta } from '@storybook/angular/types-6-0';
+import { Meta, Story } from '@storybook/angular/types-6-0';
 import { EmptyItemsComponent } from './empty-items.component';
 import { moduleMetadata } from '@storybook/angular';
 import { MatIconModule } from '@angular/material/icon';

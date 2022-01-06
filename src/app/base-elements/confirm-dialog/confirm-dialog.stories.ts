@@ -1,4 +1,4 @@
-import { Story, Meta } from '@storybook/angular/types-6-0';
+import { Meta, Story } from '@storybook/angular/types-6-0';
 import { componentWrapperDecorator, moduleMetadata } from '@storybook/angular';
 import { MatButtonModule } from '@angular/material/button';
 import { ConfirmDialogComponent } from './confirm-dialog.component';

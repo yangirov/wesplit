@@ -1,4 +1,4 @@
-import { Story, Meta } from '@storybook/angular/types-6-0';
+import { Meta, Story } from '@storybook/angular/types-6-0';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { moduleMetadata } from '@storybook/angular';

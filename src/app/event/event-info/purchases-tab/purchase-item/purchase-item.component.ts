@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Purchase, EventDto } from '../../../../../models/Event';
+import { EventDto, Purchase } from '../../../../../models/Event';
 import { formatSum } from '../../../../../utils/Formatters';
 
 @Component({
