@@ -56,6 +56,7 @@ export class EventLoginComponent implements OnInit {
         this.event.members.push(result);
         this.dataService.updateEvent(this.event);
         this.dataService.addEventAction(this.eventId, action);
+        this.dataService.setEventUser(this.eventId, result);
         await this.setEventMember(result);
       }
     });

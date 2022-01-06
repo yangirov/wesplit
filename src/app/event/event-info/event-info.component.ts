@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { EventDto } from '../../../models/Event';
 import { DataService } from '../../../shared/data.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -18,6 +18,7 @@ export class EventInfoComponent implements OnInit {
   opened: boolean = false;
 
   constructor(
+    private router: Router,
     private activateRoute: ActivatedRoute,
     private dataService: DataService,
     private dialog: MatDialog,
@@ -26,9 +27,13 @@ export class EventInfoComponent implements OnInit {
     this.eventId = activateRoute.snapshot.params['id'];
   }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<any> {
     if (history.state.isCreated) {
       this.openShareModal();
+    }
+
+    if (!this.dataService.getCurrentUser(this.eventId)) {
+      await this.router.navigate(['login'], { relativeTo: this.activateRoute });
     }
 
     this.dataService.getEventById(this.eventId).subscribe((event: EventDto) => {
