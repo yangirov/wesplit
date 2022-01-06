@@ -1,10 +1,20 @@
-<h1 mat-dialog-title>Добавить себя</h1>
-<div mat-dialog-content>
+<h1 mat-dialog-title>
+  {{ "event.invite.addMember" | transloco }}
+</h1>
+<div mat-dialog-content *transloco="let t">
   <mat-form-field appearance="fill">
-    <input placeholder="Ваше имя" matInput [(ngModel)]="data.name" />
+    <input
+      [placeholder]="t('common.yourName')"
+      matInput
+      [(ngModel)]="data.name"
+    />
   </mat-form-field>
 </div>
 <div mat-dialog-actions class="buttons">
-  <button mat-button (click)="onCancel()">Отмена</button>
-  <button mat-button [mat-dialog-close]="data.name">Войти</button>
+  <button mat-button (click)="onCancel()">
+    {{ "common.cancel" | transloco }}
+  </button>
+  <button mat-button [mat-dialog-close]="data.name">
+    {{ "common.login" | transloco }}
+  </button>
 </div>

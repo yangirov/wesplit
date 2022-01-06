@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { ActionTypes, EventAction } from '../../../../../models/Event';
 import * as moment from 'moment';
+import { TranslocoService } from '@ngneat/transloco';
 
 export const actionIcons: { [key in ActionTypes]: string } = {
   [ActionTypes.CreateEvent]: 'calendar_today',
@@ -26,13 +27,17 @@ export const actionIcons: { [key in ActionTypes]: string } = {
 export class ActionItemComponent {
   @Input() public action!: EventAction;
 
+  constructor(private translocoService: TranslocoService) {}
+
   get actionIcon(): string {
     return actionIcons[this.action.type];
   }
 
   get actionDate(): string {
+    const lang = this.translocoService.getActiveLang();
+
     return this.action?.date
-      ? moment(this.action?.date).locale('ru').fromNow()
+      ? moment(this.action?.date).locale(lang).fromNow()
       : '';
   }
 }

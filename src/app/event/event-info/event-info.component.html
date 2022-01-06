@@ -19,7 +19,7 @@
         <button class="router-button" mat-icon-button [routerLink]="['/']">
           <mat-icon>arrow_backward</mat-icon>
         </button>
-        <h1>{{ titleService.getCustomTitle(event.name) }}</h1>
+        <h1>{{ event.name }}</h1>
         <span class="spacer"></span>
         <button (click)="openShareModal()" mat-icon-button>
           <mat-icon>share</mat-icon>
@@ -31,14 +31,14 @@
     </header>
 
     <main>
-      <mat-tab-group mat-stretch-tabs>
-        <mat-tab label="Покупки" style="height: 100%">
+      <mat-tab-group mat-stretch-tabs *transloco="let t">
+        <mat-tab [label]="t('event.tabs.purchases')" style="height: 100%">
           <purchases-tab [event]="event"></purchases-tab>
         </mat-tab>
-        <mat-tab label="Баланс">
+        <mat-tab [label]="t('event.tabs.balance')">
           <debts-tab [event]="event"></debts-tab>
         </mat-tab>
-        <mat-tab label="Действия">
+        <mat-tab [label]="t('event.tabs.actions')">
           <actions-tab [event]="event"></actions-tab>
         </mat-tab>
       </mat-tab-group>

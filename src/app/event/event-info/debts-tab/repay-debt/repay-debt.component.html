@@ -1,4 +1,4 @@
-<h2 mat-dialog-title>Отметить долг возвращенным</h2>
+<h2 mat-dialog-title>{{ "event.balance.returnDebt" | transloco }}</h2>
 
 <div mat-dialog-content>
   <div class="repay-debt__direction">
@@ -11,7 +11,10 @@
 
   <form [formGroup]="rePayDebtForm" (ngSubmit)="onSubmit()" id="rePayDebtForm">
     <mat-form-field class="full-width">
-      <mat-label>Сколько, Р</mat-label>
+      <mat-label>
+        {{ "common.sum" | transloco }},
+        {{ "common.currency" | transloco }}
+      </mat-label>
       <input matInput formControlName="sum" numbersOnly required />
     </mat-form-field>
 
@@ -20,7 +23,9 @@
       class="mat-form-field-invalid"
     >
       Число не может превышать сумму долга
-      <span class="bold">{{ this.payload.debt.sum }} Р</span>
+      <span class="bold">
+        {{ this.payload.debt.sum }} {{ "common.currency" | transloco }}
+      </span>
     </div>
   </form>
 </div>
@@ -32,7 +37,7 @@
     (click)="onCancel()"
     [disabled]="loading$ | async"
   >
-    Отмена
+    {{ "common.cancel" | transloco }}
   </button>
   <button
     color="primary"
@@ -40,6 +45,6 @@
     form="rePayDebtForm"
     [disabled]="rePayDebtForm.invalid || (loading$ | async)"
   >
-    Ок
+    {{ "common.ok" | transloco }}
   </button>
 </div>

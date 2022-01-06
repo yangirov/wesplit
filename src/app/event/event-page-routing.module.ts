@@ -9,7 +9,7 @@ const routes: Routes = [
     path: 'new',
     component: EventFormComponent,
     data: {
-      title: 'Новое событие',
+      scope: 'event.new',
     },
   },
   {
@@ -17,18 +17,21 @@ const routes: Routes = [
     component: EventFormComponent,
     data: {
       isEdit: true,
-      title: 'Редактирование события',
+      scope: 'event.edit',
     },
   },
   {
     path: ':id',
     component: EventInfoComponent,
+    data: {
+      scope: 'event',
+    },
   },
   {
     path: ':id/login',
     component: EventLoginComponent,
     data: {
-      title: 'Приглашение',
+      scope: 'event.invite',
     },
   },
 ];

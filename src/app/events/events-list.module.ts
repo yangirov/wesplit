@@ -12,6 +12,7 @@ import { MatListModule } from '@angular/material/list';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { BaseElementsModule } from '../base-elements/base-elements.module';
+import { TranslocoModule } from '@ngneat/transloco';
 
 @NgModule({
   declarations: [EventsListComponent, EventItemComponent],
@@ -26,6 +27,7 @@ import { BaseElementsModule } from '../base-elements/base-elements.module';
     ReactiveFormsModule,
     MatProgressSpinnerModule,
     BaseElementsModule,
+    TranslocoModule,
   ],
 })
 export class EventsListModule {}

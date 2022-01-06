@@ -1,6 +1,6 @@
 <header>
   <mat-toolbar color="primary">
-    <h1>{{ this.titleService.getTitle() }}</h1>
+    <h1>{{ "events-list.title" | transloco }}</h1>
     <span class="spacer"></span>
     <button mat-icon-button [routerLink]="['feedback']">
       <mat-icon>mail</mat-icon>
@@ -24,7 +24,8 @@
     <ng-template #noEvents>
       <empty-items
         icon="event"
-        text="У вас пока нет мероприятий, создайте первым свое мероприятие и добавьте участников"
+        *transloco="let t"
+        [text]="t('events-list.noEvents')"
       ></empty-items>
     </ng-template>
 

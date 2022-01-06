@@ -4,13 +4,11 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Feedback } from '../../../models/Feedback';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
-import { TitleService } from '../../../shared/title.service';
 
 @Component({
   selector: 'feedback',
   templateUrl: './feedback-form.component.html',
   styleUrls: ['./feedback-form.component.scss'],
-  providers: [TitleService],
 })
 export class FeedbackFormComponent implements OnInit {
   feedbackForm!: FormGroup;
@@ -19,8 +17,7 @@ export class FeedbackFormComponent implements OnInit {
   constructor(
     private dataService: DataService,
     private formBuilder: FormBuilder,
-    private router: Router,
-    public titleService: TitleService
+    private router: Router
   ) {}
 
   ngOnInit(): void {

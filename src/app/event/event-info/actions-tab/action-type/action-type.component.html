@@ -1,14 +1,14 @@
 <div *ngIf="action.type === actionTypes.CreateEvent">
   <p class="event-action__text">
     <b class="event-action__text_bold">{{ action.manager }}</b>
-    создал(-а) мероприятие
+    {{ "action.eventCreated" | transloco }}
   </p>
 </div>
 
 <div *ngIf="action.type === actionTypes.ChangeEventName">
   <p class="event-action__text">
     <b class="event-action__text_bold">{{ action.currentUser }}</b>
-    изменил(-а) название мероприятия на
+    {{ "action.eventNameChanged" | transloco }}
     <b class="event-action__text_bold"> {{ action.eventName }}</b>
   </p>
 </div>
@@ -16,7 +16,7 @@
 <div *ngIf="action.type === actionTypes.ChangeEventDate">
   <p class="event-action__text">
     <b class="event-action__text_bold">{{ action.currentUser }}</b>
-    изменил(-а) дату проведения мероприятия на
+    {{ "action.eventDateChanged" | transloco }}
     <b class="event-action__text_bold"> {{ action.date }}</b>
   </p>
 </div>
@@ -24,7 +24,7 @@
 <div *ngIf="action.type === actionTypes.AddMemberToEvent">
   <p class="event-action__text">
     <b class="event-action__text_bold">{{ action.currentUser }}</b>
-    добавил(-а) в мероприятие
+    {{ "action.addToEvent" | transloco }}
     <b class="event-action__text_bold"> {{ action.memberName }}</b>
   </p>
 </div>
@@ -32,34 +32,34 @@
 <div *ngIf="action.type === actionTypes.AddMembersToEvent">
   <p class="event-action__text">
     <b class="event-action__text_bold">{{ action.manager }}</b>
-    добавил(-а)
+    {{ "action.add" | transloco }}
     <b class="event-action__text_bold">{{ action.eventMembersCount }}</b>
-    человек в мероприятие
+    {{ "action.peoplesToEvent" | transloco }}
   </p>
 </div>
 
 <div *ngIf="action.type === actionTypes.RemoveMemberFromEvent">
   <p class="event-action__text">
     <b class="event-action__text_bold">{{ action.currentUser }}</b>
-    исключил(-а)
+    {{ "action.exclude" | transloco }}
     <b class="event-action__text_bold"> {{ action.memberName }}</b>
-    из мероприятия
+    {{ "action.fromTheEvent" | transloco }}
   </p>
 </div>
 
 <div *ngIf="action.type === actionTypes.AddPurchase">
   <p class="event-action__text">
     <b class="event-action__text_bold">{{ action.currentUser }}</b>
-    добавил(-а) покупку
+    {{ "action.addPurchase" | transloco }}
     <b class="event-action__text_bold"> {{ action.purchaseName }}</b>
-    на сумму {{ action.sum }}
+    {{ "action.onSum" | transloco }} {{ action.sum }}
   </p>
 </div>
 
 <div *ngIf="action.type === actionTypes.DeletePurchase">
   <p class="event-action__text">
     <b class="event-action__text_bold">{{ action.currentUser }}</b>
-    удалил(-а) покупку
+    {{ "action.deletePurchase" | transloco }}
     <b class="event-action__text_bold"> {{ action.purchaseName }}</b>
   </p>
 </div>
@@ -67,9 +67,9 @@
 <div *ngIf="action.type === actionTypes.AddMembersToPurchase">
   <p class="event-action__text">
     <b class="event-action__text_bold">{{ action.currentUser }}</b>
-    добавил(-а)
+    {{ "action.add" | transloco }}
     <b class="event-action__text_bold">{{ action.purchaseMembersCount }}</b>
-    человек в покупку
+    {{ "action.peoplesToPurchase" | transloco }}
     <b class="event-action__text_bold"> {{ action.purchaseName }}</b>
   </p>
 </div>
@@ -79,7 +79,7 @@
     *ngIf="action.payerName === action.currentUser"
     class="event-action__text"
   >
-    себя
+    {{ "action.myself" | transloco }}
   </span>
   <span
     *ngIf="action.payerName !== action.currentUser"
@@ -90,7 +90,8 @@
 
   <p class="event-action__text">
     <b class="event-action__text_bold">{{ action.currentUser }}</b>
-    добавил(-а) {{ action.payerName }}в покупку
+    {{ "action.add" | transloco }} {{ action.payerName }}
+    {{ "action.inPurchase" | transloco }}
     <b class="event-action__text_bold">{{ action.purchaseName }}</b>
   </p>
 </div>
@@ -100,7 +101,7 @@
     *ngIf="action.payerName === action.currentUser"
     class="event-action__text"
   >
-    себя
+    {{ "action.myself" | transloco }}
   </span>
   <span
     *ngIf="action.payerName !== action.currentUser"
@@ -111,23 +112,26 @@
 
   <p class="event-action__text">
     <b class="event-action__text_bold">{{ action.currentUser }}</b>
-    исключил(-а) {{ action.payerName }} из покупки
+    {{ "action.exclude" | transloco }} {{ action.payerName }}
+    {{ "action.fromPurchase" | transloco }}
     <b class="event-action__text_bold">{{ action.purchaseName }}</b>
   </p>
 </div>
 
 <div *ngIf="action.type === actionTypes.GiveBackPartially">
   <p class="event-action__text">
-    <b class="event-action__text_bold">{{ action.currentUser }}</b> отметил(-а)
-    долг <b class="event-action__text_bold">{{ action.payerName }}</b> частично
-    возращенным
+    <b class="event-action__text_bold">{{ action.currentUser }}</b>
+    {{ "action.notedDebt" | transloco }}
+    <b class="event-action__text_bold">{{ action.payerName }}</b>
+    {{ "action.partialReturn" | transloco }}
   </p>
 </div>
 
 <div *ngIf="action.type === actionTypes.GiveBack">
   <p class="event-action__text">
-    <b class="event-action__text_bold">{{ action.currentUser }}</b> отметил(-а)
-    долг <b class="event-action__text_bold">{{ action.payerName }}</b> полностью
-    возращенным
+    <b class="event-action__text_bold">{{ action.currentUser }}</b>
+    {{ "action.notedDebt" | transloco }}
+    <b class="event-action__text_bold">{{ action.payerName }}</b>
+    {{ "action.fullReturn" | transloco }}
   </p>
 </div>

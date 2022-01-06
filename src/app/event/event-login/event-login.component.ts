@@ -5,13 +5,12 @@ import { DataService } from '../../../shared/data.service';
 import { MatDialog } from '@angular/material/dialog';
 import { AddMemberComponent } from './add-member/add-member.component';
 import { EventActionCreator } from '../../../shared/event-action-creator';
-import { TitleService } from '../../../shared/title.service';
+import { TranslocoService } from '@ngneat/transloco';
 
 @Component({
   selector: 'app-event-login',
   templateUrl: './event-login.component.html',
   styleUrls: ['./event-login.component.scss'],
-  providers: [TitleService],
 })
 export class EventLoginComponent implements OnInit {
   eventId: string;
@@ -25,20 +24,20 @@ export class EventLoginComponent implements OnInit {
     private activateRoute: ActivatedRoute,
     private dataService: DataService,
     private eventActionCreator: EventActionCreator,
-    public titleService: TitleService
+    private translocoService: TranslocoService
   ) {
     this.eventId = activateRoute.snapshot.params['id'];
   }
 
   ngOnInit(): void {
-    this.titleService.getTitle();
-
     this.dataService.getEventById(this.eventId).subscribe((event: EventDto) => {
       this.event = event;
     });
   }
 
   openDialog(): void {
+    const lang = this.translocoService.getActiveLang();
+
     const dialogRef = this.dialog.open(AddMemberComponent, {
       width: '250px',
       data: { name: this.name },
@@ -48,14 +47,8 @@ export class EventLoginComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(async (result) => {
       if (result && !members.includes(result.toLowerCase())) {
-        const action = this.eventActionCreator.addMemberToEvent(
-          'Через приглашение',
-          result
-        );
-
         this.event.members.push(result);
         this.dataService.updateEvent(this.event);
-        this.dataService.addEventAction(this.eventId, action);
         this.dataService.setEventUser(this.eventId, result);
         await this.setEventMember(result);
       }

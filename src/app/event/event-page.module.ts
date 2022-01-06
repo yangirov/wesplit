@@ -33,6 +33,7 @@ import { EventLoginComponent } from './event-login/event-login.component';
 import { EventHeaderComponent } from './event-info/event-sidenav/event-header/event-header.component';
 import { AddMemberComponent } from './event-login/add-member/add-member.component';
 import { PwaInstallComponent } from './event-info/event-sidenav/pwa-install/pwa-install.component';
+import { TranslocoModule } from '@ngneat/transloco';
 
 @NgModule({
   declarations: [
@@ -72,6 +73,7 @@ import { PwaInstallComponent } from './event-info/event-sidenav/pwa-install/pwa-
     MatSidenavModule,
     MatDividerModule,
     BaseElementsModule,
+    TranslocoModule,
   ],
 })
 export class EventPageModule {}

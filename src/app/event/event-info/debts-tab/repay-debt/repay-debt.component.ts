@@ -9,6 +9,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { DataService } from '../../../../../shared/data.service';
 import { EventActionCreator } from '../../../../../shared/event-action-creator';
 import { BehaviorSubject } from 'rxjs';
+import { TranslocoService } from '@ngneat/transloco';
 
 @Component({
   selector: 'repay-debt',
@@ -24,7 +25,8 @@ export class RepayDebtComponent implements OnInit {
     private eventActionCreator: EventActionCreator,
     private formBuilder: FormBuilder,
     private dialogRef: MatDialogRef<RepayDebtComponent>,
-    @Inject(MAT_DIALOG_DATA) public payload: DebtDto
+    @Inject(MAT_DIALOG_DATA) public payload: DebtDto,
+    private translocoService: TranslocoService
   ) {}
 
   ngOnInit(): void {
@@ -88,7 +90,10 @@ export class RepayDebtComponent implements OnInit {
   }
 
   getName(name: string): string {
-    return name.replace(' (Вы)', '');
+    const lang = this.translocoService.getActiveLang();
+    const youText = this.translocoService.translate('common.you', {}, lang);
+
+    return name.replace(` (${youText})`, '');
   }
 
   onCancel() {

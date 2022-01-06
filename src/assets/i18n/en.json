@@ -1,0 +1,122 @@
+{
+  "common": {
+    "currency": "$",
+    "email": "Email",
+    "message": "Message",
+    "sum": "Sum",
+    "members": "members",
+    "hasOutgoingDebts": "you've repay",
+    "hasIncomingDebts": "you've a debt",
+    "cancel": "Cancel",
+    "ok": "Ok",
+    "login": "Login",
+    "yourName": "Name",
+    "addMember": "Add member",
+    "yes": "Yes",
+    "no": "No",
+    "assured": "Are you sure?",
+    "close": "Close",
+    "notNow": "Not now",
+    "pwa": "To install the application click \"Add to Home Screen\" or \"Home Screen\" in the browser menu",
+    "you": "You",
+    "copy": "Copy"
+  },
+  "feedback": {
+    "title": "Feedback"
+  },
+  "events-list": {
+    "title": "Events",
+    "noEvents": "You don't have any events yet, create your event first and add participants"
+  },
+  "action": {
+    "eventCreated": "created (a) the event",
+    "eventNameChanged": "cheated on (a) the name of the event on",
+    "eventDateChanged": "changed(-a) the date of the event on",
+    "addToEvent": "added(-a) in the event",
+    "add": "added(-a)",
+    "peoplesToEvent": "people in action",
+    "exclude": "excluded(-a)",
+    "fromTheEvent": "from event",
+    "addPurchase": "added(-a) purchase",
+    "onSum": "in sum",
+    "deletePurchase": "removed(-a) purchase",
+    "peoplesToPurchase": "the man in purchase",
+    "myself": "self",
+    "inPurchase": "to purchase",
+    "fromPurchase": "out shopping",
+    "notedDebt": "noted(-a) debt",
+    "partialReturn": "partially refunded",
+    "fullReturn": "fully refundable"
+  },
+  "event": {
+    "new": {
+      "title": "New event"
+    },
+    "edit": {
+      "title": "Edit event"
+    },
+    "form": {
+      "name": "Name",
+      "date": "Event date",
+      "afterStartRepayDebts": "After the debt repayment begins, you can edit only the name of the purchase",
+      "hasMembersDuplicates": "The names of the participants should not be repeated",
+      "organizerInMembers": "The organizer is already in the list of participants"
+    },
+    "invite" : {
+      "title": "Invite",
+      "subtitle": "sent you an invitation to the event",
+      "userSelect": "Choose yourself among the members",
+      "addMember": "Add yourself"
+    },
+    "share": {
+      "title": "Invite friends",
+      "text": "Share the link to the event with your friends so they can keep track of purchases with you:",
+      "later": "Later",
+      "copy": "Copy"
+    },
+    "sidenav": {
+      "members": "Members",
+      "login": "Login with a different name",
+      "organizer": "event organizer"
+    },
+    "tabs": {
+      "purchases": "Purchases",
+      "balance": "Balance",
+      "actions": "Actions"
+    },
+    "purchases": {
+      "empty": "You don't have any purchases yet",
+      "of": "of",
+      "participate": "participate"
+    },
+    "balance": {
+      "empty": "The balance will appear when you make purchases",
+      "allDebtsRePayed": "All debts have been repaid",
+      "currentDebts": "Current debts",
+      "score": "Score",
+      "clipboard": {
+        "failed": "The device does not support automatic copying. Please copy the highlighted text",
+        "success": "The receipt has been copied to the clipboard"
+      },
+      "returnDebt": "Mark the debt as returned"
+    },
+    "actions": {
+      "empty": "There are no actions"
+    }
+  },
+  "purchase": {
+    "new": {
+      "title": "New purchase"
+    },
+    "edit": {
+      "title": "Edit purchase"
+    },
+    "name": "Purchase name",
+    "afterStartRepayDebts": "After the debt repayment begins, only the name of the purchase can be edited.",
+    "minimalSum": "The minimum purchase amount must be more than $1",
+    "whoPaid": "Who paid",
+    "members": "Purchase participants",
+    "needOneMember": "At least one participant is needed",
+    "delete": "Delete purchase"
+  }
+}

@@ -1,12 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { DebtTypes, EventDto } from '../../../models/Event';
 import { getEventBalance } from '../../../utils/BalanceCalculator';
-import {
-  formatDebtType,
-  formatStatus,
-  formatSum,
-} from '../../../utils/Formatters';
+import { formatDebtType, formatSum } from '../../../utils/Formatters';
 import * as moment from 'moment';
+import { TranslocoService } from '@ngneat/transloco';
 
 @Component({
   selector: 'event-item',
@@ -21,22 +18,38 @@ export class EventItemComponent implements OnInit {
   public debtType!: string;
   public debtStatus!: string | null;
 
-  constructor() {}
+  constructor(private translocoService: TranslocoService) {}
 
   ngOnInit(): void {
     const { organizer, members, date } = this.event;
 
-    this.date = `${moment(date).locale('ru').format('DD MMMM')}, ${moment(date)
-      .locale('ru')
-      .format('dddd')}`;
+    const currentLang = this.translocoService.getActiveLang();
+
+    this.date = `${moment(date)
+      .locale(currentLang)
+      .format('DD MMMM')}, ${moment(date).locale(currentLang).format('dddd')}`;
 
     const eventBalance = getEventBalance(this.event);
     const currentBalance =
       eventBalance.find((x) => x.name === organizer)?.sum || 0;
     const sum = Math.round(currentBalance);
 
-    this.sum = sum == 0 ? null : `${formatSum(Math.abs(sum))}`;
-    this.debtStatus = formatStatus(sum);
+    this.sum = sum == 0 ? null : `${formatSum(currentLang, Math.abs(sum))}`;
+
+    const hasOutgoingDebts = this.translocoService.translate(
+      'common.hasOutgoingDebts',
+      {},
+      currentLang
+    );
+    const hasIncomingDebts = this.translocoService.translate(
+      'common.hasIncomingDebts',
+      {},
+      currentLang
+    );
+
+    this.debtStatus =
+      sum !== 0 ? (sum > 0 ? hasOutgoingDebts : hasIncomingDebts) : null;
+
     this.debtType = DebtTypes[formatDebtType(currentBalance)].toLowerCase();
   }
 }

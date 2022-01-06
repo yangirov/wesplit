@@ -12,7 +12,7 @@ describe('Sum format test', function () {
     ];
 
     testCases.forEach(({ value, expected }) => {
-      const actual = formatSum(value)
+      const actual = formatSum('ru', value)
         .replace(/\xa0/g, ' ')
         .replace(/\u202f/g, ' ');
 

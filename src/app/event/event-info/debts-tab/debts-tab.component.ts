@@ -10,6 +10,7 @@ import {
   getEventsMembersDebts,
 } from '../../../../utils/BalanceCalculator';
 import { DataService } from '../../../../shared/data.service';
+import { TranslocoService } from '@ngneat/transloco';
 
 @Component({
   selector: 'debts-tab',
@@ -24,9 +25,15 @@ export class DebtsTabComponent implements OnInit {
   negativeDebts!: MemberDebt[];
   othersDebts!: MemberDebt[];
 
-  constructor(private dataService: DataService) {}
+  constructor(
+    private dataService: DataService,
+    private translocoService: TranslocoService
+  ) {}
 
   ngOnInit(): void {
+    const lang = this.translocoService.getActiveLang();
+    const youText = this.translocoService.translate('common.you', {}, lang);
+
     const balance = getEventBalance(this.event);
     const debts = getEventsMembersDebts(balance, this.event);
     this.allDebts = debts;
@@ -38,14 +45,16 @@ export class DebtsTabComponent implements OnInit {
       .map((x) => ({
         sum: Math.abs(Math.round(x.sum)),
         from: x.from,
-        to: `${x.to} ${currentUser === x.to ? '(Вы)' : ''}`.trim(),
+        to: `${x.to} ${currentUser === x.to ? `(${youText})` : ''}`.trim(),
       }));
 
     this.negativeDebts = debts
       .filter((debt) => currentUser === debt.from)
       .map((x) => ({
         sum: Math.abs(Math.round(x.sum)),
-        from: `${x.from} ${currentUser === x.from ? '(Вы)' : ''}`.trim(),
+        from: `${x.from} ${
+          currentUser === x.from ? `(${youText})` : ''
+        }`.trim(),
         to: x.to,
       }));
 

@@ -4,7 +4,9 @@
     <div class="purchase-item__payer">{{ purchase.payer }}</div>
     <div class="purchase-item__subtitle">{{ purchaseSubtitle }}</div>
   </div>
-  <div class="purchase-item__sum">{{ purchaseSum }} р</div>
+  <div class="purchase-item__sum">
+    {{ purchaseSum }} {{ "common.currency" | transloco }}
+  </div>
 </div>
 
 <mat-divider></mat-divider>

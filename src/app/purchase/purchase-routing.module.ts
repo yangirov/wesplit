@@ -7,7 +7,7 @@ const routes: Routes = [
     path: 'new',
     component: PurchaseFormComponent,
     data: {
-      title: 'Новая покупка',
+      scope: 'purchase.new',
     },
   },
   {
@@ -15,7 +15,7 @@ const routes: Routes = [
     component: PurchaseFormComponent,
     data: {
       isEdit: true,
-      title: 'Редактирование покупки',
+      scope: 'purchase.edit',
     },
   },
 ];

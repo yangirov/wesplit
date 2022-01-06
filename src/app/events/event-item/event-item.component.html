@@ -3,7 +3,9 @@
     <div class="description-title">{{ event.name }}</div>
     <div class="description-subtitle">
       <div class="subtitle-date">{{ date }}</div>
-      <div class="subtitle-members">{{ event.members.length }} участников</div>
+      <div class="subtitle-members">
+        {{ event.members.length }} {{ "common.members" | transloco }}
+      </div>
     </div>
   </div>
   <div class="event-item__debt">

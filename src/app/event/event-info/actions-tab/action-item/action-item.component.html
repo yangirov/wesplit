@@ -9,10 +9,12 @@
       <div class="event-action__text-wrapper">
         <action-type [action]="action"></action-type>
       </div>
-      <div class="event-action__sum" *ngIf="action.sum">{{ action.sum }} Р</div>
+      <div class="event-action__sum" *ngIf="action.sum">
+        {{ action.sum }} {{ "common.currency" | transloco }}
+      </div>
       <div class="event-action__debt-sum" *ngIf="action.debtSum">
         <mat-icon>arrow_forward</mat-icon>
-        <span>{{ action.debtSum }} Р</span>
+        <span> {{ action.debtSum }} {{ "common.currency" | transloco }} </span>
       </div>
     </div>
     <div class="event-action__date" *ngIf="action.date">
@@ -20,4 +22,5 @@
     </div>
   </div>
 </div>
+
 <mat-divider></mat-divider>

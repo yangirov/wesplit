@@ -18,14 +18,12 @@ import {
 import * as moment from 'moment';
 import { BehaviorSubject, forkJoin } from 'rxjs';
 import { EventActionCreator } from '../../../shared/event-action-creator';
-import { TitleService } from '../../../shared/title.service';
 
 @Component({
   selector: 'event-form',
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './event-form.component.html',
   styleUrls: ['./event-form.component.scss'],
-  providers: [TitleService],
 })
 export class EventFormComponent implements OnInit {
   isEdit!: boolean;
@@ -40,8 +38,7 @@ export class EventFormComponent implements OnInit {
     private dataService: DataService,
     private eventActionCreator: EventActionCreator,
     private route: ActivatedRoute,
-    private router: Router,
-    public titleService: TitleService
+    private router: Router
   ) {}
 
   ngOnInit(): void {

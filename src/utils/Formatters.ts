@@ -1,11 +1,7 @@
 import { DebtTypes } from '../models/Event';
 
-export function formatSum(sum: number) {
-  return new Intl.NumberFormat('ru-RU').format(sum);
-}
-
-export function formatStatus(sum: number) {
-  return sum !== 0 ? `${sum > 0 ? 'вам должны' : 'вы должны'}` : null;
+export function formatSum(currentLang: string, sum: number) {
+  return new Intl.NumberFormat(convertLang(currentLang)).format(sum);
 }
 
 export function formatDebtType(sum: number): DebtTypes {
@@ -16,4 +12,16 @@ export function formatDebtType(sum: number): DebtTypes {
     : !sum
     ? DebtTypes.Neutral
     : DebtTypes.Other;
+}
+
+export function convertLang(currentLang: string) {
+  switch (currentLang) {
+    case 'ru':
+      return 'ru-RU';
+    case 'en':
+      return 'en-GB';
+      break;
+    default:
+      return 'ru-RU';
+  }
 }

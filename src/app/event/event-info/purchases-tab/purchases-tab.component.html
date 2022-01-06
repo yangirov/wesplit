@@ -14,6 +14,7 @@
 <ng-template #noPurchases>
   <empty-items
     icon="add_shopping_cart"
-    text="У вас пока нет покупок"
+    *transloco="let t"
+    [text]="t('event.purchases.empty')"
   ></empty-items>
 </ng-template>

@@ -4,13 +4,13 @@ import { EventDto } from '../../../models/Event';
 import { DataService } from '../../../shared/data.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ShareEventComponent } from './share-event/share-event.component';
-import { TitleService } from '../../../shared/title.service';
+import { Title } from '@angular/platform-browser';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'event-info',
   templateUrl: './event-info.component.html',
   styleUrls: ['./event-info.component.scss'],
-  providers: [TitleService],
 })
 export class EventInfoComponent implements OnInit {
   eventId: string;
@@ -22,7 +22,7 @@ export class EventInfoComponent implements OnInit {
     private activateRoute: ActivatedRoute,
     private dataService: DataService,
     private dialog: MatDialog,
-    public titleService: TitleService
+    private title: Title
   ) {
     this.eventId = activateRoute.snapshot.params['id'];
   }
@@ -38,6 +38,7 @@ export class EventInfoComponent implements OnInit {
 
     this.dataService.getEventById(this.eventId).subscribe((event: EventDto) => {
       this.event = event;
+      this.title.setTitle(`${event.name} - ${environment.name}`);
     });
   }
 

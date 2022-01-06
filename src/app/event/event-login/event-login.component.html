@@ -2,7 +2,7 @@
   <div class="event-login__header">
     <div class="header__invite">
       <span class="author">{{ event.organizer }}</span>
-      прислал(-а) вам приглашение на мероприятие
+      {{ "event.invite.subtitle" | transloco }}
     </div>
 
     <event-header [event]="event" class="header__info"></event-header>
@@ -11,7 +11,8 @@
   <div class="event-login__selector">
     <grey-title
       class="selector__title"
-      text="Выберите себя среди участников"
+      *transloco="let t"
+      [text]="t('event.invite.userSelect')"
     ></grey-title>
 
     <div class="selector__members">
@@ -25,7 +26,9 @@
       </button>
 
       <button class="member_item" (click)="openDialog()" mat-stroked-button>
-        <span class="add-member-text">Добавить себя</span>
+        <span class="add-member-text">
+          {{ "event.invite.addMember" | transloco }}
+        </span>
       </button>
     </div>
   </div>

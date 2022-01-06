@@ -3,8 +3,8 @@
 
   <separator></separator>
 
-  <div class="title_wrapper">
-    <grey-title text="Текущие долги"></grey-title>
+  <div class="title_wrapper" *transloco="let t">
+    <grey-title [text]="t('event.balance.currentDebts')"></grey-title>
   </div>
 
   <div *ngFor="let debt of positiveDebts">
@@ -32,14 +32,16 @@
   </div>
 </div>
 
-<empty-items
-  *ngIf="allDebts.length === 0 && !hasReturnedDebts"
-  icon="add_shopping_cart"
-  text="Баланс появится когда вы заведете покупки"
-></empty-items>
+<div *transloco="let t">
+  <empty-items
+    *ngIf="allDebts.length === 0 && !hasReturnedDebts"
+    icon="add_shopping_cart"
+    [text]="t('event.balance.empty')"
+  ></empty-items>
 
-<empty-items
-  *ngIf="allDebts.length === 0 && hasReturnedDebts"
-  icon="check"
-  text="Все долги возвращены"
-></empty-items>
+  <empty-items
+    *ngIf="allDebts.length === 0 && hasReturnedDebts"
+    icon="check"
+    [text]="t('event.balance.allDebtsRePayed')"
+  ></empty-items>
+</div>

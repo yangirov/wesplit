@@ -1,9 +1,10 @@
-<h2 mat-dialog-title>Пригласить друзей</h2>
+<h2 mat-dialog-title>
+  {{ "event.share.title" | transloco }}
+</h2>
 
 <div mat-dialog-content>
   <p>
-    Поделитесь ссылкой на мероприятие с друзьями, чтобы они могли вести учёт
-    покупок вместе с вами:
+    {{ "event.share.text" | transloco }}
   </p>
 
   <div class="share-link">{{ eventLink }}</div>
@@ -11,7 +12,7 @@
 
 <div mat-dialog-actions class="buttons">
   <button color="basic" mat-raised-button (click)="onLaterClick()">
-    Позже
+    {{ "event.share.later" | transloco }}
   </button>
 
   <button
@@ -20,6 +21,6 @@
     [cdkCopyToClipboard]="eventLink"
     (click)="onCopyClick()"
   >
-    Скопировать
+    {{ "event.share.copy" | transloco }}
   </button>
 </div>

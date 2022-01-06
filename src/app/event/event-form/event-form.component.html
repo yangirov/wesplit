@@ -3,7 +3,13 @@
     <button class="router-button" mat-icon-button [routerLink]="['/']">
       <mat-icon>close</mat-icon>
     </button>
-    <h1>{{ titleService.getTitle() }}</h1>
+    <h1>
+      {{
+        isEdit
+          ? ("event.edit.title" | transloco)
+          : ("event.new.title" | transloco)
+      }}
+    </h1>
     <span class="spacer"></span>
     <button
       mat-icon-button
@@ -26,18 +32,17 @@
       *ngIf="isEdit && hasRePayedDebts"
       class="mat-form-field-invalid hasRePayedDebts"
     >
-      После начала возвращения долгов можно редактировать только название
-      покупки.
+      {{ "event.form.afterStartRepayDebts" | transloco }}
     </div>
 
     <form [formGroup]="eventForm" (ngSubmit)="onSubmit()" id="eventForm">
       <mat-form-field class="full-width">
-        <mat-label>Название</mat-label>
+        <mat-label>{{ "event.form.name" | transloco }}</mat-label>
         <input matInput formControlName="name" required />
       </mat-form-field>
 
       <mat-form-field class="full-width">
-        <mat-label>Дата проведения</mat-label>
+        <mat-label>{{ "event.form.date" | transloco }}</mat-label>
         <input
           matInput
           [matDatepicker]="picker"
@@ -49,14 +54,18 @@
       </mat-form-field>
 
       <separator position="outer"></separator>
-      <grey-title text="Добавить участников"></grey-title>
+      <grey-title
+        *transloco="let t"
+        [text]="t('common.addMember')"
+      ></grey-title>
 
       <mat-form-field class="full-width">
         <input
           matInput
           formControlName="organizer"
           required="true"
-          placeholder="Ваше имя"
+          *transloco="let t"
+          [placeholder]="t('common.yourName')"
         />
       </mat-form-field>
 
@@ -64,14 +73,14 @@
         *ngIf="eventForm.errors?.hasMembersDuplicates"
         class="mat-form-field-invalid"
       >
-        Имена участников не должны повторяться
+        {{ "event.form.hasMembersDuplicates" | transloco }}
       </div>
 
       <div
         *ngIf="eventForm.errors?.organizerInMembers"
         class="mat-form-field-invalid"
       >
-        Организатор уже есть в списке участников
+        {{ "event.form.organizerInMembers" | transloco }}
       </div>
 
       <div formArrayName="members">
@@ -83,7 +92,8 @@
           <input
             matInput
             formControlName="name"
-            placeholder="Добавить участника"
+            *transloco="let t"
+            [placeholder]="t('common.addMember')"
           />
         </mat-form-field>
       </div>

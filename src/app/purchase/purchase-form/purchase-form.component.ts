@@ -18,13 +18,11 @@ import {
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '../../base-elements/confirm-dialog/confirm-dialog.component';
 import * as moment from 'moment';
-import { TitleService } from '../../../shared/title.service';
 
 @Component({
   selector: 'purchase-form',
   templateUrl: './purchase-form.component.html',
   styleUrls: ['./purchase-form.component.scss'],
-  providers: [TitleService],
 })
 export class PurchaseFormComponent implements OnInit {
   isEdit!: boolean;
@@ -42,8 +40,7 @@ export class PurchaseFormComponent implements OnInit {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private dialog: MatDialog,
-    public titleService: TitleService
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {

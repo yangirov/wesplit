@@ -11,6 +11,7 @@ import { RouterModule } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { NumericDirective } from '../../shared/numeric.directive';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
+import { TranslocoModule } from '@ngneat/transloco';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
     MatIconModule,
     MatButtonModule,
     RouterModule,
+    TranslocoModule,
   ],
   exports: [
     EmptyItemsComponent,

@@ -6,7 +6,7 @@
     <mat-expansion-panel-header>
       <mat-panel-title><mat-icon>payment</mat-icon></mat-panel-title>
       <mat-panel-description>
-        <p class="panel-title">Чек</p>
+        <p class="panel-title">{{ "event.balance.score" | transloco }}</p>
       </mat-panel-description>
     </mat-expansion-panel-header>
 
@@ -22,7 +22,7 @@
       mat-raised-button
       color="basic"
     >
-      <mat-icon>content_copy</mat-icon>Скопировать чек
+      <mat-icon>content_copy</mat-icon> {{ "common.copy" | transloco }}
     </button>
   </mat-expansion-panel>
 </mat-accordion>

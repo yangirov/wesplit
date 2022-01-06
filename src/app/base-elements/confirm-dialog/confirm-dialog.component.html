@@ -1,9 +1,11 @@
-<h1 md-dialog-title>Вы уверены?</h1>
+<h1 md-dialog-title>
+  {{ "common.assured" | transloco }}
+</h1>
 <div md-dialog-actions class="buttons">
   <button color="basic" mat-raised-button (click)="dialogRef.close(false)">
-    Нет
+    {{ "common.no" | transloco }}
   </button>
   <button color="primary" mat-raised-button (click)="dialogRef.close(true)">
-    Да
+    {{ "common.yes" | transloco }}
   </button>
 </div>

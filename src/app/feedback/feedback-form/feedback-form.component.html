@@ -3,7 +3,7 @@
     <button class="router-button" mat-icon-button [routerLink]="['/']">
       <mat-icon>close</mat-icon>
     </button>
-    <h1>{{ this.titleService.getTitle() }}</h1>
+    <h1>{{ "feedback.title" | transloco }}</h1>
     <span class="spacer"></span>
     <button
       mat-icon-button
@@ -23,12 +23,12 @@
   <main class="container">
     <form [formGroup]="feedbackForm" (ngSubmit)="onSubmit()" id="feedbackForm">
       <mat-form-field class="full-width">
-        <mat-label>Электронная почта (необязательно)</mat-label>
+        <mat-label>{{ "common.email" | transloco }}</mat-label>
         <input matInput formControlName="email" />
       </mat-form-field>
 
       <mat-form-field class="full-width">
-        <mat-label>Ваш отзыв</mat-label>
+        <mat-label>{{ "common.message" | transloco }}</mat-label>
         <textarea
           matInput
           formControlName="message"

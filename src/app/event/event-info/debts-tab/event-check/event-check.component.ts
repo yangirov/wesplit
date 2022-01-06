@@ -1,6 +1,7 @@
 import { Component, ElementRef, Input } from '@angular/core';
 import { EventDto, MemberDebt } from '../../../../../models/Event';
 import { NotificationService } from '../../../../../shared/notification.service';
+import { TranslocoService } from '@ngneat/transloco';
 
 @Component({
   selector: 'event-check',
@@ -15,16 +16,29 @@ export class EventCheckComponent {
 
   constructor(
     private notificationService: NotificationService,
-    private elRef: ElementRef
+    private elRef: ElementRef,
+    private translocoService: TranslocoService
   ) {}
 
   get check(): string[] {
+    const lang = this.translocoService.getActiveLang();
+    const currencyText = this.translocoService.translate(
+      'common.currency',
+      {},
+      lang
+    );
+
     return this.debts?.map(
-      (debt) => `${debt.from} → ${debt.to}   ${Math.abs(debt?.sum || 0)} руб.`
+      (debt) =>
+        `${debt.from} → ${debt.to}   ${Math.abs(
+          debt?.sum || 0
+        )} ${currencyText}`
     );
   }
 
   copyCheck() {
+    const lang = this.translocoService.getActiveLang();
+
     const checkContent = this.elRef.nativeElement.querySelector(
       '.balance-check-content__debts'
     );
@@ -38,10 +52,20 @@ export class EventCheckComponent {
 
     if (!document.execCommand('copy')) {
       this.notificationService.open(
-        'Устройство не поддерживает автоматическое копирование. Пожалуйста, скопируйте выделенный текст сами'
+        this.translocoService.translate(
+          'event.balance.clipboard.failed',
+          {},
+          lang
+        )
       );
     } else {
-      this.notificationService.open('Чек скопирован в буфер обмена');
+      this.notificationService.open(
+        this.translocoService.translate(
+          'event.balance.clipboard.success',
+          {},
+          lang
+        )
+      );
     }
 
     selection?.removeAllRanges();

@@ -6,5 +6,9 @@
 </div>
 
 <ng-template #noActions>
-  <empty-items icon="history" text="Действий нет"></empty-items>
+  <empty-items
+    icon="history"
+    *transloco="let t"
+    [text]="t('event.actions.empty')"
+  ></empty-items>
 </ng-template>
