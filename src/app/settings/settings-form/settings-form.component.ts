@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
 import { TranslocoService } from '@ngneat/transloco';
 
 @Component({
@@ -16,9 +15,8 @@ export class SettingsFormComponent implements OnInit {
     this.selectedLanguage = this.translocoService.getActiveLang();
   }
 
-  onChange(event: any) {
-    const lang = event.target.value;
-    localStorage.setItem('lang', lang);
-    this.translocoService.setActiveLang(lang);
+  onChange(newLang: string) {
+    localStorage.setItem('lang', newLang);
+    this.translocoService.setActiveLang(newLang);
   }
 }

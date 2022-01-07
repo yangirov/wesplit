@@ -13,11 +13,11 @@
         matNativeControl
         required
         name="all"
-        (change)="onChange($event)"
-        [(ngModel)]="selectedLanguage"
+        (ngModelChange)="onChange($event)"
+        [ngModel]="selectedLanguage"
       >
         <option value="en">English</option>
-        <option value="ru">Russian</option>
+        <option value="ru">Русский</option>
       </select>
     </mat-form-field>
   </div>
