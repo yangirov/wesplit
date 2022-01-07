@@ -13,7 +13,7 @@
 
   <div body *ngIf="event">
     <mat-tab-group mat-stretch-tabs *transloco="let t">
-      <mat-tab [label]="t('event.tabs.purchases')" style="height: 100%">
+      <mat-tab [label]="t('event.tabs.purchases')">
         <purchases-tab [event]="event"></purchases-tab>
       </mat-tab>
       <mat-tab [label]="t('event.tabs.balance')">
