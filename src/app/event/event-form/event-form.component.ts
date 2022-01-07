@@ -92,6 +92,14 @@ export class EventFormComponent implements OnInit {
     return this.eventForm.get('members') as FormArray;
   }
 
+  async onBack() {
+    if (this.isEdit) {
+      await this.router.navigate(['events', this.eventId]);
+    }
+
+    await this.router.navigate(['/']);
+  }
+
   fillFormFromEvent() {
     const { name, date, organizer, members } = this.event;
 

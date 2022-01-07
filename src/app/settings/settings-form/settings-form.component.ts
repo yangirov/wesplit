@@ -8,7 +8,6 @@ import { TranslocoService } from '@ngneat/transloco';
   styleUrls: ['./settings-form.component.scss'],
 })
 export class SettingsFormComponent implements OnInit {
-  loading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   selectedLanguage!: string;
 
   constructor(private translocoService: TranslocoService) {}

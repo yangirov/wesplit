@@ -1,5 +1,5 @@
 import { EventDto, MemberBalance, MemberDebt } from '../models/Event';
-import { cloneDeep } from 'lodash/fp';
+import { cloneDeep } from 'lodash-es';
 
 function getIndex(acc: Array<{ name: string }>, name: string) {
   const index = acc.findIndex((x) => x.name === name);

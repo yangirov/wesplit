@@ -1,5 +1,5 @@
-<header>
-  <mat-toolbar color="primary">
+<app-layout [loading$]="loading$">
+  <div class="header-flex" header>
     <button
       class="router-button"
       mat-icon-button
@@ -22,15 +22,9 @@
     >
       <mat-icon>check</mat-icon>
     </button>
-  </mat-toolbar>
-</header>
+  </div>
 
-<div *ngIf="loading$ | async; else form">
-  <spinner></spinner>
-</div>
-
-<ng-template #form>
-  <main class="container" *ngIf="event">
+  <div *ngIf="event" body>
     <div *ngIf="hasRePayedDebts" class="mat-form-field-invalid hasRePayedDebts">
       {{ "purchase.afterStartRepayDebts" | transloco }}
     </div>
@@ -98,5 +92,5 @@
         <mat-icon>close</mat-icon>{{ "purchase.delete" | transloco }}
       </button>
     </div>
-  </main>
-</ng-template>
+  </div>
+</app-layout>

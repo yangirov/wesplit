@@ -1,26 +1,9 @@
-<header>
-  <mat-toolbar color="primary">
+<app-sidenav-layout [loading$]="loading$">
+  <div class="header-flex" header>
     <h1>{{ "events-list.title" | transloco }}</h1>
-    <span class="spacer"></span>
+  </div>
 
-    <button mat-icon-button [routerLink]="['settings']">
-      <mat-icon>settings</mat-icon>
-    </button>
-    <button mat-icon-button [routerLink]="['feedback']">
-      <mat-icon>mail</mat-icon>
-    </button>
-    <button mat-icon-button>
-      <mat-icon (click)="openPwaDialog()">add_to_home_screen</mat-icon>
-    </button>
-  </mat-toolbar>
-</header>
-
-<div *ngIf="loading$ | async; else form">
-  <spinner></spinner>
-</div>
-
-<ng-template #form>
-  <main>
+  <div body>
     <div *ngIf="events.length; else noEvents">
       <event-item
         *ngFor="let event of events.reverse()"
@@ -37,5 +20,5 @@
     </ng-template>
 
     <fab-button link="/events/new" icon="add"></fab-button>
-  </main>
-</ng-template>
+  </div>
+</app-sidenav-layout>

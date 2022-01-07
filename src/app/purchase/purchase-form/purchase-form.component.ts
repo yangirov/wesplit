@@ -31,7 +31,7 @@ export class PurchaseFormComponent implements OnInit {
   purchaseId!: string;
   purchase!: Purchase;
   purchaseForm!: FormGroup;
-  loading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
+  loading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   dialogRef!: MatDialogRef<ConfirmDialogComponent>;
 
   constructor(
@@ -44,6 +44,8 @@ export class PurchaseFormComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.loading$.next(true);
+
     this.isEdit = this.route.snapshot.data['isEdit'];
     this.eventId = this.route.snapshot.paramMap.get('id') ?? '';
     this.purchaseId = this.route.snapshot.paramMap.get('purchaseId') ?? '';

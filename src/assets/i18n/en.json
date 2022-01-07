@@ -18,8 +18,11 @@
     "close": "Close",
     "notNow": "Not now",
     "pwa": "To install the application click «Add to Home Screen» or «Home Screen» in the browser menu",
-    "you": "You",
+    "you": "It's you",
     "copy": "Copy"
+  },
+  "homeScreen": {
+    "title": "Add to home screen"
   },
   "feedback": {
     "title": "Feedback"

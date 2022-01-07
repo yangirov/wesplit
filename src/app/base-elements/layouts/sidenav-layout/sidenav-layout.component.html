@@ -1,0 +1,54 @@
+<mat-sidenav-container
+  class="sidenav-container"
+  (backdropClick)="closeSidenav()"
+>
+  <mat-sidenav
+    class="sidenav"
+    (keydown.escape)="closeSidenav()"
+    [(opened)]="opened"
+    [fixedInViewport]="true"
+    position="end"
+    disableClose
+  >
+    <ng-content select="[sidenav]"></ng-content>
+
+    <mat-list class="sidenav-menu">
+      <mat-list-item [routerLink]="['/settings']" class="sidenav-menu__item">
+        <mat-icon>settings</mat-icon>
+        {{ "settings.title" | transloco }}
+      </mat-list-item>
+      <mat-list-item [routerLink]="['/feedback']" class="sidenav-menu__item">
+        <mat-icon>mail</mat-icon>
+        {{ "feedback.title" | transloco }}
+      </mat-list-item>
+      <mat-list-item (click)="openPwaDialog()" class="sidenav-menu__item">
+        <mat-icon>add_to_home_screen</mat-icon>
+        {{ "homeScreen.title" | transloco }}
+      </mat-list-item>
+    </mat-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <div *ngIf="loading$ | async; else content">
+      <spinner></spinner>
+    </div>
+
+    <ng-template #content>
+      <header>
+        <mat-toolbar color="primary">
+          <ng-content select="[header]"></ng-content>
+
+          <span class="spacer"></span>
+
+          <button mat-icon-button (click)="opened = !opened">
+            <mat-icon>menu</mat-icon>
+          </button>
+        </mat-toolbar>
+      </header>
+
+      <main>
+        <ng-content select="[body]"></ng-content>
+      </main>
+    </ng-template>
+  </mat-sidenav-content>
+</mat-sidenav-container>

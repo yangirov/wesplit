@@ -1,5 +1,5 @@
-<header>
-  <mat-toolbar color="primary">
+<app-layout [loading$]="loading$">
+  <div class="header-flex" header>
     <button class="router-button" mat-icon-button [routerLink]="['/']">
       <mat-icon>close</mat-icon>
     </button>
@@ -12,15 +12,9 @@
     >
       <mat-icon>check</mat-icon>
     </button>
-  </mat-toolbar>
-</header>
+  </div>
 
-<div *ngIf="loading$ | async; else form">
-  <spinner></spinner>
-</div>
-
-<ng-template #form>
-  <main class="container">
+  <div body>
     <form [formGroup]="feedbackForm" (ngSubmit)="onSubmit()" id="feedbackForm">
       <mat-form-field class="full-width">
         <mat-label>{{ "common.email" | transloco }}</mat-label>
@@ -37,5 +31,5 @@
         ></textarea>
       </mat-form-field>
     </form>
-  </main>
-</ng-template>
+  </div>
+</app-layout>

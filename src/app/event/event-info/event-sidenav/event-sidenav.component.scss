@@ -6,7 +6,8 @@
   }
 
   &_main {
-    margin-top: 0.5em;
+    margin: 0.5em;
+    overflow: hidden;
 
     .event_header {
       display: block;

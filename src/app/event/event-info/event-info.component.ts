@@ -6,6 +6,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ShareEventComponent } from './share-event/share-event.component';
 import { Title } from '@angular/platform-browser';
 import { environment } from '../../../environments/environment';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'event-info',
@@ -13,6 +14,8 @@ import { environment } from '../../../environments/environment';
   styleUrls: ['./event-info.component.scss'],
 })
 export class EventInfoComponent implements OnInit {
+  loading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
   eventId: string;
   event!: EventDto;
   opened: boolean = false;
@@ -28,6 +31,8 @@ export class EventInfoComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<any> {
+    this.loading$.next(true);
+
     if (history.state.isCreated) {
       this.openShareModal();
     }
@@ -39,6 +44,7 @@ export class EventInfoComponent implements OnInit {
     this.dataService.getEventById(this.eventId).subscribe((event: EventDto) => {
       this.event = event;
       this.title.setTitle(`${event.name} - ${environment.name}`);
+      this.loading$.next(false);
     });
   }
 

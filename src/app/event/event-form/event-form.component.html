@@ -1,6 +1,6 @@
-<header>
-  <mat-toolbar color="primary">
-    <button class="router-button" mat-icon-button [routerLink]="['../']">
+<app-layout [loading$]="loading$">
+  <div class="header-flex" header>
+    <button class="router-button" mat-icon-button (click)="onBack()">
       <mat-icon>close</mat-icon>
     </button>
     <h1>
@@ -19,15 +19,9 @@
     >
       <mat-icon>check</mat-icon>
     </button>
-  </mat-toolbar>
-</header>
+  </div>
 
-<div *ngIf="loading$ | async; else form">
-  <spinner></spinner>
-</div>
-
-<ng-template #form>
-  <main class="container">
+  <div body>
     <div
       *ngIf="isEdit && hasRePayedDebts"
       class="mat-form-field-invalid hasRePayedDebts"
@@ -98,5 +92,5 @@
         </mat-form-field>
       </div>
     </form>
-  </main>
-</ng-template>
+  </div>
+</app-layout>

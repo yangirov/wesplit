@@ -1,0 +1,43 @@
+.sidenav-container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+mat-sidenav {
+  width: 260px;
+}
+
+main {
+  height: calc(100% - 64px);
+
+  mat-tab-group {
+    height: 100%;
+  }
+}
+
+.sidenav {
+  ::ng-deep {
+    .mat-drawer-inner-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+  }
+
+  &-menu {
+    padding-top: 0;
+
+    &__item {
+      cursor: pointer;
+      font-size: 1em;
+
+      mat-icon {
+        margin-right: 0.5em;
+        color: var(--grey);
+      }
+    }
+  }
+}

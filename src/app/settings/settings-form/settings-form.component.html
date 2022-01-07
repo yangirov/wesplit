@@ -1,19 +1,12 @@
-<header>
-  <mat-toolbar color="primary">
+<app-layout>
+  <div class="header-flex" header>
     <button class="router-button" mat-icon-button [routerLink]="['/']">
       <mat-icon>close</mat-icon>
     </button>
     <h1>{{ "settings.title" | transloco }}</h1>
-    <span class="spacer"></span>
-  </mat-toolbar>
-</header>
+  </div>
 
-<div *ngIf="loading$ | async; else settingForm">
-  <spinner></spinner>
-</div>
-
-<ng-template #settingForm>
-  <main class="container">
+  <div body>
     <mat-form-field appearance="fill" class="full-width">
       <mat-label>Language</mat-label>
       <select
@@ -27,5 +20,5 @@
         <option value="ru">Russian</option>
       </select>
     </mat-form-field>
-  </main>
-</ng-template>
+  </div>
+</app-layout>
