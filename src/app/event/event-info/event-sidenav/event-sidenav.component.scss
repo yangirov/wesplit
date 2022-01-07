@@ -2,16 +2,7 @@
   overflow-y: scroll;
 
   &_header {
-    padding: 1.2em 1em;
-
-    .event_actions {
-      display: flex;
-
-      .actions_item {
-        margin-right: 1em;
-        cursor: pointer;
-      }
-    }
+    padding: 0.5em 1em;
   }
 
   &_main {

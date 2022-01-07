@@ -1,7 +1,7 @@
 import { DebtTypes } from '../models/Event';
 
-export function formatSum(currentLang: string, sum: number) {
-  return new Intl.NumberFormat(convertLang(currentLang)).format(sum);
+export function formatSum(lang: string, sum: number) {
+  return new Intl.NumberFormat(convertLang(lang)).format(sum);
 }
 
 export function formatDebtType(sum: number): DebtTypes {
@@ -14,8 +14,8 @@ export function formatDebtType(sum: number): DebtTypes {
     : DebtTypes.Other;
 }
 
-export function convertLang(currentLang: string) {
-  switch (currentLang) {
+export function convertLang(lang: string) {
+  switch (lang) {
     case 'ru':
       return 'ru-RU';
     case 'en':

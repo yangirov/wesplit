@@ -52,6 +52,7 @@
     "fullReturn": "fully refundable"
   },
   "event": {
+    "title": "Event",
     "new": {
       "title": "New event"
     },
@@ -75,7 +76,8 @@
       "title": "Invite friends",
       "text": "Share link to the event with your friends so they can keep track of purchases with you:",
       "later": "Later",
-      "copy": "Copy"
+      "copy": "Copy",
+      "copied": "The link is copied to the clipboard"
     },
     "sidenav": {
       "members": "Members",

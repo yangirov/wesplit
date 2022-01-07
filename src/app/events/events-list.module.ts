@@ -13,6 +13,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { BaseElementsModule } from '../base-elements/base-elements.module';
 import { TranslocoModule } from '@ngneat/transloco';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [EventsListComponent, EventItemComponent],
@@ -24,6 +25,7 @@ import { TranslocoModule } from '@ngneat/transloco';
     MatInputModule,
     MatButtonModule,
     MatListModule,
+    MatDialogModule,
     ReactiveFormsModule,
     MatProgressSpinnerModule,
     BaseElementsModule,

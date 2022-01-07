@@ -2,8 +2,8 @@ import { Component, Input } from '@angular/core';
 import { EventDto } from '../../../../models/Event';
 import { DataService } from '../../../../shared/data.service';
 import { MatDialog } from '@angular/material/dialog';
-import { PwaInstallComponent } from './pwa-install/pwa-install.component';
 import { TranslocoService } from '@ngneat/transloco';
+import { ShareEventComponent } from '../share-event/share-event.component';
 
 @Component({
   selector: 'event-sidenav',
@@ -40,10 +40,10 @@ export class EventSidenavComponent {
     return memberName;
   }
 
-  openPwaDialog(): void {
-    const dialogRef = this.dialog.open(PwaInstallComponent, {
-      width: '80vw',
-      height: '60vh',
+  openShareModal() {
+    this.dialog.open(ShareEventComponent, {
+      width: '350px',
+      data: this.event.id,
     });
   }
 }

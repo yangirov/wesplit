@@ -11,10 +11,10 @@
   </mat-form-field>
 </div>
 <div mat-dialog-actions class="buttons">
-  <button mat-button (click)="onCancel()">
+  <button mat-raised-button (click)="onCancel()">
     {{ "common.cancel" | transloco }}
   </button>
-  <button mat-button [mat-dialog-close]="data.name">
+  <button mat-raised-button color="primary" [mat-dialog-close]="data.name">
     {{ "common.login" | transloco }}
   </button>
 </div>

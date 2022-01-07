@@ -32,7 +32,7 @@ import { RepayDebtComponent } from './event-info/debts-tab/repay-debt/repay-debt
 import { EventLoginComponent } from './event-login/event-login.component';
 import { EventHeaderComponent } from './event-info/event-sidenav/event-header/event-header.component';
 import { AddMemberComponent } from './event-login/add-member/add-member.component';
-import { PwaInstallComponent } from './event-info/event-sidenav/pwa-install/pwa-install.component';
+import { PwaInstallComponent } from '../base-elements/pwa-install/pwa-install.component';
 import { TranslocoModule } from '@ngneat/transloco';
 
 @NgModule({

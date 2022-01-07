@@ -15,8 +15,8 @@ export class PurchaseItemComponent {
   constructor(private translocoService: TranslocoService) {}
 
   get purchaseSum(): string {
-    const currentLang = this.translocoService.getActiveLang();
-    return formatSum(currentLang, this.purchase.sum);
+    const lang = this.translocoService.getActiveLang();
+    return formatSum(lang, this.purchase.sum);
   }
 
   get purchaseSubtitle(): string {

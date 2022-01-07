@@ -23,28 +23,28 @@ export class EventItemComponent implements OnInit {
   ngOnInit(): void {
     const { organizer, members, date } = this.event;
 
-    const currentLang = this.translocoService.getActiveLang();
+    const lang = this.translocoService.getActiveLang();
 
-    this.date = `${moment(date)
-      .locale(currentLang)
-      .format('DD MMMM')}, ${moment(date).locale(currentLang).format('dddd')}`;
+    this.date = `${moment(date).locale(lang).format('DD MMMM')}, ${moment(date)
+      .locale(lang)
+      .format('dddd')}`;
 
     const eventBalance = getEventBalance(this.event);
     const currentBalance =
       eventBalance.find((x) => x.name === organizer)?.sum || 0;
     const sum = Math.round(currentBalance);
 
-    this.sum = sum == 0 ? null : `${formatSum(currentLang, Math.abs(sum))}`;
+    this.sum = sum == 0 ? null : `${formatSum(lang, Math.abs(sum))}`;
 
     const hasOutgoingDebts = this.translocoService.translate(
       'common.hasOutgoingDebts',
       {},
-      currentLang
+      lang
     );
     const hasIncomingDebts = this.translocoService.translate(
       'common.hasIncomingDebts',
       {},
-      currentLang
+      lang
     );
 
     this.debtStatus =

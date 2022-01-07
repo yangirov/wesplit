@@ -2,11 +2,15 @@
   <mat-toolbar color="primary">
     <h1>{{ "events-list.title" | transloco }}</h1>
     <span class="spacer"></span>
+
+    <button mat-icon-button [routerLink]="['settings']">
+      <mat-icon>settings</mat-icon>
+    </button>
     <button mat-icon-button [routerLink]="['feedback']">
       <mat-icon>mail</mat-icon>
     </button>
-    <button mat-icon-button [routerLink]="['settings']">
-      <mat-icon>settings</mat-icon>
+    <button mat-icon-button>
+      <mat-icon (click)="openPwaDialog()">add_to_home_screen</mat-icon>
     </button>
   </mat-toolbar>
 </header>

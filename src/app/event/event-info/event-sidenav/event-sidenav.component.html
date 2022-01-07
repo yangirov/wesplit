@@ -1,17 +1,12 @@
 <div class="sidenav">
   <header class="sidenav_header">
-    <div class="event_actions">
-      <div
-        *ngIf="!hasRePayedDebts"
-        class="actions_item"
-        [routerLink]="['edit']"
-      >
-        <mat-icon>edit</mat-icon>
-      </div>
-      <div class="actions_item">
-        <mat-icon (click)="openPwaDialog()">add_to_home_screen</mat-icon>
-      </div>
-    </div>
+    <button *ngIf="!hasRePayedDebts" [routerLink]="['edit']" mat-icon-button>
+      <mat-icon>edit</mat-icon>
+    </button>
+
+    <button (click)="openShareModal()" mat-icon-button>
+      <mat-icon>share</mat-icon>
+    </button>
   </header>
 
   <main class="sidenav_main">

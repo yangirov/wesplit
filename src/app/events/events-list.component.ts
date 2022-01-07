@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { EventDto } from '../../models/Event';
 import { DataService } from '../../shared/data.service';
 import { BehaviorSubject } from 'rxjs';
+import { PwaInstallComponent } from '../base-elements/pwa-install/pwa-install.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'events-list',
@@ -12,7 +14,7 @@ export class EventsListComponent implements OnInit {
   loading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
   events: EventDto[] = [];
 
-  constructor(private dataService: DataService) {}
+  constructor(private dataService: DataService, public dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.dataService.getEvents().subscribe(
@@ -28,5 +30,12 @@ export class EventsListComponent implements OnInit {
         this.loading$.next(false);
       }
     );
+  }
+
+  openPwaDialog(): void {
+    const dialogRef = this.dialog.open(PwaInstallComponent, {
+      width: '80vw',
+      height: '60vh',
+    });
   }
 }
