@@ -4,6 +4,7 @@ import { getEventBalance } from '../../../utils/BalanceCalculator';
 import { formatDebtType, formatSum } from '../../../utils/Formatters';
 import * as moment from 'moment';
 import { TranslocoService } from '@ngneat/transloco';
+import { DataService } from '../../../shared/data.service';
 
 @Component({
   selector: 'event-item',
@@ -18,11 +19,15 @@ export class EventItemComponent implements OnInit {
   public debtType!: string;
   public debtStatus!: string | null;
 
-  constructor(private translocoService: TranslocoService) {}
+  constructor(
+    private translocoService: TranslocoService,
+    private dataService: DataService
+  ) {}
 
   ngOnInit(): void {
-    const { organizer, members, date } = this.event;
+    const { id, date } = this.event;
 
+    const organizer = this.dataService.getCurrentUser(id);
     const lang = this.translocoService.getActiveLang();
 
     this.date = `${moment(date).locale(lang).format('DD MMMM')}, ${moment(date)
