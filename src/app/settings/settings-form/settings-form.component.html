@@ -1,23 +1,38 @@
-<app-layout>
+<app-layout *transloco="let t">
   <div class="header-flex" header>
     <button class="router-button" mat-icon-button [routerLink]="['/']">
       <mat-icon>close</mat-icon>
     </button>
-    <h1>{{ "settings.title" | transloco }}</h1>
+    <h1>{{ t("settings.title") }}</h1>
   </div>
 
   <div body>
     <mat-form-field appearance="fill" class="full-width">
-      <mat-label>Language</mat-label>
+      <mat-label>{{ t("settings.language.name") }}</mat-label>
       <select
         matNativeControl
-        required
-        name="all"
-        (ngModelChange)="onChange($event)"
+        (ngModelChange)="onChangeLanguage($event)"
         [ngModel]="selectedLanguage"
       >
-        <option value="en">English</option>
-        <option value="ru">Русский</option>
+        <option value="en">
+          {{ t("settings.language.english") }}
+        </option>
+        <option value="ru">
+          {{ t("settings.language.russian") }}
+        </option>
+      </select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>{{ t("settings.theme.name") }}</mat-label>
+      <select
+        matNativeControl
+        (ngModelChange)="onChangeTheme($event)"
+        [(ngModel)]="selectedTheme"
+      >
+        <option value="auto-mode">{{ t("settings.theme.auto") }}</option>
+        <option value="light-mode">{{ t("settings.theme.light") }}</option>
+        <option value="dark-mode">{{ t("settings.theme.dark") }}</option>
       </select>
     </mat-form-field>
   </div>

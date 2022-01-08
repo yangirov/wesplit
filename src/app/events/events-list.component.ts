@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { EventDto } from '../../models/Event';
-import { DataService } from '../../shared/data.service';
+import { DataService } from '../../shared/events/data.service';
 import { BehaviorSubject } from 'rxjs';
 
 @Component({

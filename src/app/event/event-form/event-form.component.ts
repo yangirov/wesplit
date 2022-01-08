@@ -8,16 +8,16 @@ import {
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { debounceTime, pairwise, take } from 'rxjs/operators';
-import { DataService } from '../../../shared/data.service';
+import { DataService } from '../../../shared/events/data.service';
 import { ActionTypes, Event, EventMember } from '../../../models/Event';
-import { setLocalEvents } from '../../../shared/local-storage.service';
+import { setLocalEvents } from '../../../shared/events/local-storage.service';
 import {
   duplicateMembersValidator,
   organizerInMembersValidation,
 } from '../../../utils/FormValidators';
 import * as moment from 'moment';
 import { BehaviorSubject, forkJoin } from 'rxjs';
-import { EventActionCreator } from '../../../shared/event-action-creator';
+import { EventActionCreator } from '../../../shared/events/event-action-creator';
 
 @Component({
   selector: 'event-form',

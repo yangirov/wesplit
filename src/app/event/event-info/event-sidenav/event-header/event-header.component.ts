@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import * as moment from 'moment';
 import { Event } from '../../../../../models/Event';
-import { TranslocoService } from '@ngneat/transloco';
+import { LocalizationService } from '../../../../../shared/settings/localization.service';
 
 @Component({
   selector: 'event-header',
@@ -11,18 +11,14 @@ import { TranslocoService } from '@ngneat/transloco';
 export class EventHeaderComponent implements OnInit {
   @Input() event!: Event;
 
-  constructor(private translocoSerrvice: TranslocoService) {}
+  constructor(private localizationService: LocalizationService) {}
 
   ngOnInit(): void {}
 
   get eventSubtitle(): string {
-    const lang = this.translocoSerrvice.getActiveLang();
+    const lang = this.localizationService.getActiveLang();
 
-    const membersText = this.translocoSerrvice.translate(
-      'common.members',
-      {},
-      lang
-    );
+    const membersText = this.localizationService.translate('common.members');
     const memberStatus = `${this.event.members.length} ${membersText}`;
     const formattedDate = moment(this.event.date)
       .locale(lang)

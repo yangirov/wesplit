@@ -3,8 +3,8 @@ import { DebtTypes, EventDto } from '../../../models/Event';
 import { getEventBalance } from '../../../utils/BalanceCalculator';
 import { formatDebtType, formatSum } from '../../../utils/Formatters';
 import * as moment from 'moment';
-import { TranslocoService } from '@ngneat/transloco';
-import { DataService } from '../../../shared/data.service';
+import { DataService } from '../../../shared/events/data.service';
+import { LocalizationService } from '../../../shared/settings/localization.service';
 
 @Component({
   selector: 'event-item',
@@ -20,7 +20,7 @@ export class EventItemComponent implements OnInit {
   public debtStatus!: string | null;
 
   constructor(
-    private translocoService: TranslocoService,
+    private localizationService: LocalizationService,
     private dataService: DataService
   ) {}
 
@@ -28,7 +28,7 @@ export class EventItemComponent implements OnInit {
     const { id, date } = this.event;
 
     const organizer = this.dataService.getCurrentUser(id);
-    const lang = this.translocoService.getActiveLang();
+    const lang = this.localizationService.getActiveLang();
 
     this.date = `${moment(date).locale(lang).format('DD MMMM')}, ${moment(date)
       .locale(lang)
@@ -41,15 +41,11 @@ export class EventItemComponent implements OnInit {
 
     this.sum = sum == 0 ? null : `${formatSum(lang, Math.abs(sum))}`;
 
-    const hasOutgoingDebts = this.translocoService.translate(
-      'common.hasOutgoingDebts',
-      {},
-      lang
+    const hasOutgoingDebts = this.localizationService.translate(
+      'common.hasOutgoingDebts'
     );
-    const hasIncomingDebts = this.translocoService.translate(
-      'common.hasIncomingDebts',
-      {},
-      lang
+    const hasIncomingDebts = this.localizationService.translate(
+      'common.hasIncomingDebts'
     );
 
     this.debtStatus =

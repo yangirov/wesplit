@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DataService } from '../../../shared/data.service';
+import { DataService } from '../../../shared/events/data.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Feedback } from '../../../models/Feedback';
 import { Router } from '@angular/router';

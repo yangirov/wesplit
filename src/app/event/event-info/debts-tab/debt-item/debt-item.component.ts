@@ -7,7 +7,7 @@ import {
 } from '../../../../../models/Event';
 import { MatDialog } from '@angular/material/dialog';
 import { RepayDebtComponent } from '../repay-debt/repay-debt.component';
-import { DataService } from '../../../../../shared/data.service';
+import { DataService } from '../../../../../shared/events/data.service';
 
 @Component({
   selector: 'debt-item',

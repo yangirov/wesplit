@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { EventDto, Purchase } from '../../../../../models/Event';
 import { formatSum } from '../../../../../utils/Formatters';
-import { TranslocoService } from '@ngneat/transloco';
+import { LocalizationService } from '../../../../../shared/settings/localization.service';
 
 @Component({
   selector: 'purchase-item',
@@ -12,10 +12,10 @@ export class PurchaseItemComponent {
   @Input() event!: EventDto;
   @Input() purchase!: Purchase;
 
-  constructor(private translocoService: TranslocoService) {}
+  constructor(private localizationService: LocalizationService) {}
 
   get purchaseSum(): string {
-    const lang = this.translocoService.getActiveLang();
+    const lang = this.localizationService.getActiveLang();
     return formatSum(lang, this.purchase.sum);
   }
 
@@ -23,16 +23,9 @@ export class PurchaseItemComponent {
     const purchaseMembersCount = this.purchase.members.length;
     const eventMembersCount = this.event.members.length;
 
-    const lang = this.translocoService.getActiveLang();
-    const ofText = this.translocoService.translate(
-      'event.purchases.of',
-      {},
-      lang
-    );
-    const participateText = this.translocoService.translate(
-      'event.purchases.participate',
-      {},
-      lang
+    const ofText = this.localizationService.translate('event.purchases.of');
+    const participateText = this.localizationService.translate(
+      'event.purchases.participate'
     );
 
     return purchaseMembersCount === 1

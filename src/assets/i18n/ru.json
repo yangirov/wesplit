@@ -28,7 +28,18 @@
     "title": "Обратная связь"
   },
   "settings": {
-    "title": "Настройки"
+    "title": "Настройки",
+    "language": {
+      "name": "Язык",
+      "english": "Английский",
+      "russian": "Русский"
+    },
+    "theme": {
+      "name": "Тема",
+      "auto": "Авто",
+      "light": "Светлая",
+      "dark": "Темная"
+    }
   },
   "events-list": {
     "title": "События",

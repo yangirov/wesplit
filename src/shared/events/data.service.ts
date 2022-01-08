@@ -5,9 +5,9 @@ import {
   EventDto,
   Purchase,
   RePayedDebt,
-} from '../models/Event';
+} from '../../models/Event';
 import { getLocalEvents, setLocalEvents } from './local-storage.service';
-import { Feedback } from '../models/Feedback';
+import { Feedback } from '../../models/Feedback';
 import {
   addDoc,
   collection,

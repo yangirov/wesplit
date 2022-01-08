@@ -1,4 +1,4 @@
-import { LocalEvent } from '../models/Event';
+import { LocalEvent } from '../../models/Event';
 
 export function getLocalEvents(): LocalEvent[] {
   try {

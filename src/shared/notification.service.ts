@@ -1,6 +1,6 @@
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Injectable } from '@angular/core';
-import { TranslocoService } from '@ngneat/transloco';
+import { LocalizationService } from './settings/localization.service';
 
 @Injectable({
   providedIn: 'root',
@@ -8,15 +8,13 @@ import { TranslocoService } from '@ngneat/transloco';
 export class NotificationService {
   constructor(
     private snackBar: MatSnackBar,
-    private translocoService: TranslocoService
+    private localizationService: LocalizationService
   ) {}
 
   open(text: string, action: string | null = null, duration = 2000) {
     if (!action) {
-      const lang = this.translocoService.getActiveLang();
-
-      this.translocoService.load(lang).subscribe(() => {
-        action = this.translocoService.translate('common.close', {}, lang);
+      this.localizationService.load().subscribe(() => {
+        action = this.localizationService.translate('common.close');
         this.snackBar.open(text, action || undefined, { duration });
       });
     } else {

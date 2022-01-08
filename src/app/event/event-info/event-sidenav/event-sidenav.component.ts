@@ -1,9 +1,9 @@
 import { Component, Input } from '@angular/core';
 import { EventDto } from '../../../../models/Event';
-import { DataService } from '../../../../shared/data.service';
+import { DataService } from '../../../../shared/events/data.service';
 import { MatDialog } from '@angular/material/dialog';
-import { TranslocoService } from '@ngneat/transloco';
 import { ShareEventComponent } from '../share-event/share-event.component';
+import { LocalizationService } from '../../../../shared/settings/localization.service';
 
 @Component({
   selector: 'event-sidenav',
@@ -16,7 +16,7 @@ export class EventSidenavComponent {
   constructor(
     private dataService: DataService,
     public dialog: MatDialog,
-    private translocoService: TranslocoService
+    private localizationService: LocalizationService
   ) {}
 
   get hasRePayedDebts(): boolean {
@@ -24,8 +24,7 @@ export class EventSidenavComponent {
   }
 
   getMemberName(name: string) {
-    const lang = this.translocoService.getActiveLang();
-    const youText = this.translocoService.translate('common.you', {}, lang);
+    const youText = this.localizationService.translate('common.you');
 
     let memberName: string = name;
 

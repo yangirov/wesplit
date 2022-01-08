@@ -9,7 +9,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { FabButtonComponent } from './fab-button/fab-button.component';
 import { RouterModule } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
-import { NumericDirective } from '../../shared/numeric.directive';
+import { NumericDirective } from '../../shared/directives/numeric.directive';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 import { TranslocoModule } from '@ngneat/transloco';
 import { SidenavLayoutComponent } from './layouts/sidenav-layout/sidenav-layout.component';

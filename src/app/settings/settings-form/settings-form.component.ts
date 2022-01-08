@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { TranslocoService } from '@ngneat/transloco';
+import { ThemeService } from '../../../shared/settings/theme.service';
+import { LocalizationService } from '../../../shared/settings/localization.service';
 
 @Component({
   selector: 'app-settings-form',
@@ -8,15 +9,27 @@ import { TranslocoService } from '@ngneat/transloco';
 })
 export class SettingsFormComponent implements OnInit {
   selectedLanguage!: string;
+  selectedTheme!: string;
 
-  constructor(private translocoService: TranslocoService) {}
-
-  ngOnInit(): void {
-    this.selectedLanguage = this.translocoService.getActiveLang();
+  constructor(
+    private localizationService: LocalizationService,
+    private themeService: ThemeService
+  ) {
+    this.themeService.initTheme();
   }
 
-  onChange(newLang: string) {
+  ngOnInit(): void {
+    this.selectedLanguage = this.localizationService.getActiveLang();
+    this.selectedTheme = localStorage.getItem('user-theme') ?? 'auto-mode';
+  }
+
+  onChangeLanguage(newLang: string) {
     localStorage.setItem('lang', newLang);
-    this.translocoService.setActiveLang(newLang);
+    this.localizationService.setActiveLang(newLang);
+  }
+
+  onChangeTheme(newTheme: string) {
+    this.themeService.update(newTheme);
+    this.themeService.setColorTheme(newTheme);
   }
 }

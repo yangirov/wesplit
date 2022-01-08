@@ -3,7 +3,8 @@ import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { filter, map, mergeMap } from 'rxjs/operators';
 import { environment } from '../environments/environment';
 import { Title } from '@angular/platform-browser';
-import { TranslocoService } from '@ngneat/transloco';
+import { ThemeService } from '../shared/settings/theme.service';
+import { LocalizationService } from '../shared/settings/localization.service';
 
 @Component({
   selector: 'app-root',
@@ -15,13 +16,13 @@ export class AppComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private titleService: Title,
-    private translocoService: TranslocoService
+    private localizationService: LocalizationService,
+    private themeService: ThemeService
   ) {}
 
   ngOnInit(): void {
-    const lang =
-      localStorage.getItem('lang') ?? this.translocoService.getDefaultLang();
-    this.translocoService.setActiveLang(lang);
+    this.themeService.initTheme();
+    this.localizationService.initLocalization();
 
     this.router.events
       .pipe(
@@ -31,13 +32,9 @@ export class AppComponent implements OnInit {
         mergeMap((route: ActivatedRoute) => route.data)
       )
       .subscribe((data: { [name: string]: any }) => {
-        const lang = this.translocoService.getActiveLang();
-
-        this.translocoService.load(lang).subscribe((x) => {
-          const title = this.translocoService.translate(
-            `${data.scope}.title`,
-            {},
-            lang
+        this.localizationService.load().subscribe((x) => {
+          const title = this.localizationService.translate(
+            `${data.scope}.title`
           );
 
           this.titleService.setTitle(`${title} - ${environment.name}`);

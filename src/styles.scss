@@ -1,7 +1,38 @@
-/* You can add global styles to this file, and also import other style files */
+@use "~@angular/material" as mat;
+
+$mat-primary-scheme: mat.$indigo-palette;
+$mat-accent-scheme: mat.$pink-palette;
+
+$mat-primary-palette: mat.define-palette($mat-primary-scheme);
+$mat-accent-palette: mat.define-palette($mat-accent-scheme);
+
+$app-light-theme: mat.define-light-theme(
+  $mat-primary-palette,
+  $mat-accent-palette
+);
+
+.light-mode {
+  @include mat.all-component-themes($app-light-theme);
+}
+
+$app-dark-theme: mat.define-dark-theme(
+  $mat-primary-palette,
+  $mat-accent-palette
+);
+
+.dark-mode {
+  @include mat.all-component-themes($app-dark-theme);
+
+  background-color: #333;
+  color: whitesmoke;
+
+  --dark: #cccccc;
+  --grey: #cccccc;
+  --light-grey: #4f5357;
+  --medium-grey: #83888d;
+}
 
 :root {
-  --white: #ffffff;
   --dark: #1d1e1f;
   --red: #f44336;
 
@@ -33,7 +64,7 @@ body {
 
 button[mat-icon-button] {
   &:disabled {
-    color: var(--white) !important;
+    color: white !important;
     opacity: 0.6;
   }
 }
@@ -54,6 +85,12 @@ button {
 
 .router-button {
   margin-right: 1em;
+}
+
+.header-flex {
+  display: flex;
+  align-items: center;
+  width: 100%;
 }
 
 // Material theme customization
@@ -83,10 +120,4 @@ mat-checkbox {
   .label {
     font-size: 1.2em !important;
   }
-}
-
-.header-flex {
-  display: flex;
-  align-items: center;
-  width: 100%;
 }

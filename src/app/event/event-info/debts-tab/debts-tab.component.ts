@@ -9,8 +9,8 @@ import {
   getEventBalance,
   getEventsMembersDebts,
 } from '../../../../utils/BalanceCalculator';
-import { DataService } from '../../../../shared/data.service';
-import { TranslocoService } from '@ngneat/transloco';
+import { DataService } from '../../../../shared/events/data.service';
+import { LocalizationService } from '../../../../shared/settings/localization.service';
 
 @Component({
   selector: 'debts-tab',
@@ -27,12 +27,11 @@ export class DebtsTabComponent implements OnInit {
 
   constructor(
     private dataService: DataService,
-    private translocoService: TranslocoService
+    private localizationService: LocalizationService
   ) {}
 
   ngOnInit(): void {
-    const lang = this.translocoService.getActiveLang();
-    const youText = this.translocoService.translate('common.you', {}, lang);
+    const youText = this.localizationService.translate('common.you');
 
     const balance = getEventBalance(this.event);
     const debts = getEventsMembersDebts(balance, this.event);

@@ -1,7 +1,7 @@
 import { Component, ElementRef, Input } from '@angular/core';
 import { EventDto, MemberDebt } from '../../../../../models/Event';
 import { NotificationService } from '../../../../../shared/notification.service';
-import { TranslocoService } from '@ngneat/transloco';
+import { LocalizationService } from '../../../../../shared/settings/localization.service';
 
 @Component({
   selector: 'event-check',
@@ -17,16 +17,11 @@ export class EventCheckComponent {
   constructor(
     private notificationService: NotificationService,
     private elRef: ElementRef,
-    private translocoService: TranslocoService
+    private localizationService: LocalizationService
   ) {}
 
   get check(): string[] {
-    const lang = this.translocoService.getActiveLang();
-    const currencyText = this.translocoService.translate(
-      'common.currency',
-      {},
-      lang
-    );
+    const currencyText = this.localizationService.translate('common.currency');
 
     return this.debts?.map(
       (debt) =>
@@ -37,8 +32,6 @@ export class EventCheckComponent {
   }
 
   copyCheck() {
-    const lang = this.translocoService.getActiveLang();
-
     const checkContent = this.elRef.nativeElement.querySelector(
       '.balance-check-content__debts'
     );
@@ -52,19 +45,11 @@ export class EventCheckComponent {
 
     if (!document.execCommand('copy')) {
       this.notificationService.open(
-        this.translocoService.translate(
-          'event.balance.clipboard.failed',
-          {},
-          lang
-        )
+        this.localizationService.translate('event.balance.clipboard.failed')
       );
     } else {
       this.notificationService.open(
-        this.translocoService.translate(
-          'event.balance.clipboard.success',
-          {},
-          lang
-        )
+        this.localizationService.translate('event.balance.clipboard.success')
       );
     }
 

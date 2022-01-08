@@ -1,7 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { NotificationService } from '../../../../shared/notification.service';
-import { TranslocoService } from '@ngneat/transloco';
+import { LocalizationService } from '../../../../shared/settings/localization.service';
 
 @Component({
   selector: 'share-event',
@@ -10,7 +10,7 @@ import { TranslocoService } from '@ngneat/transloco';
 })
 export class ShareEventComponent {
   constructor(
-    private translocoService: TranslocoService,
+    private localizationService: LocalizationService,
     private notificationService: NotificationService,
     private dialogRef: MatDialogRef<ShareEventComponent>,
     @Inject(MAT_DIALOG_DATA) public id: string
@@ -25,12 +25,7 @@ export class ShareEventComponent {
   }
 
   onCopyClick() {
-    const lang = this.translocoService.getActiveLang();
-    const copiedText = this.translocoService.translate(
-      'event.share.copied',
-      {},
-      lang
-    );
+    const copiedText = this.localizationService.translate('event.share.copied');
 
     this.dialogRef.close();
     this.notificationService.open(copiedText);

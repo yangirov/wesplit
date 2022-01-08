@@ -6,10 +6,10 @@ import {
   sumLessOrEqualDebt,
 } from '../../../../../utils/FormValidators';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { DataService } from '../../../../../shared/data.service';
-import { EventActionCreator } from '../../../../../shared/event-action-creator';
+import { DataService } from '../../../../../shared/events/data.service';
+import { EventActionCreator } from '../../../../../shared/events/event-action-creator';
 import { BehaviorSubject } from 'rxjs';
-import { TranslocoService } from '@ngneat/transloco';
+import { LocalizationService } from '../../../../../shared/settings/localization.service';
 
 @Component({
   selector: 'repay-debt',
@@ -26,7 +26,7 @@ export class RepayDebtComponent implements OnInit {
     private formBuilder: FormBuilder,
     private dialogRef: MatDialogRef<RepayDebtComponent>,
     @Inject(MAT_DIALOG_DATA) public payload: DebtDto,
-    private translocoService: TranslocoService
+    private localizationService: LocalizationService
   ) {}
 
   ngOnInit(): void {
@@ -90,9 +90,7 @@ export class RepayDebtComponent implements OnInit {
   }
 
   getName(name: string): string {
-    const lang = this.translocoService.getActiveLang();
-    const youText = this.translocoService.translate('common.you', {}, lang);
-
+    const youText = this.localizationService.translate('common.you');
     return name.replace(` (${youText})`, '');
   }
 

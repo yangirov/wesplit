@@ -28,7 +28,18 @@
     "title": "Feedback"
   },
   "settings": {
-    "title": "Settings"
+    "title": "Settings",
+    "language": {
+      "name": "Language",
+      "english": "English",
+      "russian": "Russian"
+    },
+    "theme": {
+      "name": "Theme",
+      "auto": "Auto",
+      "light": "Light",
+      "dark": "Dark"
+    }
   },
   "events-list": {
     "title": "Events",
