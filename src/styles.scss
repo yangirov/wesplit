@@ -91,6 +91,10 @@ button {
   display: flex;
   align-items: center;
   width: 100%;
+
+  .header-title {
+    margin-left: 0.5em;
+  }
 }
 
 // Material theme customization

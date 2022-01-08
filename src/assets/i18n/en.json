@@ -21,6 +21,15 @@
     "you": "It's you",
     "copy": "Copy"
   },
+  "auth": {
+    "service": "Sign in with",
+    "login": {
+      "title": "Login"
+    },
+    "logout": {
+      "title": "Logout"
+    }
+  },
   "homeScreen": {
     "title": "Add to home screen"
   },

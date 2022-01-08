@@ -13,15 +13,42 @@
     <ng-content select="[sidenav]"></ng-content>
 
     <mat-list class="sidenav-menu">
+      <mat-list-item class="sidenav-menu__item" *ngIf="user">
+        <mat-icon>person</mat-icon>
+        {{ user.displayName }}
+      </mat-list-item>
+
+      <mat-list-item
+        [routerLink]="['/login']"
+        class="sidenav-menu__item"
+        *ngIf="!user"
+      >
+        <mat-icon>login</mat-icon>
+        {{ "auth.login.title" | transloco }}
+      </mat-list-item>
+
+      <mat-list-item (click)="logout()" class="sidenav-menu__item" *ngIf="user">
+        <mat-icon>exit_to_app</mat-icon>
+        {{ "auth.logout.title" | transloco }}
+      </mat-list-item>
+
+      <mat-divider></mat-divider>
+
       <mat-list-item [routerLink]="['/settings']" class="sidenav-menu__item">
         <mat-icon>settings</mat-icon>
         {{ "settings.title" | transloco }}
       </mat-list-item>
+
       <mat-list-item [routerLink]="['/feedback']" class="sidenav-menu__item">
         <mat-icon>mail</mat-icon>
         {{ "feedback.title" | transloco }}
       </mat-list-item>
-      <mat-list-item (click)="openPwaDialog()" class="sidenav-menu__item">
+
+      <mat-list-item
+        (click)="openPwaDialog()"
+        class="sidenav-menu__item"
+        *ngIf="!isPwa()"
+      >
         <mat-icon>add_to_home_screen</mat-icon>
         {{ "homeScreen.title" | transloco }}
       </mat-list-item>

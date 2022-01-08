@@ -1,0 +1,28 @@
+.auth-buttons {
+  display: flex;
+  flex-direction: column;
+  margin: 2em auto 0;
+  align-items: center;
+
+  .auth-button {
+    margin: 0.5em 0;
+    max-width: 350px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: nowrap;
+    padding-left: 0.8em;
+
+    &__icon {
+      width: 2em;
+      height: 2em;
+    }
+
+    &__text {
+      font-size: 1.2em;
+      margin-left: 0.8em;
+      white-space: nowrap;
+    }
+  }
+}

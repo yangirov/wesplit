@@ -10,6 +10,7 @@ import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { HttpClientModule } from '@angular/common/http';
 import { TranslocoRootModule } from './transloco-root.module';
+import { AuthModule, getAuth, provideAuth } from '@angular/fire/auth';
 
 @NgModule({
   declarations: [AppComponent],
@@ -20,8 +21,10 @@ import { TranslocoRootModule } from './transloco-root.module';
     MatSnackBarModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => getFirestore()),
+    provideAuth(() => getAuth()),
     HttpClientModule,
     TranslocoRootModule,
+    AuthModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
