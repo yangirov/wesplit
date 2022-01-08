@@ -27,6 +27,7 @@
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
+              "src/manifest.json",
               "src/favicon.ico",
               "src/assets"
             ],
@@ -96,6 +97,7 @@
             "karmaConfig": "karma.conf.js",
             "inlineStyleLanguage": "scss",
             "assets": [
+              "src/manifest.json",
               "src/favicon.ico",
               "src/assets"
             ],

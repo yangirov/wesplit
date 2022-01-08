@@ -1,6 +1,10 @@
 {
   "short_name": "WeSplit",
   "name": "WeSplit",
+  "categories": [
+    "finance",
+    "utilities"
+  ],
   "icons": [
     {
       "src": "assets/icons/icon-72x72.png",
@@ -43,7 +47,7 @@
       "type": "image/png"
     }
   ],
-  "start_url": "./index.html?source=pwa",
+  "start_url": "/?source=pwa",
   "display": "standalone",
   "orientation": "portrait"
 }
