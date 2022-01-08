@@ -20,11 +20,10 @@ export class SettingsFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.selectedLanguage = this.localizationService.getActiveLang();
-    this.selectedTheme = localStorage.getItem('user-theme') ?? 'auto-mode';
+    this.selectedTheme = this.themeService.getColorTheme();
   }
 
   onChangeLanguage(newLang: string) {
-    localStorage.setItem('lang', newLang);
     this.localizationService.setActiveLang(newLang);
   }
 

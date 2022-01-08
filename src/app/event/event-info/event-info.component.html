@@ -11,17 +11,15 @@
     <h1>{{ event.name }}</h1>
   </div>
 
-  <div body *ngIf="event">
-    <mat-tab-group mat-stretch-tabs *transloco="let t">
-      <mat-tab [label]="t('event.tabs.purchases')">
-        <purchases-tab [event]="event"></purchases-tab>
-      </mat-tab>
-      <mat-tab [label]="t('event.tabs.balance')">
-        <debts-tab [event]="event"></debts-tab>
-      </mat-tab>
-      <mat-tab [label]="t('event.tabs.actions')">
-        <actions-tab [event]="event"></actions-tab>
-      </mat-tab>
-    </mat-tab-group>
-  </div>
+  <mat-tab-group mat-stretch-tabs body *ngIf="event">
+    <mat-tab [label]="t('event.tabs.purchases')" *transloco="let t">
+      <purchases-tab [event]="event"></purchases-tab>
+    </mat-tab>
+    <mat-tab [label]="t('event.tabs.balance')" *transloco="let t">
+      <debts-tab [event]="event"></debts-tab>
+    </mat-tab>
+    <mat-tab [label]="t('event.tabs.actions')" *transloco="let t">
+      <actions-tab [event]="event"></actions-tab>
+    </mat-tab>
+  </mat-tab-group>
 </app-sidenav-layout>

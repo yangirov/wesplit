@@ -10,11 +10,15 @@ mat-sidenav {
   width: 260px;
 }
 
-main {
-  height: calc(100% - 64px);
+.sidenav-content {
+  main {
+    height: calc(100% - 56px);
+  }
 
-  mat-tab-group {
-    height: 100%;
+  ::ng-deep {
+    .mat-tab-group {
+      height: 100%;
+    }
   }
 }
 

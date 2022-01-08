@@ -11,8 +11,7 @@ export class LocalizationService {
     const lang =
       localStorage.getItem('lang') ?? this.translocoService.getDefaultLang();
 
-    this.translocoService.setActiveLang(lang);
-    localStorage.setItem('lang', lang);
+    this.setActiveLang(lang);
   }
 
   load() {
@@ -31,6 +30,7 @@ export class LocalizationService {
 
   setActiveLang(lang: string) {
     this.translocoService.setActiveLang(lang);
+    localStorage.setItem('lang', lang);
   }
 
   getDefaultLang() {

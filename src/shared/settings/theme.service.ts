@@ -35,7 +35,7 @@ export class ThemeService {
   }
 
   initTheme() {
-    const theme = localStorage.getItem('user-theme') ?? 'auto-mode';
+    const theme = this.getColorTheme();
     this.update(theme);
   }
 
@@ -55,5 +55,9 @@ export class ThemeService {
 
   setColorTheme(theme: string) {
     localStorage.setItem('user-theme', theme);
+  }
+
+  getColorTheme() {
+    return localStorage.getItem('user-theme') ?? 'auto-mode';
   }
 }
