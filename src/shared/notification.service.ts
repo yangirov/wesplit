@@ -1,6 +1,6 @@
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Injectable } from '@angular/core';
-import { LocalizationService } from './settings/localization.service';
+import { LocalizationService } from './localization.service';
 
 @Injectable({
   providedIn: 'root',

@@ -6,10 +6,10 @@ import {
   sumLessOrEqualDebt,
 } from '../../../../../utils/FormValidators';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { DataService } from '../../../../../shared/events/data.service';
-import { EventActionCreator } from '../../../../../shared/events/event-action-creator';
+import { DataService } from '../../../../../shared/data.service';
+import { EventActionCreator } from '../../../../../utils/EventActionCreator';
 import { BehaviorSubject } from 'rxjs';
-import { LocalizationService } from '../../../../../shared/settings/localization.service';
+import { LocalizationService } from '../../../../../shared/localization.service';
 
 @Component({
   selector: 'repay-debt',

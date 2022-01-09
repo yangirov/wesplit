@@ -6,11 +6,11 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { DataService } from '../../../shared/events/data.service';
+import { DataService } from '../../../shared/data.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { EventDto, Purchase, PurchaseMember } from '../../../models/Event';
-import { EventActionCreator } from '../../../shared/events/event-action-creator';
+import { EventActionCreator } from '../../../utils/EventActionCreator';
 import {
   minMembersCountInPurchase,
   payerNotExistsInPurchaseMembers,

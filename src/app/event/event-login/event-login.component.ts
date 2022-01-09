@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Event, EventDto } from '../../../models/Event';
 import { ActivatedRoute, Router } from '@angular/router';
-import { DataService } from '../../../shared/events/data.service';
+import { DataService } from '../../../shared/data.service';
 import { MatDialog } from '@angular/material/dialog';
 import { AddMemberComponent } from './add-member/add-member.component';
 

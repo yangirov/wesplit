@@ -8,9 +8,9 @@ import {
 import {
   getEventBalance,
   getEventsMembersDebts,
-} from '../../../../utils/BalanceCalculator';
-import { DataService } from '../../../../shared/events/data.service';
-import { LocalizationService } from '../../../../shared/settings/localization.service';
+} from '../../../../utils/EventBalanceCalculator';
+import { DataService } from '../../../../shared/data.service';
+import { LocalizationService } from '../../../../shared/localization.service';
 
 @Component({
   selector: 'debts-tab',

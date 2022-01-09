@@ -5,12 +5,12 @@ import {
   EventDto,
   Purchase,
   RePayedDebt,
-} from '../../models/Event';
+} from '../models/Event';
 import {
   getLocalEvents,
   setOrganizerToLocalEvent,
-} from './local-storage.service';
-import { Feedback } from '../../models/Feedback';
+} from '../utils/EventLocalStorage';
+import { Feedback } from '../models/Feedback';
 import {
   addDoc,
   collection,
@@ -27,7 +27,7 @@ import {
 } from '@angular/fire/firestore';
 import { map, mergeMap, take } from 'rxjs/operators';
 import { forkJoin, from, Observable } from 'rxjs';
-import { AuthenticationService } from '../auth/authentication.service';
+import { AuthenticationService } from './authentication.service';
 
 @Injectable({
   providedIn: 'root',

@@ -3,8 +3,8 @@ import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { filter, map, mergeMap } from 'rxjs/operators';
 import { environment } from '../environments/environment';
 import { Title } from '@angular/platform-browser';
-import { ThemeService } from '../shared/settings/theme.service';
-import { LocalizationService } from '../shared/settings/localization.service';
+import { ThemeService } from '../shared/theme.service';
+import { LocalizationService } from '../shared/localization.service';
 
 @Component({
   selector: 'app-root',

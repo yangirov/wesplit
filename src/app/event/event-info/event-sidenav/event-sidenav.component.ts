@@ -1,9 +1,9 @@
 import { Component, Input } from '@angular/core';
 import { EventDto } from '../../../../models/Event';
-import { DataService } from '../../../../shared/events/data.service';
+import { DataService } from '../../../../shared/data.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ShareEventComponent } from '../share-event/share-event.component';
-import { LocalizationService } from '../../../../shared/settings/localization.service';
+import { LocalizationService } from '../../../../shared/localization.service';
 
 @Component({
   selector: 'event-sidenav',

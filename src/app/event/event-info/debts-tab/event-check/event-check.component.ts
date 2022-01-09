@@ -1,7 +1,7 @@
 import { Component, ElementRef, Input } from '@angular/core';
 import { EventDto, MemberDebt } from '../../../../../models/Event';
 import { NotificationService } from '../../../../../shared/notification.service';
-import { LocalizationService } from '../../../../../shared/settings/localization.service';
+import { LocalizationService } from '../../../../../shared/localization.service';
 
 @Component({
   selector: 'event-check',

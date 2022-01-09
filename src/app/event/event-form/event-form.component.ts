@@ -8,22 +8,22 @@ import {
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { debounceTime, pairwise, take } from 'rxjs/operators';
-import { DataService } from '../../../shared/events/data.service';
+import { DataService } from '../../../shared/data.service';
 import { ActionTypes, Event, EventMember } from '../../../models/Event';
 import {
   setLocalEvents,
   setOrganizerToLocalEvent,
-} from '../../../shared/events/local-storage.service';
+} from '../../../utils/EventLocalStorage';
 import {
   duplicateMembersValidator,
   organizerInMembersValidation,
 } from '../../../utils/FormValidators';
 import * as moment from 'moment';
 import { BehaviorSubject, forkJoin } from 'rxjs';
-import { EventActionCreator } from '../../../shared/events/event-action-creator';
+import { EventActionCreator } from '../../../utils/EventActionCreator';
 import { ConfirmDialogComponent } from '../../base-elements/confirm-dialog/confirm-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
-import { AuthenticationService } from '../../../shared/auth/authentication.service';
+import { AuthenticationService } from '../../../shared/authentication.service';
 
 @Component({
   selector: 'event-form',

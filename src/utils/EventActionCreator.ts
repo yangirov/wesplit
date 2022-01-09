@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ActionTypes, EventAction } from '../../models/Event';
+import { ActionTypes, EventAction } from '../models/Event';
 import * as moment from 'moment';
 
 @Injectable({

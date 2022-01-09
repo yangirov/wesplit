@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { ActionTypes, EventAction } from '../../../../../models/Event';
 import * as moment from 'moment';
-import { LocalizationService } from '../../../../../shared/settings/localization.service';
+import { LocalizationService } from '../../../../../shared/localization.service';
 
 export const actionIcons: { [key in ActionTypes]: string } = {
   [ActionTypes.CreateEvent]: 'calendar_today',

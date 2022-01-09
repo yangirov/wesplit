@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ThemeService } from '../../../shared/settings/theme.service';
-import { LocalizationService } from '../../../shared/settings/localization.service';
+import { ThemeService } from '../../../shared/theme.service';
+import { LocalizationService } from '../../../shared/localization.service';
 
 @Component({
   selector: 'app-settings-form',

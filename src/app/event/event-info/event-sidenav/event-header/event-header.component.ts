@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import * as moment from 'moment';
 import { Event } from '../../../../../models/Event';
-import { LocalizationService } from '../../../../../shared/settings/localization.service';
+import { LocalizationService } from '../../../../../shared/localization.service';
 
 @Component({
   selector: 'event-header',

@@ -1,7 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { NotificationService } from '../../../../shared/notification.service';
-import { LocalizationService } from '../../../../shared/settings/localization.service';
+import { LocalizationService } from '../../../../shared/localization.service';
 import { EventDto } from '../../../../models/Event';
 
 @Component({

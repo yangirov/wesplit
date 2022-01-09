@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EventDto } from '../../../models/Event';
-import { DataService } from '../../../shared/events/data.service';
+import { DataService } from '../../../shared/data.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ShareEventComponent } from './share-event/share-event.component';
 import { Title } from '@angular/platform-browser';
 import { environment } from '../../../environments/environment';
 import { BehaviorSubject } from 'rxjs';
 import { take } from 'rxjs/operators';
-import { AuthenticationService } from '../../../shared/auth/authentication.service';
+import { AuthenticationService } from '../../../shared/authentication.service';
 
 @Component({
   selector: 'event-info',

@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
-import { AuthenticationService } from '../../../shared/auth/authentication.service';
+import { AuthenticationService } from '../../../shared/authentication.service';
 import { Router } from '@angular/router';
 import { calculateFormValidationErrors } from '../../../utils/FormValidators';
-import { LocalizationService } from '../../../shared/settings/localization.service';
+import { LocalizationService } from '../../../shared/localization.service';
 
 @Component({
   selector: 'app-login-modal',

@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { PwaInstallComponent } from '../../pwa-install/pwa-install.component';
 import { MatDialog } from '@angular/material/dialog';
 import { BehaviorSubject } from 'rxjs';
-import { AuthenticationService } from '../../../../shared/auth/authentication.service';
+import { AuthenticationService } from '../../../../shared/authentication.service';
 import { User } from 'firebase/auth';
 import { Router } from '@angular/router';
 

@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { EventDto, Purchase } from '../../../../../models/Event';
 import { formatSum } from '../../../../../utils/Formatters';
-import { LocalizationService } from '../../../../../shared/settings/localization.service';
+import { LocalizationService } from '../../../../../shared/localization.service';
 
 @Component({
   selector: 'purchase-item',
