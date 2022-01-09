@@ -205,7 +205,7 @@ export class EventFormComponent implements OnInit {
               },
             ].forEach((action) => this.dataService.addEventAction(id, action));
 
-            await this.onChange(id, event.organizer);
+            await this.onChange(id, event.organizer, true);
           })
           .catch(console.error)
           .finally(() => this.loading$.next(false));
@@ -213,10 +213,10 @@ export class EventFormComponent implements OnInit {
     }
   }
 
-  async onChange(id: string, organizer: string) {
+  async onChange(id: string, organizer: string, isCreated: boolean = false) {
     setOrganizerToLocalEvent(id, organizer);
 
-    await this.router.navigate(['events', id], { state: { isCreated: true } });
+    await this.router.navigate(['events', id], { state: { isCreated } });
   }
 
   async onDeleteEvent() {
