@@ -7,6 +7,8 @@ import { ShareEventComponent } from './share-event/share-event.component';
 import { Title } from '@angular/platform-browser';
 import { environment } from '../../../environments/environment';
 import { BehaviorSubject } from 'rxjs';
+import { take } from 'rxjs/operators';
+import { AuthenticationService } from '../../../shared/auth/authentication.service';
 
 @Component({
   selector: 'event-info',
@@ -16,7 +18,7 @@ import { BehaviorSubject } from 'rxjs';
 export class EventInfoComponent implements OnInit {
   loading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
-  eventId: string;
+  eventId!: string;
   event!: EventDto;
   opened: boolean = false;
 
@@ -25,13 +27,12 @@ export class EventInfoComponent implements OnInit {
     private activateRoute: ActivatedRoute,
     private dataService: DataService,
     private dialog: MatDialog,
-    private title: Title
-  ) {
-    this.eventId = activateRoute.snapshot.params['id'];
-  }
+    private title: Title,
+    public authService: AuthenticationService
+  ) {}
 
-  async ngOnInit(): Promise<any> {
-    this.loading$.next(true);
+  async ngOnInit() {
+    this.eventId = this.activateRoute.snapshot.params['id'];
 
     if (history.state.isCreated) {
       this.openShareModal();
@@ -41,11 +42,19 @@ export class EventInfoComponent implements OnInit {
       await this.router.navigate(['login'], { relativeTo: this.activateRoute });
     }
 
-    this.dataService.getEventById(this.eventId).subscribe((event: EventDto) => {
-      this.event = event;
-      this.title.setTitle(`${event.name} - ${environment.name}`);
-      this.loading$.next(false);
-    });
+    this.loading$.next(true);
+
+    this.dataService
+      .getEventById(this.eventId)
+      .pipe(take(1))
+      .subscribe(
+        (event: EventDto) => {
+          this.event = event;
+          this.title.setTitle(`${event.name} - ${environment.name}`);
+        },
+        (err) => console.error(err),
+        () => this.loading$.next(false)
+      );
   }
 
   closeSidenav() {
@@ -55,7 +64,7 @@ export class EventInfoComponent implements OnInit {
   openShareModal() {
     this.dialog.open(ShareEventComponent, {
       width: '350px',
-      data: this.eventId,
+      data: this.event,
     });
   }
 }

@@ -1,6 +1,7 @@
 <mat-sidenav-container
   class="sidenav-container"
   (backdropClick)="closeSidenav()"
+  *transloco="let t"
 >
   <mat-sidenav
     class="sidenav"
@@ -24,24 +25,24 @@
         *ngIf="!user"
       >
         <mat-icon>login</mat-icon>
-        {{ "auth.login.title" | transloco }}
+        {{ t("auth.login.title") }}
       </mat-list-item>
 
       <mat-list-item (click)="logout()" class="sidenav-menu__item" *ngIf="user">
         <mat-icon>exit_to_app</mat-icon>
-        {{ "auth.logout.title" | transloco }}
+        {{ t("auth.logout.title") }}
       </mat-list-item>
 
       <mat-divider></mat-divider>
 
       <mat-list-item [routerLink]="['/settings']" class="sidenav-menu__item">
         <mat-icon>settings</mat-icon>
-        {{ "settings.title" | transloco }}
+        {{ t("settings.title") }}
       </mat-list-item>
 
       <mat-list-item [routerLink]="['/feedback']" class="sidenav-menu__item">
         <mat-icon>mail</mat-icon>
-        {{ "feedback.title" | transloco }}
+        {{ t("feedback.title") }}
       </mat-list-item>
 
       <mat-list-item
@@ -50,7 +51,7 @@
         *ngIf="!isPwa()"
       >
         <mat-icon>add_to_home_screen</mat-icon>
-        {{ "homeScreen.title" | transloco }}
+        {{ t("homeScreen.title") }}
       </mat-list-item>
     </mat-list>
   </mat-sidenav>

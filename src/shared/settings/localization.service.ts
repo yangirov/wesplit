@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { TranslocoService } from '@ngneat/transloco';
+import { take } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -41,6 +42,7 @@ export class LocalizationService {
 
     this.translocoService
       .selectTranslateObject(key, {}, this.getActiveLang())
+      .pipe(take(1))
       .subscribe((data) => {
         translation = data;
       });

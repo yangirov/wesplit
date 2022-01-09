@@ -11,9 +11,10 @@ import { AddMemberComponent } from './add-member/add-member.component';
   styleUrls: ['./event-login.component.scss'],
 })
 export class EventLoginComponent implements OnInit {
-  eventId: string;
-  event!: Event;
+  eventId!: string;
+  userId!: string;
 
+  event!: Event;
   name!: string;
 
   constructor(
@@ -21,14 +22,27 @@ export class EventLoginComponent implements OnInit {
     private router: Router,
     private activateRoute: ActivatedRoute,
     private dataService: DataService
-  ) {
-    this.eventId = activateRoute.snapshot.params['id'];
-  }
+  ) {}
 
   ngOnInit(): void {
-    this.dataService.getEventById(this.eventId).subscribe((event: EventDto) => {
-      this.event = event;
-    });
+    this.eventId = this.activateRoute.snapshot.params['id'];
+    this.userId = this.activateRoute.snapshot.queryParams['uid'];
+
+    if (this.userId) {
+      localStorage.setItem('uid', this.userId);
+
+      this.dataService
+        .getEventById(this.eventId, this.userId)
+        .subscribe((event: EventDto) => {
+          this.event = event;
+        });
+    } else {
+      this.dataService
+        .getEventById(this.eventId)
+        .subscribe((event: EventDto) => {
+          this.event = event;
+        });
+    }
   }
 
   openDialog(): void {

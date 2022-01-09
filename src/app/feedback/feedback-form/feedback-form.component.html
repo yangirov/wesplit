@@ -1,9 +1,9 @@
-<app-layout [loading$]="loading$">
+<app-layout [loading$]="loading$" *transloco="let t">
   <div class="header-flex" header>
     <button class="router-button" mat-icon-button [routerLink]="['/']">
       <mat-icon>close</mat-icon>
     </button>
-    <h1>{{ "feedback.title" | transloco }}</h1>
+    <h1>{{ t("feedback.title") }}</h1>
     <span class="spacer"></span>
     <button
       mat-icon-button
@@ -17,12 +17,12 @@
   <div body>
     <form [formGroup]="feedbackForm" (ngSubmit)="onSubmit()" id="feedbackForm">
       <mat-form-field class="full-width">
-        <mat-label>{{ "common.email" | transloco }}</mat-label>
+        <mat-label>{{ t("common.email") }}</mat-label>
         <input matInput formControlName="email" />
       </mat-form-field>
 
       <mat-form-field class="full-width">
-        <mat-label>{{ "common.message" | transloco }}</mat-label>
+        <mat-label>{{ t("common.message") }}</mat-label>
         <textarea
           matInput
           formControlName="message"

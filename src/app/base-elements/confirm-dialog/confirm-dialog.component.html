@@ -1,11 +1,13 @@
-<h1 md-dialog-title>
-  {{ "common.assured" | transloco }}
-</h1>
-<div md-dialog-actions class="buttons">
-  <button color="basic" mat-raised-button (click)="dialogRef.close(false)">
-    {{ "common.no" | transloco }}
-  </button>
-  <button color="primary" mat-raised-button (click)="dialogRef.close(true)">
-    {{ "common.yes" | transloco }}
-  </button>
+<div *transloco="let t">
+  <h1 md-dialog-title>
+    {{ t("common.assured") }}
+  </h1>
+  <div md-dialog-actions class="buttons">
+    <button color="basic" mat-raised-button (click)="dialogRef.close(false)">
+      {{ t("common.no") }}
+    </button>
+    <button color="primary" mat-raised-button (click)="dialogRef.close(true)">
+      {{ t("common.yes") }}
+    </button>
+  </div>
 </div>

@@ -10,7 +10,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { debounceTime, pairwise, take } from 'rxjs/operators';
 import { DataService } from '../../../shared/events/data.service';
 import { ActionTypes, Event, EventMember } from '../../../models/Event';
-import { setLocalEvents } from '../../../shared/events/local-storage.service';
+import {
+  setLocalEvents,
+  setOrganizerToLocalEvent,
+} from '../../../shared/events/local-storage.service';
 import {
   duplicateMembersValidator,
   organizerInMembersValidation,
@@ -18,6 +21,9 @@ import {
 import * as moment from 'moment';
 import { BehaviorSubject, forkJoin } from 'rxjs';
 import { EventActionCreator } from '../../../shared/events/event-action-creator';
+import { ConfirmDialogComponent } from '../../base-elements/confirm-dialog/confirm-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
+import { AuthenticationService } from '../../../shared/auth/authentication.service';
 
 @Component({
   selector: 'event-form',
@@ -38,7 +44,9 @@ export class EventFormComponent implements OnInit {
     private dataService: DataService,
     private eventActionCreator: EventActionCreator,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private dialog: MatDialog,
+    private authService: AuthenticationService
   ) {}
 
   ngOnInit(): void {
@@ -63,26 +71,24 @@ export class EventFormComponent implements OnInit {
     if (this.isEdit && this.eventId) {
       this.loading$.next(true);
 
-      forkJoin({
-        event: this.dataService.getEventById(this.eventId).pipe(take(1)),
-        rePayedDebts: this.dataService
-          .getRePayedDebts(this.eventId)
-          .pipe(take(1)),
-      }).subscribe((x) => {
-        this.event = x.event;
-        this.fillFormFromEvent();
-        this.subscribeMembersChanges();
+      this.dataService
+        .getEventById(this.eventId)
+        .pipe(take(1))
+        .subscribe((x) => {
+          this.event = x;
+          this.fillFormFromEvent();
+          this.subscribeMembersChanges();
 
-        this.hasRePayedDebts = x.rePayedDebts?.length > 0;
-        if (this.hasRePayedDebts) {
-          this.eventForm.disable();
-          this.members.controls.forEach((control) => {
-            control.disable();
-          });
-        }
+          this.hasRePayedDebts = x.rePayedDebts?.length > 0;
+          if (this.hasRePayedDebts) {
+            this.eventForm.disable();
+            this.members.controls.forEach((control) => {
+              control.disable();
+            });
+          }
 
-        this.loading$.next(false);
-      });
+          this.loading$.next(false);
+        });
     } else {
       this.subscribeMembersChanges();
     }
@@ -159,6 +165,7 @@ export class EventFormComponent implements OnInit {
       let { name, date, organizer, members } = this.eventForm.value;
 
       const event: Event = {
+        ownerUserId: this.authService.currentUserId,
         id: '',
         name,
         organizer,
@@ -178,32 +185,59 @@ export class EventFormComponent implements OnInit {
           await this.onChange(this.eventId, event.organizer);
         });
       } else {
-        await this.dataService.addEvent(event).then(async (res: any) => {
-          const id = res._key.path.segments[1];
+        await this.dataService
+          .addEvent(event)
+          .then(async (res: any) => {
+            const id =
+              res._key.path.segments[res._key.path.segments.length - 1];
 
-          [
-            {
-              type: ActionTypes.CreateEvent,
-              manager: organizer,
-              date: moment().utc().valueOf(),
-            },
-            {
-              type: ActionTypes.AddMembersToEvent,
-              manager: organizer,
-              eventMembersCount: members.length,
-              date: moment().utc().valueOf(),
-            },
-          ].forEach((action) => this.dataService.addEventAction(id, action));
+            [
+              {
+                type: ActionTypes.CreateEvent,
+                manager: organizer,
+                date: moment().utc().valueOf(),
+              },
+              {
+                type: ActionTypes.AddMembersToEvent,
+                manager: organizer,
+                eventMembersCount: members.length,
+                date: moment().utc().valueOf(),
+              },
+            ].forEach((action) => this.dataService.addEventAction(id, action));
 
-          await this.onChange(id, event.organizer);
-        });
+            await this.onChange(id, event.organizer);
+          })
+          .catch(console.error)
+          .finally(() => this.loading$.next(false));
       }
     }
   }
 
   async onChange(id: string, organizer: string) {
-    setLocalEvents(id, organizer);
-    this.loading$.next(false);
+    setOrganizerToLocalEvent(id, organizer);
+
     await this.router.navigate(['events', id], { state: { isCreated: true } });
+  }
+
+  async onDeleteEvent() {
+    let dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      disableClose: false,
+    });
+
+    await dialogRef.afterClosed().subscribe(async (result) => {
+      if (result) {
+        this.loading$.next(true);
+        await this.dataService
+          .deleteEvent(this.eventId)
+          .then(async (res) => {
+            setLocalEvents([]);
+            await this.router.navigate(['/']);
+          })
+          .catch(console.error)
+          .finally(() => this.loading$.next(true));
+      }
+
+      dialogRef = null as any;
+    });
   }
 }

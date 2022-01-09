@@ -13,9 +13,10 @@ import { EventDto, Purchase, PurchaseMember } from '../../../models/Event';
 import { EventActionCreator } from '../../../shared/events/event-action-creator';
 import {
   minMembersCountInPurchase,
+  payerNotExistsInPurchaseMembers,
   sumGreaterZero,
 } from '../../../utils/FormValidators';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '../../base-elements/confirm-dialog/confirm-dialog.component';
 import * as moment from 'moment';
 
@@ -26,13 +27,15 @@ import * as moment from 'moment';
 })
 export class PurchaseFormComponent implements OnInit {
   isEdit!: boolean;
+
   eventId!: string;
   event!: EventDto;
+
   purchaseId!: string;
   purchase!: Purchase;
+
   purchaseForm!: FormGroup;
   loading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  dialogRef!: MatDialogRef<ConfirmDialogComponent>;
 
   constructor(
     private dataService: DataService,
@@ -54,7 +57,10 @@ export class PurchaseFormComponent implements OnInit {
       {
         title: ['', Validators.required],
         payer: new FormControl(
-          { value: '', disabled: this.isEdit && this.hasRePayedDebts },
+          {
+            value: '',
+            disabled: this.isEdit && this.hasRePayedDebts,
+          },
           Validators.required
         ),
         sum: new FormControl(
@@ -67,7 +73,11 @@ export class PurchaseFormComponent implements OnInit {
         members: this.formBuilder.array([]),
       },
       {
-        validators: [sumGreaterZero(), minMembersCountInPurchase()],
+        validators: [
+          sumGreaterZero(),
+          minMembersCountInPurchase(),
+          payerNotExistsInPurchaseMembers(),
+        ],
       }
     );
 
@@ -77,6 +87,10 @@ export class PurchaseFormComponent implements OnInit {
       if (this.isEdit && this.purchaseId) {
         this.fillFormFromEvent();
       } else {
+        this.purchaseForm.patchValue({
+          payer: this.dataService.getCurrentUser(this.eventId),
+        });
+
         this.checkAllMembers(true);
       }
 
@@ -191,11 +205,11 @@ export class PurchaseFormComponent implements OnInit {
   }
 
   async onDeletePurchase() {
-    this.dialogRef = this.dialog.open(ConfirmDialogComponent, {
+    let dialogRef = this.dialog.open(ConfirmDialogComponent, {
       disableClose: false,
     });
 
-    await this.dialogRef.afterClosed().subscribe(async (result) => {
+    await dialogRef.afterClosed().subscribe(async (result) => {
       if (result) {
         this.loading$.next(true);
         await this.dataService.deletePurchase(this.eventId, this.purchaseId);
@@ -205,17 +219,17 @@ export class PurchaseFormComponent implements OnInit {
           currentUser,
           this.purchase.title
         );
-        await this.dataService.addEventAction(this.eventId, action);
 
+        await this.dataService.addEventAction(this.eventId, action);
         await this.onChange();
       }
 
-      this.dialogRef = null as any;
+      dialogRef = null as any;
     });
   }
 
   async onChange() {
-    await this.router.navigate(['events', this.eventId]);
     this.loading$.next(false);
+    await this.router.navigate(['events', this.eventId]);
   }
 }

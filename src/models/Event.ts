@@ -4,6 +4,7 @@ export interface LocalEvent {
 }
 
 export interface Event {
+  ownerUserId: string;
   id: string;
   date: number;
   name: string;
@@ -12,6 +13,7 @@ export interface Event {
 }
 
 export interface EventDto {
+  ownerUserId: string;
   id: string;
   date: number;
   name: string;

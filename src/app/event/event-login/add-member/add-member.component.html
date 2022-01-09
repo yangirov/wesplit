@@ -1,20 +1,22 @@
-<h1 mat-dialog-title>
-  {{ "event.invite.addMember" | transloco }}
-</h1>
-<div mat-dialog-content *transloco="let t">
-  <mat-form-field appearance="fill">
-    <input
-      [placeholder]="t('common.yourName')"
-      matInput
-      [(ngModel)]="data.name"
-    />
-  </mat-form-field>
-</div>
-<div mat-dialog-actions class="buttons">
-  <button mat-raised-button (click)="onCancel()">
-    {{ "common.cancel" | transloco }}
-  </button>
-  <button mat-raised-button color="primary" [mat-dialog-close]="data.name">
-    {{ "common.login" | transloco }}
-  </button>
+<div *transloco="let t">
+  <h1 mat-dialog-title>
+    {{ t("event.invite.addMember") }}
+  </h1>
+  <div mat-dialog-content *transloco="let t">
+    <mat-form-field appearance="fill">
+      <input
+        matInput
+        [placeholder]="t('common.yourName')"
+        [(ngModel)]="data.name"
+      />
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions class="buttons">
+    <button mat-raised-button (click)="onCancel()">
+      {{ t("common.cancel") }}
+    </button>
+    <button mat-raised-button color="primary" [mat-dialog-close]="data.name">
+      {{ t("common.login") }}
+    </button>
+  </div>
 </div>

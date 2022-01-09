@@ -1,11 +1,15 @@
-<div class="purchase-item" [routerLink]="['purchases', purchase.id, 'edit']">
+<div
+  class="purchase-item"
+  [routerLink]="['purchases', purchase.id, 'edit']"
+  *transloco="let t"
+>
   <div class="purchase-item__description">
     <div class="purchase-item__title">{{ purchase.title }}</div>
     <div class="purchase-item__payer">{{ purchase.payer }}</div>
     <div class="purchase-item__subtitle">{{ purchaseSubtitle }}</div>
   </div>
   <div class="purchase-item__sum">
-    {{ purchaseSum }} {{ "common.currency" | transloco }}
+    {{ purchaseSum }} {{ t("common.currency") }}
   </div>
 </div>
 

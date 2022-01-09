@@ -2,6 +2,7 @@ import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { NotificationService } from '../../../../shared/notification.service';
 import { LocalizationService } from '../../../../shared/settings/localization.service';
+import { EventDto } from '../../../../models/Event';
 
 @Component({
   selector: 'share-event',
@@ -13,11 +14,11 @@ export class ShareEventComponent {
     private localizationService: LocalizationService,
     private notificationService: NotificationService,
     private dialogRef: MatDialogRef<ShareEventComponent>,
-    @Inject(MAT_DIALOG_DATA) public id: string
+    @Inject(MAT_DIALOG_DATA) public event: EventDto
   ) {}
 
   get eventLink(): string {
-    return `${window.location.origin}/events/${this.id}/login`;
+    return `${window.location.origin}/events/${this.event.id}/login?uid=${this.event.ownerUserId}`;
   }
 
   onLaterClick() {

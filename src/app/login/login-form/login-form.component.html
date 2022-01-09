@@ -1,10 +1,10 @@
-<app-sidenav-layout [loading$]="loading$">
+<app-sidenav-layout [loading$]="loading$" *transloco="let t">
   <div class="header-flex" header>
     <button class="router-button" mat-icon-button [routerLink]="['/']">
       <mat-icon>arrow_backward</mat-icon>
     </button>
 
-    <h1>{{ "auth.login.title" | transloco }}</h1>
+    <h1>{{ t("auth.login.title") }}</h1>
   </div>
 
   <div body>

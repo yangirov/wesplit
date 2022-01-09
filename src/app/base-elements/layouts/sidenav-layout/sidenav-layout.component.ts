@@ -54,11 +54,9 @@ export class SidenavLayoutComponent {
     this.authService
       .logout()
       .then(async () => {
-        this.loading$.next(false);
-        await this.router.navigate(['/']);
+        await this.router.navigate(['/login']);
       })
-      .catch((err) => {
-        this.loading$.next(false);
-      });
+      .catch(console.error)
+      .finally(() => this.loading$.next(false));
   }
 }

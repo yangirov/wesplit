@@ -54,37 +54,24 @@ export function minMembersCountInPurchase(): ValidatorFn {
   };
 }
 
+export function payerNotExistsInPurchaseMembers(): ValidatorFn {
+  return (form: AbstractControl): ValidationErrors | null => {
+    const payer = form.get('payer')?.value;
+    const members = (form.get('members')?.value as PurchaseMember[]).filter(
+      (x) => x.selected
+    );
+
+    return !members.some((x) => x.name == payer)
+      ? { payerNotExistsInPurchaseMembers: true }
+      : null;
+  };
+}
+
 export function sumLessOrEqualDebt(debtSum: number): ValidatorFn {
   return (form: AbstractControl): ValidationErrors | null => {
     const sum = form.get('sum')?.value;
     return Number(sum) > debtSum ? { sumLessOrEqualDebt: true } : null;
   };
-}
-
-export function getFormValidationErrors(
-  controls: FormGroupControls
-): AllValidationErrors[] {
-  let errors: AllValidationErrors[] = [];
-  Object.keys(controls).forEach((key) => {
-    const control = controls[key];
-
-    if (control instanceof FormGroup) {
-      errors = errors.concat(getFormValidationErrors(control.controls));
-    }
-
-    const controlErrors = controls[key]?.errors;
-    if (controlErrors !== null) {
-      Object.keys(controlErrors).forEach((keyError) => {
-        errors.push({
-          control_name: key,
-          error_name: keyError,
-          error_value: controlErrors[keyError],
-        });
-      });
-    }
-  });
-
-  return errors;
 }
 
 export function calculateFormValidationErrors(
@@ -116,4 +103,30 @@ export function calculateFormValidationErrors(
         }`;
     }
   });
+}
+
+export function getFormValidationErrors(
+  controls: FormGroupControls
+): AllValidationErrors[] {
+  let errors: AllValidationErrors[] = [];
+  Object.keys(controls).forEach((key) => {
+    const control = controls[key];
+
+    if (control instanceof FormGroup) {
+      errors = errors.concat(getFormValidationErrors(control.controls));
+    }
+
+    const controlErrors = controls[key]?.errors;
+    if (controlErrors !== null) {
+      Object.keys(controlErrors).forEach((keyError) => {
+        errors.push({
+          control_name: key,
+          error_name: keyError,
+          error_value: controlErrors[keyError],
+        });
+      });
+    }
+  });
+
+  return errors;
 }

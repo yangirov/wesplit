@@ -62,13 +62,11 @@ export class LoginModalComponent implements OnInit {
     if (this.loginForm.valid) {
       this.loading$.next(true);
       const { email, password } = this.loginForm.value;
-
       this.authService
         .loginWitEmailAndPassword(email, password)
-        .then(async (result) => await this.successLogin())
+        .then(async (result) => await this.successLogin(result.user.uid))
         .catch((err) => {
           if (err.code == 'auth/wrong-password') {
-            this.loading$.next(false);
             this.isPasswordWrong = true;
           }
 
@@ -77,19 +75,20 @@ export class LoginModalComponent implements OnInit {
 
             this.authService
               .createUserWithEmailAndPassword(email, password)
-              .then(async (result) => await this.successLogin())
-              .catch((err) => {
-                this.loading$.next(false);
-                console.log({ err });
-              });
+              .then(async (result) => await this.successLogin(result.user.uid))
+              .catch(console.error);
           }
-        });
+        })
+        .finally(() => this.loading$.next(false));
     }
   }
 
-  async successLogin() {
-    this.dialogRef.close();
+  async successLogin(uid: string) {
+    localStorage.setItem('uid', uid);
+
     this.loading$.next(false);
+    this.dialogRef.close();
+
     await this.router.navigate(['/']);
   }
 

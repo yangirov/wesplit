@@ -1,4 +1,7 @@
-import { getLocalEvents, setLocalEvents } from './local-storage.service';
+import {
+  getLocalEvents,
+  setOrganizerToLocalEvent,
+} from './local-storage.service';
 
 export interface LocalStorage {
   [key: string]: any;
@@ -25,7 +28,7 @@ describe('Local storage events test', function () {
     const organizer = 'Emil';
 
     // Act
-    const newEvents = setLocalEvents(id, organizer);
+    const newEvents = setOrganizerToLocalEvent(id, organizer);
     const events = getLocalEvents();
 
     // Assert
@@ -40,8 +43,8 @@ describe('Local storage events test', function () {
     const organizer = 'Emil';
 
     // Act
-    setLocalEvents(id, organizer);
-    setLocalEvents(id, 'Ivan');
+    setOrganizerToLocalEvent(id, organizer);
+    setOrganizerToLocalEvent(id, 'Ivan');
     const events = getLocalEvents();
 
     // Assert

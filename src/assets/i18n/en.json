@@ -88,6 +88,8 @@
   },
   "event": {
     "title": "Event",
+    "delete": "Delete event",
+    "anonymous": "(by access link)",
     "new": {
       "title": "New event"
     },
@@ -157,6 +159,7 @@
     "whoPaid": "Who paid",
     "members": "Purchase participants",
     "needOneMember": "At least one participant is needed",
+    "payerNotExistsInPurchaseMembers": "You cannot remove the payer from the purchase members",
     "delete": "Delete purchase"
   }
 }

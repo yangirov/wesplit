@@ -14,6 +14,7 @@ import { MatOptionModule } from '@angular/material/core';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDialogModule } from '@angular/material/dialog';
 import { TranslocoModule } from '@ngneat/transloco';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @NgModule({
   declarations: [PurchaseFormComponent],
@@ -25,6 +26,7 @@ import { TranslocoModule } from '@ngneat/transloco';
     BaseElementsModule,
     MatToolbarModule,
     MatIconModule,
+    MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
     MatSelectModule,

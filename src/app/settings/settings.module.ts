@@ -10,6 +10,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { FormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @NgModule({
   declarations: [SettingsFormComponent],
@@ -20,6 +21,7 @@ import { FormsModule } from '@angular/forms';
     BaseElementsModule,
     MatToolbarModule,
     MatIconModule,
+    MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
     FormsModule,

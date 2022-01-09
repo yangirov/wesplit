@@ -1,52 +1,54 @@
-<h2 mat-dialog-title>
-  {{ "auth.login.title" | transloco }} / {{ "auth.register.title" | transloco }}
-</h2>
+<div *transloco="let t">
+  <h2 mat-dialog-title>
+    {{ t("auth.login.title") }} / {{ t("auth.register.title") }}
+  </h2>
 
-<div *ngIf="loading$ | async; else form">
-  <spinner class="login-spinner"></spinner>
-</div>
+  <div *ngIf="loading$ | async; else form">
+    <spinner class="login-spinner"></spinner>
+  </div>
 
-<div mat-dialog-content>
-  <ng-template #form>
-    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" id="loginForm">
-      <mat-form-field class="full-width">
-        <mat-label> {{ "common.email" | transloco }}, </mat-label>
-        <input matInput formControlName="email" required />
-      </mat-form-field>
+  <div mat-dialog-content>
+    <ng-template #form>
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" id="loginForm">
+        <mat-form-field class="full-width">
+          <mat-label>{{ t("common.email") }}</mat-label>
+          <input matInput formControlName="email" required />
+        </mat-form-field>
 
-      <mat-form-field class="full-width">
-        <mat-label> {{ "common.password" | transloco }}, </mat-label>
-        <input matInput formControlName="password" type="password" required />
-      </mat-form-field>
-    </form>
+        <mat-form-field class="full-width">
+          <mat-label>{{ t("common.password") }}</mat-label>
+          <input matInput formControlName="password" type="password" required />
+        </mat-form-field>
+      </form>
 
-    <div *ngIf="isPasswordWrong" class="mat-form-field-invalid">
-      {{ "auth.login.wrongPassword" | transloco }}
-    </div>
-
-    <div *ngIf="formErrors">
-      <div *ngFor="let err of formErrors" class="mat-form-field-invalid">
-        {{ err }}
+      <div *ngIf="isPasswordWrong" class="mat-form-field-invalid">
+        {{ t("auth.login.wrongPassword") }}
       </div>
-    </div>
-  </ng-template>
-</div>
 
-<div mat-dialog-actions class="buttons">
-  <button
-    color="basic"
-    mat-raised-button
-    (click)="onCancel()"
-    [disabled]="loading$ | async"
-  >
-    {{ "common.cancel" | transloco }}
-  </button>
-  <button
-    color="primary"
-    mat-raised-button
-    form="loginForm"
-    [disabled]="loginForm.invalid || (loading$ | async)"
-  >
-    {{ "auth.login.title" | transloco }}
-  </button>
+      <div *ngIf="formErrors">
+        <div *ngFor="let err of formErrors" class="mat-form-field-invalid">
+          {{ err }}
+        </div>
+      </div>
+    </ng-template>
+  </div>
+
+  <div mat-dialog-actions class="buttons">
+    <button
+      color="basic"
+      mat-raised-button
+      (click)="onCancel()"
+      [disabled]="loading$ | async"
+    >
+      {{ t("common.cancel") }}
+    </button>
+    <button
+      color="primary"
+      mat-raised-button
+      form="loginForm"
+      [disabled]="loginForm.invalid || (loading$ | async)"
+    >
+      {{ t("auth.login.title") }}
+    </button>
+  </div>
 </div>

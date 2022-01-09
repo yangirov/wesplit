@@ -1,4 +1,4 @@
-<div class="sidenav">
+<div class="sidenav" *transloco="let t">
   <header class="sidenav_header">
     <button *ngIf="!hasRePayedDebts" [routerLink]="['edit']" mat-icon-button>
       <mat-icon>edit</mat-icon>
@@ -16,7 +16,7 @@
 
     <div class="event_members">
       <div class="members_title">
-        {{ "event.sidenav.members" | transloco }}
+        {{ t("event.sidenav.members") }}
       </div>
       <div class="members_item" *ngFor="let member of event.members">
         {{ getMemberName(member) }}
@@ -30,14 +30,12 @@
         <mat-icon>login</mat-icon>
       </div>
       <div [routerLink]="['login']" class="login_button">
-        {{ "event.sidenav.login" | transloco }}
+        {{ t("event.sidenav.login") }}
       </div>
     </div>
 
     <mat-divider></mat-divider>
 
-    <div class="event_organizer">
-      ★ — {{ "event.sidenav.organizer" | transloco }}
-    </div>
+    <div class="event_organizer">★ — {{ t("event.sidenav.organizer") }}</div>
   </main>
 </div>

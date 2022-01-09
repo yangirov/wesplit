@@ -1,4 +1,4 @@
-<app-sidenav-layout [loading$]="loading$">
+<app-sidenav-layout [loading$]="loading$" *transloco="let t">
   <div sidenav *ngIf="event">
     <event-sidenav [event]="event"></event-sidenav>
   </div>
@@ -8,7 +8,12 @@
       <mat-icon>arrow_backward</mat-icon>
     </button>
 
-    <h1>{{ event.name }}</h1>
+    <h1>
+      {{ event.name }}
+      <span *ngIf="!(authService.currentUser$ | async)" class="event-anonymous">
+        {{ t("event.anonymous") }}
+      </span>
+    </h1>
   </div>
 
   <mat-tab-group mat-stretch-tabs body *ngIf="event">

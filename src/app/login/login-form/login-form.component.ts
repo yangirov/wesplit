@@ -25,12 +25,11 @@ export class LoginFormComponent {
     this.authService
       .loginWithService(service)
       .then(async (result) => {
-        this.loading$.next(false);
+        localStorage.setItem('uid', result.user.uid);
         await this.router.navigate(['/']);
       })
-      .catch((err) => {
-        this.loading$.next(false);
-      });
+      .catch(console.error)
+      .finally(() => this.loading$.next(false));
   }
 
   openLoginModal() {

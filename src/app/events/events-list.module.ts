@@ -14,6 +14,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { BaseElementsModule } from '../base-elements/base-elements.module';
 import { TranslocoModule } from '@ngneat/transloco';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @NgModule({
   declarations: [EventsListComponent, EventItemComponent],
@@ -22,6 +23,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     EventsListRoutingModule,
     MatToolbarModule,
     MatIconModule,
+    MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
     MatListModule,

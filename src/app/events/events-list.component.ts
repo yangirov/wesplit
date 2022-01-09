@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { EventDto } from '../../models/Event';
 import { DataService } from '../../shared/events/data.service';
 import { BehaviorSubject } from 'rxjs';
+import { setLocalEvents } from '../../shared/events/local-storage.service';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'events-list',
@@ -16,18 +18,16 @@ export class EventsListComponent implements OnInit {
   ngOnInit(): void {
     this.loading$.next(true);
 
-    this.dataService.getEvents().subscribe(
-      (event: EventDto) => {
-        if (event.id) {
-          this.events.push(event);
-        }
-
-        this.loading$.next(false);
-      },
-      (err) => console.error(err),
-      () => {
-        this.loading$.next(false);
-      }
-    );
+    this.dataService
+      .getEvents()
+      .pipe(take(1))
+      .subscribe(
+        (events: EventDto[]) => {
+          this.events = events;
+          setLocalEvents(events);
+        },
+        (err) => console.error(err),
+        () => this.loading$.next(false)
+      );
   }
 }

@@ -1,10 +1,10 @@
-<div class="event-item" [routerLink]="['events', event.id]">
+<div class="event-item" [routerLink]="['events', event.id]" *transloco="let t">
   <div class="event-item__description">
     <div class="description-title">{{ event.name }}</div>
     <div class="description-subtitle">
       <div class="subtitle-date">{{ date }}</div>
       <div class="subtitle-members">
-        {{ event.members.length }} {{ "common.members" | transloco }}
+        {{ event.members.length }} {{ t("common.members") }}
       </div>
     </div>
   </div>

@@ -10,18 +10,6 @@ mat-sidenav {
   width: 260px;
 }
 
-.sidenav-content {
-  main {
-    height: calc(100% - 56px);
-  }
-
-  ::ng-deep {
-    .mat-tab-group {
-      height: 100%;
-    }
-  }
-}
-
 .sidenav {
   ::ng-deep {
     .mat-drawer-inner-container {

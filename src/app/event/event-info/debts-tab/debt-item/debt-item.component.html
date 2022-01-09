@@ -1,4 +1,8 @@
-<div class="debt-item {{ debtTypeName }}" (click)="openRePayDebtModal()">
+<div
+  class="debt-item {{ debtTypeName }}"
+  (click)="openRePayDebtModal()"
+  *transloco="let t"
+>
   <div class="wrapper">
     <div class="info">
       <div class="from">{{ debt.from }}</div>
@@ -6,6 +10,6 @@
       <div class="to">{{ debt.to }}</div>
     </div>
   </div>
-  <div class="sum">{{ debt.sum }} {{ "common.currency" | transloco }}</div>
+  <div class="sum">{{ debt.sum }} {{ t("common.currency") }}</div>
 </div>
 <mat-divider></mat-divider>

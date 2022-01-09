@@ -19,7 +19,7 @@ export class EventHeaderComponent implements OnInit {
     const lang = this.localizationService.getActiveLang();
 
     const membersText = this.localizationService.translate('common.members');
-    const memberStatus = `${this.event.members.length} ${membersText}`;
+    const memberStatus = `${this.event?.members?.length ?? 0} ${membersText}`;
     const formattedDate = moment(this.event.date)
       .locale(lang)
       .format('DD MMMM');

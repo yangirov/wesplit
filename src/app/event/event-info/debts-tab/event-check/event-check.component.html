@@ -2,11 +2,12 @@
   <mat-expansion-panel
     (opened)="checkOpenState = true"
     (closed)="checkOpenState = false"
+    *transloco="let t"
   >
     <mat-expansion-panel-header>
       <mat-panel-title><mat-icon>payment</mat-icon></mat-panel-title>
       <mat-panel-description>
-        <p class="panel-title">{{ "event.balance.score" | transloco }}</p>
+        <p class="panel-title">{{ t("event.balance.score") }}</p>
       </mat-panel-description>
     </mat-expansion-panel-header>
 
@@ -22,7 +23,7 @@
       mat-raised-button
       color="basic"
     >
-      <mat-icon>content_copy</mat-icon> {{ "common.copy" | transloco }}
+      <mat-icon>content_copy</mat-icon> {{ t("common.copy") }}
     </button>
   </mat-expansion-panel>
 </mat-accordion>

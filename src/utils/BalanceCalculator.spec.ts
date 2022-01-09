@@ -7,6 +7,7 @@ describe('Balance calculation repayment debts test', function () {
 
   beforeEach(() => {
     event = {
+      ownerUserId: '111',
       id: '111',
       name: 'Test',
       organizer: 'Emil',
@@ -89,6 +90,7 @@ describe('Balance calculation functions test', function () {
 
   beforeEach(() => {
     defaultEvent = {
+      ownerUserId: '111',
       id: '111',
       name: 'Beer party',
       organizer: 'Emil',
@@ -175,6 +177,7 @@ describe('Balance calculation functions test', function () {
   it('should get balance for five peoples with debts', () => {
     // Arrange
     const event: EventDto = {
+      ownerUserId: '111',
       id: '111',
       name: 'Beer party',
       organizer: 'Emil',
@@ -222,6 +225,7 @@ describe('Balance calculation functions test', function () {
   it('should get balance for five peoples with re-payed debts', () => {
     // Arrange
     const event: EventDto = {
+      ownerUserId: '111',
       id: '111',
       name: 'Beer party',
       organizer: 'Emil',

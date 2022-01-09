@@ -1,4 +1,4 @@
-<div class="pwa__content">
+<div class="pwa__content" *transloco="let t">
   <div class="pwa__close">
     <mat-icon (click)="onClose()">close</mat-icon>
   </div>
@@ -7,10 +7,10 @@
       <mat-icon>add_to_home_screen</mat-icon>
     </div>
     <div class="pwa__text">
-      {{ "common.pwa" | transloco }}
+      {{ t("common.pwa") }}
     </div>
   </div>
   <div class="pwa__bottom" (click)="onClose()">
-    {{ "common.notNow" | transloco }}
+    {{ t("common.notNow") }}
   </div>
 </div>

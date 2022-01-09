@@ -34,6 +34,7 @@ import { EventHeaderComponent } from './event-info/event-sidenav/event-header/ev
 import { AddMemberComponent } from './event-login/add-member/add-member.component';
 import { PwaInstallComponent } from '../base-elements/pwa-install/pwa-install.component';
 import { TranslocoModule } from '@ngneat/transloco';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @NgModule({
   declarations: [
@@ -62,6 +63,7 @@ import { TranslocoModule } from '@ngneat/transloco';
     ReactiveFormsModule,
     MatToolbarModule,
     MatIconModule,
+    MatFormFieldModule,
     MatInputModule,
     MatDatepickerModule,
     MatNativeDateModule,

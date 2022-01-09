@@ -1,4 +1,4 @@
-import { LocalEvent } from '../../models/Event';
+import { EventDto, LocalEvent } from '../../models/Event';
 
 export function getLocalEvents(): LocalEvent[] {
   try {
@@ -12,7 +12,15 @@ export function getLocalEvents(): LocalEvent[] {
   return [];
 }
 
-export function setLocalEvents(id: string, organizer: string) {
+export function setLocalEvents(events: EventDto[]) {
+  const newLocalEvents = events.map(({ id, organizer }) => ({ id, organizer }));
+
+  localStorage.setItem('localEvents', JSON.stringify(newLocalEvents));
+
+  return newLocalEvents;
+}
+
+export function setOrganizerToLocalEvent(id: string, organizer: string) {
   const newLocalEventToSave: LocalEvent = { id, organizer };
 
   let oldLocalEvents = getLocalEvents();

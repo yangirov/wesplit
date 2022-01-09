@@ -10,6 +10,7 @@ import { BaseElementsModule } from '../base-elements/base-elements.module';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { TranslocoModule } from '@ngneat/transloco';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @NgModule({
   declarations: [FeedbackFormComponent],
@@ -21,6 +22,7 @@ import { TranslocoModule } from '@ngneat/transloco';
     BaseElementsModule,
     MatToolbarModule,
     MatIconModule,
+    MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
     TranslocoModule,

@@ -1,50 +1,56 @@
-<h2 mat-dialog-title>{{ "event.balance.returnDebt" | transloco }}</h2>
+<div *transloco="let t">
+  <h2 mat-dialog-title>{{ t("event.balance.returnDebt") }}</h2>
 
-<div mat-dialog-content>
-  <div class="repay-debt__direction">
-    {{ payload.debt.from }}
-    <div class="repay-debt__icon">
-      <mat-icon>arrow_forward</mat-icon>
+  <div mat-dialog-content>
+    <div class="repay-debt__direction">
+      {{ payload.debt.from }}
+      <div class="repay-debt__icon">
+        <mat-icon>arrow_forward</mat-icon>
+      </div>
+      {{ payload.debt.to }}
     </div>
-    {{ payload.debt.to }}
+
+    <form
+      [formGroup]="rePayDebtForm"
+      (ngSubmit)="onSubmit()"
+      id="rePayDebtForm"
+    >
+      <mat-form-field class="full-width">
+        <mat-label>
+          {{ t("common.sum") }},
+          {{ t("common.currency") }}
+        </mat-label>
+        <input matInput formControlName="sum" numbersOnly required />
+      </mat-form-field>
+
+      <div
+        *ngIf="rePayDebtForm.errors?.sumLessOrEqualDebt"
+        class="mat-form-field-invalid"
+      >
+        Число не может превышать сумму долга
+        <span class="bold">
+          {{ this.payload.debt.sum }} {{ t("common.currency") }}
+        </span>
+      </div>
+    </form>
   </div>
 
-  <form [formGroup]="rePayDebtForm" (ngSubmit)="onSubmit()" id="rePayDebtForm">
-    <mat-form-field class="full-width">
-      <mat-label>
-        {{ "common.sum" | transloco }},
-        {{ "common.currency" | transloco }}
-      </mat-label>
-      <input matInput formControlName="sum" numbersOnly required />
-    </mat-form-field>
-
-    <div
-      *ngIf="rePayDebtForm.errors?.sumLessOrEqualDebt"
-      class="mat-form-field-invalid"
+  <div mat-dialog-actions class="buttons">
+    <button
+      color="basic"
+      mat-raised-button
+      (click)="onCancel()"
+      [disabled]="loading$ | async"
     >
-      Число не может превышать сумму долга
-      <span class="bold">
-        {{ this.payload.debt.sum }} {{ "common.currency" | transloco }}
-      </span>
-    </div>
-  </form>
-</div>
-
-<div mat-dialog-actions class="buttons">
-  <button
-    color="basic"
-    mat-raised-button
-    (click)="onCancel()"
-    [disabled]="loading$ | async"
-  >
-    {{ "common.cancel" | transloco }}
-  </button>
-  <button
-    color="primary"
-    mat-raised-button
-    form="rePayDebtForm"
-    [disabled]="rePayDebtForm.invalid || (loading$ | async)"
-  >
-    {{ "common.ok" | transloco }}
-  </button>
+      {{ t("common.cancel") }}
+    </button>
+    <button
+      color="primary"
+      mat-raised-button
+      form="rePayDebtForm"
+      [disabled]="rePayDebtForm.invalid || (loading$ | async)"
+    >
+      {{ t("common.ok") }}
+    </button>
+  </div>
 </div>

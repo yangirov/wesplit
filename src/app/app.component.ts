@@ -20,9 +20,16 @@ export class AppComponent implements OnInit {
     private themeService: ThemeService
   ) {}
 
-  ngOnInit(): void {
+  async ngOnInit() {
     this.themeService.initTheme();
     this.localizationService.initLocalization();
+
+    if (
+      !localStorage.getItem('uid') &&
+      this.route.snapshot.queryParamMap.has('uid')
+    ) {
+      await this.router.navigate(['/login']);
+    }
 
     this.router.events
       .pipe(

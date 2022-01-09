@@ -1,4 +1,4 @@
-<app-layout [loading$]="loading$">
+<app-layout [loading$]="loading$" *transloco="let t">
   <div class="header-flex" header>
     <button
       class="router-button"
@@ -8,11 +8,7 @@
       <mat-icon>close</mat-icon>
     </button>
     <h1>
-      {{
-        isEdit
-          ? ("purchase.edit.title" | transloco)
-          : ("purchase.new.title" | transloco)
-      }}
+      {{ isEdit ? t("purchase.edit.title") : t("purchase.new.title") }}
     </h1>
     <span class="spacer"></span>
     <button
@@ -26,17 +22,17 @@
 
   <div *ngIf="event" body>
     <div *ngIf="hasRePayedDebts" class="mat-form-field-invalid hasRePayedDebts">
-      {{ "purchase.afterStartRepayDebts" | transloco }}
+      {{ t("purchase.afterStartRepayDebts") }}
     </div>
 
     <form [formGroup]="purchaseForm" (ngSubmit)="onSubmit()" id="purchaseForm">
       <mat-form-field class="full-width">
-        <mat-label>{{ "purchase.name" | transloco }}</mat-label>
+        <mat-label>{{ t("purchase.name") }}</mat-label>
         <input matInput formControlName="title" type="text" required />
       </mat-form-field>
 
       <mat-form-field class="full-width">
-        <mat-label>{{ "common.sum" | transloco }}</mat-label>
+        <mat-label>{{ t("common.sum") }}</mat-label>
         <input matInput formControlName="sum" numbersOnly required />
       </mat-form-field>
 
@@ -44,11 +40,11 @@
         *ngIf="purchaseForm.errors?.minimalSum"
         class="mat-form-field-invalid"
       >
-        {{ "purchase.minimalSum" | transloco }}
+        {{ t("purchase.minimalSum") }}
       </div>
 
       <mat-form-field class="full-width">
-        <mat-label>{{ "purchase.whoPaid" | transloco }}</mat-label>
+        <mat-label>{{ t("purchase.whoPaid") }}</mat-label>
         <mat-select formControlName="payer" required>
           <mat-option *ngFor="let member of event.members" [value]="member">
             {{ member }}
@@ -67,7 +63,14 @@
           *ngIf="purchaseForm.errors?.minimalMembersCount"
           class="mat-form-field-invalid"
         >
-          {{ "purchase.needOneMember" | transloco }}
+          {{ t("purchase.needOneMember") }}
+        </div>
+
+        <div
+          *ngIf="purchaseForm.errors?.payerNotExistsInPurchaseMembers"
+          class="mat-form-field-invalid"
+        >
+          {{ t("purchase.payerNotExistsInPurchaseMembers") }}
         </div>
 
         <div
@@ -89,7 +92,7 @@
         mat-raised-button
         color="basic"
       >
-        <mat-icon>close</mat-icon>{{ "purchase.delete" | transloco }}
+        <mat-icon>close</mat-icon>{{ t("purchase.delete") }}
       </button>
     </div>
   </div>

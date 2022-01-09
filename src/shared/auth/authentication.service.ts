@@ -19,6 +19,10 @@ export class AuthenticationService {
 
   constructor(private auth: Auth) {}
 
+  get currentUserId(): string {
+    return localStorage.getItem('uid') ?? '';
+  }
+
   async loginWithService(service: string) {
     let provider!: AuthProvider;
 
@@ -46,6 +50,9 @@ export class AuthenticationService {
   }
 
   async logout() {
+    localStorage.removeItem('uid');
+    localStorage.removeItem('localEvents');
+
     return await this.auth.signOut();
   }
 }

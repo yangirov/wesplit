@@ -10,7 +10,7 @@ export function getEventBalance(currentEvent: EventDto): MemberBalance[] {
   const event = cloneDeep(currentEvent);
   const balance: MemberBalance[] = [];
 
-  event?.purchases?.forEach((purchase) => {
+  event.purchases?.forEach((purchase) => {
     purchase.members?.forEach((memberName) => {
       const memberIndex = getIndex(balance, memberName);
       const debt = memberName === purchase.payer && purchase.sum;
