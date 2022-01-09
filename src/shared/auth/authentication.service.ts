@@ -7,8 +7,9 @@ import {
   GoogleAuthProvider,
   TwitterAuthProvider,
   GithubAuthProvider,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
 } from '@angular/fire/auth';
-import { from, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -18,23 +19,33 @@ export class AuthenticationService {
 
   constructor(private auth: Auth) {}
 
-  login(provider: AuthProvider): Observable<any> {
-    return from(signInWithPopup(this.auth, provider));
+  async loginWithService(service: string) {
+    let provider!: AuthProvider;
+
+    switch (service) {
+      case 'google':
+        provider = new GoogleAuthProvider();
+        break;
+      case 'twitter':
+        provider = new TwitterAuthProvider();
+        break;
+      case 'github':
+        provider = new GithubAuthProvider();
+        break;
+    }
+
+    return await signInWithPopup(this.auth, provider);
   }
 
-  // loginWithGoogle(): Observable<any> {
-  //   return from(signInWithPopup(this.auth, new GoogleAuthProvider()));
-  // }
-  //
-  // loginWithTwitter(): Observable<any> {
-  //   return from(signInWithPopup(this.auth, new TwitterAuthProvider()));
-  // }
-  //
-  // loginWithGithub(): Observable<any> {
-  //   return from(signInWithPopup(this.auth, new GithubAuthProvider()));
-  // }
+  async loginWitEmailAndPassword(email: string, password: string) {
+    return await signInWithEmailAndPassword(this.auth, email, password);
+  }
 
-  logout(): Observable<any> {
-    return from(this.auth.signOut());
+  async createUserWithEmailAndPassword(email: string, password: string) {
+    return await createUserWithEmailAndPassword(this.auth, email, password);
+  }
+
+  async logout() {
+    return await this.auth.signOut();
   }
 }

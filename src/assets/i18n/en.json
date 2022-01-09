@@ -2,6 +2,7 @@
   "common": {
     "currency": "$",
     "email": "Email",
+    "password": "Password",
     "message": "Message",
     "sum": "Sum",
     "members": "members",
@@ -21,10 +22,21 @@
     "you": "It's you",
     "copy": "Copy"
   },
+  "form": {
+    "isRequired": "is required.",
+    "hasWrongPattern": "has wrong pattern.",
+    "hasWrongEmailFormat": "has wrong email format.",
+    "hasWrongLength": "has wrong length! Required length:",
+    "mustBeEqual": "must be equal."
+  },
   "auth": {
     "service": "Sign in with",
+    "register": {
+      "title": "Register"
+    },
     "login": {
-      "title": "Login"
+      "title": "Login",
+      "wrongPassword": "Wrong password or login"
     },
     "logout": {
       "title": "Logout"

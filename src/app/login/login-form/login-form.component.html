@@ -9,9 +9,16 @@
 
   <div body>
     <div class="auth-buttons" *transloco="let t">
-      <p>TODO. Not working correctly now.</p>
+      <button class="auth-button" mat-raised-button (click)="openLoginModal()">
+        <mat-icon class="auth-button__icon">email</mat-icon>
+        <span class="auth-button__text">{{ t("auth.service") }} Email</span>
+      </button>
 
-      <button class="auth-button" mat-raised-button (click)="login('google')">
+      <button
+        class="auth-button"
+        mat-raised-button
+        (click)="loginWithService('google')"
+      >
         <img
           class="auth-button__icon"
           src="/assets/auth/google.svg"
@@ -20,7 +27,24 @@
         <span class="auth-button__text">{{ t("auth.service") }} Google</span>
       </button>
 
-      <button class="auth-button" mat-raised-button (click)="login('twitter')">
+      <button
+        class="auth-button"
+        mat-raised-button
+        (click)="loginWithService('github')"
+      >
+        <img
+          class="auth-button__icon"
+          src="/assets/auth/github.svg"
+          alt="Google icon"
+        />
+        <span class="auth-button__text">{{ t("auth.service") }} Github</span>
+      </button>
+
+      <button
+        class="auth-button"
+        mat-raised-button
+        (click)="loginWithService('twitter')"
+      >
         <img
           class="auth-button__icon"
           src="/assets/auth/twitter.svg"
@@ -29,14 +53,9 @@
         <span class="auth-button__text">{{ t("auth.service") }} Twitter</span>
       </button>
 
-      <button class="auth-button" mat-raised-button (click)="login('github')">
-        <img
-          class="auth-button__icon"
-          src="/assets/auth/github.svg"
-          alt="Google icon"
-        />
-        <span class="auth-button__text">{{ t("auth.service") }} Github</span>
-      </button>
+      <p style="text-align: center">
+        Twitter login not working correctly now. <br />We're working on it.
+      </p>
     </div>
   </div>
 </app-sidenav-layout>

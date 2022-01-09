@@ -1,14 +1,9 @@
 import { Component } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { AuthenticationService } from '../../../shared/auth/authentication.service';
-import {
-  AuthProvider,
-  GoogleAuthProvider,
-  TwitterAuthProvider,
-  GithubAuthProvider,
-  EmailAuthProvider,
-} from '@angular/fire/auth';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { LoginModalComponent } from '../login-modal/login-modal.component';
 
 @Component({
   selector: 'app-login-form',
@@ -20,29 +15,27 @@ export class LoginFormComponent {
 
   constructor(
     public authService: AuthenticationService,
-    private router: Router
+    private router: Router,
+    private dialog: MatDialog
   ) {}
 
-  login(service: string = '') {
-    let provider!: AuthProvider;
+  loginWithService(service: string = '') {
+    this.loading$.next(true);
 
-    switch (service) {
-      case 'google':
-        provider = new GoogleAuthProvider();
-        break;
-      case 'twitter':
-        provider = new TwitterAuthProvider();
-        break;
-      case 'github':
-        provider = new GithubAuthProvider();
-        break;
-      default:
-        provider = new EmailAuthProvider();
-        break;
-    }
+    this.authService
+      .loginWithService(service)
+      .then(async (result) => {
+        this.loading$.next(false);
+        await this.router.navigate(['/']);
+      })
+      .catch((err) => {
+        this.loading$.next(false);
+      });
+  }
 
-    this.authService.login(provider).subscribe(async (result) => {
-      await this.router.navigate(['/']);
+  openLoginModal() {
+    const dialogRef = this.dialog.open(LoginModalComponent, {
+      width: '350px',
     });
   }
 }

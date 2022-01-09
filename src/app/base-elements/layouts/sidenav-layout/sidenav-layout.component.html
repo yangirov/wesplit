@@ -15,7 +15,7 @@
     <mat-list class="sidenav-menu">
       <mat-list-item class="sidenav-menu__item" *ngIf="user">
         <mat-icon>person</mat-icon>
-        {{ user.displayName }}
+        {{ user.displayName ?? user.email }}
       </mat-list-item>
 
       <mat-list-item

@@ -8,19 +8,18 @@ export class LocalizationService {
   constructor(private translocoService: TranslocoService) {}
 
   initLocalization() {
-    const lang =
-      localStorage.getItem('lang') ?? this.translocoService.getDefaultLang();
+    const lang = localStorage.getItem('lang') ?? this.getDefaultLang();
 
     this.setActiveLang(lang);
   }
 
   load() {
-    const lang = this.translocoService.getActiveLang();
+    const lang = this.getActiveLang();
     return this.translocoService.load(lang);
   }
 
   translate(key: string) {
-    const lang = this.translocoService.getActiveLang();
+    const lang = this.getActiveLang();
     return this.translocoService.translate(key, {}, lang);
   }
 
@@ -35,5 +34,17 @@ export class LocalizationService {
 
   getDefaultLang() {
     return this.translocoService.getDefaultLang();
+  }
+
+  getTranslationSection(key: string): { [key: string]: string } {
+    let translation = {};
+
+    this.translocoService
+      .selectTranslateObject(key, {}, this.getActiveLang())
+      .subscribe((data) => {
+        translation = data;
+      });
+
+    return translation;
   }
 }
