@@ -14,11 +14,11 @@ export class ShareEventComponent {
     private localizationService: LocalizationService,
     private notificationService: NotificationService,
     private dialogRef: MatDialogRef<ShareEventComponent>,
-    @Inject(MAT_DIALOG_DATA) public event: EventDto
+    @Inject(MAT_DIALOG_DATA) public data: { id: string; uid: string }
   ) {}
 
   get eventLink(): string {
-    return `${window.location.origin}/events/${this.event.id}/login?uid=${this.event.ownerUserId}`;
+    return `${window.location.origin}/events/${this.data.id}/login?uid=${this.data.uid}`;
   }
 
   onLaterClick() {

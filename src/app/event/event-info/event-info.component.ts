@@ -64,7 +64,10 @@ export class EventInfoComponent implements OnInit {
   openShareModal() {
     this.dialog.open(ShareEventComponent, {
       width: '350px',
-      data: this.event,
+      data: {
+        id: this.eventId,
+        uid: this.authService.currentUserId,
+      },
     });
   }
 }

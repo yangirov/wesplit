@@ -42,7 +42,10 @@ export class EventSidenavComponent {
   openShareModal() {
     this.dialog.open(ShareEventComponent, {
       width: '350px',
-      data: this.event,
+      data: {
+        id: this.event.id,
+        uid: this.event.ownerUserId,
+      },
     });
   }
 }
