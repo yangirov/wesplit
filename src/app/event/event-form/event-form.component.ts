@@ -9,13 +9,19 @@ import {
 import { ActivatedRoute, Router } from '@angular/router';
 import { debounceTime, pairwise, take } from 'rxjs/operators';
 import { DataService } from '../../../shared/data.service';
-import { ActionTypes, Event, EventMember } from '../../../models/Event';
+import {
+  ActionTypes,
+  Event,
+  EventDto,
+  EventMember,
+} from '../../../models/Event';
 import {
   setLocalEvents,
   setOrganizerToLocalEvent,
 } from '../../../utils/EventLocalStorage';
 import {
   duplicateMembersValidator,
+  notDeleteMemberExistedInPurchase,
   organizerInMembersValidation,
 } from '../../../utils/FormValidators';
 import * as moment from 'moment';
@@ -34,7 +40,7 @@ import { AuthenticationService } from '../../../shared/authentication.service';
 export class EventFormComponent implements OnInit {
   isEdit!: boolean;
   eventId!: string;
-  event!: Event;
+  event!: EventDto;
   eventForm!: FormGroup;
   hasRePayedDebts: boolean = false;
   loading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
@@ -78,6 +84,9 @@ export class EventFormComponent implements OnInit {
           this.event = x;
           this.fillFormFromEvent();
           this.subscribeMembersChanges();
+          this.eventForm.addValidators(
+            notDeleteMemberExistedInPurchase(this.event)
+          );
 
           this.hasRePayedDebts = x.rePayedDebts?.length > 0;
           if (this.hasRePayedDebts) {

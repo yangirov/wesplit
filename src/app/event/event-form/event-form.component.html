@@ -73,6 +73,13 @@
         {{ t("event.form.organizerInMembers") }}
       </div>
 
+      <div
+        *ngIf="eventForm.errors?.notDeleteMemberExistedInPurchase"
+        class="mat-form-field-invalid"
+      >
+        {{ t("event.form.notDeleteMemberExistedInPurchase") }}
+      </div>
+
       <div formArrayName="members">
         <mat-form-field
           class="full-width"

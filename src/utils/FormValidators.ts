@@ -4,7 +4,7 @@ import {
   ValidationErrors,
   ValidatorFn,
 } from '@angular/forms';
-import { EventMember, PurchaseMember } from '../models/Event';
+import { EventDto, EventMember, PurchaseMember } from '../models/Event';
 
 export interface AllValidationErrors {
   control_name: string;
@@ -22,6 +22,37 @@ export function duplicateMembersValidator(): ValidatorFn {
 
     return members.length > 1 && members.length !== new Set(members).size
       ? { hasMembersDuplicates: true }
+      : null;
+  };
+}
+
+export function notDeleteMemberExistedInPurchase(event: EventDto): ValidatorFn {
+  return (form: AbstractControl): ValidationErrors | null => {
+    if (!event) {
+      return null;
+    }
+
+    const allPurchasesMembers = event.purchases.reduce((acc, x) => {
+      x.members.forEach((m) => {
+        if (!acc.includes(m)) {
+          acc.push(m);
+        }
+      });
+
+      return acc;
+    }, Array<string>());
+
+    const members = (form.get('members')?.value as EventMember[])
+      .filter((x) => x.name !== '')
+      .map((x) => x.name);
+
+    const organizer = form.get('organizer')?.value;
+    if (!members.includes(organizer)) {
+      members.push(organizer);
+    }
+
+    return !allPurchasesMembers.every((r) => members.includes(r))
+      ? { notDeleteMemberExistedInPurchase: true }
       : null;
   };
 }

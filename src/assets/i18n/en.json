@@ -41,7 +41,7 @@
     },
     "logout": {
       "title": "Logout"
-    },.
+    },
   },
   "homeScreen": {
     "title": "Add to home screen"
@@ -102,7 +102,8 @@
       "date": "Event date",
       "afterStartRepayDebts": "After begin the debt repayment, you can edit only the name of the event",
       "hasMembersDuplicates": "The names of the members should not be repeated",
-      "organizerInMembers": "The organizer is already exists in members"
+      "organizerInMembers": "The organizer is already exists in members",
+      "notDeleteMemberExistedInPurchase": "You cannot remove members from event if they are in purchases"
     },
     "invite" : {
       "title": "Invite",
