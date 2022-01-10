@@ -36,11 +36,12 @@
     },
     "login": {
       "title": "Login",
-      "wrongPassword": "Wrong password or login"
+      "wrongPassword": "Wrong password or login",
+      "popupClosedByUser": "Auth popup closed by user"
     },
     "logout": {
       "title": "Logout"
-    }
+    },.
   },
   "homeScreen": {
     "title": "Add to home screen"

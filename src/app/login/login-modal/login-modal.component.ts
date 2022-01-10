@@ -6,6 +6,7 @@ import { AuthenticationService } from '../../../shared/authentication.service';
 import { Router } from '@angular/router';
 import { calculateFormValidationErrors } from '../../../utils/FormValidators';
 import { LocalizationService } from '../../../shared/localization.service';
+import { NotificationService } from '../../../shared/notification.service';
 
 @Component({
   selector: 'app-login-modal',
