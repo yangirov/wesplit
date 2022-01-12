@@ -101,6 +101,10 @@ button {
   }
 }
 
+*:focus {
+  outline: none;
+}
+
 // Material theme customization
 
 .mat-form-field-invalid {
