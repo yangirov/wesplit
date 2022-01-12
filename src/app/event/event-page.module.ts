@@ -35,6 +35,7 @@ import { AddMemberComponent } from './event-login/add-member/add-member.componen
 import { PwaInstallComponent } from '../base-elements/pwa-install/pwa-install.component';
 import { TranslocoModule } from '@ngneat/transloco';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatTabGroupGestureModule } from '../../utils/MatTabGroupGestureModule/mat-tab-group-gesture.module';
 
 @NgModule({
   declarations: [
@@ -76,6 +77,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatDividerModule,
     BaseElementsModule,
     TranslocoModule,
+    MatTabGroupGestureModule,
   ],
 })
 export class EventPageModule {}
