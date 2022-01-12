@@ -5,6 +5,7 @@ import { BehaviorSubject } from 'rxjs';
 import { AuthenticationService } from '../../../../shared/authentication.service';
 import { User } from 'firebase/auth';
 import { Router } from '@angular/router';
+import isPwa from '../../../../utils/PwaExtensions';
 
 @Component({
   selector: 'app-sidenav-layout',
@@ -31,10 +32,7 @@ export class SidenavLayoutComponent {
   }
 
   isPwa() {
-    return ['fullscreen', 'standalone', 'minimal-ui'].some(
-      (displayMode) =>
-        window.matchMedia('(display-mode: ' + displayMode + ')').matches
-    );
+    return isPwa();
   }
 
   closeSidenav() {

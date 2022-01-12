@@ -6,6 +6,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { LoginModalComponent } from '../login-modal/login-modal.component';
 import { NotificationService } from '../../../shared/notification.service';
 import { LocalizationService } from '../../../shared/localization.service';
+import isPwa from '../../../utils/PwaExtensions';
 
 @Component({
   selector: 'app-login-form',
@@ -23,10 +24,14 @@ export class LoginFormComponent {
     private notificationService: NotificationService
   ) {}
 
-  loginWithService(service: string = '') {
+  async loginWithService(service: string = '') {
     this.loading$.next(true);
 
-    this.authService
+    if (isPwa()) {
+      setTimeout(() => this.loading$.next(false), 5000);
+    }
+
+    await this.authService
       .loginWithService(service)
       .then(async (result) => {
         localStorage.setItem('uid', result.user.uid);
@@ -35,7 +40,13 @@ export class LoginFormComponent {
       .catch((err) => {
         console.error(err);
 
-        if (err.code == 'auth/popup-closed-by-user') {
+        if (
+          [
+            'auth/network-request-failed',
+            'auth/popup-closed-by-user',
+            'auth/cancelled-popup-request',
+          ].includes(err.code)
+        ) {
           this.loading$.next(false);
 
           this.notificationService.open(
