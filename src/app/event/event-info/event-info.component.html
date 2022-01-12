@@ -1,6 +1,9 @@
 <app-sidenav-layout [loading$]="loading$" *transloco="let t">
   <div sidenav *ngIf="event">
-    <event-sidenav [event]="event"></event-sidenav>
+    <event-sidenav
+      (notifyParent)="getNotification($event)"
+      [event]="event"
+    ></event-sidenav>
   </div>
 
   <div class="header-flex" header *ngIf="event">

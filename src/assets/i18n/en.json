@@ -29,6 +29,10 @@
     "hasWrongLength": "has wrong length! Required length:",
     "mustBeEqual": "must be equal."
   },
+  "clipboard": {
+    "success": "Copying success",
+    "failed": "Copying failed"
+  },
   "auth": {
     "service": "Sign in with",
     "register": {
@@ -41,7 +45,7 @@
     },
     "logout": {
       "title": "Logout"
-    },
+    }
   },
   "homeScreen": {
     "title": "Add to home screen"

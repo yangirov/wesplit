@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { EventDto } from '../../../../models/Event';
 import { DataService } from '../../../../shared/data.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -12,6 +12,7 @@ import { LocalizationService } from '../../../../shared/localization.service';
 })
 export class EventSidenavComponent {
   @Input() event!: EventDto;
+  @Output() notifyParent: EventEmitter<any> = new EventEmitter();
 
   constructor(
     private dataService: DataService,
@@ -40,12 +41,6 @@ export class EventSidenavComponent {
   }
 
   openShareModal() {
-    this.dialog.open(ShareEventComponent, {
-      width: '350px',
-      data: {
-        id: this.event.id,
-        uid: this.event.ownerUserId,
-      },
-    });
+    this.notifyParent.emit('openShareModal');
   }
 }

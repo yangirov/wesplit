@@ -1,8 +1,9 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { NotificationService } from '../../../../shared/notification.service';
 import { LocalizationService } from '../../../../shared/localization.service';
-import { EventDto } from '../../../../models/Event';
+import { ClipboardService } from '../../../../shared/clipboard.service';
+
+const navigator = window.navigator as any;
 
 @Component({
   selector: 'share-event',
@@ -11,24 +12,49 @@ import { EventDto } from '../../../../models/Event';
 })
 export class ShareEventComponent {
   constructor(
-    private localizationService: LocalizationService,
-    private notificationService: NotificationService,
     private dialogRef: MatDialogRef<ShareEventComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { id: string; uid: string }
+    private clipboardService: ClipboardService,
+    private localizationService: LocalizationService,
+    @Inject(MAT_DIALOG_DATA) public data: { title: string; url: string }
   ) {}
 
   get eventLink(): string {
-    return `${window.location.origin}/events/${this.data.id}/login?uid=${this.data.uid}`;
+    return this.data.url;
+  }
+
+  get copyButtonText() {
+    if (navigator.share) {
+      return this.localizationService.translate('event.share.title');
+    }
+
+    return this.localizationService.translate('event.share.copy');
   }
 
   onLaterClick() {
     this.dialogRef.close();
   }
 
-  onCopyClick() {
-    const copiedText = this.localizationService.translate('event.share.copied');
+  openNativeShare() {
+    navigator
+      .share({
+        title: this.data.title,
+        url: this.data.url,
+      })
+      .then(() => {})
+      .catch(console.error)
+      .finally(() => this.closeShareModal());
+  }
 
+  onCopyClick() {
+    if (navigator.share) {
+      this.openNativeShare();
+    } else {
+      this.clipboardService.copyFromText(this.data.url, 'event.share.copied');
+      this.closeShareModal();
+    }
+  }
+
+  private closeShareModal(): void {
     this.dialogRef.close();
-    this.notificationService.open(copiedText);
   }
 }

@@ -1,7 +1,7 @@
 import { Component, ElementRef, Input } from '@angular/core';
 import { EventDto, MemberDebt } from '../../../../../models/Event';
-import { NotificationService } from '../../../../../shared/notification.service';
 import { LocalizationService } from '../../../../../shared/localization.service';
+import { ClipboardService } from '../../../../../shared/clipboard.service';
 
 @Component({
   selector: 'event-check',
@@ -15,9 +15,9 @@ export class EventCheckComponent {
   checkOpenState: boolean = false;
 
   constructor(
-    private notificationService: NotificationService,
     private elRef: ElementRef,
-    private localizationService: LocalizationService
+    private localizationService: LocalizationService,
+    private clipboardService: ClipboardService
   ) {}
 
   get check(): string[] {
@@ -32,27 +32,11 @@ export class EventCheckComponent {
   }
 
   copyCheck() {
-    const checkContent = this.elRef.nativeElement.querySelector(
-      '.balance-check-content__debts'
+    this.clipboardService.copyFromElement(
+      this.elRef,
+      '.balance-check-content__debts',
+      'event.balance.clipboard.success',
+      'event.balance.clipboard.failed'
     );
-
-    const range = document.createRange();
-    const selection = window.getSelection();
-    selection?.removeAllRanges();
-
-    range.selectNode(checkContent);
-    selection?.addRange(range);
-
-    if (!document.execCommand('copy')) {
-      this.notificationService.open(
-        this.localizationService.translate('event.balance.clipboard.failed')
-      );
-    } else {
-      this.notificationService.open(
-        this.localizationService.translate('event.balance.clipboard.success')
-      );
-    }
-
-    selection?.removeAllRanges();
   }
 }

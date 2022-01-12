@@ -61,12 +61,22 @@ export class EventInfoComponent implements OnInit {
     this.opened = false;
   }
 
+  getNotification(event: any) {
+    if (event === 'openShareModal') {
+      this.openShareModal();
+    }
+  }
+
   openShareModal() {
+    const { name: eventName, id: eventId, ownerUserId: userId } = this.event;
+
+    const eventShareLink = `${window.location.origin}/events/${eventId}/login?uid=${userId}`;
+
     this.dialog.open(ShareEventComponent, {
       width: '350px',
       data: {
-        id: this.eventId,
-        uid: this.authService.currentUserId,
+        title: eventName,
+        url: eventShareLink,
       },
     });
   }
