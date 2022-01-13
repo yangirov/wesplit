@@ -6,9 +6,10 @@ import { MatDialog } from '@angular/material/dialog';
 import { ShareEventComponent } from './share-event/share-event.component';
 import { Title } from '@angular/platform-browser';
 import { environment } from '../../../environments/environment';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { AuthenticationService } from '../../../shared/authentication.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'event-info',
@@ -19,8 +20,9 @@ export class EventInfoComponent implements OnInit {
   loading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   eventId!: string;
-  event!: EventDto;
   opened: boolean = false;
+
+  event$!: Observable<EventDto>;
 
   constructor(
     private router: Router,
@@ -28,11 +30,13 @@ export class EventInfoComponent implements OnInit {
     private dataService: DataService,
     private dialog: MatDialog,
     private title: Title,
-    public authService: AuthenticationService
+    public authService: AuthenticationService,
+    private location: Location
   ) {}
 
   async ngOnInit() {
     this.eventId = this.activateRoute.snapshot.params['id'];
+    this.event$ = this.dataService.getEventById(this.eventId).pipe(take(1));
 
     if (history.state.isCreated) {
       this.openShareModal();
@@ -44,17 +48,13 @@ export class EventInfoComponent implements OnInit {
 
     this.loading$.next(true);
 
-    this.dataService
-      .getEventById(this.eventId)
-      .pipe(take(1))
-      .subscribe(
-        (event: EventDto) => {
-          this.event = event;
-          this.title.setTitle(`${event.name} - ${environment.name}`);
-        },
-        (err) => console.error(err),
-        () => this.loading$.next(false)
-      );
+    this.event$.subscribe(
+      (event: EventDto) => {
+        this.title.setTitle(`${event.name} - ${environment.name}`);
+      },
+      (err) => console.error(err),
+      () => this.loading$.next(false)
+    );
   }
 
   closeSidenav() {
@@ -68,16 +68,18 @@ export class EventInfoComponent implements OnInit {
   }
 
   openShareModal() {
-    const { name: eventName, id: eventId, ownerUserId: userId } = this.event;
+    this.event$.subscribe((event: EventDto) => {
+      const { name: eventName, id: eventId, ownerUserId: userId } = event;
 
-    const eventShareLink = `${window.location.origin}/events/${eventId}/login?uid=${userId}`;
+      const eventShareLink = `${window.location.origin}/events/${eventId}/login?uid=${userId}`;
 
-    this.dialog.open(ShareEventComponent, {
-      width: '350px',
-      data: {
-        title: eventName,
-        url: eventShareLink,
-      },
+      this.dialog.open(ShareEventComponent, {
+        width: '350px',
+        data: {
+          title: eventName,
+          url: eventShareLink,
+        },
+      });
     });
   }
 }

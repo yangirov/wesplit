@@ -8,7 +8,7 @@ import {
 } from '@angular/forms';
 import { DataService } from '../../../shared/data.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { EventDto, Purchase, PurchaseMember } from '../../../models/Event';
 import { EventActionCreator } from '../../../utils/EventActionCreator';
 import {
@@ -27,11 +27,12 @@ import * as moment from 'moment';
 })
 export class PurchaseFormComponent implements OnInit {
   isEdit!: boolean;
-
   eventId!: string;
-  event!: EventDto;
-
   purchaseId!: string;
+
+  event$!: Observable<EventDto>;
+
+  event!: EventDto;
   purchase!: Purchase;
 
   purchaseForm!: FormGroup;
@@ -81,21 +82,25 @@ export class PurchaseFormComponent implements OnInit {
       }
     );
 
-    this.dataService.getEventById(this.eventId).subscribe((event) => {
-      this.event = event;
+    this.event$ = this.dataService.getEventById(this.eventId);
 
-      if (this.isEdit && this.purchaseId) {
-        this.fillFormFromEvent();
-      } else {
-        this.purchaseForm.patchValue({
-          payer: this.dataService.getCurrentUser(this.eventId),
-        });
+    this.event$.subscribe(
+      (event) => {
+        this.event = event;
 
-        this.checkAllMembers(true);
-      }
+        if (this.isEdit && this.purchaseId) {
+          this.fillFormFromEvent();
+        } else {
+          this.purchaseForm.patchValue({
+            payer: this.dataService.getCurrentUser(this.eventId),
+          });
 
-      this.loading$.next(false);
-    });
+          this.checkAllMembers(true);
+        }
+      },
+      (err) => console.error,
+      () => this.loading$.next(false)
+    );
   }
 
   get members(): FormArray {

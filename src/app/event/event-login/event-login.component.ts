@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { DataService } from '../../../shared/data.service';
 import { MatDialog } from '@angular/material/dialog';
 import { AddMemberComponent } from './add-member/add-member.component';
+import { AuthenticationService } from '../../../shared/authentication.service';
 
 @Component({
   selector: 'app-event-login',
@@ -21,21 +22,27 @@ export class EventLoginComponent implements OnInit {
     public dialog: MatDialog,
     private router: Router,
     private activateRoute: ActivatedRoute,
-    private dataService: DataService
+    private dataService: DataService,
+    private authService: AuthenticationService
   ) {}
 
-  ngOnInit(): void {
+  async ngOnInit() {
     this.eventId = this.activateRoute.snapshot.params['id'];
     this.userId = this.activateRoute.snapshot.queryParams['uid'];
 
     if (this.userId) {
-      localStorage.setItem('uid', this.userId);
+      await this.authService
+        .logout()
+        .then(() => {
+          localStorage.setItem('uid', this.userId);
 
-      this.dataService
-        .getEventById(this.eventId, this.userId)
-        .subscribe((event: EventDto) => {
-          this.event = event;
-        });
+          this.dataService
+            .getEventById(this.eventId, this.userId)
+            .subscribe((event: EventDto) => {
+              this.event = event;
+            });
+        })
+        .catch(console.error);
     } else {
       this.dataService
         .getEventById(this.eventId)

@@ -8,13 +8,13 @@ import { TranslocoModule } from '@ngneat/transloco';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { LoginModalComponent } from './login-modal/login-modal.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
+import { LoginEmailComponent } from './login-form/login-email/login-email.component';
 
 @NgModule({
-  declarations: [LoginFormComponent, LoginModalComponent],
+  declarations: [LoginFormComponent, LoginEmailComponent],
   imports: [
     CommonModule,
     LoginRoutingModule,

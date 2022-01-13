@@ -2,18 +2,17 @@ import { Component, OnInit } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
-import { AuthenticationService } from '../../../shared/authentication.service';
 import { Router } from '@angular/router';
-import { calculateFormValidationErrors } from '../../../utils/FormValidators';
-import { LocalizationService } from '../../../shared/localization.service';
-import { NotificationService } from '../../../shared/notification.service';
+import { AuthenticationService } from '../../../../shared/authentication.service';
+import { LocalizationService } from '../../../../shared/localization.service';
+import { calculateFormValidationErrors } from '../../../../utils/FormValidators';
 
 @Component({
   selector: 'app-login-modal',
-  templateUrl: './login-modal.component.html',
-  styleUrls: ['./login-modal.component.scss'],
+  templateUrl: './login-email.component.html',
+  styleUrls: ['./login-email.component.scss'],
 })
-export class LoginModalComponent implements OnInit {
+export class LoginEmailComponent implements OnInit {
   loading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   loginForm!: FormGroup;
 
@@ -22,7 +21,7 @@ export class LoginModalComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    public dialogRef: MatDialogRef<LoginModalComponent>,
+    public dialogRef: MatDialogRef<LoginEmailComponent>,
     private router: Router,
     private authService: AuthenticationService,
     private localizationService: LocalizationService
@@ -62,7 +61,9 @@ export class LoginModalComponent implements OnInit {
   onSubmit() {
     if (this.loginForm.valid) {
       this.loading$.next(true);
+
       const { email, password } = this.loginForm.value;
+
       this.authService
         .loginWitEmailAndPassword(email, password)
         .then(async (result) => await this.successLogin(result.user.uid))

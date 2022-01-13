@@ -15,7 +15,8 @@ export class ShareEventComponent {
     private dialogRef: MatDialogRef<ShareEventComponent>,
     private clipboardService: ClipboardService,
     private localizationService: LocalizationService,
-    @Inject(MAT_DIALOG_DATA) public data: { title: string; url: string }
+    @Inject(MAT_DIALOG_DATA)
+    public data: { title: string; url: string }
   ) {}
 
   get eventLink(): string {
@@ -35,18 +36,23 @@ export class ShareEventComponent {
   }
 
   openNativeShare() {
+    const { title, url } = this.data;
+
     navigator
       .share({
-        title: this.data.title,
-        url: this.data.url,
+        url,
+        title,
+        text: `${title} | ${this.localizationService.translate(
+          'event.share.text'
+        )}`,
       })
       .then(() => {})
-      .catch(console.error)
-      .finally(() => this.closeShareModal());
+      .catch(console.error);
   }
 
   onCopyClick() {
     if (navigator.share) {
+      this.closeShareModal();
       this.openNativeShare();
     } else {
       this.clipboardService.copyFromText(this.data.url, 'event.share.copied');

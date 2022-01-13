@@ -30,6 +30,7 @@ import { EventActionCreator } from '../../../utils/EventActionCreator';
 import { ConfirmDialogComponent } from '../../base-elements/confirm-dialog/confirm-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { AuthenticationService } from '../../../shared/authentication.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'event-form',
@@ -51,6 +52,7 @@ export class EventFormComponent implements OnInit {
     private eventActionCreator: EventActionCreator,
     private route: ActivatedRoute,
     private router: Router,
+    private location: Location,
     private dialog: MatDialog,
     private authService: AuthenticationService
   ) {}
@@ -108,11 +110,7 @@ export class EventFormComponent implements OnInit {
   }
 
   async onBack() {
-    if (this.isEdit) {
-      await this.router.navigate(['events', this.eventId]);
-    }
-
-    await this.router.navigate(['/']);
+    this.location.back();
   }
 
   fillFormFromEvent() {
@@ -236,6 +234,7 @@ export class EventFormComponent implements OnInit {
     await dialogRef.afterClosed().subscribe(async (result) => {
       if (result) {
         this.loading$.next(true);
+
         await this.dataService
           .deleteEvent(this.eventId)
           .then(async (res) => {

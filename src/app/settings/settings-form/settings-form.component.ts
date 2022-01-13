@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ThemeService } from '../../../shared/theme.service';
 import { LocalizationService } from '../../../shared/localization.service';
+import { Location } from '@angular/common';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-settings-form',
@@ -8,27 +10,41 @@ import { LocalizationService } from '../../../shared/localization.service';
   styleUrls: ['./settings-form.component.scss'],
 })
 export class SettingsFormComponent implements OnInit {
-  selectedLanguage!: string;
-  selectedTheme!: string;
+  settingsForm!: FormGroup;
 
   constructor(
+    private formBuilder: FormBuilder,
     private localizationService: LocalizationService,
-    private themeService: ThemeService
+    private themeService: ThemeService,
+    private location: Location
   ) {
     this.themeService.initTheme();
   }
 
   ngOnInit(): void {
-    this.selectedLanguage = this.localizationService.getActiveLang();
-    this.selectedTheme = this.themeService.getColorTheme();
+    const selectedLanguage = this.localizationService.getActiveLang();
+    const selectedTheme = this.themeService.getColorTheme();
+
+    this.settingsForm = this.formBuilder.group({
+      language: [selectedLanguage, Validators.required],
+      theme: [selectedTheme, Validators.required],
+    });
+
+    this.settingsForm.valueChanges.subscribe((settings) =>
+      this.saveSettings(settings)
+    );
   }
 
-  onChangeLanguage(newLang: string) {
-    this.localizationService.setActiveLang(newLang);
+  onBack() {
+    this.location.back();
   }
 
-  onChangeTheme(newTheme: string) {
-    this.themeService.update(newTheme);
-    this.themeService.setColorTheme(newTheme);
+  saveSettings(form: any) {
+    const { language, theme } = this.settingsForm.value;
+
+    this.localizationService.setActiveLang(language);
+
+    this.themeService.update(theme);
+    this.themeService.setColorTheme(theme);
   }
 }

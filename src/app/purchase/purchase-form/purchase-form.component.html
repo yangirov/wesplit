@@ -20,7 +20,7 @@
     </button>
   </div>
 
-  <div *ngIf="event" body>
+  <div *ngIf="event$ | async" body>
     <div *ngIf="hasRePayedDebts" class="mat-form-field-invalid hasRePayedDebts">
       {{ t("purchase.afterStartRepayDebts") }}
     </div>

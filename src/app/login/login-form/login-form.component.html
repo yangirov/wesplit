@@ -1,6 +1,6 @@
 <app-sidenav-layout [loading$]="loading$" *transloco="let t">
   <div class="header-flex" header>
-    <button class="router-button" mat-icon-button [routerLink]="['/']">
+    <button class="router-button" mat-icon-button (click)="onBack()">
       <mat-icon>arrow_backward</mat-icon>
     </button>
 

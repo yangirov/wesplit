@@ -1,17 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-import { filter, map, mergeMap } from 'rxjs/operators';
+import { filter, map, mergeMap, takeUntil } from 'rxjs/operators';
 import { environment } from '../environments/environment';
 import { Title } from '@angular/platform-browser';
 import { ThemeService } from '../shared/theme.service';
 import { LocalizationService } from '../shared/localization.service';
+import { BehaviorSubject, combineLatest, ReplaySubject } from 'rxjs';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -19,6 +20,8 @@ export class AppComponent implements OnInit {
     private localizationService: LocalizationService,
     private themeService: ThemeService
   ) {}
+
+  destroyed$: ReplaySubject<boolean> = new ReplaySubject<boolean>(1);
 
   async ngOnInit() {
     this.themeService.initTheme();
@@ -31,14 +34,19 @@ export class AppComponent implements OnInit {
       await this.router.navigate(['/login']);
     }
 
-    this.router.events
-      .pipe(
-        filter((event) => event instanceof NavigationEnd),
-        map(() => this.rootRoute(this.route)),
-        filter((route: ActivatedRoute) => route.outlet === 'primary'),
-        mergeMap((route: ActivatedRoute) => route.data)
-      )
-      .subscribe((data: { [name: string]: any }) => {
+    const routes$ = this.router.events.pipe(
+      filter((event) => event instanceof NavigationEnd),
+      map(() => this.rootRoute(this.route)),
+      filter((route: ActivatedRoute) => route.outlet === 'primary'),
+      map((route) => route)
+    );
+
+    const data$ = routes$.pipe(mergeMap((route: ActivatedRoute) => route.data));
+    const url$ = routes$.pipe(mergeMap((route: ActivatedRoute) => route.url));
+
+    combineLatest([routes$, data$, url$])
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe(([route, data, url]) => {
         this.localizationService.load().subscribe((x) => {
           const title = this.localizationService.translate(
             `${data.scope}.title`
@@ -47,6 +55,11 @@ export class AppComponent implements OnInit {
           this.titleService.setTitle(`${title} - ${environment.name}`);
         });
       });
+  }
+
+  ngOnDestroy() {
+    this.destroyed$.next(true);
+    this.destroyed$.complete();
   }
 
   private rootRoute(route: ActivatedRoute): ActivatedRoute {

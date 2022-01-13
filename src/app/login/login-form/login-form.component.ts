@@ -3,10 +3,11 @@ import { BehaviorSubject } from 'rxjs';
 import { AuthenticationService } from '../../../shared/authentication.service';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
-import { LoginModalComponent } from '../login-modal/login-modal.component';
 import { NotificationService } from '../../../shared/notification.service';
 import { LocalizationService } from '../../../shared/localization.service';
 import isPwa from '../../../utils/PwaExtensions';
+import { LoginEmailComponent } from './login-email/login-email.component';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-login-form',
@@ -21,7 +22,8 @@ export class LoginFormComponent {
     private router: Router,
     private dialog: MatDialog,
     private localizationService: LocalizationService,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private location: Location
   ) {}
 
   async loginWithService(service: string = '') {
@@ -58,8 +60,12 @@ export class LoginFormComponent {
   }
 
   openLoginModal() {
-    const dialogRef = this.dialog.open(LoginModalComponent, {
+    const dialogRef = this.dialog.open(LoginEmailComponent, {
       width: '350px',
     });
+  }
+
+  onBack() {
+    this.location.back();
   }
 }

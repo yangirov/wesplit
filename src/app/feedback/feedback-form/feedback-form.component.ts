@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { DataService } from '../../../shared/data.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Feedback } from '../../../models/Feedback';
-import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'feedback',
@@ -17,7 +17,7 @@ export class FeedbackFormComponent implements OnInit {
   constructor(
     private dataService: DataService,
     private formBuilder: FormBuilder,
-    private router: Router
+    private location: Location
   ) {}
 
   ngOnInit(): void {
@@ -38,8 +38,12 @@ export class FeedbackFormComponent implements OnInit {
       await this.dataService.addFeedback(form).then((res) => {
         this.feedbackForm.reset();
         this.loading$.next(false);
-        this.router.navigate(['/']);
+        this.location.back();
       });
     }
+  }
+
+  onBack() {
+    this.location.back();
   }
 }

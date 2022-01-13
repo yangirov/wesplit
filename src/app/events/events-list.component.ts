@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EventDto } from '../../models/Event';
 import { DataService } from '../../shared/data.service';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { setLocalEvents } from '../../utils/EventLocalStorage';
 import { take } from 'rxjs/operators';
 
@@ -12,22 +12,20 @@ import { take } from 'rxjs/operators';
 })
 export class EventsListComponent implements OnInit {
   loading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  events: EventDto[] = [];
+  events$!: Observable<EventDto[]>;
   constructor(private dataService: DataService) {}
 
   ngOnInit(): void {
     this.loading$.next(true);
 
-    this.dataService
-      .getEvents()
-      .pipe(take(1))
-      .subscribe(
-        (events: EventDto[]) => {
-          this.events = events;
-          setLocalEvents(events);
-        },
-        (err) => console.error(err),
-        () => this.loading$.next(false)
-      );
+    this.events$ = this.dataService.getEvents().pipe(take(1));
+
+    this.events$.subscribe(
+      (events: EventDto[]) => {
+        setLocalEvents(events);
+      },
+      (err) => console.error(err),
+      () => this.loading$.next(false)
+    );
   }
 }
