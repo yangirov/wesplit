@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { AuthenticationService } from '../../../../shared/authentication.service';
 import { LocalizationService } from '../../../../shared/localization.service';
 import { calculateFormValidationErrors } from '../../../../utils/FormValidators';
+import { debounceTime } from 'rxjs/operators';
 
 @Component({
   selector: 'app-login-modal',
@@ -48,7 +49,8 @@ export class LoginEmailComponent implements OnInit {
 
     const translation = this.localizationService.getTranslationSection('form');
 
-    this.loginForm.valueChanges.subscribe(() => {
+    this.loginForm.valueChanges.pipe(debounceTime(200)).subscribe(() => {
+      this.formErrors = [];
       this.isPasswordWrong = false;
 
       this.formErrors = calculateFormValidationErrors(
