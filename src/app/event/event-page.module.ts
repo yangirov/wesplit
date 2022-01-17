@@ -36,6 +36,7 @@ import { PwaInstallComponent } from '../base-elements/pwa-install/pwa-install.co
 import { TranslocoModule } from '@ngneat/transloco';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatTabGroupGestureModule } from '../../utils/MatTabGroupGestureModule/mat-tab-group-gesture.module';
+import { QrCodeComponent } from './event-info/qr-code/qr-code.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { MatTabGroupGestureModule } from '../../utils/MatTabGroupGestureModule/m
     EventHeaderComponent,
     AddMemberComponent,
     PwaInstallComponent,
+    QrCodeComponent,
   ],
   imports: [
     CommonModule,

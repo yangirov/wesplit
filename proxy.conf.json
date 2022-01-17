@@ -1,0 +1,11 @@
+{
+  "/check": {
+    "target": "http://localhost:5001",
+    "secure": false,
+    "pathRewrite": {
+      "^/check": "/wesplit-840b9/us-central1/check"
+    },
+    "changeOrigin": true,
+    "logLevel": "debug"
+  }
+}

@@ -150,6 +150,9 @@
     },
     "actions": {
       "empty": "There are no actions"
+    },
+    "qrCode": {
+      "title": "Import by QR code"
     }
   },
   "purchase": {

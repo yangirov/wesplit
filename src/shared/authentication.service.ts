@@ -5,7 +5,6 @@ import {
   signInWithPopup,
   AuthProvider,
   GoogleAuthProvider,
-  TwitterAuthProvider,
   GithubAuthProvider,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
@@ -23,15 +22,19 @@ export class AuthenticationService {
     return localStorage.getItem('uid') ?? '';
   }
 
+  getUserToken(): Promise<string> {
+    if (this.auth.currentUser)
+      return this.auth.currentUser?.getIdToken();
+
+    return new Promise<string>(() => "");
+  }
+
   async loginWithService(service: string) {
     let provider!: AuthProvider;
 
     switch (service) {
       case 'google':
         provider = new GoogleAuthProvider();
-        break;
-      case 'twitter':
-        provider = new TwitterAuthProvider();
         break;
       case 'github':
         provider = new GithubAuthProvider();
