@@ -37,6 +37,7 @@ import { TranslocoModule } from '@ngneat/transloco';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatTabGroupGestureModule } from '../../utils/MatTabGroupGestureModule/mat-tab-group-gesture.module';
 import { QrCodeComponent } from './event-info/qr-code/qr-code.component';
+import {MatCheckboxModule} from "@angular/material/checkbox";
 
 @NgModule({
   declarations: [
@@ -59,27 +60,28 @@ import { QrCodeComponent } from './event-info/qr-code/qr-code.component';
     PwaInstallComponent,
     QrCodeComponent,
   ],
-  imports: [
-    CommonModule,
-    EventPageRoutingModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    MatTabsModule,
-    MatExpansionModule,
-    MatDialogModule,
-    ClipboardModule,
-    MatButtonModule,
-    MatSidenavModule,
-    MatDividerModule,
-    BaseElementsModule,
-    TranslocoModule,
-    MatTabGroupGestureModule,
-  ],
+    imports: [
+        CommonModule,
+        EventPageRoutingModule,
+        FormsModule,
+        ReactiveFormsModule,
+        MatToolbarModule,
+        MatIconModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        MatTabsModule,
+        MatExpansionModule,
+        MatDialogModule,
+        ClipboardModule,
+        MatButtonModule,
+        MatSidenavModule,
+        MatDividerModule,
+        BaseElementsModule,
+        TranslocoModule,
+        MatTabGroupGestureModule,
+        MatCheckboxModule,
+    ],
 })
 export class EventPageModule {}

@@ -11,5 +11,6 @@ export interface ReceiptPurchase {
   name: string,
   price: number,
   sum: number,
-  quantity: number
+  quantity: number,
+  selected: boolean
 }

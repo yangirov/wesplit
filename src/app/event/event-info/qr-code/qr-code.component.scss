@@ -1,5 +1,51 @@
+.receipt-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1em;
+
+  &__total-sum {
+    font-weight: bold;
+  }
+}
+
+.receipt-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: last baseline;
+  width: 100%;
+
+  .name {
+    line-height: 1;
+    font-size: 1em;
+    opacity: 0.7;
+    white-space: normal;
+    width: 100%;
+    padding-right: 1em;
+  }
+
+  .sum {
+    margin-right: auto;
+    font-weight: bold;
+  }
+}
+
 ::ng-deep {
+  .mat-checkbox {
+    width: 100%;
+
+    .mat-checkbox-layout {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+
+      .mat-checkbox-label {
+        width: 100%;
+      }
+    }
+  }
+
   #qr-reader {
+    font-size: 1em !important;
     border: none !important;
     height: auto;
     width: auto;
@@ -25,12 +71,19 @@
     #qr-reader__dashboard_section_csr {
       display: flex;
       justify-content: center;
+
+      span:first-child {
+        color: transparent;
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 1em;
+      }
     }
 
+    #qr-reader__dashboard_section_fsr,
+    #qr-reader__header_message,
     #qr-reader__dashboard_section_swaplink {
-      @import "button";
-      font-size: 13.3px;
-      margin-left: 10px;
+      display: none !important;
     }
 
     img {

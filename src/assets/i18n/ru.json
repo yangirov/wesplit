@@ -151,8 +151,11 @@
     "actions": {
       "empty": "Действий нет"
     },
-    "qrCode": {
-      "title": "Импорт чека по QR-коду"
+    "qr-receipt": {
+      "title": "Импорт чека по QR-коду",
+      "summary": "Итого",
+      "minLengthArray": "В чеке должен быть хотя бы один товар",
+      "minPurchaseInReceipt": "Нужно выбрать хотя бы один товар из чека"
     }
   },
   "purchase": {

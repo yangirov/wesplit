@@ -5,6 +5,7 @@ import {
   ValidatorFn,
 } from '@angular/forms';
 import { EventDto, EventMember, PurchaseMember } from '../models/Event';
+import { ReceiptPurchase } from '../models/Receipt';
 
 export interface AllValidationErrors {
   control_name: string;
@@ -160,4 +161,21 @@ export function getFormValidationErrors(
   });
 
   return errors;
+}
+
+export function minLengthArray(min: number, field: string): ValidatorFn {
+  return (c: AbstractControl): { [p: string]: any } | null => {
+    if (c.value[field].length >= min) return null;
+    return { minLengthArray: true };
+  };
+}
+
+export function minPurchaseInReceipt(): ValidatorFn {
+  return (form: AbstractControl): ValidationErrors | null => {
+    const purchases = form
+      .get('purchases')
+      ?.value.filter((x: ReceiptPurchase) => x.selected);
+
+    return purchases?.length === 0 ? { minPurchaseInReceipt: true } : null;
+  };
 }

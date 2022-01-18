@@ -151,8 +151,11 @@
     "actions": {
       "empty": "There are no actions"
     },
-    "qrCode": {
-      "title": "Import by QR code"
+    "qr-receipt": {
+      "title": "Import by QR code",
+      "summary": "Summary",
+      "minLengthArray": "The receipt must contain at least one item",
+      "minPurchaseInReceipt": "You need to select at least one product from the receipt"
     }
   },
   "purchase": {

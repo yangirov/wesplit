@@ -46,7 +46,7 @@ const routes: Routes = [
     path: ':id/qr',
     component: QrCodeComponent,
     data: {
-      scope: 'event.qrCode',
+      scope: 'event.qr-receipt',
     },
   },
 ];

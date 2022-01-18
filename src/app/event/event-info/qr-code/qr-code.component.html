@@ -3,19 +3,61 @@
     <button class="router-button" mat-icon-button (click)="onBack()">
       <mat-icon>close</mat-icon>
     </button>
-    <h1>{{ t("event.qrCode.title") }}</h1>
+    <h1>{{ t("event.qr-receipt.title") }}</h1>
     <span class="spacer"></span>
+    <button mat-icon-button form="receiptForm" [disabled]="receiptForm.invalid">
+      <mat-icon>check</mat-icon>
+    </button>
   </div>
 
   <div body>
     <div id="qr-reader"></div>
 
-    <div *ngIf="receipt">
-      {{ receipt.user }} - {{ receipt.totalSum }} - {{ receipt.date }}
+    <div class="receipt" *ngIf="receipt">
+      <div class="receipt-form_errors">
+        <div
+          *ngIf="receiptForm.errors?.minLengthArray"
+          class="mat-form-field-invalid"
+        >
+          {{ t("event.qr-receipt.minLengthArray") }}
+        </div>
 
-      <div *ngFor="let item of receipt.items">
-        {{ item.name }} -- {{ item.sum }}
+        <div
+          *ngIf="receiptForm.errors?.minPurchaseInReceipt"
+          class="mat-form-field-invalid"
+        >
+          {{ t("event.qr-receipt.minPurchaseInReceipt") }}
+        </div>
       </div>
+
+      <div class="receipt-header">
+        <span class="receipt-header__date">
+          {{ receiptDate }}
+        </span>
+        <span class="receipt-header__total-sum">
+          {{ receiptTotalSum }}
+        </span>
+      </div>
+
+      <form [formGroup]="receiptForm" (ngSubmit)="onSubmit()" id="receiptForm">
+        <div formArrayName="purchases">
+          <div
+            *ngFor="let purchase of purchases.controls; let i = index"
+            [formGroupName]="i"
+          >
+            <mat-checkbox color="primary" formControlName="selected">
+              <div class="receipt-item">
+                <span class="name">
+                  {{ purchase.get("name")?.value }}
+                </span>
+                <span class="sum">
+                  {{ purchase.get("sum")?.value }}
+                </span>
+              </div>
+            </mat-checkbox>
+          </div>
+        </div>
+      </form>
     </div>
   </div>
 </app-layout>
