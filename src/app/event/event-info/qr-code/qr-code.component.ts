@@ -1,33 +1,36 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {
+  AfterViewChecked, AfterViewInit,
+  Component,
+  OnInit,
+} from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Location } from '@angular/common';
-import jsQR  from 'jsqr';
 import { HttpClient } from '@angular/common/http';
-import {environment} from "../../../../environments/environment";
 import {Receipt} from "../../../../models/Receipt";
 import {AuthenticationService} from "../../../../shared/authentication.service";
 import {filter} from "rxjs/operators";
+import {Html5QrcodeScanner} from "html5-qrcode"
+import {environment} from "../../../../environments/environment";
 
 @Component({
   selector: 'app-qr-code',
   templateUrl: './qr-code.component.html',
   styleUrls: ['./qr-code.component.scss'],
 })
-export class QrCodeComponent implements OnInit {
+export class QrCodeComponent implements OnInit, AfterViewInit {
   loading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
-  @ViewChild('video')
-  public video!: ElementRef;
-
-  @ViewChild('canvas')
-  public canvas!: ElementRef;
+  qrCodeScanner!: Html5QrcodeScanner;
+  isSuccessScan: boolean = false;
 
   receipt!: Receipt;
   userToken!: string;
 
-  requestId!: number | undefined;
-
-  constructor(private location: Location, private httpClient: HttpClient, private  authService: AuthenticationService) {}
+  constructor(
+    private location: Location,
+    private httpClient: HttpClient,
+    private  authService: AuthenticationService
+  ) {}
 
   ngOnInit() {
     this.authService.currentUser$
@@ -37,116 +40,55 @@ export class QrCodeComponent implements OnInit {
       });
   }
 
-  onBack() {
-    this.location.back();
+  ngAfterViewInit(): void {
+    const config =  {
+      fps: 10,
+      qrbox: {
+        width: 120,
+        height: 120
+      }
+    };
+
+    setTimeout(() => {
+      this.qrCodeScanner = new Html5QrcodeScanner("qr-reader", config, false);
+      this.qrCodeScanner.render(this.onScanSuccess.bind(this), this.onScanFailure.bind(this));
+    }, 500);
   }
 
-  public capture() {
-    let self = this;
+  onScanSuccess(decodedText: string, decodedResult: any) {
+    if (this.isSuccessScan) {
+      this.qrCodeScanner.clear();
+    }
 
-    const video = this.video.nativeElement;
-    const canvasElement = this.canvas.nativeElement;
-    const canvas = canvasElement.getContext('2d');
+    this.isSuccessScan = true;
 
-    navigator.mediaDevices
-      .getUserMedia({ video: { facingMode: 'environment' } })
-      .then((stream) => {
-        video.srcObject = stream;
-        video.setAttribute('playsinline', true); // required to tell iOS safari we don't want fullscreen
-        video.play();
-        this.requestId = requestAnimationFrame(tick);
-      });
+    const obj = decodeURI(decodedText)
+      .replace(/"/g, '\\"')
+      .replace(/&/g, '","')
+      .replace(/=/g, '":"');
 
-    function tick() {
-      if (video.readyState === video.HAVE_ENOUGH_DATA) {
-        canvasElement.hidden = false;
-        canvasElement.height = video.videoHeight;
-        canvasElement.width = video.videoWidth;
+    const data = JSON.parse(`{ "${obj} "}`);
 
-        canvas.drawImage(
-          video,
-          0,
-          0,
-          canvasElement.width,
-          canvasElement.height
-        );
-
-        const imageData = canvas.getImageData(
-          0,
-          0,
-          canvasElement.width,
-          canvasElement.height
-        );
-
-        const code = jsQR(imageData.data, imageData.width, imageData.height, {
-          inversionAttempts: 'dontInvert',
-        });
-
-        if (code) {
-          if (self.requestId) {
-            cancelAnimationFrame(self.requestId);
-          }
-
-          self.requestId = undefined;
-
-          console.log(code.data);
-
-          drawLine(
-            code.location.topLeftCorner,
-            code.location.topRightCorner,
-            '#FF3B58'
-          );
-          drawLine(
-            code.location.topRightCorner,
-            code.location.bottomRightCorner,
-            '#FF3B58'
-          );
-          drawLine(
-            code.location.bottomRightCorner,
-            code.location.bottomLeftCorner,
-            '#FF3B58'
-          );
-          drawLine(
-            code.location.bottomLeftCorner,
-            code.location.topLeftCorner,
-            '#FF3B58'
-          );
-
-          const data = JSON.parse(
-            '{"' +
-            decodeURI(code.data)
-              .replace(/"/g, '\\"')
-              .replace(/&/g, '","')
-              .replace(/=/g, '":"') +
-            '"}'
-          );
-
-          self.httpClient.post<any>(`${environment.functionsUrl}/check`, data,
-            {
-              headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + self.userToken,
-                'Host': "us-central1-wesplit-840b9.cloudfunctions.net"
-              }
-            }).subscribe(
-            (res: Receipt) => {
-              self.receipt = res;
-            },
-            (err: any) => console.log(err)
-          );
+    this.httpClient.post<any>(`/check`, data,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + this.userToken,
+          'Host': "us-central1-wesplit-840b9.cloudfunctions.net"
         }
-      }
+      }).subscribe(
+      (res: Receipt) => {
+        this.receipt = res;
+      },
+      (err: any) => console.log(err)
+    );
+  }
 
-      requestAnimationFrame(tick);
-    }
+  onScanFailure(error: string) {
+    console.warn(`Code scan error = ${error}`);
+  }
 
-    function drawLine(begin: any, end: any, color: string) {
-      canvas.beginPath();
-      canvas.moveTo(begin.x, begin.y);
-      canvas.lineTo(end.x, end.y);
-      canvas.lineWidth = 4;
-      canvas.strokeStyle = color;
-      canvas.stroke();
-    }
+  onBack() {
+    this.location.back();
   }
 }

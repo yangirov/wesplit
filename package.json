@@ -30,7 +30,7 @@
     "@fontsource/roboto": "^4.5.1",
     "@ngneat/transloco": "^3.1.1",
     "firebase": "^9.1.0",
-    "jsqr": "^1.4.0",
+    "html5-qrcode": "^2.1.6",
     "lodash-es": "^4.17.21",
     "material-icons": "^1.10.4",
     "moment": "^2.29.1",

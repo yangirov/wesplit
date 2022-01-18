@@ -8,16 +8,7 @@
   </div>
 
   <div body>
-    <div>
-      <button color="basic" mat-raised-button (click)="capture()">
-        Take photo
-      </button>
-    </div>
-
-    <div class="video">
-      <video #video id="video" width="320" height="320" autoplay></video>
-      <canvas #canvas id="canvas" width="320" height="320"></canvas>
-    </div>
+    <div id="qr-reader"></div>
 
     <div *ngIf="receipt">
       {{ receipt.user }} - {{ receipt.totalSum }} - {{ receipt.date }}

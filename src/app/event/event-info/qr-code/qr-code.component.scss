@@ -1,7 +1,42 @@
-#video {
-  display: none;
-}
+::ng-deep {
+  #qr-reader {
+    border: none !important;
+    height: auto;
+    width: auto;
 
-#canvas {
-  width: 100%;
+    #qr-reader__scan_region {
+      min-height: auto !important;
+
+      br {
+        display: none;
+      }
+    }
+
+    #qr-reader__dashboard_section {
+      display: flex;
+      justify-content: center;
+
+      div {
+        margin: 0;
+        line-height: 1;
+      }
+    }
+
+    #qr-reader__dashboard_section_csr {
+      display: flex;
+      justify-content: center;
+    }
+
+    #qr-reader__dashboard_section_swaplink {
+      @import "button";
+      font-size: 13.3px;
+      margin-left: 10px;
+    }
+
+    img {
+      display: none;
+    }
+
+    @import "button";
+  }
 }
