@@ -3,7 +3,7 @@ import { EventDto } from '../../models/Event';
 import { DataService } from '../../shared/data.service';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { setLocalEvents } from '../../utils/EventLocalStorage';
-import { take } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 
 @Component({
   selector: 'events-list',
@@ -13,12 +13,16 @@ import { take } from 'rxjs/operators';
 export class EventsListComponent implements OnInit {
   loading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   events$!: Observable<EventDto[]>;
+
   constructor(private dataService: DataService) {}
 
   ngOnInit(): void {
     this.loading$.next(true);
 
-    this.events$ = this.dataService.getEvents().pipe(take(1));
+    this.events$ = this.dataService.getEvents().pipe(
+      map((events) => events.sort((a, b) => a.date - b.date)),
+      take(1)
+    );
 
     this.events$.subscribe(
       (events: EventDto[]) => {
