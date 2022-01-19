@@ -20,7 +20,18 @@
           {{ t("common.sum") }},
           {{ t("common.currency") }}
         </mat-label>
-        <input matInput formControlName="sum" numbersOnly required />
+        <input
+          matInput
+          formControlName="sum"
+          required
+          type="text"
+          name="currency"
+          inputmode="numeric"
+          pattern="^\d+(\.\d{1,2})?$"
+          placeholder="0.00"
+          digitOnly
+          [decimal]="true"
+        />
       </mat-form-field>
 
       <div

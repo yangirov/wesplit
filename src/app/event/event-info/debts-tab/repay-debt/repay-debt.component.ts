@@ -34,10 +34,7 @@ export class RepayDebtComponent implements OnInit {
       {
         sum: [
           this.payload.debt.sum || 0,
-          Validators.compose([
-            Validators.required,
-            Validators.pattern('^[0-9]*$'),
-          ]),
+          Validators.compose([Validators.required]),
         ],
       },
       {

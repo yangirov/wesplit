@@ -66,10 +66,7 @@ export class PurchaseFormComponent implements OnInit {
         ),
         sum: new FormControl(
           { value: 0, disabled: this.isEdit && this.hasRePayedDebts },
-          Validators.compose([
-            Validators.required,
-            Validators.pattern('^[0-9]*$'),
-          ])
+          Validators.compose([Validators.required])
         ),
         members: this.formBuilder.array([]),
       },
