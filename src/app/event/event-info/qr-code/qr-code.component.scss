@@ -49,6 +49,8 @@
     border: none !important;
     height: auto;
     width: auto;
+    margin: 0 auto;
+    max-width: 600px;
 
     #qr-reader__scan_region {
       min-height: auto !important;

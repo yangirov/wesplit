@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, ParamMap, Params, Router } from '@angular/router';
 import { EventDto } from '../../../models/Event';
 import { DataService } from '../../../shared/data.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -9,7 +9,6 @@ import { environment } from '../../../environments/environment';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { AuthenticationService } from '../../../shared/authentication.service';
-import { Location } from '@angular/common';
 
 @Component({
   selector: 'event-info',
@@ -30,13 +29,19 @@ export class EventInfoComponent implements OnInit {
     private dataService: DataService,
     private dialog: MatDialog,
     private title: Title,
-    public authService: AuthenticationService,
-    private location: Location
+    public authService: AuthenticationService
   ) {}
 
   async ngOnInit() {
     this.eventId = this.activateRoute.snapshot.params['id'];
     this.event$ = this.dataService.getEventById(this.eventId).pipe(take(1));
+
+    if (this.activateRoute.snapshot.queryParams['refresh']) {
+      const url: any = new URL(window.location.href.split('?')[0]);
+      window.location = url;
+    }
+
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
 
     if (history.state.isCreated) {
       this.openShareModal();

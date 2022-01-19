@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Receipt, ReceiptPurchase } from '../../../../models/Receipt';
 import { AuthenticationService } from '../../../../shared/authentication.service';
@@ -49,8 +49,6 @@ export class QrCodeComponent implements OnInit, AfterViewInit {
   ) {}
 
   ngOnInit() {
-    this.loading$.next(true);
-
     this.eventId = this.activateRoute.snapshot.params['id'];
 
     this.dataService
@@ -60,8 +58,7 @@ export class QrCodeComponent implements OnInit, AfterViewInit {
         (event: EventDto) => {
           this.event = event;
         },
-        (err) => console.error(err),
-        () => this.loading$.next(false)
+        (err) => console.error(err)
       );
 
     this.authService.currentUser$
@@ -80,23 +77,6 @@ export class QrCodeComponent implements OnInit, AfterViewInit {
     );
   }
 
-  fillFormArray() {
-    const config = this.receipt.items.map(({ name, price, sum, quantity }) =>
-      this.formBuilder.group({
-        name,
-        price,
-        sum,
-        quantity,
-        selected: false,
-      })
-    );
-
-    this.receiptForm.setControl(
-      'purchases',
-      this.formBuilder.array(config || [])
-    );
-  }
-
   ngAfterViewInit(): void {
     const config = {
       fps: 10,
@@ -106,18 +86,11 @@ export class QrCodeComponent implements OnInit, AfterViewInit {
       },
     };
 
-    setTimeout(() => {
-      this.qrCodeScanner = new Html5QrcodeScanner('qr-reader', config, false);
-      this.qrCodeScanner.render(
-        this.onScanSuccess.bind(this),
-        this.onScanFailure.bind(this)
-      );
-
-      // this.isSuccessScan = true;
-      // const qrText =
-      //   't=20220111T1340&s=702.64&fn=9960440301573952&i=5106&fp=3364516555&n=1';
-      // this.onScanSuccess(qrText, null);
-    }, 2000);
+    this.qrCodeScanner = new Html5QrcodeScanner('qr-reader', config, false);
+    this.qrCodeScanner.render(
+      this.onScanSuccess.bind(this),
+      this.onScanFailure.bind(this)
+    );
   }
 
   get purchases(): FormArray {
@@ -146,6 +119,7 @@ export class QrCodeComponent implements OnInit, AfterViewInit {
       this.qrCodeScanner.clear().then(() => {});
     }
 
+    this.loading$.next(true);
     this.isSuccessScan = true;
 
     const obj = decodeURI(decodedText)
@@ -155,20 +129,31 @@ export class QrCodeComponent implements OnInit, AfterViewInit {
 
     const data = JSON.parse(`{ "${obj} "}`);
 
+    const guestModeQueryParam = this.authService.isGuestMode
+      ? '?questMode=true'
+      : '';
+
+    console.log(this.authService.isGuestMode);
+
     this.httpClient
-      .post<any>(`${environment.functionsUrl}/check`, data, {
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: 'Bearer ' + this.userToken,
-          Host: 'us-central1-wesplit-840b9.cloudfunctions.net',
-        },
-      })
+      .post<any>(
+        `${environment.functionsUrl}/check${guestModeQueryParam}`,
+        data,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: 'Bearer ' + this.userToken,
+            Host: 'us-central1-wesplit-840b9.cloudfunctions.net',
+          },
+        }
+      )
       .subscribe(
         (res: Receipt) => {
           this.receipt = res;
           this.fillFormArray();
         },
-        (err: any) => console.log(err)
+        (err: any) => console.log(err),
+        () => this.loading$.next(false)
       );
   }
 
@@ -176,8 +161,27 @@ export class QrCodeComponent implements OnInit, AfterViewInit {
     console.warn(`Code scan error = ${error}`);
   }
 
+  fillFormArray() {
+    const config = this.receipt.items.map(({ name, price, sum, quantity }) =>
+      this.formBuilder.group({
+        name,
+        price,
+        sum,
+        quantity,
+        selected: false,
+      })
+    );
+
+    this.receiptForm.setControl(
+      'purchases',
+      this.formBuilder.array(config || [])
+    );
+  }
+
   async onBack() {
-    await this.router.navigate(['events', this.eventId]);
+    await this.router.navigate(['events', this.eventId], {
+      queryParams: { refresh: true },
+    });
   }
 
   async onSubmit() {

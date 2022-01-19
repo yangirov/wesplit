@@ -11,8 +11,6 @@
   </div>
 
   <div body>
-    <div id="qr-reader"></div>
-
     <div class="receipt" *ngIf="receipt">
       <div class="receipt-form_errors">
         <div
@@ -61,3 +59,5 @@
     </div>
   </div>
 </app-layout>
+
+<div id="qr-reader" *ngIf="!isSuccessScan"></div>

@@ -22,11 +22,8 @@ export class AuthenticationService {
     return localStorage.getItem('uid') ?? '';
   }
 
-  getUserToken(): Promise<string> {
-    if (this.auth.currentUser)
-      return this.auth.currentUser?.getIdToken();
-
-    return new Promise<string>(() => "");
+  get isGuestMode(): boolean {
+    return !this.auth.currentUser && Boolean(localStorage.getItem('uid'));
   }
 
   async loginWithService(service: string) {
