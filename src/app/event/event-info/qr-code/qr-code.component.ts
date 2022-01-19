@@ -208,11 +208,11 @@ export class QrCodeComponent implements OnInit, AfterViewInit {
         this.eventActionCreator.addPurchase(currentUser, x.name, x.sum)
       );
 
-      return await Promise.all([
-        eventPurchases.map(async (purchase: Purchase) => {
+      await Promise.all([
+        ...eventPurchases.map(async (purchase: Purchase) => {
           await this.dataService.addPurchase(this.eventId, purchase);
         }),
-        eventActions.map(async (eventAction: EventAction) => {
+        ...eventActions.map(async (eventAction: EventAction) => {
           await this.dataService.addEventAction(this.eventId, eventAction);
         }),
       ])
