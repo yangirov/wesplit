@@ -72,7 +72,7 @@ export class DataService {
         take(1)
       ),
       purchases: this.getPurchases(eventId, userId).pipe(
-        map((items) => items.sort((a, b) => b.date - a.date)),
+        map((items) => items.sort((a, b) => a.date - b.date)),
         take(1)
       ),
       actions: this.getActions(eventId, userId).pipe(
