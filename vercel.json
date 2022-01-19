@@ -1,0 +1,17 @@
+{
+  "rewrites": [
+    { "source": "/api/:match*", "destination": "https://us-central1-wesplit-840b9.cloudfunctions.net/:match*" }
+
+  ],
+  "headers": [
+    {
+      "source": "api/(.*)",
+      "headers": [
+        { "key": "Access-Control-Allow-Credentials", "value": "true" },
+        { "key": "Access-Control-Allow-Origin", "value": "*" },
+        { "key": "Access-Control-Allow-Methods", "value": "GET" },
+        { "key": "Host", "value": "us-central1-wesplit-840b9.cloudfunctions.net" }
+      ]
+    }
+  ]
+}

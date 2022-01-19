@@ -5,7 +5,6 @@ import { Receipt, ReceiptPurchase } from '../../../../models/Receipt';
 import { AuthenticationService } from '../../../../shared/authentication.service';
 import { filter, take } from 'rxjs/operators';
 import { Html5QrcodeScanner } from 'html5-qrcode';
-import { environment } from '../../../../environments/environment';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import {
   minLengthArray,
@@ -133,20 +132,12 @@ export class QrCodeComponent implements OnInit, AfterViewInit {
       ? '?questMode=true'
       : '';
 
-    console.log(this.authService.isGuestMode);
-
     this.httpClient
-      .post<any>(
-        `${environment.functionsUrl}/check${guestModeQueryParam}`,
-        data,
-        {
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: 'Bearer ' + this.userToken,
-            Host: 'us-central1-wesplit-840b9.cloudfunctions.net',
-          },
-        }
-      )
+      .post<any>(`/api/check${guestModeQueryParam}`, data, {
+        headers: {
+          Authorization: 'Bearer ' + this.userToken,
+        },
+      })
       .subscribe(
         (res: Receipt) => {
           this.receipt = res;
@@ -197,7 +188,7 @@ export class QrCodeComponent implements OnInit, AfterViewInit {
       const eventPurchases = purchases.map((x: ReceiptPurchase) => {
         return {
           title: x.name,
-          date: this.receipt.date,
+          date: moment(this.receipt.date).utc().valueOf(),
           payer: currentUser,
           sum: x.sum,
           members: this.event.members,
