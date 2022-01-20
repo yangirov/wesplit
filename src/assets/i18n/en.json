@@ -146,7 +146,8 @@
         "failed": "The device does not support automatic copying. Please copy the highlighted text",
         "success": "The receipt has been copied to the clipboard"
       },
-      "returnDebt": "Mark the debt as returned"
+      "returnDebt": "Mark the debt as returned",
+      "sumLessOrEqualDebt": "The number cannot exceed the amount of debt"
     },
     "actions": {
       "empty": "There are no actions"
@@ -170,7 +171,7 @@
     "minimalSum": "The minimum purchase amount must be more than $1",
     "whoPaid": "Who paid",
     "members": "Purchase participants",
-    "needOneMember": "At least one participant is needed",
+    "minimalMembersCount": "At least one participant is needed",
     "payerNotExistsInPurchaseMembers": "You cannot remove the payer from the purchase members",
     "delete": "Delete purchase"
   }

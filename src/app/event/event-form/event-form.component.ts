@@ -39,12 +39,13 @@ import { Location } from '@angular/common';
   styleUrls: ['./event-form.component.scss'],
 })
 export class EventFormComponent implements OnInit {
+  loading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
   isEdit!: boolean;
   eventId!: string;
   event!: EventDto;
   eventForm!: FormGroup;
   hasRePayedDebts: boolean = false;
-  loading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor(
     private formBuilder: FormBuilder,
@@ -93,6 +94,8 @@ export class EventFormComponent implements OnInit {
           this.hasRePayedDebts = x.rePayedDebts?.length > 0;
           if (this.hasRePayedDebts) {
             this.eventForm.disable();
+            this.eventForm.controls['name'].enable();
+
             this.members.controls.forEach((control) => {
               control.disable();
             });

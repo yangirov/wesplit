@@ -5,7 +5,7 @@ import { environment } from '../environments/environment';
 import { Title } from '@angular/platform-browser';
 import { ThemeService } from '../shared/theme.service';
 import { LocalizationService } from '../shared/localization.service';
-import { BehaviorSubject, combineLatest, ReplaySubject } from 'rxjs';
+import { combineLatest, ReplaySubject } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -57,16 +57,16 @@ export class AppComponent implements OnInit, OnDestroy {
       });
   }
 
-  ngOnDestroy() {
-    this.destroyed$.next(true);
-    this.destroyed$.complete();
-  }
-
   private rootRoute(route: ActivatedRoute): ActivatedRoute {
     while (route.firstChild) {
       route = route.firstChild;
     }
 
     return route;
+  }
+
+  ngOnDestroy() {
+    this.destroyed$.next(true);
+    this.destroyed$.complete();
   }
 }

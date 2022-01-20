@@ -26,17 +26,16 @@ import * as moment from 'moment';
   styleUrls: ['./purchase-form.component.scss'],
 })
 export class PurchaseFormComponent implements OnInit {
+  loading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
   isEdit!: boolean;
   eventId!: string;
   purchaseId!: string;
 
   event$!: Observable<EventDto>;
-
   event!: EventDto;
   purchase!: Purchase;
-
   purchaseForm!: FormGroup;
-  loading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor(
     private dataService: DataService,
@@ -130,6 +129,9 @@ export class PurchaseFormComponent implements OnInit {
       );
 
       if (this.hasRePayedDebts) {
+        this.purchaseForm.controls['sum'].disable();
+        this.purchaseForm.controls['payer'].disable();
+
         this.members.controls.forEach((control) => {
           control.disable();
         });

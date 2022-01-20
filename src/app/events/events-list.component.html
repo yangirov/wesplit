@@ -3,7 +3,7 @@
     <h1 class="header-title">{{ t("events-list.title") }}</h1>
   </div>
 
-  <div body *ngIf="events$ | async as events">
+  <div body *ngIf="events">
     <div *ngIf="events.length; else noEvents">
       <event-item
         *ngFor="let event of events.reverse()"

@@ -36,12 +36,11 @@ export class EventInfoComponent implements OnInit {
     this.eventId = this.activateRoute.snapshot.params['id'];
     this.event$ = this.dataService.getEventById(this.eventId).pipe(take(1));
 
+    // TODO: this hack is disgusting
     if (this.activateRoute.snapshot.queryParams['refresh']) {
       const url: any = new URL(window.location.href.split('?')[0]);
       window.location = url;
     }
-
-    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
 
     if (history.state.isCreated) {
       this.openShareModal();

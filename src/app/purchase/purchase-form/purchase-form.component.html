@@ -7,10 +7,13 @@
     >
       <mat-icon>close</mat-icon>
     </button>
+
     <h1>
       {{ isEdit ? t("purchase.edit.title") : t("purchase.new.title") }}
     </h1>
+
     <span class="spacer"></span>
+
     <button
       mat-icon-button
       form="purchaseForm"
@@ -21,9 +24,13 @@
   </div>
 
   <div *ngIf="event$ | async" body>
-    <div *ngIf="hasRePayedDebts" class="mat-form-field-invalid hasRePayedDebts">
-      {{ t("purchase.afterStartRepayDebts") }}
-    </div>
+    <form-errors
+      *ngIf="this.isEdit && hasRePayedDebts"
+      class="hasRePayedDebts"
+      [errors]="['afterStartRepayDebts']"
+      localization="purchase"
+      [force]="true"
+    ></form-errors>
 
     <form [formGroup]="purchaseForm" (ngSubmit)="onSubmit()" id="purchaseForm">
       <mat-form-field class="full-width">
@@ -47,12 +54,11 @@
         />
       </mat-form-field>
 
-      <div
-        *ngIf="purchaseForm.errors?.minimalSum"
-        class="mat-form-field-invalid"
-      >
-        {{ t("purchase.minimalSum") }}
-      </div>
+      <form-errors
+        [form]="purchaseForm"
+        [errors]="['minimalSum']"
+        localization="purchase"
+      ></form-errors>
 
       <mat-form-field class="full-width">
         <mat-label>{{ t("purchase.whoPaid") }}</mat-label>
@@ -70,19 +76,11 @@
       ></grey-title>
 
       <div formArrayName="members">
-        <div
-          *ngIf="purchaseForm.errors?.minimalMembersCount"
-          class="mat-form-field-invalid"
-        >
-          {{ t("purchase.needOneMember") }}
-        </div>
-
-        <div
-          *ngIf="purchaseForm.errors?.payerNotExistsInPurchaseMembers"
-          class="mat-form-field-invalid"
-        >
-          {{ t("purchase.payerNotExistsInPurchaseMembers") }}
-        </div>
+        <form-errors
+          [form]="purchaseForm"
+          [errors]="['minimalMembersCount', 'payerNotExistsInPurchaseMembers']"
+          localization="purchase"
+        ></form-errors>
 
         <div
           *ngFor="let member of members.controls; let i = index"

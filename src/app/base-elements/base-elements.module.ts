@@ -17,6 +17,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { PortalModule } from '@angular/cdk/portal';
 import { LayoutComponent } from './layouts/layout/layout.component';
 import { MatListModule } from '@angular/material/list';
+import { FormErrorsComponent } from './form-errors/form-errors.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { MatListModule } from '@angular/material/list';
     ConfirmDialogComponent,
     SidenavLayoutComponent,
     LayoutComponent,
+    FormErrorsComponent,
   ],
   imports: [
     CommonModule,
@@ -50,6 +52,7 @@ import { MatListModule } from '@angular/material/list';
     ConfirmDialogComponent,
     LayoutComponent,
     SidenavLayoutComponent,
+    FormErrorsComponent,
   ],
 })
 export class BaseElementsModule {}

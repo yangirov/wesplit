@@ -12,7 +12,9 @@ import { map, take } from 'rxjs/operators';
 })
 export class EventsListComponent implements OnInit {
   loading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
   events$!: Observable<EventDto[]>;
+  events!: EventDto[];
 
   constructor(private dataService: DataService) {}
 
@@ -26,6 +28,7 @@ export class EventsListComponent implements OnInit {
 
     this.events$.subscribe(
       (events: EventDto[]) => {
+        this.events = events;
         setLocalEvents(events);
       },
       (err) => console.error(err),

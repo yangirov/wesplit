@@ -1,33 +1,28 @@
-<app-layout [loading$]="loading$">
+<app-layout [loading$]="loading$" *transloco="let t">
   <div class="header-flex" header>
     <button class="router-button" mat-icon-button (click)="onBack()">
       <mat-icon>close</mat-icon>
     </button>
+
     <h1>
-      {{
-        isEdit
-          ? ("event.edit.title" | transloco)
-          : ("event.new.title" | transloco)
-      }}
+      {{ isEdit ? t("event.edit.title") : t("event.new.title") }}
     </h1>
+
     <span class="spacer"></span>
-    <button
-      mat-icon-button
-      form="eventForm"
-      *ngIf="!hasRePayedDebts"
-      [disabled]="eventForm.invalid"
-    >
+
+    <button mat-icon-button form="eventForm" [disabled]="eventForm.invalid">
       <mat-icon>check</mat-icon>
     </button>
   </div>
 
-  <div body *transloco="let t">
-    <div
+  <div body>
+    <form-errors
       *ngIf="isEdit && hasRePayedDebts"
-      class="mat-form-field-invalid hasRePayedDebts"
-    >
-      {{ t("event.form.afterStartRepayDebts") }}
-    </div>
+      class="hasRePayedDebts"
+      [errors]="['afterStartRepayDebts']"
+      localization="event.form"
+      [force]="true"
+    ></form-errors>
 
     <form [formGroup]="eventForm" (ngSubmit)="onSubmit()" id="eventForm">
       <mat-form-field class="full-width">
@@ -59,26 +54,15 @@
         />
       </mat-form-field>
 
-      <div
-        *ngIf="eventForm.errors?.hasMembersDuplicates"
-        class="mat-form-field-invalid"
-      >
-        {{ t("event.form.hasMembersDuplicates") }}
-      </div>
-
-      <div
-        *ngIf="eventForm.errors?.organizerInMembers"
-        class="mat-form-field-invalid"
-      >
-        {{ t("event.form.organizerInMembers") }}
-      </div>
-
-      <div
-        *ngIf="eventForm.errors?.notDeleteMemberExistedInPurchase"
-        class="mat-form-field-invalid"
-      >
-        {{ t("event.form.notDeleteMemberExistedInPurchase") }}
-      </div>
+      <form-errors
+        [form]="eventForm"
+        [errors]="[
+          'hasMembersDuplicates',
+          'organizerInMembers',
+          'notDeleteMemberExistedInPurchase'
+        ]"
+        localization="event.form"
+      ></form-errors>
 
       <div formArrayName="members">
         <mat-form-field
@@ -97,11 +81,13 @@
 
     <div *ngIf="isEdit">
       <separator position="outer"></separator>
+
       <button
         class="delete-event-button"
         (click)="onDeleteEvent()"
         mat-raised-button
         color="basic"
+        [disabled]="hasRePayedDebts"
       >
         <mat-icon>close</mat-icon>{{ t("event.delete") }}
       </button>

@@ -12,21 +12,12 @@
 
   <div body>
     <div class="receipt" *ngIf="receipt">
-      <div class="receipt-form_errors">
-        <div
-          *ngIf="receiptForm.errors?.minLengthArray"
-          class="mat-form-field-invalid"
-        >
-          {{ t("event.qr-receipt.minLengthArray") }}
-        </div>
-
-        <div
-          *ngIf="receiptForm.errors?.minPurchaseInReceipt"
-          class="mat-form-field-invalid"
-        >
-          {{ t("event.qr-receipt.minPurchaseInReceipt") }}
-        </div>
-      </div>
+      <form-errors
+        class="receipt-form_errors"
+        [form]="receiptForm"
+        [errors]="['minLengthArray', 'minPurchaseInReceipt']"
+        localization="event.qr-receipt"
+      ></form-errors>
 
       <div class="receipt-header">
         <span class="receipt-header__date">

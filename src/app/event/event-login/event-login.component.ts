@@ -35,21 +35,15 @@ export class EventLoginComponent implements OnInit {
         .logout()
         .then(() => {
           localStorage.setItem('uid', this.userId);
-
-          this.dataService
-            .getEventById(this.eventId, this.userId)
-            .subscribe((event: EventDto) => {
-              this.event = event;
-            });
         })
         .catch(console.error);
-    } else {
-      this.dataService
-        .getEventById(this.eventId)
-        .subscribe((event: EventDto) => {
-          this.event = event;
-        });
     }
+
+    this.dataService
+      .getEventById(this.eventId, this.userId)
+      .subscribe((event: EventDto) => {
+        this.event = event;
+      });
   }
 
   openDialog(): void {

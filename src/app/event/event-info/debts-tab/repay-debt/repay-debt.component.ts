@@ -47,43 +47,48 @@ export class RepayDebtComponent implements OnInit {
   }
 
   async onSubmit() {
-    this.loading$.next(true);
-    this.rePayDebtForm.disable();
+    if (this.rePayDebtForm.valid) {
+      this.loading$.next(true);
+      this.rePayDebtForm.disable();
 
-    const event = this.payload.event;
-    const debt = this.payload.debt;
-    const currentUser = this.payload.currentUser;
+      const event = this.payload.event;
+      const debt = this.payload.debt;
+      const currentUser = this.payload.currentUser;
+      const currentDebtSum = this.rePayDebtForm.value.sum;
 
-    const currentDebtSum = this.rePayDebtForm.value.sum;
+      const action =
+        Math.abs(currentDebtSum) === debt.sum
+          ? this.eventActionCreator.giveBack(
+              currentUser,
+              debt.from,
+              currentDebtSum
+            )
+          : this.eventActionCreator.giveBackPartially(
+              currentUser,
+              debt.from,
+              currentDebtSum
+            );
 
-    const action =
-      Math.abs(currentDebtSum) === debt.sum
-        ? this.eventActionCreator.giveBack(
-            currentUser,
-            debt.from,
-            currentDebtSum
-          )
-        : this.eventActionCreator.giveBackPartially(
-            currentUser,
-            debt.from,
-            currentDebtSum
-          );
+      Promise.all<any, any, any>([
+        this.dataService.addEventAction(event.id, action),
 
-    Promise.all<any, any, any>([
-      this.dataService.addEventAction(event.id, action),
-      this.dataService.updateRePayedDebt(event.id, {
-        sum: Number(currentDebtSum),
-        name: this.getName(debt.from),
-      }),
-      this.dataService.updateRePayedDebt(event.id, {
-        sum: Number(currentDebtSum * -1),
-        name: this.getName(debt.to),
-      }),
-    ]).then((res) => {
-      this.loading$.next(false);
-      this.dialogRef.close();
-      location.reload();
-    });
+        this.dataService.updateRePayedDebt(event.id, {
+          sum: Number(currentDebtSum),
+          name: this.getName(debt.from),
+        }),
+
+        this.dataService.updateRePayedDebt(event.id, {
+          sum: Number(currentDebtSum * -1),
+          name: this.getName(debt.to),
+        }),
+      ])
+        .then((res) => {
+          this.dialogRef.close();
+          location.reload();
+        })
+        .catch(console.error)
+        .finally(() => this.loading$.next(false));
+    }
   }
 
   getName(name: string): string {

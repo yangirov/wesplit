@@ -51,12 +51,12 @@ export class ShareEventComponent {
   }
 
   onCopyClick() {
+    this.closeShareModal();
+
     if (navigator.share) {
-      this.closeShareModal();
       this.openNativeShare();
     } else {
       this.clipboardService.copyFromText(this.data.url, 'event.share.copied');
-      this.closeShareModal();
     }
   }
 

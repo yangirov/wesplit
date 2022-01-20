@@ -38,7 +38,8 @@
         *ngIf="rePayDebtForm.errors?.sumLessOrEqualDebt"
         class="mat-form-field-invalid"
       >
-        Число не может превышать сумму долга
+        {{ t("event.balance.sumLessOrEqualDebt") }}
+
         <span class="bold">
           {{ this.payload.debt.sum }} {{ t("common.currency") }}
         </span>

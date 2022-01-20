@@ -1,0 +1,5 @@
+<div *ngFor="let key of errors">
+  <div *ngIf="formHasError(key)" class="mat-form-field-invalid">
+    {{ errorText(key) }}
+  </div>
+</div>

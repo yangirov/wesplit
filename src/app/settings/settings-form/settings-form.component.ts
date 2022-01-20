@@ -25,6 +25,8 @@ export class SettingsFormComponent implements OnInit {
     const selectedLanguage = this.localizationService.getActiveLang();
     const selectedTheme = this.themeService.getColorTheme();
 
+    // TODO: Add currency selector
+
     this.settingsForm = this.formBuilder.group({
       language: [selectedLanguage, Validators.required],
       theme: [selectedTheme, Validators.required],
