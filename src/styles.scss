@@ -25,11 +25,6 @@ $app-dark-theme: mat.define-dark-theme(
 
   background-color: #333;
   color: whitesmoke;
-
-  --dark: #cccccc;
-  --grey: #cccccc;
-  --light-grey: #4f5357;
-  --medium-grey: #83888d;
 }
 
 :root {
@@ -43,6 +38,13 @@ $app-dark-theme: mat.define-dark-theme(
   --grey: #83888d;
   --light-grey: #eef1f5;
   --medium-grey: #cccccc;
+
+  @media (prefers-color-scheme: dark) {
+    --dark: #cccccc;
+    --grey: #cccccc;
+    --light-grey: #4f5357;
+    --medium-grey: #83888d;
+  }
 }
 
 @import "~@fontsource/roboto";
