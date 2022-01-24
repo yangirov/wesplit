@@ -10,11 +10,13 @@
         <action-type [action]="action"></action-type>
       </div>
       <div class="event-action__sum" *ngIf="action.sum">
-        {{ action.sum }} {{ t("common.currency") }}
+        {{ action.sum }} {{ currencyService.getCurrencyAcronym() }}
       </div>
       <div class="event-action__debt-sum" *ngIf="action.debtSum">
         <mat-icon>arrow_forward</mat-icon>
-        <span> {{ action.debtSum }} {{ t("common.currency") }} </span>
+        <span>
+          {{ action.debtSum }} {{ currencyService.getCurrencyAcronym() }}
+        </span>
       </div>
     </div>
     <div class="event-action__date" *ngIf="action.date">

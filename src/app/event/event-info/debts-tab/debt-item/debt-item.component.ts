@@ -8,6 +8,7 @@ import {
 import { MatDialog } from '@angular/material/dialog';
 import { RepayDebtComponent } from '../repay-debt/repay-debt.component';
 import { DataService } from '../../../../../shared/data.service';
+import { CurrencyService } from '../../../../../shared/currency.service';
 
 @Component({
   selector: 'debt-item',
@@ -19,7 +20,11 @@ export class DebtItemComponent {
   @Input() public debt!: MemberDebt;
   @Input() public debtType!: DebtTypes;
 
-  constructor(private dialog: MatDialog, private dataService: DataService) {}
+  constructor(
+    private dialog: MatDialog,
+    private dataService: DataService,
+    public currencyService: CurrencyService
+  ) {}
 
   get debtTypeName() {
     return DebtTypes[this.debtType].toLowerCase();

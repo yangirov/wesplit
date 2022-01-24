@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { EventDto, Purchase } from '../../../../../models/Event';
 import { formatSum } from '../../../../../utils/Formatters';
 import { LocalizationService } from '../../../../../shared/localization.service';
+import { CurrencyService } from '../../../../../shared/currency.service';
 
 @Component({
   selector: 'purchase-item',
@@ -12,7 +13,10 @@ export class PurchaseItemComponent {
   @Input() event!: EventDto;
   @Input() purchase!: Purchase;
 
-  constructor(private localizationService: LocalizationService) {}
+  constructor(
+    private localizationService: LocalizationService,
+    public currencyService: CurrencyService
+  ) {}
 
   get purchaseSum(): string {
     const lang = this.localizationService.getActiveLang();

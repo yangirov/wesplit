@@ -3,6 +3,7 @@ import { ThemeService } from '../../../shared/theme.service';
 import { LocalizationService } from '../../../shared/localization.service';
 import { Location } from '@angular/common';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { CurrencyService } from '../../../shared/currency.service';
 
 @Component({
   selector: 'app-settings-form',
@@ -16,7 +17,8 @@ export class SettingsFormComponent implements OnInit {
     private formBuilder: FormBuilder,
     private localizationService: LocalizationService,
     private themeService: ThemeService,
-    private location: Location
+    private location: Location,
+    public currencyService: CurrencyService
   ) {
     this.themeService.initTheme();
   }
@@ -24,12 +26,12 @@ export class SettingsFormComponent implements OnInit {
   ngOnInit(): void {
     const selectedLanguage = this.localizationService.getActiveLang();
     const selectedTheme = this.themeService.getColorTheme();
-
-    // TODO: Add currency selector
+    const selectedCurrency = this.currencyService.getCurrency();
 
     this.settingsForm = this.formBuilder.group({
       language: [selectedLanguage, Validators.required],
       theme: [selectedTheme, Validators.required],
+      currency: [selectedCurrency, Validators.required],
     });
 
     this.settingsForm.valueChanges.subscribe((settings) =>
@@ -42,7 +44,9 @@ export class SettingsFormComponent implements OnInit {
   }
 
   saveSettings(form: any) {
-    const { language, theme } = this.settingsForm.value;
+    const { language, theme, currency } = this.settingsForm.value;
+
+    this.currencyService.update(currency);
 
     this.localizationService.setActiveLang(language);
 

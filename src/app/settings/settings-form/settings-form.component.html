@@ -22,11 +22,29 @@
       </mat-form-field>
 
       <mat-form-field class="full-width">
+        <mat-label>{{ t("settings.currency.name") }}</mat-label>
+        <select matNativeControl formControlName="currency" required>
+          <option
+            *ngFor="let currency of currencyService.currencies; let i = index"
+            [value]="currency.name"
+          >
+            {{ currency.name }}
+          </option>
+        </select>
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
         <mat-label>{{ t("settings.theme.name") }}</mat-label>
         <select matNativeControl formControlName="theme">
-          <option value="auto-mode">{{ t("settings.theme.auto") }}</option>
-          <option value="light-mode">{{ t("settings.theme.light") }}</option>
-          <option value="dark-mode">{{ t("settings.theme.dark") }}</option>
+          <option value="auto-mode">
+            {{ t("settings.theme.auto") }}
+          </option>
+          <option value="light-mode">
+            {{ t("settings.theme.light") }}
+          </option>
+          <option value="dark-mode">
+            {{ t("settings.theme.dark") }}
+          </option>
         </select>
       </mat-form-field>
     </form>

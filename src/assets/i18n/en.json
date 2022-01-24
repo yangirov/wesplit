@@ -1,6 +1,5 @@
 {
   "common": {
-    "currency": "$",
     "email": "Email",
     "password": "Password",
     "message": "Message",
@@ -65,6 +64,9 @@
       "auto": "Auto",
       "light": "Light",
       "dark": "Dark"
+    },
+    "currency": {
+      "name": "Currency"
     }
   },
   "events-list": {

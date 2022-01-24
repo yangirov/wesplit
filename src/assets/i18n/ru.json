@@ -1,6 +1,5 @@
 {
   "common": {
-    "currency": "₽",
     "email": "Электронная почта",
     "password": "Пароль",
     "message": "Ваш отзыв",
@@ -65,6 +64,9 @@
       "auto": "Авто",
       "light": "Светлая",
       "dark": "Темная"
+    },
+    "currency": {
+      "name": "Валюта"
     }
   },
   "events-list": {

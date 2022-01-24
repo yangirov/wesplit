@@ -10,6 +10,8 @@
       <div class="to">{{ debt.to }}</div>
     </div>
   </div>
-  <div class="sum">{{ debt.sum }} {{ t("common.currency") }}</div>
+  <div class="sum">
+    {{ debt.sum }} {{ currencyService.getCurrencyAcronym() }}
+  </div>
 </div>
 <mat-divider></mat-divider>

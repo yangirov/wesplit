@@ -18,7 +18,7 @@
       <mat-form-field class="full-width">
         <mat-label>
           {{ t("common.sum") }},
-          {{ t("common.currency") }}
+          {{ currencyService.getCurrencyAcronym() }}
         </mat-label>
         <input
           matInput
@@ -41,7 +41,7 @@
         {{ t("event.balance.sumLessOrEqualDebt") }}
 
         <span class="bold">
-          {{ this.payload.debt.sum }} {{ t("common.currency") }}
+          {{ this.payload.debt.sum }} {{ currencyService.getCurrencyAcronym() }}
         </span>
       </div>
     </form>

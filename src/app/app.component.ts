@@ -6,6 +6,7 @@ import { Title } from '@angular/platform-browser';
 import { ThemeService } from '../shared/theme.service';
 import { LocalizationService } from '../shared/localization.service';
 import { combineLatest, ReplaySubject } from 'rxjs';
+import { CurrencyService } from '../shared/currency.service';
 
 @Component({
   selector: 'app-root',
@@ -18,7 +19,8 @@ export class AppComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private titleService: Title,
     private localizationService: LocalizationService,
-    private themeService: ThemeService
+    private themeService: ThemeService,
+    private currencyService: CurrencyService
   ) {}
 
   destroyed$: ReplaySubject<boolean> = new ReplaySubject<boolean>(1);
@@ -26,9 +28,10 @@ export class AppComponent implements OnInit, OnDestroy {
   async ngOnInit() {
     this.themeService.initTheme();
     this.localizationService.initLocalization();
+    this.currencyService.initCurrency();
 
     if (
-      !localStorage.getItem('uid') &&
+      !localStorage.getItem('uid') ||
       this.route.snapshot.queryParamMap.has('uid')
     ) {
       await this.router.navigate(['/login']);

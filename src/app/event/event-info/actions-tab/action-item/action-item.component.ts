@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { ActionTypes, EventAction } from '../../../../../models/Event';
 import * as moment from 'moment';
 import { LocalizationService } from '../../../../../shared/localization.service';
+import { CurrencyService } from '../../../../../shared/currency.service';
 
 export const actionIcons: { [key in ActionTypes]: string } = {
   [ActionTypes.CreateEvent]: 'calendar_today',
@@ -27,7 +28,10 @@ export const actionIcons: { [key in ActionTypes]: string } = {
 export class ActionItemComponent {
   @Input() public action!: EventAction;
 
-  constructor(private localizationService: LocalizationService) {}
+  constructor(
+    private localizationService: LocalizationService,
+    public currencyService: CurrencyService
+  ) {}
 
   get actionIcon(): string {
     return actionIcons[this.action.type];

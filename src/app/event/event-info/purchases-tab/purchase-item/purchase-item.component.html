@@ -9,7 +9,7 @@
     <div class="purchase-item__subtitle">{{ purchaseSubtitle }}</div>
   </div>
   <div class="purchase-item__sum">
-    {{ purchaseSum }} {{ t("common.currency") }}
+    {{ purchaseSum }} {{ currencyService.getCurrencyAcronym() }}
   </div>
 </div>
 

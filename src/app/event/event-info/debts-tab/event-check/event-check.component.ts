@@ -1,7 +1,7 @@
 import { Component, ElementRef, Input } from '@angular/core';
 import { EventDto, MemberDebt } from '../../../../../models/Event';
-import { LocalizationService } from '../../../../../shared/localization.service';
 import { ClipboardService } from '../../../../../shared/clipboard.service';
+import { CurrencyService } from '../../../../../shared/currency.service';
 
 @Component({
   selector: 'event-check',
@@ -16,12 +16,12 @@ export class EventCheckComponent {
 
   constructor(
     private elRef: ElementRef,
-    private localizationService: LocalizationService,
+    private currencyService: CurrencyService,
     private clipboardService: ClipboardService
   ) {}
 
   get check(): string[] {
-    const currencyText = this.localizationService.translate('common.currency');
+    const currencyText = this.currencyService.getCurrencyAcronym();
 
     return this.debts?.map(
       (debt) =>

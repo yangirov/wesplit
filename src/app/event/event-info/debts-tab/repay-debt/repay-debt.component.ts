@@ -10,6 +10,7 @@ import { DataService } from '../../../../../shared/data.service';
 import { EventActionCreator } from '../../../../../utils/EventActionCreator';
 import { BehaviorSubject } from 'rxjs';
 import { LocalizationService } from '../../../../../shared/localization.service';
+import { CurrencyService } from '../../../../../shared/currency.service';
 
 @Component({
   selector: 'repay-debt',
@@ -26,7 +27,8 @@ export class RepayDebtComponent implements OnInit {
     private formBuilder: FormBuilder,
     private dialogRef: MatDialogRef<RepayDebtComponent>,
     @Inject(MAT_DIALOG_DATA) public payload: DebtDto,
-    private localizationService: LocalizationService
+    private localizationService: LocalizationService,
+    public currencyService: CurrencyService
   ) {}
 
   ngOnInit(): void {
