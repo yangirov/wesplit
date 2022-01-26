@@ -1,6 +1,6 @@
 {
   "name": "wesplit",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "scripts": {
     "ng": "ng",
     "start": "concurrently --kill-others \"npm run start-web\" \"npm run start-functions\"",
