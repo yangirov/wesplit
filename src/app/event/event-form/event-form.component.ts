@@ -226,7 +226,7 @@ export class EventFormComponent implements OnInit {
   async onChange(id: string, organizer: string, isCreated: boolean = false) {
     setOrganizerToLocalEvent(id, organizer);
 
-    await this.router.navigate(['events', id], { state: { isCreated } });
+    await this.router.navigate(['/', 'events', id], { state: { isCreated } });
   }
 
   async onDeleteEvent() {
@@ -242,7 +242,7 @@ export class EventFormComponent implements OnInit {
           .deleteEvent(this.eventId)
           .then(async (res) => {
             setLocalEvents([]);
-            await this.router.navigate(['/']);
+            await this.router.navigate(['/events']);
           })
           .catch(console.error)
           .finally(() => this.loading$.next(true));

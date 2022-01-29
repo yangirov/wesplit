@@ -65,6 +65,6 @@ export class EventLoginComponent implements OnInit {
 
   async setEventMember(member: string) {
     this.dataService.setEventUser(this.eventId, member);
-    await this.router.navigate(['events', this.eventId]);
+    await this.router.navigate(['/', 'events', this.eventId]);
   }
 }

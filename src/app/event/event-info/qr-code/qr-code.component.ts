@@ -172,7 +172,7 @@ export class QrCodeComponent implements OnInit, AfterViewInit {
   }
 
   async onBack() {
-    await this.router.navigate(['events', this.eventId], {
+    await this.router.navigate(['/', 'events', this.eventId], {
       queryParams: { refresh: true },
     });
   }

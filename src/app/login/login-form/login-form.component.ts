@@ -37,7 +37,7 @@ export class LoginFormComponent {
       .loginWithService(service)
       .then(async (result) => {
         localStorage.setItem('uid', result.user.uid);
-        await this.router.navigate(['/']);
+        await this.router.navigate(['/events']);
       })
       .catch((err) => {
         console.error(err);

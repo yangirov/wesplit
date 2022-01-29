@@ -51,11 +51,13 @@ export class AppComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroyed$))
       .subscribe(([route, data, url]) => {
         this.localizationService.load().subscribe((x) => {
-          const title = this.localizationService.translate(
-            `${data.scope}.title`
-          );
+          if (data.scope) {
+            const title = this.localizationService.translate(
+              `${data.scope}.title`
+            );
 
-          this.titleService.setTitle(`${title} - ${environment.name}`);
+            this.titleService.setTitle(`${title} - ${environment.name}`);
+          }
         });
       });
   }

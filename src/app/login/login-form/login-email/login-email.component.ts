@@ -93,7 +93,7 @@ export class LoginEmailComponent implements OnInit {
     this.loading$.next(false);
     this.dialogRef.close();
 
-    await this.router.navigate(['/']);
+    await this.router.navigate(['/events']);
   }
 
   onCancel() {

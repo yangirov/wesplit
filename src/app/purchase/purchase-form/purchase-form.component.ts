@@ -234,6 +234,6 @@ export class PurchaseFormComponent implements OnInit {
 
   async onChange() {
     this.loading$.next(false);
-    await this.router.navigate(['events', this.eventId]);
+    await this.router.navigate(['/', 'events', this.eventId]);
   }
 }
