@@ -1,12 +1,12 @@
 export const environment = {
-  name: 'WeSplit',
+  name: 'WeSplit Test',
   production: false,
   firebase: {
-    apiKey: 'AIzaSyB0bNmQ3UAfLjXvpwGrJFssjlf74xZqSB4',
-    authDomain: 'wesplit-840b9.firebaseapp.com',
-    projectId: 'wesplit-840b9',
-    storageBucket: 'wesplit-840b9.appspot.com',
-    messagingSenderId: '190723137399',
-    appId: '1:190723137399:web:7b98bfe021caaec1054b72',
+    apiKey: 'AIzaSyCOQvYnbku9pNlozb843leBzTFv28wlfSo',
+    authDomain: 'wesplit-test.firebaseapp.com',
+    projectId: 'wesplit-test',
+    storageBucket: 'wesplit-test.appspot.com',
+    messagingSenderId: '292563052296',
+    appId: '1:292563052296:web:9e1c4e00a289779a60eebd',
   },
 };
