@@ -16,6 +16,7 @@ import { DataService } from '../../../../shared/data.service';
 import * as moment from 'moment';
 import { LocalizationService } from '../../../../shared/localization.service';
 import { EventActionCreator } from '../../../../utils/EventActionCreator';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-qr-code',
@@ -44,7 +45,8 @@ export class QrCodeComponent implements OnInit, AfterViewInit {
     private activateRoute: ActivatedRoute,
     private dataService: DataService,
     private localizationService: LocalizationService,
-    private eventActionCreator: EventActionCreator
+    private eventActionCreator: EventActionCreator,
+    private location: Location
   ) {}
 
   ngOnInit() {
@@ -173,6 +175,10 @@ export class QrCodeComponent implements OnInit, AfterViewInit {
     await this.router.navigate(['events', this.eventId], {
       queryParams: { refresh: true },
     });
+  }
+
+  async onClose() {
+    this.location.back();
   }
 
   async onSubmit() {
