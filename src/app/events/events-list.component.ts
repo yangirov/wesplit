@@ -21,10 +21,7 @@ export class EventsListComponent implements OnInit {
   ngOnInit(): void {
     this.loading$.next(true);
 
-    this.events$ = this.dataService.getEvents().pipe(
-      map((events) => events.sort((a, b) => a.date - b.date)),
-      take(1)
-    );
+    this.events$ = this.dataService.getEvents().pipe(take(1));
 
     this.events$.subscribe(
       (events: EventDto[]) => {

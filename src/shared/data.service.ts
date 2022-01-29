@@ -24,6 +24,7 @@ import {
   updateDoc,
   where,
   CollectionReference,
+  orderBy,
 } from '@angular/fire/firestore';
 import { map, mergeMap, take } from 'rxjs/operators';
 import { forkJoin, from, Observable } from 'rxjs';
@@ -57,7 +58,10 @@ export class DataService {
       `users/${this.authService.currentUserId}/events`
     );
 
-    return collectionData(ref, { idField: 'id' }) as Observable<EventDto[]>;
+    const queryRef = query(ref, orderBy('date', 'asc'));
+    return collectionData(queryRef, { idField: 'id' }) as Observable<
+      EventDto[]
+    >;
   }
 
   getEventById(
@@ -65,20 +69,11 @@ export class DataService {
     customUserId: string = ''
   ): Observable<EventDto> {
     const userId = customUserId ? customUserId : this.authService.currentUserId;
-    const ref = doc(this.firestore, `users/${userId}/events/${eventId}`);
 
     return forkJoin({
-      event: (docData(ref, { idField: 'id' }) as Observable<Event>).pipe(
-        take(1)
-      ),
-      purchases: this.getPurchases(eventId, userId).pipe(
-        map((items) => items.sort((a, b) => a.date - b.date)),
-        take(1)
-      ),
-      actions: this.getActions(eventId, userId).pipe(
-        map((items) => items.sort((a, b) => a.date - b.date)),
-        take(1)
-      ),
+      event: this.getEventDoc(eventId, userId).pipe(take(1)),
+      purchases: this.getPurchases(eventId, userId).pipe(take(1)),
+      actions: this.getActions(eventId, userId).pipe(take(1)),
       rePayedDebts: this.getRePayedDebts(eventId, userId).pipe(take(1)),
     }).pipe(
       map((x) => ({
@@ -88,6 +83,11 @@ export class DataService {
         rePayedDebts: x.rePayedDebts,
       }))
     );
+  }
+
+  private getEventDoc(eventId: string, userId: string) {
+    const ref = doc(this.firestore, `users/${userId}/events/${eventId}`);
+    return docData(ref, { idField: 'id' }) as Observable<Event>;
   }
 
   async addEvent(event: Event) {
@@ -163,7 +163,10 @@ export class DataService {
       `users/${userId}/events/${eventId}/purchases`
     );
 
-    return collectionData(ref, { idField: 'id' }) as Observable<Purchase[]>;
+    const queryRef = query(ref, orderBy('date', 'asc'));
+    return collectionData(queryRef, { idField: 'id' }) as Observable<
+      Purchase[]
+    >;
   }
 
   async addPurchase(eventId: string, purchase: Purchase) {
@@ -199,7 +202,11 @@ export class DataService {
       this.firestore,
       `users/${userId}/events/${eventId}/actions`
     );
-    return collectionData(ref, { idField: 'id' }) as Observable<EventAction[]>;
+
+    const queryRef = query(ref, orderBy('date', 'asc'));
+    return collectionData(queryRef, { idField: 'id' }) as Observable<
+      EventAction[]
+    >;
   }
 
   async addEventAction(eventId: string, eventAction: EventAction) {
