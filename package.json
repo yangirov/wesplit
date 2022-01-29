@@ -2,12 +2,13 @@
   "name": "wesplit",
   "version": "1.0.0",
   "scripts": {
-    "ng": "ng",
+    "start-all": "vercel dev",
     "start": "ng serve --host 0.0.0.0 --disable-host-check --ssl",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "unit-tests": "ng test --include=src/utils/*.spec.ts"
+    "unit-tests": "ng test --include=src/utils/*.spec.ts",
+    "postinstall": "npm i -g vercel"
   },
   "private": true,
   "dependencies": {
