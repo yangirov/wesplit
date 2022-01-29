@@ -1,5 +1,7 @@
 # Wesplit
 
+  Before start project, you need install [Vercel CLI](https://vercel.com/docs/cli). Run `npm i -g vercel`
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.13.
 
 ## Development server
