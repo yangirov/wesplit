@@ -53,15 +53,13 @@ export class DataService {
   }
 
   getEvents(): Observable<EventDto[]> {
-    const ref = collection(
+    const collectionRef = collection(
       this.firestore,
       `users/${this.authService.currentUserId}/events`
     );
 
-    const queryRef = query(ref, orderBy('date', 'asc'));
-    return collectionData(queryRef, { idField: 'id' }) as Observable<
-      EventDto[]
-    >;
+    const ref = query(collectionRef, orderBy('date', 'desc'));
+    return collectionData(ref, { idField: 'id' }) as Observable<EventDto[]>;
   }
 
   getEventById(
@@ -158,15 +156,13 @@ export class DataService {
   }
 
   getPurchases(eventId: string, userId: string) {
-    const ref = collection(
+    const collectionRef = collection(
       this.firestore,
       `users/${userId}/events/${eventId}/purchases`
     );
 
-    const queryRef = query(ref, orderBy('date', 'asc'));
-    return collectionData(queryRef, { idField: 'id' }) as Observable<
-      Purchase[]
-    >;
+    const ref = query(collectionRef, orderBy('date', 'desc'));
+    return collectionData(ref, { idField: 'id' }) as Observable<Purchase[]>;
   }
 
   async addPurchase(eventId: string, purchase: Purchase) {
@@ -198,15 +194,13 @@ export class DataService {
   }
 
   getActions(eventId: string, userId: string) {
-    const ref = collection(
+    const collectionRef = collection(
       this.firestore,
       `users/${userId}/events/${eventId}/actions`
     );
 
-    const queryRef = query(ref, orderBy('date', 'asc'));
-    return collectionData(queryRef, { idField: 'id' }) as Observable<
-      EventAction[]
-    >;
+    const ref = query(collectionRef, orderBy('date', 'asc'));
+    return collectionData(ref, { idField: 'id' }) as Observable<EventAction[]>;
   }
 
   async addEventAction(eventId: string, eventAction: EventAction) {
