@@ -189,5 +189,8 @@
     "deny": "Decline",
     "link": "Learn more",
     "policy": "Cookie Policy"
+  },
+  "landing": {
+    "subtitle": "Joint cost accounting with friends"
   }
 }

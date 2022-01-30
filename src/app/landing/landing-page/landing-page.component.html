@@ -1,10 +1,10 @@
-<div class="gradient-container">
+<div class="gradient-container" *transloco="let t">
   <div class="wrapper">
     <h1 class="title">WeSplit</h1>
-    <p class="subtitle">Совместный учет расходов</p>
+    <p class="subtitle">{{ t("landing.subtitle") }}</p>
 
     <button color="primary" mat-raised-button [routerLink]="['/', 'events']">
-      Войти
+      {{ t("auth.login.title") }}
     </button>
   </div>
 </div>
