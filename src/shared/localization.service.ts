@@ -14,9 +14,7 @@ export class LocalizationService {
 
   initLocalization() {
     const lang = localStorage.getItem('lang') ?? this.getDefaultLang();
-
     this.setActiveLang(lang);
-
     this.setCookieTranslation();
   }
 
