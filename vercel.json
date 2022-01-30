@@ -1,9 +1,0 @@
-{
-  "functions": {
-    "api/check.ts": {
-      "memory": 1024,
-      "maxDuration": 5,
-      "includeFiles": "src/api/serviceAccountKey.json"
-    }
-  }
-}
