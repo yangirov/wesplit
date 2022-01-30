@@ -30,13 +30,6 @@ export class AppComponent implements OnInit, OnDestroy {
     this.localizationService.initLocalization();
     this.currencyService.initCurrency();
 
-    if (
-      !localStorage.getItem('uid') ||
-      this.route.snapshot.queryParamMap.has('uid')
-    ) {
-      await this.router.navigate(['/login']);
-    }
-
     const routes$ = this.router.events.pipe(
       filter((event) => event instanceof NavigationEnd),
       map(() => this.rootRoute(this.route)),
