@@ -41,8 +41,12 @@ export class EventLoginComponent implements OnInit {
 
     this.dataService
       .getEventById(this.eventId, this.userId)
-      .subscribe((event: EventDto) => {
-        this.event = event;
+      .subscribe(async (event: EventDto) => {
+        if (event) {
+          this.event = event;
+        } else {
+          await this.router.navigate(['/', 'events']);
+        }
       });
   }
 

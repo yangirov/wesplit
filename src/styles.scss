@@ -64,6 +64,37 @@ body {
   padding: 1em;
 }
 
+.gradient-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 2em);
+  padding: 1em;
+  background: #fff;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(255, 254, 234, 1) 0%,
+    rgba(255, 254, 234, 1) 35%,
+    #b7e8eb 100%
+  );
+
+  .wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    background: radial-gradient(
+      circle,
+      rgba(2, 0, 36, 1) 0%,
+      rgba(2, 2, 89, 1) 51%,
+      rgba(4, 93, 112, 1) 100%
+    );
+  }
+}
+
 button[mat-icon-button] {
   &:disabled {
     color: white !important;

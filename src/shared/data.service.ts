@@ -27,7 +27,7 @@ import {
   orderBy,
 } from '@angular/fire/firestore';
 import { map, mergeMap, take } from 'rxjs/operators';
-import { forkJoin, from, Observable } from 'rxjs';
+import { forkJoin, from, Observable, throwError } from 'rxjs';
 import { AuthenticationService } from './authentication.service';
 
 @Injectable({
@@ -62,6 +62,10 @@ export class DataService {
     customUserId: string = ''
   ): Observable<EventDto> {
     const userId = customUserId ? customUserId : this.authService.currentUserId;
+
+    if (!userId) {
+      return throwError('User Id not found');
+    }
 
     return forkJoin({
       event: this.getEventDoc(eventId, userId).pipe(take(1)),

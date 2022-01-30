@@ -6,8 +6,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { ShareEventComponent } from './share-event/share-event.component';
 import { Title } from '@angular/platform-browser';
 import { environment } from '../../../environments/environment';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { take } from 'rxjs/operators';
+import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
+import { catchError, take } from 'rxjs/operators';
 import { AuthenticationService } from '../../../shared/authentication.service';
 
 @Component({
@@ -21,7 +21,7 @@ export class EventInfoComponent implements OnInit {
   eventId!: string;
   opened: boolean = false;
 
-  event$!: Observable<EventDto>;
+  event$!: Observable<EventDto> | Observable<any>;
 
   constructor(
     private router: Router,
@@ -32,9 +32,22 @@ export class EventInfoComponent implements OnInit {
     public authService: AuthenticationService
   ) {}
 
+  catchHttpError = () =>
+    catchError((error: any) => {
+      const msg = `${error.status} ${error.statusText} -  ${error.url}`;
+
+      return of(new Error(msg));
+    });
+
   async ngOnInit() {
     this.eventId = this.activateRoute.snapshot.params['id'];
-    this.event$ = this.dataService.getEventById(this.eventId).pipe(take(1));
+    this.event$ = this.dataService.getEventById(this.eventId).pipe(
+      catchError((err) => {
+        this.router.navigate(['/', 'events']);
+        return of();
+      }),
+      take(1)
+    );
 
     // TODO: this hack is disgusting
     if (this.activateRoute.snapshot.queryParams['refresh']) {
@@ -53,16 +66,12 @@ export class EventInfoComponent implements OnInit {
     this.loading$.next(true);
 
     this.event$.subscribe(
-      (event: EventDto) => {
+      async (event: EventDto | any) => {
         this.title.setTitle(`${event.name} - ${environment.name}`);
       },
-      (err) => console.error(err),
+      () => console.error,
       () => this.loading$.next(false)
     );
-  }
-
-  closeSidenav() {
-    this.opened = false;
   }
 
   getNotification(event: any) {
