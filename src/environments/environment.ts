@@ -1,5 +1,6 @@
 export const environment = {
   name: 'WeSplit Test',
+  domain: 'localhost',
   production: false,
   firebase: {
     apiKey: 'AIzaSyCOQvYnbku9pNlozb843leBzTFv28wlfSo',
