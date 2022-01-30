@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { PathResolverService } from '../shared/path-resolver.service';
+import { NotFoundPageComponent } from './base-elements/not-found-page/not-found-page.component';
 
 const routes: Routes = [
   {
@@ -36,6 +38,13 @@ const routes: Routes = [
     path: 'feedback',
     loadChildren: () =>
       import('./feedback/feedback.module').then((m) => m.FeedbackModule),
+  },
+  {
+    path: '**',
+    resolve: {
+      path: PathResolverService,
+    },
+    component: NotFoundPageComponent,
   },
 ];
 

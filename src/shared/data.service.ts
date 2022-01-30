@@ -47,11 +47,6 @@ export class DataService {
     setOrganizerToLocalEvent(eventId, member);
   }
 
-  getFromLocalEvents(): Observable<EventDto> {
-    const localEvents = getLocalEvents();
-    return from(localEvents).pipe(mergeMap((x) => this.getEventById(x.id)));
-  }
-
   getEvents(): Observable<EventDto[]> {
     const collectionRef = collection(
       this.firestore,

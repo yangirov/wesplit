@@ -16,6 +16,26 @@
 .wrapper {
   display: flex;
   align-items: center;
-  justify-content: center;
-  flex-direction: column;
+  flex-direction: row;
+
+  .not_found {
+    width: auto;
+    height: auto;
+
+    &__emoji {
+      position: relative;
+      font-size: 9em;
+      line-height: 1;
+    }
+
+    &__text {
+      margin-left: 1em;
+
+      .title {
+        margin-top: 0;
+        padding-top: 0;
+        font-weight: bold;
+      }
+    }
+  }
 }

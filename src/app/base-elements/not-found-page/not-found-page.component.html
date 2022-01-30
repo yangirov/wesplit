@@ -1,0 +1,11 @@
+<div class="container" *transloco="let t">
+  <div class="wrapper">
+    <div class="not_found__emoji">😞</div>
+    <div class="not_found__text">
+      <h1 class="title">{{ t("not-found.title") }}</h1>
+      <button color="warn" mat-raised-button [routerLink]="['/']">
+        {{ t("not-found.home") }}
+      </button>
+    </div>
+  </div>
+</div>

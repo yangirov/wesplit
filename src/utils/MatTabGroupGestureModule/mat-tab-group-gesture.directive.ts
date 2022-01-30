@@ -124,10 +124,7 @@ export class MatTabGroupGestureDirective implements OnInit {
             this.skipBodySwipe = true;
           }
 
-          // after a mouse down, we'll record all mouse moves
           return fromEvent(this.body, 'touchmove').pipe(
-            // we'll stop (and unsubscribe) once the user releases the mouse
-            // this will trigger a 'mouseup' event
             takeUntil(
               fromEvent(this.body, 'touchend').pipe(
                 tap(() => {

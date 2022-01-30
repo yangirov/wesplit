@@ -18,6 +18,7 @@ import { PortalModule } from '@angular/cdk/portal';
 import { LayoutComponent } from './layouts/layout/layout.component';
 import { MatListModule } from '@angular/material/list';
 import { FormErrorsComponent } from './form-errors/form-errors.component';
+import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { FormErrorsComponent } from './form-errors/form-errors.component';
     SidenavLayoutComponent,
     LayoutComponent,
     FormErrorsComponent,
+    NotFoundPageComponent,
   ],
   imports: [
     CommonModule,
@@ -53,6 +55,7 @@ import { FormErrorsComponent } from './form-errors/form-errors.component';
     LayoutComponent,
     SidenavLayoutComponent,
     FormErrorsComponent,
+    NotFoundPageComponent,
   ],
 })
 export class BaseElementsModule {}

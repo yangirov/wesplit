@@ -176,5 +176,9 @@
     "minimalMembersCount": "At least one participant is needed",
     "payerNotExistsInPurchaseMembers": "You cannot remove the payer from the purchase members",
     "delete": "Delete purchase"
+  },
+  "not-found": {
+    "title": "Page not found",
+    "home": "Home"
   }
 }

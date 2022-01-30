@@ -38,13 +38,13 @@ export class ClipboardService {
     successLocalizationKey: string = 'clipboard.success',
     failedLocalizationText: string = 'clipboard.failed'
   ) {
-    const checkContent = elRef.nativeElement.querySelector(selector);
+    const htmlContent = elRef.nativeElement.querySelector(selector);
 
     const range = document.createRange();
     const selection = window.getSelection();
     selection?.removeAllRanges();
 
-    range.selectNode(checkContent);
+    range.selectNode(htmlContent);
     selection?.addRange(range);
 
     if (!document.execCommand('copy')) {
