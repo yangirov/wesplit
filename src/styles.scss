@@ -38,6 +38,7 @@ $app-dark-theme: mat.define-dark-theme(
   --grey: #83888d;
   --light-grey: #eef1f5;
   --medium-grey: #cccccc;
+  --dark-grey: #4f5357;
 
   @media (prefers-color-scheme: dark) {
     --dark: #cccccc;
@@ -136,6 +137,11 @@ button {
 
 *:focus {
   outline: none;
+}
+
+.cc-revoke,
+.cc-btn.cc-deny {
+  display: none;
 }
 
 // Material theme customization

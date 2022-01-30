@@ -10,6 +10,24 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { HttpClientModule } from '@angular/common/http';
 import { TranslocoRootModule } from './transloco-root.module';
 import { AuthModule, getAuth, provideAuth } from '@angular/fire/auth';
+import { NgcCookieConsentModule } from 'ngx-cookieconsent';
+import { NgcCookieConsentConfig } from 'ngx-cookieconsent/service';
+
+const cookieConfig: NgcCookieConsentConfig = {
+  cookie: {
+    domain: 'localhost',
+  },
+  palette: {
+    popup: {
+      background: 'var(--dark-grey)',
+    },
+    button: {
+      background: '#3f51b5',
+    },
+  },
+  theme: 'classic',
+  type: 'opt-out',
+};
 
 @NgModule({
   declarations: [AppComponent],
@@ -24,6 +42,7 @@ import { AuthModule, getAuth, provideAuth } from '@angular/fire/auth';
     HttpClientModule,
     TranslocoRootModule,
     AuthModule,
+    NgcCookieConsentModule.forRoot(cookieConfig),
   ],
   bootstrap: [AppComponent],
   exports: [],
