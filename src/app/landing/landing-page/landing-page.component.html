@@ -1,10 +1,25 @@
 <div class="gradient-container" *transloco="let t">
   <div class="wrapper">
-    <h1 class="title">WeSplit</h1>
-    <p class="subtitle">{{ t("landing.subtitle") }}</p>
+    <header></header>
 
-    <button color="primary" mat-raised-button [routerLink]="['/', 'events']">
-      {{ t("auth.login.title") }}
-    </button>
+    <main>
+      <h1 class="title">WeSplit</h1>
+      <p class="subtitle">{{ t("landing.subtitle") }}</p>
+      <button color="primary" mat-raised-button [routerLink]="['/', 'events']">
+        {{ t("auth.login.title") }}
+      </button>
+    </main>
+
+    <footer>
+      <div class="system_status">
+        <span>{{ t("landing.status.title") }}: </span>
+        <a
+          href="https://status.wesplit.app"
+          class="status_link {{ isNormalStatus ? 'success' : 'failed' }}"
+        >
+          {{ systemStatus }}
+        </a>
+      </div>
+    </footer>
   </div>
 </div>

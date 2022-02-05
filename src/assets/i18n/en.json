@@ -191,6 +191,11 @@
     "policy": "Cookie Policy"
   },
   "landing": {
-    "subtitle": "Joint cost accounting with friends"
+    "subtitle": "Joint cost accounting with friends",
+    "status": {
+      "title": "Status",
+      "noProblems": "No problems",
+      "hasProblems": "Has problems"
+    }
   }
 }
