@@ -38,11 +38,13 @@
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
+    "@angular-devkit/architect": "^0.1202.16",
     "@angular-devkit/build-angular": "~12.2.13",
     "@angular/cli": "~12.2.13",
     "@angular/compiler-cli": "~12.2.0",
     "@angular/elements": "^12.2.13",
     "@babel/core": "^7.16.7",
+    "@ngx-env/builder": "^2.0.2",
     "@types/jasmine": "~3.8.0",
     "@types/lodash-es": "^4.17.5",
     "@types/node": "^12.11.1",
