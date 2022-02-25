@@ -37,8 +37,6 @@ export class LandingPageComponent implements OnInit {
         },
       })
       .subscribe((x: any) => {
-        console.log(x);
-
         this.isNormalStatus = !(x.hasErrors && x.hasFailures);
       });
   }
