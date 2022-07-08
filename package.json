@@ -30,7 +30,7 @@
     "html5-qrcode": "^2.1.6",
     "lodash-es": "^4.17.21",
     "material-icons": "^1.10.4",
-    "moment": "^2.29.1",
+    "moment": "^2.29.4",
     "ngx-cookieconsent": "^2.2.3",
     "rxfire": "^6.0.0",
     "rxjs": "~6.6.0",
