@@ -70,12 +70,12 @@ export default async (req: VercelRequest, res: VercelResponse) => {
   formData.append('t', moment(t).format('DD.MM.YYYY HH:ss'));
   formData.append('qr', '0');
 
-  const response = await fetch('https://proverkacheka.com/example/check.php', {
+  const response = await fetch(process.env.NG_APP_OFD_AGGREGATOR_URL, {
     method: 'POST',
     body: formData,
     headers: {
       Accept: '*/*',
-      Host: 'proverkacheka.com',
+      Host: process.env.NG_APP_OFD_AGGREGATOR_HOST,
     },
   });
 
