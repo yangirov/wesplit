@@ -1,6 +1,5 @@
 .gradient-container {
   justify-content: space-between;
-  height: calc(100% - 2em);
 }
 
 .wrapper {
@@ -17,10 +16,25 @@ main {
   display: flex;
   align-items: center;
   flex-direction: column;
+  gap: 1.6em;
+
+  .description {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .demo {
+    max-width: 360px;
+
+    @media only screen and (max-width: 640px) {
+      max-width: 300px;
+    }
+  }
 }
 
 footer {
-  margin-top: auto;
+  margin-top: 2em;
 
   .system_status {
     border: 1px solid var(--medium-grey);

@@ -3,11 +3,35 @@
     <header></header>
 
     <main>
-      <h1 class="title">WeSplit</h1>
-      <p class="subtitle">{{ t("landing.subtitle") }}</p>
-      <button color="primary" mat-raised-button [routerLink]="['/', 'events']">
-        {{ t("auth.login.title") }}
-      </button>
+      <div class="description">
+        <h1 class="title">WeSplit</h1>
+        <p class="subtitle">{{ t("landing.subtitle") }}</p>
+        <button
+          color="primary"
+          mat-raised-button
+          [routerLink]="['/', 'events']"
+        >
+          {{ t("auth.login.title") }}
+        </button>
+      </div>
+
+      <div class="demo">
+        <video
+          #video
+          (canplay)="video.play()"
+          (loadedmetadata)="video.muted = true"
+          autoplay
+          loop
+          muted
+          playsinline
+          width="100%"
+          height="auto"
+        >
+          <source src="/assets/demo.webm" type="video/webm" />
+          <source src="/assets/demo.mp4" type="video/mp4" />
+          Sorry, your browser doesn't support embedded videos.
+        </video>
+      </div>
     </main>
 
     <footer>
