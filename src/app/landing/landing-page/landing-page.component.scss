@@ -40,18 +40,38 @@ footer {
     border: 1px solid var(--medium-grey);
     border-radius: 0.4em;
     padding: 0.6em;
+  }
 
-    .status_link {
-      text-decoration: none;
-      font-weight: bold;
+  .link {
+    text-decoration: none;
+    font-weight: bold;
 
-      &.success {
-        color: var(--blue);
-      }
-
-      &.failed {
-        color: var(--red);
-      }
+    &.success {
+      color: var(--blue);
     }
+
+    &.failed {
+      color: var(--red);
+    }
+  }
+
+  .open_source {
+    margin-top: 1em;
+    display: flex;
+    align-items: center;
+  }
+
+  .divider {
+    color: var(--grey);
+    margin: 0 0.5em;
+  }
+
+  .github_link {
+    display: flex;
+    align-items: center;
+  }
+
+  .github_icon {
+    margin-right: 0.2em;
   }
 }

@@ -5,13 +5,12 @@
     <main>
       <div class="description">
         <h1 class="title">WeSplit</h1>
-        <p class="subtitle">{{ t("landing.subtitle") }}</p>
+        <p class="subtitle">{{ t('landing.subtitle') }}</p>
         <button
           color="primary"
           mat-raised-button
-          [routerLink]="['/', 'events']"
-        >
-          {{ t("auth.login.title") }}
+          [routerLink]="['/', 'events']">
+          {{ t('auth.login.title') }}
         </button>
       </div>
 
@@ -25,8 +24,7 @@
           muted
           playsinline
           width="100%"
-          height="auto"
-        >
+          height="auto">
           <source src="/assets/demo.webm" type="video/webm" />
           <source src="/assets/demo.mp4" type="video/mp4" />
           Sorry, your browser doesn't support embedded videos.
@@ -36,12 +34,24 @@
 
     <footer>
       <div class="system_status">
-        <span>{{ t("landing.status.title") }}: </span>
+        <span>{{ t('landing.status.title') }}: </span>
         <a
           href="https://status.wesplit.app"
-          class="status_link {{ isNormalStatus ? 'success' : 'failed' }}"
-        >
+          class="link {{ isNormalStatus ? 'success' : 'failed' }}">
           {{ systemStatus }}
+        </a>
+      </div>
+
+      <div class="open_source">
+        <span>Coded with ❤️</span>
+        <span class="divider">|</span>
+        <a
+          class="link github_link"
+          href="https://github.com/yangirov/wesplit"
+          target="_blank"
+          rel="nofollow noreferrer">
+          <img class="github_icon" src="/assets/github.svg" alt="Github icon" />
+          Github
         </a>
       </div>
     </footer>
