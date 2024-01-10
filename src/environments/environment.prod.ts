@@ -1,6 +1,6 @@
 export const environment = {
   name: 'WeSplit',
-  domain: 'wesplit.app',
+  domain: 'we-split.vercel.app',
   production: true,
   checklyhq: {
     url: 'https://api.checklyhq.com/v1/check-statuses',
