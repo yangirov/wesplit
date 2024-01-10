@@ -1,7 +1,7 @@
 User-agent: *
 Host: wesplit.app
-Sitemap: https://wesplit.app/sitemap.xml
+Sitemap: https://we-split.vercel.app/sitemap.xml
 
 User-agent: Yandex
 Host: wesplit.app
-Sitemap: https://wesplit.app/sitemap.xml
+Sitemap: https://we-split.vercel.app/sitemap.xml
