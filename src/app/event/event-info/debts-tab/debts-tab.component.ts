@@ -35,21 +35,22 @@ export class DebtsTabComponent implements OnInit {
 
     const balance = getEventBalance(this.event);
     const debts = getEventsMembersDebts(balance, this.event);
+
     this.allDebts = debts;
 
     const currentUser = this.dataService.getCurrentUser(this.event.id);
 
     this.positiveDebts = debts
-      .filter((debt) => currentUser === debt.to)
-      .map((x) => ({
+      .filter(debt => currentUser === debt.to)
+      .map(x => ({
         sum: Math.abs(Math.round(x.sum)),
         from: x.from,
         to: `${x.to} ${currentUser === x.to ? `(${youText})` : ''}`.trim(),
       }));
 
     this.negativeDebts = debts
-      .filter((debt) => currentUser === debt.from)
-      .map((x) => ({
+      .filter(debt => currentUser === debt.from)
+      .map(x => ({
         sum: Math.abs(Math.round(x.sum)),
         from: `${x.from} ${
           currentUser === x.from ? `(${youText})` : ''
@@ -58,8 +59,8 @@ export class DebtsTabComponent implements OnInit {
       }));
 
     this.othersDebts = debts
-      .filter((debt) => currentUser !== debt.from && currentUser !== debt.to)
-      .map((x) => ({
+      .filter(debt => currentUser !== debt.from && currentUser !== debt.to)
+      .map(x => ({
         sum: Math.abs(Math.round(x.sum)),
         from: x.from,
         to: x.to,

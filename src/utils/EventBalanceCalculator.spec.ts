@@ -292,3 +292,62 @@ describe('Balance calculation functions test', function () {
     ]);
   });
 });
+
+describe('Balance calculation when the payer is not included in purchase members', function () {
+  let event!: EventDto;
+
+  beforeEach(() => {
+    event = {
+      ownerUserId: '111',
+      id: '111',
+      name: 'Solo Purchase',
+      organizer: 'Emil',
+      date: 111,
+      purchases: [
+        {
+          title: 'Smoke',
+          payer: 'Emil',
+          sum: 900,
+          members: ['Ivan', 'Dima', 'Diana'],
+          date: 1,
+        },
+        {
+          title: 'Pizza',
+          payer: 'Emil',
+          sum: 100,
+          members: ['Emil', 'Ivan', 'Dima', 'Diana'],
+          date: 1,
+        },
+        {
+          title: 'Tea',
+          payer: 'Emil',
+          sum: 100,
+          members: ['Emil', 'Ivan', 'Dima', 'Diana'],
+          date: 1,
+        },
+      ],
+      members: ['Emil', 'Ivan', 'Dima', 'Diana'],
+      rePayedDebts: [],
+    };
+  });
+
+  it('should correctly calculate balances when the payer is not a participant in the purchase', () => {
+    // Act
+    const balance = getEventBalance(event);
+    const eventDebts = getEventsMembersDebts(balance, event);
+
+    // Assert
+    expect(balance).toEqual([
+      { name: 'Ivan', sum: -350 },
+      { name: 'Dima', sum: -350 },
+      { name: 'Diana', sum: -350 },
+      { name: 'Emil', sum: 1050 },
+    ]);
+
+    expect(eventDebts).toEqual([
+      { from: 'Ivan', to: 'Emil', sum: -350 },
+      { from: 'Dima', to: 'Emil', sum: -350 },
+      { from: 'Diana', to: 'Emil', sum: -350 },
+    ]);
+  });
+});

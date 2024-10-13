@@ -34,7 +34,7 @@ export function notDeleteMemberExistedInPurchase(event: EventDto): ValidatorFn {
     }
 
     const allPurchasesMembers = event.purchases.reduce((acc, x) => {
-      x.members.forEach((m) => {
+      x.members.forEach(m => {
         if (!acc.includes(m)) {
           acc.push(m);
         }
@@ -44,15 +44,15 @@ export function notDeleteMemberExistedInPurchase(event: EventDto): ValidatorFn {
     }, Array<string>());
 
     const members = (form.get('members')?.value as EventMember[])
-      .filter((x) => x.name !== '')
-      .map((x) => x.name);
+      .filter(x => x.name !== '')
+      .map(x => x.name);
 
     const organizer = form.get('organizer')?.value;
     if (!members.includes(organizer)) {
       members.push(organizer);
     }
 
-    return !allPurchasesMembers.every((r) => members.includes(r))
+    return !allPurchasesMembers.every(r => members.includes(r))
       ? { notDeleteMemberExistedInPurchase: true }
       : null;
   };
@@ -86,19 +86,6 @@ export function minMembersCountInPurchase(): ValidatorFn {
   };
 }
 
-export function payerNotExistsInPurchaseMembers(): ValidatorFn {
-  return (form: AbstractControl): ValidationErrors | null => {
-    const payer = form.get('payer')?.value;
-    const members = (form.get('members')?.value as PurchaseMember[]).filter(
-      (x) => x.selected
-    );
-
-    return !members.some((x) => x.name == payer)
-      ? { payerNotExistsInPurchaseMembers: true }
-      : null;
-  };
-}
-
 export function sumLessOrEqualDebt(debtSum: number): ValidatorFn {
   return (form: AbstractControl): ValidationErrors | null => {
     const sum = form.get('sum')?.value;
@@ -112,7 +99,7 @@ export function calculateFormValidationErrors(
 ): string[] {
   const errors = getFormValidationErrors(form.controls);
 
-  return errors.map((error) => {
+  return errors.map(error => {
     let getErrorName = (error: AllValidationErrors) =>
       error.control_name.charAt(0).toUpperCase() + error.control_name.slice(1);
 
@@ -141,7 +128,7 @@ export function getFormValidationErrors(
   controls: FormGroupControls
 ): AllValidationErrors[] {
   let errors: AllValidationErrors[] = [];
-  Object.keys(controls).forEach((key) => {
+  Object.keys(controls).forEach(key => {
     const control = controls[key];
 
     if (control instanceof FormGroup) {
@@ -150,7 +137,7 @@ export function getFormValidationErrors(
 
     const controlErrors = controls[key]?.errors;
     if (controlErrors !== null) {
-      Object.keys(controlErrors).forEach((keyError) => {
+      Object.keys(controlErrors).forEach(keyError => {
         errors.push({
           control_name: key,
           error_name: keyError,

@@ -174,7 +174,6 @@
     "whoPaid": "Кто оплачивает",
     "members": "Участники покупки",
     "minimalMembersCount": "Нужен хотя бы один участник",
-    "payerNotExistsInPurchaseMembers": "Нельзя удалять заплатившего за покупку из участников покупки",
     "delete": "Удалить покупку"
   },
   "not-found": {

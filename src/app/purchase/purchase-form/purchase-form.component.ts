@@ -13,7 +13,6 @@ import { EventDto, Purchase, PurchaseMember } from '../../../models/Event';
 import { EventActionCreator } from '../../../utils/EventActionCreator';
 import {
   minMembersCountInPurchase,
-  payerNotExistsInPurchaseMembers,
   sumGreaterZero,
 } from '../../../utils/FormValidators';
 import { MatDialog } from '@angular/material/dialog';
@@ -70,18 +69,14 @@ export class PurchaseFormComponent implements OnInit {
         members: this.formBuilder.array([]),
       },
       {
-        validators: [
-          sumGreaterZero(),
-          minMembersCountInPurchase(),
-          payerNotExistsInPurchaseMembers(),
-        ],
+        validators: [sumGreaterZero(), minMembersCountInPurchase()],
       }
     );
 
     this.event$ = this.dataService.getEventById(this.eventId);
 
     this.event$.subscribe(
-      (event) => {
+      event => {
         this.event = event;
 
         if (this.isEdit && this.purchaseId) {
@@ -94,7 +89,7 @@ export class PurchaseFormComponent implements OnInit {
           this.checkAllMembers(true);
         }
       },
-      (err) => console.error,
+      err => console.error,
       () => this.loading$.next(false)
     );
   }
@@ -108,7 +103,7 @@ export class PurchaseFormComponent implements OnInit {
   }
 
   fillFormFromEvent() {
-    const purchase = this.event.purchases.find((x) => x.id === this.purchaseId);
+    const purchase = this.event.purchases.find(x => x.id === this.purchaseId);
 
     if (purchase) {
       this.purchase = purchase;
@@ -120,10 +115,10 @@ export class PurchaseFormComponent implements OnInit {
       });
 
       this.fillFormArray(
-        this.event.members.map((name) =>
+        this.event.members.map(name =>
           this.formBuilder.group({
             name,
-            selected: purchase.members.some((x) => x === name),
+            selected: purchase.members.some(x => x === name),
           })
         )
       );
@@ -132,7 +127,7 @@ export class PurchaseFormComponent implements OnInit {
         this.purchaseForm.controls['sum'].disable();
         this.purchaseForm.controls['payer'].disable();
 
-        this.members.controls.forEach((control) => {
+        this.members.controls.forEach(control => {
           control.disable();
         });
       }
@@ -141,9 +136,7 @@ export class PurchaseFormComponent implements OnInit {
 
   checkAllMembers(selected: boolean) {
     this.fillFormArray(
-      this.event.members.map((name) =>
-        this.formBuilder.group({ name, selected })
-      )
+      this.event.members.map(name => this.formBuilder.group({ name, selected }))
     );
   }
 
@@ -199,7 +192,7 @@ export class PurchaseFormComponent implements OnInit {
         const action = this.eventActionCreator.addPurchase(
           currentUser,
           purchase.title,
-          purchase.sum
+          Number(purchase.sum)
         );
 
         await this.dataService.addEventAction(this.eventId, action);
@@ -213,7 +206,7 @@ export class PurchaseFormComponent implements OnInit {
       disableClose: false,
     });
 
-    await dialogRef.afterClosed().subscribe(async (result) => {
+    await dialogRef.afterClosed().subscribe(async result => {
       if (result) {
         this.loading$.next(true);
         await this.dataService.deletePurchase(this.eventId, this.purchaseId);

@@ -80,11 +80,11 @@ export class RepayDebtComponent implements OnInit {
         }),
 
         this.dataService.updateRePayedDebt(event.id, {
-          sum: Number(currentDebtSum * -1),
+          sum: Number(currentDebtSum) * -1,
           name: this.getName(debt.to),
         }),
       ])
-        .then((res) => {
+        .then(res => {
           this.dialogRef.close();
           location.reload();
         })

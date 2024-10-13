@@ -20,7 +20,7 @@ export class PurchaseItemComponent {
 
   get purchaseSum(): string {
     const lang = this.localizationService.getActiveLang();
-    return formatSum(lang, this.purchase.sum);
+    return formatSum(lang, Number(this.purchase.sum));
   }
 
   get purchaseSubtitle(): string {

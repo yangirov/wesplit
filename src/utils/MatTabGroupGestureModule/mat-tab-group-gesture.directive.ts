@@ -54,7 +54,7 @@ export class MatTabGroupGestureDirective implements OnInit {
           this.headersMaxScroll =
             -1 * (this.headersList.offsetWidth - this.headers.offsetWidth + 64);
         }),
-        switchMap((e) => {
+        switchMap(e => {
           return fromEvent(this.headers, 'touchmove').pipe(
             takeUntil(
               fromEvent(this.headers, 'touchend').pipe(
@@ -120,7 +120,6 @@ export class MatTabGroupGestureDirective implements OnInit {
                   p.className.indexOf('mat-slider') > -1
               ) > -1
           ) {
-            console.log(111);
             this.skipBodySwipe = true;
           }
 

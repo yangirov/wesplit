@@ -1,132 +1,107 @@
 import { EventDto, MemberBalance, MemberDebt } from '../models/Event';
-import { cloneDeep } from 'lodash-es';
-
-function getIndex(acc: Array<{ name: string }>, name: string) {
-  const index = acc.findIndex((x) => x.name === name);
-  return index !== -1 ? index : acc.length;
-}
 
 export function getEventBalance(currentEvent: EventDto): MemberBalance[] {
-  const event = cloneDeep(currentEvent);
-  const balance: MemberBalance[] = [];
+  const balanceMap = new Map<string, number>();
 
-  event.purchases?.forEach((purchase) => {
-    purchase.members?.forEach((memberName) => {
-      const memberIndex = getIndex(balance, memberName);
-      const debt = memberName === purchase.payer && purchase.sum;
+  // Process purchases
+  currentEvent.purchases?.forEach(purchase => {
+    const members = purchase.members || [];
+    const purchaseSum = Number(purchase.sum);
+    const share = purchaseSum / members.length;
 
-      if (!balance[memberIndex]) {
-        balance[memberIndex] = { name: memberName, sum: 0 };
-      }
-
-      balance[memberIndex].sum +=
-        Number(debt) - purchase.sum / purchase.members.length;
+    members.forEach(member => {
+      const memberBalance = balanceMap.get(member) || 0;
+      const delta = (member === purchase.payer ? purchaseSum : 0) - share;
+      balanceMap.set(member, memberBalance + delta);
     });
 
-    const payerIndex = getIndex(balance, purchase.payer);
-    if (!purchase.members.includes(purchase.payer)) {
-      balance[payerIndex].sum += purchase.sum;
+    if (!members.includes(purchase.payer)) {
+      // If the payer is not among the members, they cover the entire sum
+      const payerBalance = balanceMap.get(purchase.payer) || 0;
+      balanceMap.set(purchase.payer, payerBalance + purchaseSum);
     }
   });
 
-  let positiveSum = 0;
-  let negativeSum = 0;
+  // Process rePayedDebts
+  currentEvent.rePayedDebts?.forEach(rePayedDebt => {
+    const memberBalance = balanceMap.get(rePayedDebt.name) || 0;
+    balanceMap.set(rePayedDebt.name, memberBalance + (rePayedDebt.sum || 0));
+  });
 
-  balance.forEach((member) => {
-    const memberIndex = getIndex(balance, member.name);
+  // Prepare balance array and compute total positive and negative sums
+  const balanceArray: MemberBalance[] = [];
+  let totalPositive = 0;
+  let totalNegative = 0;
 
-    if (!balance[memberIndex]) {
-      balance[memberIndex] = { name: member.name, sum: 0 };
-    }
+  balanceMap.forEach((sum, name) => {
+    // Truncate decimals towards zero
+    const truncatedSum = sum < 0 ? Math.ceil(sum) : Math.floor(sum);
+    balanceMap.set(name, truncatedSum);
+    balanceArray.push({ name, sum: truncatedSum });
 
-    const rePayedMemberIndex = getIndex(event.rePayedDebts, member.name);
-    if (!event.rePayedDebts[rePayedMemberIndex]) {
-      event.rePayedDebts[rePayedMemberIndex] = { name: member.name, sum: 0 };
-    }
-
-    balance[memberIndex].sum +=
-      Number(
-        event.rePayedDebts && event.rePayedDebts[rePayedMemberIndex]?.sum
-      ) || 0;
-
-    if (balance[memberIndex]?.sum % 1 !== 0) {
-      const pointPosition = balance[memberIndex].sum
-        .toString()
-        .split('')
-        .indexOf('.');
-
-      balance[memberIndex].sum = parseFloat(
-        balance[memberIndex].sum
-          .toString()
-          .split('')
-          .slice(0, pointPosition)
-          .join('')
-      );
-    }
-
-    if (balance[memberIndex].sum < 0) {
-      negativeSum += balance[memberIndex].sum;
+    if (truncatedSum < 0) {
+      totalNegative += truncatedSum;
     } else {
-      positiveSum += balance[memberIndex].sum;
+      totalPositive += truncatedSum;
     }
   });
 
-  let sumDiff = positiveSum + negativeSum;
+  // Adjust balances to make total sum zero
+  let sumDiff = totalPositive + totalNegative;
 
-  balance.forEach((member) => {
-    const memberIndex = getIndex(balance, member.name);
-
-    if (balance[memberIndex].sum < 0 && sumDiff > 0) {
-      balance[memberIndex].sum -= 1;
-      sumDiff--;
+  if (sumDiff !== 0) {
+    for (const member of balanceArray) {
+      if (sumDiff <= 0) break;
+      if (member.sum < 0) {
+        member.sum -= 1;
+        sumDiff -= 1;
+      }
     }
-  });
+  }
 
-  return balance;
+  return balanceArray;
 }
 
 export function getEventsMembersDebts(
   membersBalance: MemberBalance[],
   event: EventDto
 ): MemberDebt[] {
-  const balance = cloneDeep(membersBalance);
+  const balanceMap = new Map<string, number>();
+  membersBalance.forEach(({ name, sum }) => {
+    balanceMap.set(name, sum);
+  });
 
-  return event?.members?.reduce((acc, lender) => {
-    const lenderIndex = getIndex(balance, lender);
+  const debts: MemberDebt[] = [];
 
-    if (!balance[lenderIndex]) {
-      balance[lenderIndex] = { name: lender, sum: 0 };
+  for (const lender of event.members) {
+    let lenderBalance = balanceMap.get(lender) || 0;
+    if (lenderBalance <= 0) continue;
+
+    for (const payer of event.members) {
+      if (lenderBalance <= 0) break;
+      if (lender === payer) continue;
+
+      let payerBalance = balanceMap.get(payer) || 0;
+      if (payerBalance >= 0) continue;
+
+      const debtAmount = Math.min(lenderBalance, -payerBalance);
+
+      if (debtAmount > 0) {
+        debts.push({
+          from: payer,
+          to: lender,
+          sum: -debtAmount,
+        });
+
+        // Update balances
+        lenderBalance -= debtAmount;
+        balanceMap.set(lender, lenderBalance);
+
+        payerBalance += debtAmount;
+        balanceMap.set(payer, payerBalance);
+      }
     }
+  }
 
-    if (balance[lenderIndex].sum > 0) {
-      event?.members?.forEach((payer) => {
-        const payerIndex = getIndex(balance, payer);
-
-        if (!balance[payerIndex]) {
-          balance[payerIndex] = { name: payer, sum: 0 };
-        }
-
-        if (balance[payerIndex].sum < 0) {
-          const debt =
-            (balance[lenderIndex].sum + balance[payerIndex].sum >= 0 &&
-              balance[payerIndex].sum) ||
-            balance[payerIndex].sum -
-              (balance[lenderIndex].sum + balance[payerIndex].sum);
-
-          if (debt) {
-            acc.push({
-              from: payer,
-              to: lender,
-              sum: debt,
-            });
-          }
-
-          balance[payerIndex].sum -= debt;
-          balance[lenderIndex].sum += debt;
-        }
-      });
-    }
-
-    return acc;
-  }, Array<MemberDebt>());
+  return debts;
 }

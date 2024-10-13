@@ -29,7 +29,7 @@ export interface Purchase {
   date: number;
   title: string;
   payer: string;
-  sum: number;
+  sum: string;
   members: string[];
 }
 

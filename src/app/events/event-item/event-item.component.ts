@@ -36,7 +36,7 @@ export class EventItemComponent implements OnInit {
 
     const eventBalance = getEventBalance(this.event);
     const currentBalance =
-      eventBalance.find((x) => x.name === organizer)?.sum || 0;
+      eventBalance.find(x => x.name === organizer)?.sum || 0;
     const sum = Math.round(currentBalance);
 
     this.sum = sum == 0 ? null : `${formatSum(lang, Math.abs(sum))}`;
