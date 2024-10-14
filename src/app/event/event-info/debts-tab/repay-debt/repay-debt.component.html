@@ -1,5 +1,5 @@
 <div *transloco="let t">
-  <h2 mat-dialog-title>{{ t("event.balance.returnDebt") }}</h2>
+  <h2 mat-dialog-title>{{ t('event.balance.returnDebt') }}</h2>
 
   <div mat-dialog-content>
     <div class="repay-debt__direction">
@@ -13,11 +13,10 @@
     <form
       [formGroup]="rePayDebtForm"
       (ngSubmit)="onSubmit()"
-      id="rePayDebtForm"
-    >
+      id="rePayDebtForm">
       <mat-form-field class="full-width">
         <mat-label>
-          {{ t("common.sum") }},
+          {{ t('common.sum') }},
           {{ currencyService.getCurrencyAcronym() }}
         </mat-label>
         <input
@@ -28,17 +27,11 @@
           name="currency"
           inputmode="numeric"
           pattern="^\d+(\.\d{1,2})?$"
-          placeholder="0.00"
-          digitOnly
-          [decimal]="true"
-        />
+          placeholder="0.00" />
       </mat-form-field>
 
-      <div
-        *ngIf="rePayDebtForm.errors?.sumLessOrEqualDebt"
-        class="mat-form-field-invalid"
-      >
-        {{ t("event.balance.sumLessOrEqualDebt") }}
+      <div *ngIf="hasErrorSumLessOrEqualDebt" class="mat-form-field-invalid">
+        {{ t('event.balance.sumLessOrEqualDebt') }}
 
         <span class="bold">
           {{ this.payload.debt.sum }} {{ currencyService.getCurrencyAcronym() }}
@@ -52,17 +45,15 @@
       color="basic"
       mat-raised-button
       (click)="onCancel()"
-      [disabled]="loading$ | async"
-    >
-      {{ t("common.cancel") }}
+      [disabled]="loading$ | async">
+      {{ t('common.cancel') }}
     </button>
     <button
       color="primary"
       mat-raised-button
       form="rePayDebtForm"
-      [disabled]="rePayDebtForm.invalid || (loading$ | async)"
-    >
-      {{ t("common.ok") }}
+      [disabled]="rePayDebtForm.invalid || (loading$ | async)">
+      {{ t('common.ok') }}
     </button>
   </div>
 </div>

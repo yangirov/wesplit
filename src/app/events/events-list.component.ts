@@ -26,7 +26,7 @@ export class EventsListComponent implements OnInit {
       (events: EventDto[]) => {
         setLocalEvents(events);
       },
-      (err) => console.error(err),
+      err => console.error(err),
       () => this.loading$.next(false)
     );
   }

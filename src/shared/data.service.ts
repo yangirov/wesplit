@@ -40,7 +40,7 @@ export class DataService {
   ) {}
 
   getCurrentUser(eventId: string) {
-    return getLocalEvents().find((x) => x.id === eventId)?.organizer || '';
+    return getLocalEvents().find(x => x.id === eventId)?.organizer || '';
   }
 
   setEventUser(eventId: string, member: string) {
@@ -73,7 +73,7 @@ export class DataService {
       actions: this.getActions(eventId, userId).pipe(take(1)),
       rePayedDebts: this.getRePayedDebts(eventId, userId).pipe(take(1)),
     }).pipe(
-      map((x) => ({
+      map(x => ({
         ...x.event,
         purchases: x.purchases,
         actions: x.actions,
@@ -100,7 +100,7 @@ export class DataService {
       this.firestore,
       `users/${this.authService.currentUserId}/events/${event.id}`
     );
-    return await updateDoc(ref, event);
+    return await updateDoc(ref, { ...event });
   }
 
   async deleteEvent(eventId: string) {
@@ -124,7 +124,7 @@ export class DataService {
       `users/${this.authService.currentUserId}/events/${eventId}/rePayedDebts`
     );
 
-    return Promise.all<void, void, void>([
+    return Promise.all([
       this.deleteCollection<EventAction>(refActions),
       this.deleteCollection<Purchase>(refPurchases),
       this.deleteCollection<RePayedDebt>(refRePayedDebts),
@@ -132,7 +132,7 @@ export class DataService {
       .then(() => {
         return deleteDoc(refEvent);
       })
-      .catch((err) => {
+      .catch(err => {
         console.error(err);
         return Promise.reject();
       });
@@ -142,7 +142,7 @@ export class DataService {
     return ((await collectionData(ref, { idField: 'id' })) as Observable<T[]>)
       .pipe(take(1))
       .toPromise()
-      .then(async (items) => {
+      .then(async items => {
         if (items) {
           for (const { id } of items) {
             const refDoc = doc(this.firestore, `${ref.path}/${id}`);
@@ -181,7 +181,7 @@ export class DataService {
       this.firestore,
       `users/${this.authService.currentUserId}/events/${eventId}/purchases/${purchaseId}`
     );
-    return await updateDoc(ref, purchase);
+    return await updateDoc(ref, { ...purchase });
   }
 
   async deletePurchase(eventId: string, purchaseId: string) {
@@ -230,7 +230,7 @@ export class DataService {
       return addDoc(ref, rePayedDebt);
     }
 
-    return rePayedDebtExists.forEach((debt) => {
+    return rePayedDebtExists.forEach(debt => {
       const oldDebtId = debt.id;
       const oldDebt = debt.data() as RePayedDebt;
 
@@ -243,7 +243,7 @@ export class DataService {
         `users/${this.authService.currentUserId}/events/${eventId}/rePayedDebts/${oldDebtId}`
       );
 
-      return updateDoc(debtRef, rePayedDebt);
+      return updateDoc(debtRef, { ...rePayedDebt });
     });
   }
 

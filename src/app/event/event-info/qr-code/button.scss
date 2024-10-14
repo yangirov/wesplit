@@ -36,7 +36,7 @@ button span {
 
 a:before,
 button:before {
-  content: "";
+  content: '';
   position: absolute;
   top: 50%;
   left: 50%;
@@ -53,7 +53,9 @@ button:active:before {
   width: 120%;
   padding-top: 120%;
 
-  transition: width 0.2s ease-out, padding-top 0.2s ease-out;
+  transition:
+    width 0.2s ease-out,
+    padding-top 0.2s ease-out;
 }
 
 @media (prefers-color-scheme: light) {

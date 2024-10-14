@@ -9,7 +9,7 @@ import { map } from 'rxjs/operators';
 export const redirectToEventsIfIsPwa = (redirect: any[]) =>
   pipe(
     isNotAnonymous,
-    map((loggedIn) => !loggedIn || (isPwa() && redirect) || true)
+    map(loggedIn => !loggedIn || (isPwa() && redirect) || true)
   );
 
 const redirectLoggedInToEvents = () => redirectToEventsIfIsPwa(['events']);

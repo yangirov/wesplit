@@ -6,45 +6,40 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { environment } from '../environments/environment';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { HttpClientModule } from '@angular/common/http';
-import { TranslocoRootModule } from './transloco-root.module';
+import { MatSnackBarModule as MatSnackBarModule } from '@angular/material/snack-bar';
+import {
+  provideHttpClient,
+  withInterceptorsFromDi,
+} from '@angular/common/http';
+import { TranslocoHttpLoader } from './transloco-loader.module';
 import { AuthModule, getAuth, provideAuth } from '@angular/fire/auth';
-import { NgcCookieConsentModule } from 'ngx-cookieconsent';
-import { NgcCookieConsentConfig } from 'ngx-cookieconsent/service';
-
-const cookieConfig: NgcCookieConsentConfig = {
-  cookie: {
-    domain: environment.domain,
-  },
-  palette: {
-    popup: {
-      background: 'var(--dark-grey)',
-    },
-    button: {
-      background: '#3f51b5',
-    },
-  },
-  theme: 'classic',
-  type: 'opt-out',
-};
+import { provideTransloco } from '@ngneat/transloco';
 
 @NgModule({
   declarations: [AppComponent],
+  bootstrap: [AppComponent],
+  exports: [],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatSnackBarModule,
+    AuthModule,
+  ],
+  providers: [
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => getFirestore()),
     provideAuth(() => getAuth()),
-    HttpClientModule,
-    TranslocoRootModule,
-    AuthModule,
-    NgcCookieConsentModule.forRoot(cookieConfig),
+    provideHttpClient(withInterceptorsFromDi()),
+    provideTransloco({
+      config: {
+        availableLangs: ['en', 'ru'],
+        defaultLang: 'ru',
+        reRenderOnLangChange: true,
+        prodMode: environment.production,
+      },
+      loader: TranslocoHttpLoader,
+    }),
   ],
-  bootstrap: [AppComponent],
-  exports: [],
 })
 export class AppModule {}

@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import {
-  FormArray,
-  FormBuilder,
-  FormControl,
-  FormGroup,
+  UntypedFormArray,
+  UntypedFormBuilder,
+  UntypedFormControl,
+  UntypedFormGroup,
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -24,11 +24,11 @@ import {
   notDeleteMemberExistedInPurchase,
   organizerInMembersValidation,
 } from '../../../utils/FormValidators';
-import * as moment from 'moment';
+import moment from 'moment';
 import { BehaviorSubject, forkJoin } from 'rxjs';
 import { EventActionCreator } from '../../../utils/EventActionCreator';
 import { ConfirmDialogComponent } from '../../base-elements/confirm-dialog/confirm-dialog.component';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog as MatDialog } from '@angular/material/dialog';
 import { AuthenticationService } from '../../../shared/authentication.service';
 import { Location } from '@angular/common';
 
@@ -44,11 +44,11 @@ export class EventFormComponent implements OnInit {
   isEdit!: boolean;
   eventId!: string;
   event!: EventDto;
-  eventForm!: FormGroup;
+  eventForm!: UntypedFormGroup;
   hasRePayedDebts: boolean = false;
 
   constructor(
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private dataService: DataService,
     private eventActionCreator: EventActionCreator,
     private route: ActivatedRoute,
@@ -62,7 +62,7 @@ export class EventFormComponent implements OnInit {
     this.eventForm = this.formBuilder.group(
       {
         name: ['', Validators.required],
-        date: new FormControl(new Date()),
+        date: new UntypedFormControl(new Date()),
         organizer: ['', Validators.required],
         members: this.formBuilder.array([]),
       },
@@ -83,7 +83,7 @@ export class EventFormComponent implements OnInit {
       this.dataService
         .getEventById(this.eventId)
         .pipe(take(1))
-        .subscribe((x) => {
+        .subscribe(x => {
           this.event = x;
           this.fillFormFromEvent();
           this.subscribeMembersChanges();
@@ -96,7 +96,7 @@ export class EventFormComponent implements OnInit {
             this.eventForm.disable();
             this.eventForm.controls['name'].enable();
 
-            this.members.controls.forEach((control) => {
+            this.members.controls.forEach(control => {
               control.disable();
             });
           }
@@ -108,8 +108,8 @@ export class EventFormComponent implements OnInit {
     }
   }
 
-  get members(): FormArray {
-    return this.eventForm.get('members') as FormArray;
+  get members(): UntypedFormArray {
+    return this.eventForm.get('members') as UntypedFormArray;
   }
 
   async onBack() {
@@ -127,8 +127,8 @@ export class EventFormComponent implements OnInit {
 
     this.fillFormArray(
       members
-        .filter((x) => x !== organizer)
-        .map((name) => this.formBuilder.group({ name })) || []
+        .filter(x => x !== organizer)
+        .map(name => this.formBuilder.group({ name })) || []
     );
   }
 
@@ -156,7 +156,7 @@ export class EventFormComponent implements OnInit {
   removeEmptyMembers(members: EventMember[]) {
     members
       .map(({ name }, i) => (name === '' && i != members.length - 1 ? i : null))
-      .forEach((n) => {
+      .forEach(n => {
         if (n !== null) {
           this.members.removeAt(n);
         }
@@ -213,7 +213,7 @@ export class EventFormComponent implements OnInit {
                 eventMembersCount: members.length,
                 date: moment().utc().valueOf(),
               },
-            ].forEach((action) => this.dataService.addEventAction(id, action));
+            ].forEach(action => this.dataService.addEventAction(id, action));
 
             await this.onChange(id, event.organizer, true);
           })
@@ -234,13 +234,13 @@ export class EventFormComponent implements OnInit {
       disableClose: false,
     });
 
-    await dialogRef.afterClosed().subscribe(async (result) => {
+    await dialogRef.afterClosed().subscribe(async result => {
       if (result) {
         this.loading$.next(true);
 
         await this.dataService
           .deleteEvent(this.eventId)
-          .then(async (res) => {
+          .then(async res => {
             setLocalEvents([]);
             await this.router.navigate(['/events']);
           })

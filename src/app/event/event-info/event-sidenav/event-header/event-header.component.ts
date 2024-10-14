@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import * as moment from 'moment';
+import moment from 'moment';
 import { Event } from '../../../../../models/Event';
 import { LocalizationService } from '../../../../../shared/localization.service';
 

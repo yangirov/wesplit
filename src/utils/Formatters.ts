@@ -8,10 +8,10 @@ export function formatDebtType(sum: number): DebtTypes {
   return sum > 0
     ? DebtTypes.Positive
     : sum < 0
-    ? DebtTypes.Negative
-    : !sum
-    ? DebtTypes.Neutral
-    : DebtTypes.Other;
+      ? DebtTypes.Negative
+      : !sum
+        ? DebtTypes.Neutral
+        : DebtTypes.Other;
 }
 
 export function convertLang(lang: string) {

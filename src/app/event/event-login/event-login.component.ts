@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Event, EventDto } from '../../../models/Event';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DataService } from '../../../shared/data.service';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog as MatDialog } from '@angular/material/dialog';
 import { AddMemberComponent } from './add-member/add-member.component';
 import { AuthenticationService } from '../../../shared/authentication.service';
 
@@ -56,9 +56,9 @@ export class EventLoginComponent implements OnInit {
       data: { name: this.name },
     });
 
-    const members = this.event.members.map((x) => x.toLowerCase());
+    const members = this.event.members.map(x => x.toLowerCase());
 
-    dialogRef.afterClosed().subscribe(async (result) => {
+    dialogRef.afterClosed().subscribe(async result => {
       if (result && !members.includes(result.toLowerCase())) {
         this.event.members.push(result);
         await this.dataService.updateEvent(this.event);

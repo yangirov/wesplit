@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { ActionTypes, EventAction } from '../../../../../models/Event';
-import * as moment from 'moment';
+import moment from 'moment';
 import { LocalizationService } from '../../../../../shared/localization.service';
 import { CurrencyService } from '../../../../../shared/currency.service';
 

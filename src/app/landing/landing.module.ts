@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { LandingRoutingModule } from './landing-routing.module';
 import { LandingPageComponent } from './landing-page/landing-page.component';
-import { MatButtonModule } from '@angular/material/button';
+import { MatButtonModule as MatButtonModule } from '@angular/material/button';
 import { TranslocoModule } from '@ngneat/transloco';
 
 @NgModule({

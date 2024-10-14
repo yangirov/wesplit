@@ -1,14 +1,12 @@
 <div *ngIf="event.actions?.length; else noActions">
   <action-item
     *ngFor="let action of event.actions"
-    [action]="action"
-  ></action-item>
+    [action]="action"></action-item>
 </div>
 
 <ng-template #noActions>
   <empty-items
     icon="history"
     *transloco="let t"
-    [text]="t('event.actions.empty')"
-  ></empty-items>
+    [text]="t('event.actions.empty')"></empty-items>
 </ng-template>

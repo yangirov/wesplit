@@ -111,7 +111,7 @@
       "organizerInMembers": "The organizer is already exists in members",
       "notDeleteMemberExistedInPurchase": "You cannot remove members from event if they are in purchases"
     },
-    "invite" : {
+    "invite": {
       "title": "Invite",
       "subtitle": "sent you an invitation to the event",
       "userSelect": "Choose yourself among the members",
@@ -179,15 +179,6 @@
   "not-found": {
     "title": "Page not found",
     "home": "Home"
-  },
-  "cookie": {
-    "header": "Cookies used on the website!",
-    "message": "This website uses cookies to ensure you get the best experience on our website.",
-    "dismiss": "Got it!",
-    "allow": "Ok",
-    "deny": "Decline",
-    "link": "Learn more",
-    "policy": "Cookie Policy"
   },
   "landing": {
     "subtitle": "Joint cost accounting with friends",

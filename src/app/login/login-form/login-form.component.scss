@@ -8,20 +8,22 @@
     margin: 0.5em 0;
     width: 220px;
 
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    flex-wrap: nowrap;
-    padding-left: 0.8em;
-
-    &__icon {
-      width: 2em;
-      height: 2em;
+    div {
+      display: flex;
+      align-items: center;
+      flex-wrap: nowrap;
+      justify-content: start;
+      justify-self: start;
     }
 
-    mat-icon {
-      width: 1.15em;
-      height: 1.15em;
+    &__icon {
+      width: 20px;
+      height: 20px;
+    }
+
+    .mat-icon {
+      width: 20px;
+      height: 20px;
     }
 
     &__text {

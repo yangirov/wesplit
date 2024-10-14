@@ -3,47 +3,46 @@
     <button class="router-button" mat-icon-button (click)="onBack()">
       <mat-icon>close</mat-icon>
     </button>
-    <h1>{{ t("settings.title") }}</h1>
+    <h1>{{ t('settings.title') }}</h1>
     <span class="spacer"></span>
   </div>
 
   <div body>
     <form [formGroup]="settingsForm" id="settingsForm">
       <mat-form-field class="full-width">
-        <mat-label>{{ t("settings.language.name") }}</mat-label>
+        <mat-label>{{ t('settings.language.name') }}</mat-label>
         <select matNativeControl formControlName="language">
           <option value="en">
-            {{ t("settings.language.english") }}
+            {{ t('settings.language.english') }}
           </option>
           <option value="ru">
-            {{ t("settings.language.russian") }}
+            {{ t('settings.language.russian') }}
           </option>
         </select>
       </mat-form-field>
 
       <mat-form-field class="full-width">
-        <mat-label>{{ t("settings.currency.name") }}</mat-label>
+        <mat-label>{{ t('settings.currency.name') }}</mat-label>
         <select matNativeControl formControlName="currency" required>
           <option
             *ngFor="let currency of currencyService.currencies; let i = index"
-            [value]="currency.name"
-          >
+            [value]="currency.name">
             {{ currency.name }}
           </option>
         </select>
       </mat-form-field>
 
       <mat-form-field class="full-width">
-        <mat-label>{{ t("settings.theme.name") }}</mat-label>
+        <mat-label>{{ t('settings.theme.name') }}</mat-label>
         <select matNativeControl formControlName="theme">
           <option value="auto-mode">
-            {{ t("settings.theme.auto") }}
+            {{ t('settings.theme.auto') }}
           </option>
           <option value="light-mode">
-            {{ t("settings.theme.light") }}
+            {{ t('settings.theme.light') }}
           </option>
           <option value="dark-mode">
-            {{ t("settings.theme.dark") }}
+            {{ t('settings.theme.dark') }}
           </option>
         </select>
       </mat-form-field>

@@ -31,10 +31,10 @@ export class AppComponent implements OnInit, OnDestroy {
     this.currencyService.initCurrency();
 
     const routes$ = this.router.events.pipe(
-      filter((event) => event instanceof NavigationEnd),
+      filter(event => event instanceof NavigationEnd),
       map(() => this.rootRoute(this.route)),
       filter((route: ActivatedRoute) => route.outlet === 'primary'),
-      map((route) => route)
+      map(route => route)
     );
 
     const data$ = routes$.pipe(mergeMap((route: ActivatedRoute) => route.data));
@@ -43,10 +43,10 @@ export class AppComponent implements OnInit, OnDestroy {
     combineLatest([routes$, data$, url$])
       .pipe(takeUntil(this.destroyed$))
       .subscribe(([route, data, url]) => {
-        this.localizationService.load().subscribe((x) => {
-          if (data.scope) {
+        this.localizationService.load().subscribe(x => {
+          if (data['scope']) {
             const title = this.localizationService.translate(
-              `${data.scope}.title`
+              `${data['scope']}.title`
             );
 
             this.titleService.setTitle(`${title} - ${environment.name}`);

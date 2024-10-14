@@ -1,6 +1,6 @@
 <div *transloco="let t">
   <h2 mat-dialog-title>
-    {{ t("auth.login.title") }} / {{ t("auth.register.title") }}
+    {{ t('auth.login.title') }} / {{ t('auth.register.title') }}
   </h2>
 
   <div *ngIf="loading$ | async; else form">
@@ -11,18 +11,18 @@
     <ng-template #form>
       <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" id="loginForm">
         <mat-form-field class="full-width">
-          <mat-label>{{ t("common.email") }}</mat-label>
+          <mat-label>{{ t('common.email') }}</mat-label>
           <input matInput formControlName="email" required />
         </mat-form-field>
 
         <mat-form-field class="full-width">
-          <mat-label>{{ t("common.password") }}</mat-label>
+          <mat-label>{{ t('common.password') }}</mat-label>
           <input matInput formControlName="password" type="password" required />
         </mat-form-field>
       </form>
 
       <div *ngIf="isPasswordWrong" class="mat-form-field-invalid">
-        {{ t("auth.login.wrongPassword") }}
+        {{ t('auth.login.wrongPassword') }}
       </div>
 
       <div *ngIf="formErrors">
@@ -38,17 +38,15 @@
       color="basic"
       mat-raised-button
       (click)="onCancel()"
-      [disabled]="loading$ | async"
-    >
-      {{ t("common.cancel") }}
+      [disabled]="loading$ | async">
+      {{ t('common.cancel') }}
     </button>
     <button
       color="primary"
       mat-raised-button
       form="loginForm"
-      [disabled]="loginForm.invalid || (loading$ | async)"
-    >
-      {{ t("auth.login.title") }}
+      [disabled]="loginForm.invalid || (loading$ | async)">
+      {{ t('auth.login.title') }}
     </button>
   </div>
 </div>

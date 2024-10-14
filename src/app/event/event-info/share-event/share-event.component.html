@@ -1,11 +1,11 @@
 <div *transloco="let t">
   <h2 mat-dialog-title>
-    {{ t("event.share.title") }}
+    {{ t('event.share.title') }}
   </h2>
 
   <div mat-dialog-content>
     <p>
-      {{ t("event.share.text") }}
+      {{ t('event.share.text') }}
     </p>
 
     <div class="share-link">{{ eventLink }}</div>
@@ -13,15 +13,14 @@
 
   <div mat-dialog-actions class="buttons">
     <button color="basic" mat-raised-button (click)="onLaterClick()">
-      {{ t("event.share.later") }}
+      {{ t('event.share.later') }}
     </button>
 
     <button
       color="primary"
       mat-raised-button
       [cdkCopyToClipboard]="eventLink"
-      (click)="onCopyClick()"
-    >
+      (click)="onCopyClick()">
       {{ copyButtonText }}
     </button>
   </div>

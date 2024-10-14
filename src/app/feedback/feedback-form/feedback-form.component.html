@@ -4,15 +4,14 @@
       <mat-icon>close</mat-icon>
     </button>
 
-    <h1>{{ t("feedback.title") }}</h1>
+    <h1>{{ t('feedback.title') }}</h1>
 
     <span class="spacer"></span>
 
     <button
       mat-icon-button
       form="feedbackForm"
-      [disabled]="feedbackForm.invalid"
-    >
+      [disabled]="feedbackForm.invalid">
       <mat-icon>check</mat-icon>
     </button>
   </div>
@@ -20,18 +19,17 @@
   <div body>
     <form [formGroup]="feedbackForm" (ngSubmit)="onSubmit()" id="feedbackForm">
       <mat-form-field class="full-width">
-        <mat-label>{{ t("common.email") }}</mat-label>
+        <mat-label>{{ t('common.email') }}</mat-label>
         <input matInput formControlName="email" />
       </mat-form-field>
 
       <mat-form-field class="full-width">
-        <mat-label>{{ t("common.message") }}</mat-label>
+        <mat-label>{{ t('common.message') }}</mat-label>
         <textarea
           matInput
           formControlName="message"
           rows="10"
-          required
-        ></textarea>
+          required></textarea>
       </mat-form-field>
     </form>
   </div>

@@ -5,7 +5,11 @@ import { Receipt, ReceiptPurchase } from '../../../../models/Receipt';
 import { AuthenticationService } from '../../../../shared/authentication.service';
 import { filter, take } from 'rxjs/operators';
 import { Html5QrcodeScanner } from 'html5-qrcode';
-import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import {
+  UntypedFormArray,
+  UntypedFormBuilder,
+  UntypedFormGroup,
+} from '@angular/forms';
 import {
   minLengthArray,
   minPurchaseInReceipt,
@@ -13,7 +17,7 @@ import {
 import { EventAction, EventDto, Purchase } from '../../../../models/Event';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DataService } from '../../../../shared/data.service';
-import * as moment from 'moment';
+import moment from 'moment';
 import { LocalizationService } from '../../../../shared/localization.service';
 import { EventActionCreator } from '../../../../utils/EventActionCreator';
 import { Location } from '@angular/common';
@@ -35,13 +39,13 @@ export class QrCodeComponent implements OnInit, AfterViewInit {
   isSuccessScan: boolean = false;
 
   receipt!: Receipt;
-  receiptForm!: FormGroup;
+  receiptForm!: UntypedFormGroup;
 
   constructor(
     private router: Router,
     private httpClient: HttpClient,
     private authService: AuthenticationService,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private activateRoute: ActivatedRoute,
     private dataService: DataService,
     private localizationService: LocalizationService,
@@ -59,11 +63,11 @@ export class QrCodeComponent implements OnInit, AfterViewInit {
         (event: EventDto) => {
           this.event = event;
         },
-        (err) => console.error(err)
+        err => console.error(err)
       );
 
     this.authService.currentUser$
-      .pipe(filter((x) => x != null))
+      .pipe(filter(x => x != null))
       .subscribe((x: any) => {
         this.userToken = x.stsTokenManager.accessToken;
       });
@@ -94,8 +98,8 @@ export class QrCodeComponent implements OnInit, AfterViewInit {
     );
   }
 
-  get purchases(): FormArray {
-    return this.receiptForm.get('purchases') as FormArray;
+  get purchases(): UntypedFormArray {
+    return this.receiptForm.get('purchases') as UntypedFormArray;
   }
 
   get receiptDate(): string {

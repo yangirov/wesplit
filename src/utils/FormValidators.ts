@@ -1,6 +1,6 @@
 import {
   AbstractControl,
-  FormGroup,
+  UntypedFormGroup,
   ValidationErrors,
   ValidatorFn,
 } from '@angular/forms';
@@ -94,7 +94,7 @@ export function sumLessOrEqualDebt(debtSum: number): ValidatorFn {
 }
 
 export function calculateFormValidationErrors(
-  form: FormGroup,
+  form: UntypedFormGroup,
   translation: { [key: string]: string }
 ): string[] {
   const errors = getFormValidationErrors(form.controls);
@@ -131,7 +131,7 @@ export function getFormValidationErrors(
   Object.keys(controls).forEach(key => {
     const control = controls[key];
 
-    if (control instanceof FormGroup) {
+    if (control instanceof UntypedFormGroup) {
       errors = errors.concat(getFormValidationErrors(control.controls));
     }
 
