@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { DebtDto } from '../../../../../models/Event';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import {
   sumGreaterZero,
   sumLessOrEqualDebt,
@@ -19,12 +19,12 @@ import { CurrencyService } from '../../../../../shared/currency.service';
 })
 export class RepayDebtComponent implements OnInit {
   loading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  rePayDebtForm!: FormGroup;
+  rePayDebtForm!: UntypedFormGroup;
 
   constructor(
     private dataService: DataService,
     private eventActionCreator: EventActionCreator,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private dialogRef: MatDialogRef<RepayDebtComponent>,
     @Inject(MAT_DIALOG_DATA) public payload: DebtDto,
     private localizationService: LocalizationService,

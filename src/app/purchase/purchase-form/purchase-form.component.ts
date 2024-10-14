@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {
-  FormArray,
-  FormBuilder,
-  FormControl,
-  FormGroup,
+  UntypedFormArray,
+  UntypedFormBuilder,
+  UntypedFormControl,
+  UntypedFormGroup,
   Validators,
 } from '@angular/forms';
 import { DataService } from '../../../shared/data.service';
@@ -34,12 +34,12 @@ export class PurchaseFormComponent implements OnInit {
   event$!: Observable<EventDto>;
   event!: EventDto;
   purchase!: Purchase;
-  purchaseForm!: FormGroup;
+  purchaseForm!: UntypedFormGroup;
 
   constructor(
     private dataService: DataService,
     private eventActionCreator: EventActionCreator,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private route: ActivatedRoute,
     private router: Router,
     private dialog: MatDialog
@@ -55,14 +55,14 @@ export class PurchaseFormComponent implements OnInit {
     this.purchaseForm = this.formBuilder.group(
       {
         title: ['', Validators.required],
-        payer: new FormControl(
+        payer: new UntypedFormControl(
           {
             value: '',
             disabled: this.isEdit && this.hasRePayedDebts,
           },
           Validators.required
         ),
-        sum: new FormControl(
+        sum: new UntypedFormControl(
           { value: 0, disabled: this.isEdit && this.hasRePayedDebts },
           Validators.compose([Validators.required])
         ),
@@ -94,8 +94,8 @@ export class PurchaseFormComponent implements OnInit {
     );
   }
 
-  get members(): FormArray {
-    return this.purchaseForm.get('members') as FormArray;
+  get members(): UntypedFormArray {
+    return this.purchaseForm.get('members') as UntypedFormArray;
   }
 
   get hasRePayedDebts(): boolean {

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../../../shared/data.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Feedback } from '../../../models/Feedback';
 import { BehaviorSubject } from 'rxjs';
 import { Location } from '@angular/common';
@@ -11,12 +11,12 @@ import { Location } from '@angular/common';
   styleUrls: ['./feedback-form.component.scss'],
 })
 export class FeedbackFormComponent implements OnInit {
-  feedbackForm!: FormGroup;
+  feedbackForm!: UntypedFormGroup;
   loading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor(
     private dataService: DataService,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private location: Location
   ) {}
 

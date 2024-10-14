@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../../../../shared/authentication.service';
@@ -15,13 +15,13 @@ import { debounceTime } from 'rxjs/operators';
 })
 export class LoginEmailComponent implements OnInit {
   loading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  loginForm!: FormGroup;
+  loginForm!: UntypedFormGroup;
 
   isPasswordWrong: boolean = false;
   formErrors: string[] = [];
 
   constructor(
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     public dialogRef: MatDialogRef<LoginEmailComponent>,
     private router: Router,
     private authService: AuthenticationService,

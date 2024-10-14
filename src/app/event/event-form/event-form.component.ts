@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import {
-  FormArray,
-  FormBuilder,
-  FormControl,
-  FormGroup,
+  UntypedFormArray,
+  UntypedFormBuilder,
+  UntypedFormControl,
+  UntypedFormGroup,
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -44,11 +44,11 @@ export class EventFormComponent implements OnInit {
   isEdit!: boolean;
   eventId!: string;
   event!: EventDto;
-  eventForm!: FormGroup;
+  eventForm!: UntypedFormGroup;
   hasRePayedDebts: boolean = false;
 
   constructor(
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private dataService: DataService,
     private eventActionCreator: EventActionCreator,
     private route: ActivatedRoute,
@@ -62,7 +62,7 @@ export class EventFormComponent implements OnInit {
     this.eventForm = this.formBuilder.group(
       {
         name: ['', Validators.required],
-        date: new FormControl(new Date()),
+        date: new UntypedFormControl(new Date()),
         organizer: ['', Validators.required],
         members: this.formBuilder.array([]),
       },
@@ -108,8 +108,8 @@ export class EventFormComponent implements OnInit {
     }
   }
 
-  get members(): FormArray {
-    return this.eventForm.get('members') as FormArray;
+  get members(): UntypedFormArray {
+    return this.eventForm.get('members') as UntypedFormArray;
   }
 
   async onBack() {

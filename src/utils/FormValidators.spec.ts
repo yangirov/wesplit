@@ -1,4 +1,4 @@
-import { FormArray, FormBuilder } from '@angular/forms';
+import { UntypedFormArray, UntypedFormBuilder } from '@angular/forms';
 import {
   duplicateMembersValidator,
   minMembersCountInPurchase,
@@ -11,7 +11,7 @@ import { fakeAsync } from '@angular/core/testing';
 describe('Form custom validators test', function () {
   it('should detect the duplicates in organizer and members list', fakeAsync(() => {
     // Arrange
-    const formBuilder = new FormBuilder();
+    const formBuilder = new UntypedFormBuilder();
     const form = formBuilder.group(
       {
         organizer: 'Emil',
@@ -27,8 +27,8 @@ describe('Form custom validators test', function () {
 
     // Act
     const name = formBuilder.group({ name: 'Emil' });
-    (form.get('members') as FormArray).push(name);
-    (form.get('members') as FormArray).push(name);
+    (form.get('members') as UntypedFormArray).push(name);
+    (form.get('members') as UntypedFormArray).push(name);
 
     const organizerInMembers = form.errors?.organizerInMembers;
     const hasMembersDuplicates = form.errors?.hasMembersDuplicates;
@@ -41,7 +41,7 @@ describe('Form custom validators test', function () {
 
   it('should validate the minimal sum and minimum members count in purchase', fakeAsync(() => {
     // Arrange
-    const formBuilder = new FormBuilder();
+    const formBuilder = new UntypedFormBuilder();
     const form = formBuilder.group(
       {
         sum: [0],
@@ -64,7 +64,7 @@ describe('Form custom validators test', function () {
 
   it('should validate the number not be equal or greater debt sum', fakeAsync(() => {
     // Arrange
-    const formBuilder = new FormBuilder();
+    const formBuilder = new UntypedFormBuilder();
     const form = formBuilder.group(
       {
         sum: [250],

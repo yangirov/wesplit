@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { LocalizationService } from '../../../shared/localization.service';
-import { FormGroup } from '@angular/forms';
+import { UntypedFormGroup } from '@angular/forms';
 
 @Component({
   selector: 'form-errors',
@@ -9,7 +9,7 @@ import { FormGroup } from '@angular/forms';
 })
 export class FormErrorsComponent implements OnInit {
   @Input() localization!: string;
-  @Input() form!: FormGroup;
+  @Input() form!: UntypedFormGroup;
   @Input() errors!: string[];
   @Input() force: boolean = false;
 
