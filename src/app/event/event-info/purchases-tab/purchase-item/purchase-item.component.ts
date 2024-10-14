@@ -3,6 +3,7 @@ import { EventDto, Purchase } from '../../../../../models/Event';
 import { formatSum } from '../../../../../utils/Formatters';
 import { LocalizationService } from '../../../../../shared/localization.service';
 import { CurrencyService } from '../../../../../shared/currency.service';
+import moment from 'moment';
 
 @Component({
   selector: 'purchase-item',
@@ -13,14 +14,24 @@ export class PurchaseItemComponent {
   @Input() event!: EventDto;
   @Input() purchase!: Purchase;
 
+  lang!: string;
+
   constructor(
     private localizationService: LocalizationService,
     public currencyService: CurrencyService
-  ) {}
+  ) {
+    this.lang = this.localizationService.getActiveLang();
+  }
 
   get purchaseSum(): string {
-    const lang = this.localizationService.getActiveLang();
-    return formatSum(lang, Number(this.purchase.sum));
+    return formatSum(this.lang, Number(this.purchase.sum));
+  }
+
+  get purchaseDate(): string {
+    const date = this.purchase.date;
+    const formattedDate = `${moment(date).locale(this.lang).format('DD MMMM')}`;
+
+    return formattedDate;
   }
 
   get purchaseSubtitle(): string {

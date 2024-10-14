@@ -9,10 +9,7 @@ import {
   sumGreaterZero,
   sumLessOrEqualDebt,
 } from '../../../../../utils/FormValidators';
-import {
-  MAT_DIALOG_DATA,
-  MatDialogRef as MatDialogRef,
-} from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { DataService } from '../../../../../shared/data.service';
 import { EventActionCreator } from '../../../../../utils/EventActionCreator';
 import { BehaviorSubject } from 'rxjs';

@@ -19,7 +19,11 @@
     "notNow": "Not now",
     "pwa": "To install the application click «Add to Home Screen» or «Home Screen» in the browser menu",
     "you": "It's you",
-    "copy": "Copy"
+    "copy": "Copy",
+    "sort": {
+      "asc": "By ascending",
+      "desc": "By descending"
+    }
   },
   "form": {
     "isRequired": "is required.",
@@ -169,6 +173,7 @@
       "title": "Edit purchase"
     },
     "name": "Purchase name",
+    "date": "Purchase date",
     "afterStartRepayDebts": "After begin the debt repayment, you can edit only the name of the purchase",
     "minimalSum": "The minimum purchase amount must be more than $1",
     "whoPaid": "Who paid",

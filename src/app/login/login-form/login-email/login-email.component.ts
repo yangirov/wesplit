@@ -5,7 +5,7 @@ import {
   UntypedFormGroup,
   Validators,
 } from '@angular/forms';
-import { MatDialogRef as MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../../../../shared/authentication.service';
 import { LocalizationService } from '../../../../shared/localization.service';

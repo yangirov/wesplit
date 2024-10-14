@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { AuthenticationService } from '../../../shared/authentication.service';
 import { Router } from '@angular/router';
-import { MatDialog as MatDialog } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { NotificationService } from '../../../shared/notification.service';
 import { LocalizationService } from '../../../shared/localization.service';
 import isPwa from '../../../utils/PwaExtensions';

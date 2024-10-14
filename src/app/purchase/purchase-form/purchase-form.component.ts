@@ -15,9 +15,8 @@ import {
   minMembersCountInPurchase,
   sumGreaterZero,
 } from '../../../utils/FormValidators';
-import { MatDialog as MatDialog } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '../../base-elements/confirm-dialog/confirm-dialog.component';
-import moment from 'moment';
 
 @Component({
   selector: 'purchase-form',
@@ -52,18 +51,24 @@ export class PurchaseFormComponent implements OnInit {
     this.eventId = this.route.snapshot.paramMap.get('id') ?? '';
     this.purchaseId = this.route.snapshot.paramMap.get('purchaseId') ?? '';
 
+    const isEditMode = this.isEdit && this.hasRePayedDebts;
+
     this.purchaseForm = this.formBuilder.group(
       {
         title: ['', Validators.required],
+        date: new UntypedFormControl({
+          value: new Date(),
+          disabled: isEditMode,
+        }),
         payer: new UntypedFormControl(
           {
             value: '',
-            disabled: this.isEdit && this.hasRePayedDebts,
+            disabled: isEditMode,
           },
           Validators.required
         ),
         sum: new UntypedFormControl(
-          { value: 0, disabled: this.isEdit && this.hasRePayedDebts },
+          { value: 0, disabled: isEditMode },
           Validators.compose([Validators.required])
         ),
         members: this.formBuilder.array([]),
@@ -110,6 +115,7 @@ export class PurchaseFormComponent implements OnInit {
 
       this.purchaseForm.patchValue({
         title: purchase.title,
+        date: new Date(purchase.date),
         payer: purchase.payer,
         sum: purchase.sum,
       });
@@ -124,6 +130,7 @@ export class PurchaseFormComponent implements OnInit {
       );
 
       if (this.hasRePayedDebts) {
+        this.purchaseForm.controls['date'].disable();
         this.purchaseForm.controls['sum'].disable();
         this.purchaseForm.controls['payer'].disable();
 
@@ -148,20 +155,20 @@ export class PurchaseFormComponent implements OnInit {
   }
 
   mapPurchase(): Purchase {
-    const { title, payer, sum } = this.purchaseForm.value as Purchase;
+    const { title, date, payer, sum } = this.purchaseForm.value as Purchase;
 
     if (this.hasRePayedDebts && this.isEdit) {
       return {
         title,
-        date: this.purchase.date,
+        date: new Date(date).getTime(),
         payer: this.purchase.payer,
         sum: this.purchase.sum,
         members: this.purchase.members,
       };
     }
 
-    return {
-      date: this.isEdit ? this.purchase.date : moment().utc().valueOf(),
+    const dto = {
+      date: new Date(date).getTime(),
       title,
       payer,
       sum,
@@ -169,6 +176,8 @@ export class PurchaseFormComponent implements OnInit {
         .filter((x: PurchaseMember) => x.selected)
         .map((x: PurchaseMember) => x.name),
     };
+
+    return dto;
   }
 
   async onSubmit() {

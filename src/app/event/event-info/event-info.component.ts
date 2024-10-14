@@ -2,13 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Params, Router } from '@angular/router';
 import { EventDto } from '../../../models/Event';
 import { DataService } from '../../../shared/data.service';
-import { MatDialog as MatDialog } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { ShareEventComponent } from './share-event/share-event.component';
 import { Title } from '@angular/platform-browser';
 import { environment } from '../../../environments/environment';
 import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
 import { catchError, take } from 'rxjs/operators';
 import { AuthenticationService } from '../../../shared/authentication.service';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'event-info',
@@ -20,6 +21,7 @@ export class EventInfoComponent implements OnInit {
 
   eventId!: string;
   opened: boolean = false;
+  sortForm!: FormGroup;
 
   event$!: Observable<EventDto> | Observable<any>;
 
@@ -29,8 +31,14 @@ export class EventInfoComponent implements OnInit {
     private dataService: DataService,
     private dialog: MatDialog,
     private title: Title,
-    public authService: AuthenticationService
-  ) {}
+    public authService: AuthenticationService,
+    private formBuilder: FormBuilder
+  ) {
+    this.sortForm = this.formBuilder.group({
+      key: ['date'],
+      order: ['desc'],
+    });
+  }
 
   catchHttpError = () =>
     catchError((error: any) => {
@@ -72,6 +80,10 @@ export class EventInfoComponent implements OnInit {
       () => console.error,
       () => this.loading$.next(false)
     );
+
+    this.sortForm.valueChanges.subscribe(filter => {
+      console.log('Sorting filter updated:', filter);
+    });
   }
 
   getNotification(event: any) {

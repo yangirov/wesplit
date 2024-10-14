@@ -4,11 +4,15 @@
   *transloco="let t">
   <div class="purchase-item__description">
     <div class="purchase-item__title">{{ purchase.title }}</div>
-    <div class="purchase-item__payer">{{ purchase.payer }}</div>
-    <div class="purchase-item__subtitle">{{ purchaseSubtitle }}</div>
+    <div class="purchase-item__subtitle">
+      {{ purchaseDate }}. {{ purchaseSubtitle }}
+    </div>
   </div>
-  <div class="purchase-item__sum">
-    {{ purchaseSum }} {{ currencyService.getCurrencyAcronym() }}
+  <div class="purchase-item__money">
+    <div class="purchase-item__sum">
+      {{ purchaseSum }} {{ currencyService.getCurrencyAcronym() }}
+    </div>
+    <div class="purchase-item__payer">{{ purchase.payer }}</div>
   </div>
 </div>
 

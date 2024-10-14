@@ -28,7 +28,7 @@ import moment from 'moment';
 import { BehaviorSubject, forkJoin } from 'rxjs';
 import { EventActionCreator } from '../../../utils/EventActionCreator';
 import { ConfirmDialogComponent } from '../../base-elements/confirm-dialog/confirm-dialog.component';
-import { MatDialog as MatDialog } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { AuthenticationService } from '../../../shared/authentication.service';
 import { Location } from '@angular/common';
 
