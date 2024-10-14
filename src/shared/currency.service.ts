@@ -35,7 +35,7 @@ export class CurrencyService {
 
   getCurrencyAcronym(): string {
     const currencyName = localStorage.getItem(USER_CURRENCY) ?? 'RUB';
-    const currency = this.currencies?.find((x) => x.name === currencyName);
+    const currency = this.currencies?.find(x => x.name === currencyName);
 
     return currency?.acronym ?? '';
   }

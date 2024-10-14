@@ -28,7 +28,7 @@ export class ThemeService {
 
     window
       .matchMedia('(prefers-color-scheme: dark)')
-      .addEventListener('change', (e) => {
+      .addEventListener('change', e => {
         const isDarkModeOn = e.matches;
 
         const isAutoMode = localStorage.getItem('user-theme') === AUTO_MODE;

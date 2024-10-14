@@ -4,40 +4,36 @@
       <mat-icon>arrow_backward</mat-icon>
     </button>
 
-    <h1>{{ t("auth.login.title") }}</h1>
+    <h1>{{ t('auth.login.title') }}</h1>
   </div>
 
   <div body>
     <div class="auth-buttons" *transloco="let t">
       <button class="auth-button" mat-raised-button (click)="openLoginModal()">
         <mat-icon class="auth-button__icon">email</mat-icon>
-        <span class="auth-button__text">{{ t("auth.service") }} Email</span>
+        <span class="auth-button__text">{{ t('auth.service') }} Email</span>
       </button>
 
       <button
         class="auth-button"
         mat-raised-button
-        (click)="loginWithService('google')"
-      >
+        (click)="loginWithService('google')">
         <img
           class="auth-button__icon"
           src="/assets/auth/google.svg"
-          alt="Google icon"
-        />
-        <span class="auth-button__text">{{ t("auth.service") }} Google</span>
+          alt="Google icon" />
+        <span class="auth-button__text">{{ t('auth.service') }} Google</span>
       </button>
 
       <button
         class="auth-button"
         mat-raised-button
-        (click)="loginWithService('github')"
-      >
+        (click)="loginWithService('github')">
         <img
           class="auth-button__icon"
           src="/assets/auth/github.svg"
-          alt="Google icon"
-        />
-        <span class="auth-button__text">{{ t("auth.service") }} Github</span>
+          alt="Google icon" />
+        <span class="auth-button__text">{{ t('auth.service') }} Github</span>
       </button>
     </div>
   </div>

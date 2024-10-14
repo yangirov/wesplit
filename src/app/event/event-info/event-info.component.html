@@ -2,8 +2,7 @@
   <div sidenav *ngIf="event">
     <event-sidenav
       (notifyParent)="getNotification($event)"
-      [event]="event"
-    ></event-sidenav>
+      [event]="event"></event-sidenav>
   </div>
 
   <div class="header-flex" header *ngIf="event">
@@ -14,16 +13,12 @@
     <h1 *transloco="let t">
       {{ event.name }}
       <span *ngIf="!(authService.currentUser$ | async)" class="event-anonymous">
-        {{ t("event.anonymous") }}
+        {{ t('event.anonymous') }}
       </span>
     </h1>
   </div>
 
-  <mat-tab-group
-    body
-    mat-stretch-tabs
-    *ngIf="event"
-  >
+  <mat-tab-group body mat-stretch-tabs *ngIf="event">
     <mat-tab [label]="t('event.tabs.purchases')" *transloco="let t">
       <purchases-tab [event]="event"></purchases-tab>
     </mat-tab>

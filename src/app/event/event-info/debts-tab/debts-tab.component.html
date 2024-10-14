@@ -11,24 +11,21 @@
     <debt-item
       [event]="event"
       [debt]="debt"
-      [debtType]="debtTypes.Positive"
-    ></debt-item>
+      [debtType]="debtTypes.Positive"></debt-item>
   </div>
 
   <div *ngFor="let debt of negativeDebts">
     <debt-item
       [event]="event"
       [debt]="debt"
-      [debtType]="debtTypes.Negative"
-    ></debt-item>
+      [debtType]="debtTypes.Negative"></debt-item>
   </div>
 
   <div *ngFor="let debt of othersDebts">
     <debt-item
       [event]="event"
       [debt]="debt"
-      [debtType]="debtTypes.Neutral"
-    ></debt-item>
+      [debtType]="debtTypes.Neutral"></debt-item>
   </div>
 </div>
 
@@ -36,12 +33,10 @@
   <empty-items
     *ngIf="allDebts.length === 0 && !hasReturnedDebts"
     icon="add_shopping_cart"
-    [text]="t('event.balance.empty')"
-  ></empty-items>
+    [text]="t('event.balance.empty')"></empty-items>
 
   <empty-items
     *ngIf="allDebts.length === 0 && hasReturnedDebts"
     icon="check"
-    [text]="t('event.balance.allDebtsRePayed')"
-  ></empty-items>
+    [text]="t('event.balance.allDebtsRePayed')"></empty-items>
 </div>

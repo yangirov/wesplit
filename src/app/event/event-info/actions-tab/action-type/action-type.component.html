@@ -2,14 +2,14 @@
   <div *ngIf="action.type === actionTypes.CreateEvent">
     <p class="event-action__text">
       <b class="event-action__text_bold">{{ action.manager }}</b>
-      {{ t("action.eventCreated") }}
+      {{ t('action.eventCreated') }}
     </p>
   </div>
 
   <div *ngIf="action.type === actionTypes.ChangeEventName">
     <p class="event-action__text">
       <b class="event-action__text_bold">{{ action.currentUser }}</b>
-      {{ t("action.eventNameChanged") }}
+      {{ t('action.eventNameChanged') }}
       <b class="event-action__text_bold"> {{ action.eventName }}</b>
     </p>
   </div>
@@ -17,7 +17,7 @@
   <div *ngIf="action.type === actionTypes.ChangeEventDate">
     <p class="event-action__text">
       <b class="event-action__text_bold">{{ action.currentUser }}</b>
-      {{ t("action.eventDateChanged") }}
+      {{ t('action.eventDateChanged') }}
       <b class="event-action__text_bold"> {{ action.date }}</b>
     </p>
   </div>
@@ -25,7 +25,7 @@
   <div *ngIf="action.type === actionTypes.AddMemberToEvent">
     <p class="event-action__text">
       <b class="event-action__text_bold">{{ action.currentUser }}</b>
-      {{ t("action.addToEvent") }}
+      {{ t('action.addToEvent') }}
       <b class="event-action__text_bold"> {{ action.memberName }}</b>
     </p>
   </div>
@@ -33,34 +33,34 @@
   <div *ngIf="action.type === actionTypes.AddMembersToEvent">
     <p class="event-action__text">
       <b class="event-action__text_bold">{{ action.manager }}</b>
-      {{ t("action.add") }}
+      {{ t('action.add') }}
       <b class="event-action__text_bold">{{ action.eventMembersCount }}</b>
-      {{ t("action.peoplesToEvent") }}
+      {{ t('action.peoplesToEvent') }}
     </p>
   </div>
 
   <div *ngIf="action.type === actionTypes.RemoveMemberFromEvent">
     <p class="event-action__text">
       <b class="event-action__text_bold">{{ action.currentUser }}</b>
-      {{ t("action.exclude") }}
+      {{ t('action.exclude') }}
       <b class="event-action__text_bold"> {{ action.memberName }}</b>
-      {{ t("action.fromTheEvent") }}
+      {{ t('action.fromTheEvent') }}
     </p>
   </div>
 
   <div *ngIf="action.type === actionTypes.AddPurchase">
     <p class="event-action__text">
       <b class="event-action__text_bold">{{ action.currentUser }}</b>
-      {{ t("action.addPurchase") }}
+      {{ t('action.addPurchase') }}
       <b class="event-action__text_bold"> {{ action.purchaseName }}</b>
-      {{ t("action.onSum") }} {{ action.sum }}
+      {{ t('action.onSum') }} {{ action.sum }}
     </p>
   </div>
 
   <div *ngIf="action.type === actionTypes.DeletePurchase">
     <p class="event-action__text">
       <b class="event-action__text_bold">{{ action.currentUser }}</b>
-      {{ t("action.deletePurchase") }}
+      {{ t('action.deletePurchase') }}
       <b class="event-action__text_bold"> {{ action.purchaseName }}</b>
     </p>
   </div>
@@ -68,9 +68,9 @@
   <div *ngIf="action.type === actionTypes.AddMembersToPurchase">
     <p class="event-action__text">
       <b class="event-action__text_bold">{{ action.currentUser }}</b>
-      {{ t("action.add") }}
+      {{ t('action.add') }}
       <b class="event-action__text_bold">{{ action.purchaseMembersCount }}</b>
-      {{ t("action.peoplesToPurchase") }}
+      {{ t('action.peoplesToPurchase') }}
       <b class="event-action__text_bold"> {{ action.purchaseName }}</b>
     </p>
   </div>
@@ -78,21 +78,19 @@
   <div *ngIf="action.type === actionTypes.AddMemberToPurchase">
     <span
       *ngIf="action.payerName === action.currentUser"
-      class="event-action__text"
-    >
-      {{ t("action.myself") }}
+      class="event-action__text">
+      {{ t('action.myself') }}
     </span>
     <span
       *ngIf="action.payerName !== action.currentUser"
-      class="event-action__text_bold"
-    >
+      class="event-action__text_bold">
       {{ action.payerName }}
     </span>
 
     <p class="event-action__text">
       <b class="event-action__text_bold">{{ action.currentUser }}</b>
-      {{ t("action.add") }} {{ action.payerName }}
-      {{ t("action.inPurchase") }}
+      {{ t('action.add') }} {{ action.payerName }}
+      {{ t('action.inPurchase') }}
       <b class="event-action__text_bold">{{ action.purchaseName }}</b>
     </p>
   </div>
@@ -100,21 +98,19 @@
   <div *ngIf="action.type === actionTypes.RemoveMemberFromPurchase">
     <span
       *ngIf="action.payerName === action.currentUser"
-      class="event-action__text"
-    >
-      {{ t("action.myself") }}
+      class="event-action__text">
+      {{ t('action.myself') }}
     </span>
     <span
       *ngIf="action.payerName !== action.currentUser"
-      class="event-action__text_bold"
-    >
+      class="event-action__text_bold">
       {{ action.payerName }}
     </span>
 
     <p class="event-action__text">
       <b class="event-action__text_bold">{{ action.currentUser }}</b>
-      {{ t("action.exclude") }} {{ action.payerName }}
-      {{ t("action.fromPurchase") }}
+      {{ t('action.exclude') }} {{ action.payerName }}
+      {{ t('action.fromPurchase') }}
       <b class="event-action__text_bold">{{ action.purchaseName }}</b>
     </p>
   </div>
@@ -122,18 +118,18 @@
   <div *ngIf="action.type === actionTypes.GiveBackPartially">
     <p class="event-action__text">
       <b class="event-action__text_bold">{{ action.currentUser }}</b>
-      {{ t("action.notedDebt") }}
+      {{ t('action.notedDebt') }}
       <b class="event-action__text_bold">{{ action.payerName }}</b>
-      {{ t("action.partialReturn") }}
+      {{ t('action.partialReturn') }}
     </p>
   </div>
 
   <div *ngIf="action.type === actionTypes.GiveBack">
     <p class="event-action__text">
       <b class="event-action__text_bold">{{ action.currentUser }}</b>
-      {{ t("action.notedDebt") }}
+      {{ t('action.notedDebt') }}
       <b class="event-action__text_bold">{{ action.payerName }}</b>
-      {{ t("action.fullReturn") }}
+      {{ t('action.fullReturn') }}
     </p>
   </div>
 </div>

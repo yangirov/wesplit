@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../../../shared/data.service';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import {
+  UntypedFormBuilder,
+  UntypedFormGroup,
+  Validators,
+} from '@angular/forms';
 import { Feedback } from '../../../models/Feedback';
 import { BehaviorSubject } from 'rxjs';
 import { Location } from '@angular/common';
@@ -35,7 +39,7 @@ export class FeedbackFormComponent implements OnInit {
       const form = <Feedback>this.feedbackForm.value;
       this.loading$.next(true);
 
-      await this.dataService.addFeedback(form).then((res) => {
+      await this.dataService.addFeedback(form).then(res => {
         this.feedbackForm.reset();
         this.loading$.next(false);
         this.location.back();

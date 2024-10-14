@@ -5,7 +5,11 @@ import { Receipt, ReceiptPurchase } from '../../../../models/Receipt';
 import { AuthenticationService } from '../../../../shared/authentication.service';
 import { filter, take } from 'rxjs/operators';
 import { Html5QrcodeScanner } from 'html5-qrcode';
-import { UntypedFormArray, UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
+import {
+  UntypedFormArray,
+  UntypedFormBuilder,
+  UntypedFormGroup,
+} from '@angular/forms';
 import {
   minLengthArray,
   minPurchaseInReceipt,
@@ -59,11 +63,11 @@ export class QrCodeComponent implements OnInit, AfterViewInit {
         (event: EventDto) => {
           this.event = event;
         },
-        (err) => console.error(err)
+        err => console.error(err)
       );
 
     this.authService.currentUser$
-      .pipe(filter((x) => x != null))
+      .pipe(filter(x => x != null))
       .subscribe((x: any) => {
         this.userToken = x.stsTokenManager.accessToken;
       });

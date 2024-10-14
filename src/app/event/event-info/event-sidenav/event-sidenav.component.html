@@ -20,7 +20,7 @@
 
     <div class="event_members">
       <div class="members_title">
-        {{ t("event.sidenav.members") }}
+        {{ t('event.sidenav.members') }}
       </div>
       <div class="members_item" *ngFor="let member of event.members">
         {{ getMemberName(member) }}
@@ -34,12 +34,12 @@
         <mat-icon>login</mat-icon>
       </div>
       <div [routerLink]="['login']" class="login_button">
-        {{ t("event.sidenav.login") }}
+        {{ t('event.sidenav.login') }}
       </div>
     </div>
 
     <mat-divider></mat-divider>
 
-    <div class="event_organizer">★ — {{ t("event.sidenav.organizer") }}</div>
+    <div class="event_organizer">★ — {{ t('event.sidenav.organizer') }}</div>
   </main>
 </div>

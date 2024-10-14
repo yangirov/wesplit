@@ -74,8 +74,8 @@ export class DebtsTabComponent implements OnInit {
   get hasReturnedDebts(): boolean {
     if (this.event.actions) {
       return (
-        this.event.actions.filter((x) => x.type == ActionTypes.GiveBack)
-          .length > 0
+        this.event.actions.filter(x => x.type == ActionTypes.GiveBack).length >
+        0
       );
     }
 

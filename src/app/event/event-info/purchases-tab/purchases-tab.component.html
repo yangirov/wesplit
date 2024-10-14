@@ -2,19 +2,16 @@
   <purchase-item
     *ngFor="let purchase of event.purchases; let i = index"
     [purchase]="purchase"
-    [event]="event"
-  ></purchase-item>
+    [event]="event"></purchase-item>
 </div>
 
 <fab-button
   link="/events/{{ event.id }}/purchases/new"
-  icon="add_shopping_cart"
-></fab-button>
+  icon="add_shopping_cart"></fab-button>
 
 <ng-template #noPurchases>
   <empty-items
     icon="add_shopping_cart"
     *transloco="let t"
-    [text]="t('event.purchases.empty')"
-  ></empty-items>
+    [text]="t('event.purchases.empty')"></empty-items>
 </ng-template>

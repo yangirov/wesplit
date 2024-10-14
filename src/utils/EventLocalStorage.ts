@@ -24,8 +24,8 @@ export function setOrganizerToLocalEvent(id: string, organizer: string) {
   const newLocalEventToSave: LocalEvent = { id, organizer };
 
   let oldLocalEvents = getLocalEvents();
-  if (oldLocalEvents.some((x) => x.id === id)) {
-    oldLocalEvents = oldLocalEvents.filter((x) => x.id !== id);
+  if (oldLocalEvents.some(x => x.id === id)) {
+    oldLocalEvents = oldLocalEvents.filter(x => x.id !== id);
   }
 
   const newLocalEvents = [...oldLocalEvents, newLocalEventToSave];
