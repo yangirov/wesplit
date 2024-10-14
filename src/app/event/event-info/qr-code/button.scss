@@ -57,10 +57,3 @@ button:active:before {
     width 0.2s ease-out,
     padding-top 0.2s ease-out;
 }
-
-@media (prefers-color-scheme: light) {
-  button,
-  a {
-    color: var(--dark);
-  }
-}

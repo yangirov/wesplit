@@ -1,24 +1,3 @@
-@use '@angular/material' as mat;
-@include mat.core();
-
-$my-theme: mat.m2-define-dark-theme(
-  (
-    color: (
-      primary: mat.$m2-indigo-palette,
-      accent: mat.$m2-pink-palette,
-    ),
-    typography: mat.m2-define-typography-config(),
-    density: 0,
-  )
-);
-
-@include mat.core-theme($my-theme);
-
-.dark-mode {
-  background-color: #333;
-  color: whitesmoke;
-}
-
 :root {
   --dark: #1d1e1f;
   --red: #f44336;
@@ -32,13 +11,6 @@ $my-theme: mat.m2-define-dark-theme(
   --light-grey: #eef1f5;
   --medium-grey: #cccccc;
   --dark-grey: #4f5357;
-
-  @media (prefers-color-scheme: dark) {
-    --dark: #cccccc;
-    --grey: #cccccc;
-    --light-grey: #4f5357;
-    --medium-grey: #83888d;
-  }
 }
 
 @import '@fontsource/roboto';
@@ -77,15 +49,6 @@ body {
     align-items: center;
     justify-content: center;
     flex-direction: column;
-  }
-
-  @media (prefers-color-scheme: dark) {
-    background: radial-gradient(
-      circle,
-      rgba(2, 0, 36, 1) 0%,
-      rgba(2, 2, 89, 1) 51%,
-      rgba(4, 93, 112, 1) 100%
-    );
   }
 }
 
