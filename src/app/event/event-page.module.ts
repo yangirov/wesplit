@@ -37,7 +37,6 @@ import { TranslocoModule } from '@ngneat/transloco';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { QrCodeComponent } from './event-info/qr-code/qr-code.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { DigitOnlyModule } from '@uiowa/digit-only';
 
 @NgModule({
   declarations: [
@@ -81,7 +80,6 @@ import { DigitOnlyModule } from '@uiowa/digit-only';
     BaseElementsModule,
     TranslocoModule,
     MatCheckboxModule,
-    DigitOnlyModule,
   ],
 })
 export class EventPageModule {}

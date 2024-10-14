@@ -15,7 +15,6 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDialogModule } from '@angular/material/dialog';
 import { TranslocoModule } from '@ngneat/transloco';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { DigitOnlyModule } from '@uiowa/digit-only';
 
 @NgModule({
   declarations: [PurchaseFormComponent],
@@ -35,7 +34,6 @@ import { DigitOnlyModule } from '@uiowa/digit-only';
     MatCheckboxModule,
     MatDialogModule,
     TranslocoModule,
-    DigitOnlyModule,
   ],
 })
 export class PurchaseModule {}
