@@ -17,7 +17,7 @@ import {
 } from '../../../utils/FormValidators';
 import { MatDialog as MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '../../base-elements/confirm-dialog/confirm-dialog.component';
-import * as moment from 'moment';
+import moment from 'moment';
 
 @Component({
   selector: 'purchase-form',

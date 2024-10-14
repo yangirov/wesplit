@@ -108,4 +108,8 @@ export class RepayDebtComponent implements OnInit {
   onCancel() {
     this.dialogRef.close();
   }
+
+  get hasErrorSumLessOrEqualDebt() {
+    return Boolean(this.rePayDebtForm.errors?.['sumLessOrEqualDebt']);
+  }
 }

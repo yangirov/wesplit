@@ -30,8 +30,8 @@ describe('Form custom validators test', function () {
     (form.get('members') as UntypedFormArray).push(name);
     (form.get('members') as UntypedFormArray).push(name);
 
-    const organizerInMembers = form.errors?.organizerInMembers;
-    const hasMembersDuplicates = form.errors?.hasMembersDuplicates;
+    const organizerInMembers = form.errors?.['organizerInMembers'];
+    const hasMembersDuplicates = form.errors?.['hasMembersDuplicates'];
 
     // Assert
     expect(false).toEqual(form.valid);
@@ -53,8 +53,8 @@ describe('Form custom validators test', function () {
     );
 
     // Act
-    const minimalSum = form.errors?.minimalSum;
-    const minimalMembersCount = form.errors?.minimalMembersCount;
+    const minimalSum = form.errors?.['minimalSum'];
+    const minimalMembersCount = form.errors?.['minimalMembersCount'];
 
     // Assert
     expect(false).toEqual(form.valid);
@@ -76,7 +76,7 @@ describe('Form custom validators test', function () {
     );
 
     // Act
-    const error = form.errors?.sumLessOrEqualDebt;
+    const error = form.errors?.['sumLessOrEqualDebt'];
 
     // Assert
     expect(false).toEqual(form.valid);

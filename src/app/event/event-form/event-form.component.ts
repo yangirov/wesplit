@@ -24,7 +24,7 @@ import {
   notDeleteMemberExistedInPurchase,
   organizerInMembersValidation,
 } from '../../../utils/FormValidators';
-import * as moment from 'moment';
+import moment from 'moment';
 import { BehaviorSubject, forkJoin } from 'rxjs';
 import { EventActionCreator } from '../../../utils/EventActionCreator';
 import { ConfirmDialogComponent } from '../../base-elements/confirm-dialog/confirm-dialog.component';

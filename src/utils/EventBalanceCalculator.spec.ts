@@ -3,7 +3,7 @@ import {
   getEventsMembersDebts,
 } from './EventBalanceCalculator';
 import { EventDto } from '../models/Event';
-import * as moment from 'moment';
+import moment from 'moment';
 
 describe('Balance calculation repayment debts test', function () {
   let event!: EventDto;
@@ -19,14 +19,14 @@ describe('Balance calculation repayment debts test', function () {
         {
           title: 'Test',
           payer: 'Emil',
-          sum: 1000,
+          sum: '1000',
           members: ['Emil', 'Ivan', 'Mark', 'Sam'],
           date: 1,
         },
         {
           title: 'Test',
           payer: 'Mark',
-          sum: 1500,
+          sum: '1500',
           members: ['Emil', 'Ivan', 'Mark', 'Sam'],
           date: 1,
         },
@@ -102,14 +102,14 @@ describe('Balance calculation functions test', function () {
         {
           title: 'Beer',
           payer: 'Ivan',
-          sum: 200,
+          sum: '200',
           members: ['Emil', 'Ivan'],
           date: 1,
         },
         {
           title: 'Burgers',
           payer: 'Emil',
-          sum: 500,
+          sum: '500',
           members: ['Emil', 'Ivan'],
           date: 1,
         },
@@ -189,21 +189,21 @@ describe('Balance calculation functions test', function () {
         {
           title: 'Beer',
           payer: 'Emil',
-          sum: 1000,
+          sum: '1000',
           members: ['Emil', 'Ivan', 'Fedor', 'Artem', 'Mark'],
           date: 1,
         },
         {
           title: 'Burgers',
           payer: 'Fedor',
-          sum: 1000,
+          sum: '1000',
           members: ['Emil', 'Ivan', 'Fedor', 'Artem', 'Mark'],
           date: 1,
         },
         {
           title: 'Rental house',
           payer: 'Mark',
-          sum: 5000,
+          sum: '5000',
           members: ['Emil', 'Ivan', 'Fedor', 'Artem', 'Mark'],
           date: 1,
         },
@@ -237,21 +237,21 @@ describe('Balance calculation functions test', function () {
         {
           title: 'Beer',
           payer: 'Emil',
-          sum: 1000,
+          sum: '1000',
           members: ['Emil', 'Ivan', 'Fedor', 'Artem', 'Mark'],
           date: 1,
         },
         {
           title: 'Burgers',
           payer: 'Fedor',
-          sum: 1000,
+          sum: '1000',
           members: ['Emil', 'Ivan', 'Fedor', 'Artem', 'Mark'],
           date: 1,
         },
         {
           title: 'Rental house',
           payer: 'Mark',
-          sum: 5000,
+          sum: '5000',
           members: ['Emil', 'Ivan', 'Fedor', 'Artem', 'Mark'],
           date: 1,
         },
@@ -307,21 +307,21 @@ describe('Balance calculation when the payer is not included in purchase members
         {
           title: 'Smoke',
           payer: 'Emil',
-          sum: 900,
+          sum: '900',
           members: ['Ivan', 'Dima', 'Diana'],
           date: 1,
         },
         {
           title: 'Pizza',
           payer: 'Emil',
-          sum: 100,
+          sum: '100',
           members: ['Emil', 'Ivan', 'Dima', 'Diana'],
           date: 1,
         },
         {
           title: 'Tea',
           payer: 'Emil',
-          sum: 100,
+          sum: '100',
           members: ['Emil', 'Ivan', 'Dima', 'Diana'],
           date: 1,
         },

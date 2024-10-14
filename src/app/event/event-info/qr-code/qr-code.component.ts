@@ -17,7 +17,7 @@ import {
 import { EventAction, EventDto, Purchase } from '../../../../models/Event';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DataService } from '../../../../shared/data.service';
-import * as moment from 'moment';
+import moment from 'moment';
 import { LocalizationService } from '../../../../shared/localization.service';
 import { EventActionCreator } from '../../../../utils/EventActionCreator';
 import { Location } from '@angular/common';

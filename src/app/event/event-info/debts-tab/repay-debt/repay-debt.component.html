@@ -30,9 +30,7 @@
           placeholder="0.00" />
       </mat-form-field>
 
-      <div
-        *ngIf="rePayDebtForm.errors?.sumLessOrEqualDebt"
-        class="mat-form-field-invalid">
+      <div *ngIf="hasErrorSumLessOrEqualDebt" class="mat-form-field-invalid">
         {{ t('event.balance.sumLessOrEqualDebt') }}
 
         <span class="bold">

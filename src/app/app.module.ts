@@ -11,8 +11,9 @@ import {
   provideHttpClient,
   withInterceptorsFromDi,
 } from '@angular/common/http';
-import { TranslocoRootModule } from './transloco-root.module';
+import { TranslocoHttpLoader } from './transloco-loader.module';
 import { AuthModule, getAuth, provideAuth } from '@angular/fire/auth';
+import { provideTransloco } from '@ngneat/transloco';
 
 @NgModule({
   declarations: [AppComponent],
@@ -23,7 +24,6 @@ import { AuthModule, getAuth, provideAuth } from '@angular/fire/auth';
     AppRoutingModule,
     BrowserAnimationsModule,
     MatSnackBarModule,
-    TranslocoRootModule,
     AuthModule,
   ],
   providers: [
@@ -31,6 +31,15 @@ import { AuthModule, getAuth, provideAuth } from '@angular/fire/auth';
     provideFirestore(() => getFirestore()),
     provideAuth(() => getAuth()),
     provideHttpClient(withInterceptorsFromDi()),
+    provideTransloco({
+      config: {
+        availableLangs: ['en', 'ru'],
+        defaultLang: 'ru',
+        reRenderOnLangChange: true,
+        prodMode: environment.production,
+      },
+      loader: TranslocoHttpLoader,
+    }),
   ],
 })
 export class AppModule {}

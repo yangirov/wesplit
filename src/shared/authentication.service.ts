@@ -9,14 +9,17 @@ import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
 } from '@angular/fire/auth';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthenticationService {
-  currentUser$ = authState(this.auth);
+  currentUser$: Observable<any>;
 
-  constructor(private auth: Auth) {}
+  constructor(private auth: Auth) {
+    this.currentUser$ = authState(this.auth);
+  }
 
   get currentUserId(): string {
     return localStorage.getItem('uid') ?? '';
