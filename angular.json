@@ -35,12 +35,9 @@
             ],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
-              "./node_modules/cookieconsent/build/cookieconsent.min.css",
               "src/styles.scss"
             ],
-            "scripts": [
-              "./node_modules/cookieconsent/build/cookieconsent.min.js"
-            ]
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -110,12 +107,9 @@
             ],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
-              "./node_modules/cookieconsent/build/cookieconsent.min.css",
               "src/styles.scss"
             ],
-            "scripts": [
-              "./node_modules/cookieconsent/build/cookieconsent.min.js"
-            ]
+            "scripts": []
           }
         }
       }
