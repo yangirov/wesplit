@@ -1,11 +1,11 @@
 import { Component, Input } from '@angular/core';
 import { PwaInstallComponent } from '../../pwa-install/pwa-install.component';
-import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { BehaviorSubject } from 'rxjs';
 import { AuthenticationService } from '../../../../shared/authentication.service';
-import { User } from 'firebase/auth';
 import { Router } from '@angular/router';
 import isPwa from '../../../../utils/PwaExtensions';
+import { User } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-sidenav-layout',
@@ -26,7 +26,7 @@ export class SidenavLayoutComponent {
     private router: Router,
     private authService: AuthenticationService
   ) {
-    this.authService.currentUser$.subscribe((user) => {
+    this.authService.currentUser$.subscribe(user => {
       this.user = user;
     });
   }

@@ -7,18 +7,18 @@ import { EventInfoComponent } from './event-info/event-info.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
-import { MatLegacyInputModule as MatInputModule } from '@angular/material/legacy-input';
+import { MatInputModule as MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
-import { MatLegacyTabsModule as MatTabsModule } from '@angular/material/legacy-tabs';
+import { MatTabsModule as MatTabsModule } from '@angular/material/tabs';
 import { DebtItemComponent } from './event-info/debts-tab/debt-item/debt-item.component';
 import { DebtsTabComponent } from './event-info/debts-tab/debts-tab.component';
 import { EventCheckComponent } from './event-info/debts-tab/event-check/event-check.component';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { ShareEventComponent } from './event-info/share-event/share-event.component';
-import { MatLegacyDialogModule as MatDialogModule } from '@angular/material/legacy-dialog';
+import { MatDialogModule as MatDialogModule } from '@angular/material/dialog';
 import { ClipboardModule } from '@angular/cdk/clipboard';
-import { MatLegacyButtonModule as MatButtonModule } from '@angular/material/legacy-button';
+import { MatButtonModule as MatButtonModule } from '@angular/material/button';
 import { ActionsTabComponent } from './event-info/actions-tab/actions-tab.component';
 import { ActionItemComponent } from './event-info/actions-tab/action-item/action-item.component';
 import { ActionTypeComponent } from './event-info/actions-tab/action-type/action-type.component';
@@ -34,9 +34,9 @@ import { EventHeaderComponent } from './event-info/event-sidenav/event-header/ev
 import { AddMemberComponent } from './event-login/add-member/add-member.component';
 import { PwaInstallComponent } from '../base-elements/pwa-install/pwa-install.component';
 import { TranslocoModule } from '@ngneat/transloco';
-import { MatLegacyFormFieldModule as MatFormFieldModule } from '@angular/material/legacy-form-field';
+import { MatFormFieldModule as MatFormFieldModule } from '@angular/material/form-field';
 import { QrCodeComponent } from './event-info/qr-code/qr-code.component';
-import { MatLegacyCheckboxModule as MatCheckboxModule } from '@angular/material/legacy-checkbox';
+import { MatCheckboxModule as MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [

@@ -3,62 +3,8 @@ import type { VercelRequest, VercelResponse } from '@vercel/node';
 const FormData = require('form-data');
 const moment = require('moment/moment');
 const fetch = require('node-fetch');
-const firebaseAdmin = require('firebase-admin');
-
-const serviceAccount = {
-  type: 'service_account',
-  project_id: process.env.NG_APP_FIREBASE_PROJECT_ID,
-  private_key_id: process.env.NG_APP_FIREBASE_PRIVATE_KEY_ID,
-  private_key: process.env.NG_APP_FIREBASE_PRIVATE_KEY,
-  client_email: process.env.NG_APP_FIREBASE_CLIENT_EMAIL,
-  client_id: process.env.NG_APP_FIREBASE_CLIENT_ID,
-  client_x509_cert_url: process.env.NG_APP_FIREBASE_CLIENT_CERT_URL,
-  auth_uri: 'https://accounts.google.com/o/oauth2/auth',
-  token_uri: 'https://oauth2.googleapis.com/token',
-  auth_provider_x509_cert_url: 'https://www.googleapis.com/oauth2/v1/certs',
-};
-
-firebaseAdmin.initializeApp({
-  credential: firebaseAdmin.credential.cert(serviceAccount),
-});
-
-const verifyToken = async (idToken: string | undefined) => {
-  if (idToken && idToken.length) {
-    const newToken = idToken.replace('Bearer ', '');
-
-    let header = await firebaseAdmin
-      .auth()
-      .verifyIdToken(newToken)
-      .then(function (decodedToken: any) {
-        return {
-          Authorization: 'Bearer ' + decodedToken,
-        };
-      })
-      .catch((error: any) => {
-        console.log({ error });
-        return null;
-      });
-
-    return header;
-  } else {
-    return false;
-  }
-};
 
 export default async (req: VercelRequest, res: VercelResponse) => {
-  const verified = await verifyToken(req.headers.authorization);
-
-  if (!verified) {
-    if (!req.query?.questMode) {
-      console.log('No access ');
-
-      res.writeHead(500, { 'Content-Type': 'application/json' });
-      res.write(JSON.stringify({ error: 'No access' }));
-      res.end();
-      return;
-    }
-  }
-
   const { fn, i, fp, n, s, t } = req.body;
 
   const formData = new FormData();

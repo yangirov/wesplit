@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
-import { MatLegacyDialogRef as MatDialogRef } from '@angular/material/legacy-dialog';
+import {
+  UntypedFormBuilder,
+  UntypedFormGroup,
+  Validators,
+} from '@angular/forms';
+import { MatDialogRef as MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../../../../shared/authentication.service';
 import { LocalizationService } from '../../../../shared/localization.service';
@@ -68,8 +72,8 @@ export class LoginEmailComponent implements OnInit {
 
       this.authService
         .loginWitEmailAndPassword(email, password)
-        .then(async (result) => await this.successLogin(result.user.uid))
-        .catch((err) => {
+        .then(async result => await this.successLogin(result.user.uid))
+        .catch(err => {
           if (err.code == 'auth/wrong-password') {
             this.isPasswordWrong = true;
           }
@@ -79,7 +83,7 @@ export class LoginEmailComponent implements OnInit {
 
             this.authService
               .createUserWithEmailAndPassword(email, password)
-              .then(async (result) => await this.successLogin(result.user.uid))
+              .then(async result => await this.successLogin(result.user.uid))
               .catch(console.error);
           }
         })

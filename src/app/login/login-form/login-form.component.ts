@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { AuthenticationService } from '../../../shared/authentication.service';
 import { Router } from '@angular/router';
-import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
+import { MatDialog as MatDialog } from '@angular/material/dialog';
 import { NotificationService } from '../../../shared/notification.service';
 import { LocalizationService } from '../../../shared/localization.service';
 import isPwa from '../../../utils/PwaExtensions';
@@ -35,11 +35,11 @@ export class LoginFormComponent {
 
     await this.authService
       .loginWithService(service)
-      .then(async (result) => {
+      .then(async result => {
         localStorage.setItem('uid', result.user.uid);
         await this.router.navigate(['/events']);
       })
-      .catch((err) => {
+      .catch(err => {
         console.error(err);
 
         if (

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Params, Router } from '@angular/router';
 import { EventDto } from '../../../models/Event';
 import { DataService } from '../../../shared/data.service';
-import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
+import { MatDialog as MatDialog } from '@angular/material/dialog';
 import { ShareEventComponent } from './share-event/share-event.component';
 import { Title } from '@angular/platform-browser';
 import { environment } from '../../../environments/environment';
@@ -42,7 +42,7 @@ export class EventInfoComponent implements OnInit {
   async ngOnInit() {
     this.eventId = this.activateRoute.snapshot.params['id'];
     this.event$ = this.dataService.getEventById(this.eventId).pipe(
-      catchError((err) => {
+      catchError(err => {
         this.router.navigate(['/', 'events']);
         return of();
       }),
