@@ -1,3 +1,35 @@
+@use '@angular/material' as mat;
+
+@include mat.core();
+
+$light-theme: mat.m2-define-light-theme(
+  (
+    color: (
+      primary: mat.m2-define-palette(mat.$m2-indigo-palette),
+      accent: mat.m2-define-palette(mat.$m2-pink-palette),
+    ),
+  )
+);
+
+.light-mode {
+  @include mat.all-component-themes($light-theme);
+}
+
+$dark-theme: mat.m2-define-dark-theme(
+  (
+    color: (
+      primary: mat.m2-define-palette(mat.$m2-blue-grey-palette),
+      accent: mat.m2-define-palette(mat.$m2-pink-palette),
+    ),
+  )
+);
+
+.dark-mode {
+  @include mat.all-component-themes($dark-theme);
+  background-color: #333;
+  color: whitesmoke;
+}
+
 :root {
   --dark: #1d1e1f;
   --red: #f44336;
@@ -11,6 +43,13 @@
   --light-grey: #eef1f5;
   --medium-grey: #cccccc;
   --dark-grey: #4f5357;
+
+  @media (prefers-color-scheme: dark) {
+    --dark: #cccccc;
+    --grey: #cccccc;
+    --light-grey: #4f5357;
+    --medium-grey: #83888d;
+  }
 }
 
 @import '@fontsource/roboto';
@@ -49,6 +88,15 @@ body {
     align-items: center;
     justify-content: center;
     flex-direction: column;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    background: radial-gradient(
+      circle,
+      rgba(2, 0, 36, 1) 0%,
+      rgba(2, 2, 89, 1) 51%,
+      rgba(4, 93, 112, 1) 100%
+    );
   }
 }
 
