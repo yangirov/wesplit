@@ -1,4 +1,35 @@
-<div class="new-event" *ngIf="event.purchases?.length; else noPurchases">
+<div [formGroup]="sortForm" class="purchases-filter" *transloco="let t">
+  <mat-form-field class="filter-input" subscriptSizing="dynamic">
+    <mat-select formControlName="key">
+      <mat-option value="date">
+        {{ t('purchase.date') }}
+      </mat-option>
+      <mat-option value="sum">
+        {{ t('common.sum') }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field class="filter-input" subscriptSizing="dynamic">
+    <mat-select formControlName="order">
+      <mat-option value="asc">
+        {{ t('common.sort.asc') }}
+      </mat-option>
+      <mat-option value="desc">
+        {{ t('common.sort.desc') }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+
+<div class="purchases-sum" *transloco="let t">
+  <span>{{ t('common.summary') }}: </span>
+  <span>{{ allSum }}</span>
+</div>
+
+<mat-divider></mat-divider>
+
+<div class="purchases-list" *ngIf="event.purchases?.length; else noPurchases">
   <purchase-item
     *ngFor="let purchase of sortedPurchases; let i = index"
     [purchase]="purchase"

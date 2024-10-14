@@ -23,7 +23,8 @@
     "sort": {
       "asc": "By ascending",
       "desc": "By descending"
-    }
+    },
+    "summary": "Summary"
   },
   "form": {
     "isRequired": "is required.",

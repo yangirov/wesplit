@@ -20,33 +20,7 @@
 
   <mat-tab-group body mat-stretch-tabs *ngIf="event">
     <mat-tab [label]="t('event.tabs.purchases')" *transloco="let t">
-      <div [formGroup]="sortForm" class="purchases-filter">
-        <mat-form-field>
-          <mat-select formControlName="key">
-            <mat-option value="date">
-              {{ t('purchase.date') }}
-            </mat-option>
-            <mat-option value="sum">
-              {{ t('common.sum') }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-
-        <mat-form-field>
-          <mat-select formControlName="order">
-            <mat-option value="asc">
-              {{ t('common.sort.asc') }}
-            </mat-option>
-            <mat-option value="desc">
-              {{ t('common.sort.desc') }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
-
-      <purchases-tab
-        [event]="event"
-        [sortFilter]="sortForm.value"></purchases-tab>
+      <purchases-tab [event]="event"></purchases-tab>
     </mat-tab>
 
     <mat-tab [label]="t('event.tabs.balance')" *transloco="let t">
