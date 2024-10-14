@@ -1,4 +1,4 @@
-@use "@angular/material" as mat;
+@use '@angular/material' as mat;
 
 $mat-primary-scheme: mat.$indigo-palette;
 $mat-accent-scheme: mat.$pink-palette;
@@ -49,8 +49,8 @@ $app-dark-theme: mat.define-dark-theme(
   }
 }
 
-@import "~@fontsource/roboto";
-@import "~material-icons/iconfont/material-icons.css";
+@import '@fontsource/roboto';
+@import '~material-icons/iconfont/material-icons.css';
 
 html,
 body {
@@ -59,7 +59,7 @@ body {
 
 body {
   margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
 }
 
 .container {

@@ -1,11 +1,18 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { DebtDto } from '../../../../../models/Event';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import {
+  UntypedFormBuilder,
+  UntypedFormGroup,
+  Validators,
+} from '@angular/forms';
 import {
   sumGreaterZero,
   sumLessOrEqualDebt,
 } from '../../../../../utils/FormValidators';
-import { MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA, MatLegacyDialogRef as MatDialogRef } from '@angular/material/legacy-dialog';
+import {
+  MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA,
+  MatLegacyDialogRef as MatDialogRef,
+} from '@angular/material/legacy-dialog';
 import { DataService } from '../../../../../shared/data.service';
 import { EventActionCreator } from '../../../../../utils/EventActionCreator';
 import { BehaviorSubject } from 'rxjs';
@@ -71,7 +78,7 @@ export class RepayDebtComponent implements OnInit {
               currentDebtSum
             );
 
-      Promise.all<any, any, any>([
+      Promise.all([
         this.dataService.addEventAction(event.id, action),
 
         this.dataService.updateRePayedDebt(event.id, {

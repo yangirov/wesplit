@@ -16,7 +16,7 @@
     "@angular/common": "^16.2.12",
     "@angular/compiler": "^16.2.12",
     "@angular/core": "^16.2.12",
-    "@angular/fire": "^16.0.0",
+    "@angular/fire": "^7.6.1",
     "@angular/forms": "^16.2.12",
     "@angular/material": "^16.2.14",
     "@angular/platform-browser": "^16.2.12",
@@ -25,14 +25,14 @@
     "@fontsource/roboto": "^4.5.1",
     "@ngneat/transloco": "^3.1.1",
     "@vercel/analytics": "^1.0.0",
-    "firebase": "^9.1.0",
+    "firebase": "^9.22.2",
     "html5-qrcode": "^2.1.6",
     "lodash-es": "^4.17.21",
     "material-icons": "^1.10.4",
     "moment": "^2.29.4",
-    "rxfire": "^6.0.0",
+    "rxfire": "^6.0.5",
     "rxjs": "~6.6.0",
-    "tslib": "^2.3.0",
+    "tslib": "^2.7.0",
     "zone.js": "~0.13.3"
   },
   "devDependencies": {
@@ -49,8 +49,8 @@
     "@vercel/node": "^1.12.1",
     "@webcomponents/custom-elements": "^1.5.0",
     "babel-loader": "^8.2.3",
-    "firebase-admin": "^9.8.0",
-    "form-data": "^4.0.0",
+    "firebase-admin": "^9.12.0",
+    "form-data": "^4.0.1",
     "jasmine-core": "~3.8.0",
     "karma": "~6.3.16",
     "karma-chrome-launcher": "~3.1.0",
@@ -59,7 +59,7 @@
     "karma-jasmine-html-reporter": "~1.7.0",
     "node-fetch": "^2.6.7",
     "prettier": "^2.7.1",
-    "sass": "^1.47.0",
+    "sass": "^1.79.5",
     "typescript": "^4.9.3"
   }
 }

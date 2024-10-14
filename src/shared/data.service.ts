@@ -124,7 +124,7 @@ export class DataService {
       `users/${this.authService.currentUserId}/events/${eventId}/rePayedDebts`
     );
 
-    return Promise.all<void, void, void>([
+    return Promise.all([
       this.deleteCollection<EventAction>(refActions),
       this.deleteCollection<Purchase>(refPurchases),
       this.deleteCollection<RePayedDebt>(refRePayedDebts),
