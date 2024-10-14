@@ -5,7 +5,7 @@ import {
   EventDto,
   MemberDebt,
 } from '../../../../../models/Event';
-import { MatDialog } from '@angular/material/dialog';
+import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
 import { RepayDebtComponent } from '../repay-debt/repay-debt.component';
 import { DataService } from '../../../../../shared/data.service';
 import { CurrencyService } from '../../../../../shared/currency.service';

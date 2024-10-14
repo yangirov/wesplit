@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { PwaInstallComponent } from '../../pwa-install/pwa-install.component';
-import { MatDialog } from '@angular/material/dialog';
+import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
 import { BehaviorSubject } from 'rxjs';
 import { AuthenticationService } from '../../../../shared/authentication.service';
 import { User } from 'firebase/auth';

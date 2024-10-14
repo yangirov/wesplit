@@ -15,7 +15,7 @@ import {
   minMembersCountInPurchase,
   sumGreaterZero,
 } from '../../../utils/FormValidators';
-import { MatDialog } from '@angular/material/dialog';
+import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
 import { ConfirmDialogComponent } from '../../base-elements/confirm-dialog/confirm-dialog.component';
 import * as moment from 'moment';
 

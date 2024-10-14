@@ -12,7 +12,7 @@ $app-light-theme: mat.define-light-theme(
 );
 
 .light-mode {
-  @include mat.all-component-themes($app-light-theme);
+  @include mat.all-legacy-component-themes($app-light-theme);
 }
 
 $app-dark-theme: mat.define-dark-theme(
@@ -21,7 +21,7 @@ $app-dark-theme: mat.define-dark-theme(
 );
 
 .dark-mode {
-  @include mat.all-component-themes($app-dark-theme);
+  @include mat.all-legacy-component-themes($app-dark-theme);
 
   background-color: #333;
   color: whitesmoke;

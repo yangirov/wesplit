@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { EventDto } from '../../../../models/Event';
 import { DataService } from '../../../../shared/data.service';
-import { MatDialog } from '@angular/material/dialog';
+import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
 import { LocalizationService } from '../../../../shared/localization.service';
 
 @Component({

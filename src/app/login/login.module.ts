@@ -5,12 +5,12 @@ import { LoginRoutingModule } from './login-routing.module';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { BaseElementsModule } from '../base-elements/base-elements.module';
 import { TranslocoModule } from '@ngneat/transloco';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MatLegacyDialogModule as MatDialogModule } from '@angular/material/legacy-dialog';
 import { MatIconModule } from '@angular/material/icon';
-import { MatButtonModule } from '@angular/material/button';
-import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatLegacyButtonModule as MatButtonModule } from '@angular/material/legacy-button';
+import { MatLegacyFormFieldModule as MatFormFieldModule } from '@angular/material/legacy-form-field';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MatInputModule } from '@angular/material/input';
+import { MatLegacyInputModule as MatInputModule } from '@angular/material/legacy-input';
 import { LoginEmailComponent } from './login-form/login-email/login-email.component';
 
 @NgModule({

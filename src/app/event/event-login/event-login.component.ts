@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Event, EventDto } from '../../../models/Event';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DataService } from '../../../shared/data.service';
-import { MatDialog } from '@angular/material/dialog';
+import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
 import { AddMemberComponent } from './add-member/add-member.component';
 import { AuthenticationService } from '../../../shared/authentication.service';
 
