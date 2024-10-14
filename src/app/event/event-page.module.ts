@@ -35,7 +35,6 @@ import { AddMemberComponent } from './event-login/add-member/add-member.componen
 import { PwaInstallComponent } from '../base-elements/pwa-install/pwa-install.component';
 import { TranslocoModule } from '@ngneat/transloco';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatTabGroupGestureModule } from '../../utils/MatTabGroupGestureModule/mat-tab-group-gesture.module';
 import { QrCodeComponent } from './event-info/qr-code/qr-code.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { DigitOnlyModule } from '@uiowa/digit-only';
@@ -81,7 +80,6 @@ import { DigitOnlyModule } from '@uiowa/digit-only';
     MatDividerModule,
     BaseElementsModule,
     TranslocoModule,
-    MatTabGroupGestureModule,
     MatCheckboxModule,
     DigitOnlyModule,
   ],

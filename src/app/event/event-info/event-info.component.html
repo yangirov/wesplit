@@ -23,9 +23,6 @@
     body
     mat-stretch-tabs
     *ngIf="event"
-    matTabGroupGesture
-    [swipeLimitWidth]="80"
-    [connectEdges]="true"
   >
     <mat-tab [label]="t('event.tabs.purchases')" *transloco="let t">
       <purchases-tab [event]="event"></purchases-tab>
