@@ -3,7 +3,7 @@ import {
   getEventsMembersDebts,
 } from './EventBalanceCalculator';
 import { EventDto } from '../models/Event';
-import moment from 'moment';
+import { utc } from 'moment';
 
 describe('Balance calculation repayment debts test', function () {
   let event!: EventDto;
@@ -97,7 +97,7 @@ describe('Balance calculation functions test', function () {
       id: '111',
       name: 'Beer party',
       organizer: 'Emil',
-      date: moment.utc().startOf('day').valueOf(),
+      date: utc().startOf('day').valueOf(),
       purchases: [
         {
           title: 'Beer',
@@ -184,7 +184,7 @@ describe('Balance calculation functions test', function () {
       id: '111',
       name: 'Beer party',
       organizer: 'Emil',
-      date: moment.utc().startOf('day').valueOf(),
+      date: utc().startOf('day').valueOf(),
       purchases: [
         {
           title: 'Beer',
@@ -232,7 +232,7 @@ describe('Balance calculation functions test', function () {
       id: '111',
       name: 'Beer party',
       organizer: 'Emil',
-      date: moment.utc().startOf('day').valueOf(),
+      date: utc().startOf('day').valueOf(),
       purchases: [
         {
           title: 'Beer',

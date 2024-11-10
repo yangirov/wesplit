@@ -3,7 +3,7 @@ import { EventDto, Purchase } from '../../../../../models/Event';
 import { formatSum } from '../../../../../utils/Formatters';
 import { LocalizationService } from '../../../../../shared/localization.service';
 import { CurrencyService } from '../../../../../shared/currency.service';
-import moment from 'moment';
+import { utc } from 'moment';
 
 @Component({
   selector: 'purchase-item',
@@ -29,7 +29,7 @@ export class PurchaseItemComponent {
 
   get purchaseDate(): string {
     const date = this.purchase.date;
-    const formattedDate = `${moment(date).locale(this.lang).format('DD MMMM')}`;
+    const formattedDate = `${utc(date).locale(this.lang).format('DD MMMM')}`;
 
     return formattedDate;
   }

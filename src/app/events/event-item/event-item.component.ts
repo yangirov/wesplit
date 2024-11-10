@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { DebtTypes, EventDto } from '../../../models/Event';
 import { getEventBalance } from '../../../utils/EventBalanceCalculator';
 import { formatDebtType, formatSum } from '../../../utils/Formatters';
-import moment from 'moment';
+import { utc } from 'moment';
 import { DataService } from '../../../shared/data.service';
 import { LocalizationService } from '../../../shared/localization.service';
 
@@ -30,7 +30,7 @@ export class EventItemComponent implements OnInit {
     const organizer = this.dataService.getCurrentUser(id);
     const lang = this.localizationService.getActiveLang();
 
-    this.date = `${moment(date).locale(lang).format('DD MMMM')}, ${moment(date)
+    this.date = `${utc(date).locale(lang).format('DD MMMM')}, ${utc(date)
       .locale(lang)
       .format('dddd')}`;
 

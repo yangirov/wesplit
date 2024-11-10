@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { ActionTypes, EventAction } from '../../../../../models/Event';
-import moment from 'moment';
+import { utc } from 'moment';
 import { LocalizationService } from '../../../../../shared/localization.service';
 import { CurrencyService } from '../../../../../shared/currency.service';
 
@@ -41,7 +41,7 @@ export class ActionItemComponent {
     const lang = this.localizationService.getActiveLang();
 
     return this.action?.date
-      ? moment(this.action?.date).locale(lang).fromNow()
+      ? utc(this.action?.date).locale(lang).fromNow()
       : '';
   }
 }

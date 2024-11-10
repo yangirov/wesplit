@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import moment from 'moment';
+import { utc } from 'moment';
 import { Event } from '../../../../../models/Event';
 import { LocalizationService } from '../../../../../shared/localization.service';
 
@@ -20,9 +20,7 @@ export class EventHeaderComponent implements OnInit {
 
     const membersText = this.localizationService.translate('common.members');
     const memberStatus = `${this.event?.members?.length ?? 0} ${membersText}`;
-    const formattedDate = moment(this.event.date)
-      .locale(lang)
-      .format('DD MMMM');
+    const formattedDate = utc(this.event.date).locale(lang).format('DD MMMM');
 
     return `${memberStatus} • ${formattedDate}`;
   }

@@ -17,7 +17,7 @@ import {
 import { EventAction, EventDto, Purchase } from '../../../../models/Event';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DataService } from '../../../../shared/data.service';
-import moment from 'moment';
+import { utc } from 'moment';
 import { LocalizationService } from '../../../../shared/localization.service';
 import { EventActionCreator } from '../../../../utils/EventActionCreator';
 import { Location } from '@angular/common';
@@ -106,7 +106,7 @@ export class QrCodeComponent implements OnInit, AfterViewInit {
     const lang = this.localizationService.getActiveLang();
     const date = this.receipt.date;
 
-    return `${moment(date).locale(lang).format('DD MMMM')}, ${moment(date)
+    return `${utc(date).locale(lang).format('DD MMMM')}, ${utc(date)
       .locale(lang)
       .format('dddd')}`;
   }
@@ -198,7 +198,7 @@ export class QrCodeComponent implements OnInit, AfterViewInit {
       const eventPurchases = purchases.map((x: ReceiptPurchase) => {
         return {
           title: x.name,
-          date: moment(this.receipt.date).utc().valueOf(),
+          date: utc(this.receipt.date).valueOf(),
           payer: currentUser,
           sum: x.sum,
           members: this.event.members,

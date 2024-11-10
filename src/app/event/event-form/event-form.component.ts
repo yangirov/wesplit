@@ -24,7 +24,7 @@ import {
   notDeleteMemberExistedInPurchase,
   organizerInMembersValidation,
 } from '../../../utils/FormValidators';
-import moment from 'moment';
+import { utc } from 'moment';
 import { BehaviorSubject, forkJoin } from 'rxjs';
 import { EventActionCreator } from '../../../utils/EventActionCreator';
 import { ConfirmDialogComponent } from '../../base-elements/confirm-dialog/confirm-dialog.component';
@@ -179,7 +179,7 @@ export class EventFormComponent implements OnInit {
         id: '',
         name,
         organizer,
-        date: moment.utc(date).valueOf(),
+        date: utc(date).valueOf(),
         members: [
           organizer,
           ...this.members?.value
@@ -205,13 +205,13 @@ export class EventFormComponent implements OnInit {
               {
                 type: ActionTypes.CreateEvent,
                 manager: organizer,
-                date: moment().utc().valueOf(),
+                date: utc().valueOf(),
               },
               {
                 type: ActionTypes.AddMembersToEvent,
                 manager: organizer,
                 eventMembersCount: members.length,
-                date: moment().utc().valueOf(),
+                date: utc().valueOf(),
               },
             ].forEach(action => this.dataService.addEventAction(id, action));
 
