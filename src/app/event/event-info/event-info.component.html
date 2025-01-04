@@ -10,7 +10,7 @@
       <mat-icon>arrow_backward</mat-icon>
     </button>
 
-    <h1 *transloco="let t">
+    <h1 *transloco="let t" class="event-title">
       {{ event.name }}
       <span *ngIf="!(authService.currentUser$ | async)" class="event-anonymous">
         {{ t('event.anonymous') }}
