@@ -5,23 +5,19 @@ import { NotFoundPageComponent } from './base-elements/not-found-page/not-found-
 const routes: Routes = [
   {
     path: '',
-    loadChildren: () =>
-      import('./landing/landing.module').then(m => m.LandingModule),
+    loadChildren: () => import('./landing/landing.module').then(m => m.LandingModule),
   },
   {
     path: 'events',
-    loadChildren: () =>
-      import('./events/events-list.module').then(m => m.EventsListModule),
+    loadChildren: () => import('./events/events-list.module').then(m => m.EventsListModule),
   },
   {
     path: 'events',
-    loadChildren: () =>
-      import('./event/event-page.module').then(m => m.EventPageModule),
+    loadChildren: () => import('./event/event-page.module').then(m => m.EventPageModule),
   },
   {
     path: 'events/:id/purchases',
-    loadChildren: () =>
-      import('./purchase/purchase.module').then(m => m.PurchaseModule),
+    loadChildren: () => import('./purchase/purchase.module').then(m => m.PurchaseModule),
   },
   {
     path: 'login',
@@ -29,13 +25,11 @@ const routes: Routes = [
   },
   {
     path: 'settings',
-    loadChildren: () =>
-      import('./settings/settings.module').then(m => m.SettingsModule),
+    loadChildren: () => import('./settings/settings.module').then(m => m.SettingsModule),
   },
   {
     path: 'feedback',
-    loadChildren: () =>
-      import('./feedback/feedback.module').then(m => m.FeedbackModule),
+    loadChildren: () => import('./feedback/feedback.module').then(m => m.FeedbackModule),
   },
   {
     path: '**',

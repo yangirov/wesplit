@@ -1,7 +1,4 @@
-import {
-  getEventBalance,
-  getEventsMembersDebts,
-} from './EventBalanceCalculator';
+import { getEventBalance, getEventsMembersDebts } from './EventBalanceCalculator';
 import { EventDto } from '../models/Event';
 import { utc } from 'moment';
 

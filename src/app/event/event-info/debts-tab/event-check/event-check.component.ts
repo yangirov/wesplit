@@ -24,10 +24,7 @@ export class EventCheckComponent {
     const currencyText = this.currencyService.getCurrencyAcronym();
 
     return this.debts?.map(
-      debt =>
-        `${debt.from} → ${debt.to}   ${Math.abs(
-          debt?.sum || 0
-        )} ${currencyText}`
+      debt => `${debt.from} → ${debt.to}   ${Math.abs(debt?.sum || 0)} ${currencyText}`
     );
   }
 

@@ -1,9 +1,4 @@
-import {
-  ApplicationRef,
-  Injectable,
-  Renderer2,
-  RendererFactory2,
-} from '@angular/core';
+import { ApplicationRef, Injectable, Renderer2, RendererFactory2 } from '@angular/core';
 
 const DARK_MODE: string = 'dark-mode';
 const LIGHT_MODE: string = 'light-mode';
@@ -26,19 +21,17 @@ export class ThemeService {
       localStorage.setItem(USER_THEME, AUTO_MODE);
     }
 
-    window
-      .matchMedia('(prefers-color-scheme: dark)')
-      .addEventListener('change', e => {
-        const isDarkModeOn = e.matches;
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+      const isDarkModeOn = e.matches;
 
-        const isAutoMode = localStorage.getItem('user-theme') === AUTO_MODE;
-        if (isAutoMode) {
-          const theme = isDarkModeOn ? DARK_MODE : LIGHT_MODE;
-          this.update(theme);
-        }
+      const isAutoMode = localStorage.getItem('user-theme') === AUTO_MODE;
+      if (isAutoMode) {
+        const theme = isDarkModeOn ? DARK_MODE : LIGHT_MODE;
+        this.update(theme);
+      }
 
-        this.ref.tick();
-      });
+      this.ref.tick();
+    });
   }
 
   initTheme() {
@@ -50,8 +43,7 @@ export class ThemeService {
     const isAutoMode = theme === AUTO_MODE;
     if (isAutoMode) {
       const isDarkModeOn =
-        window.matchMedia &&
-        window.matchMedia('(prefers-color-scheme: dark)').matches;
+        window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
 
       theme = isDarkModeOn ? DARK_MODE : LIGHT_MODE;
     }

@@ -42,9 +42,7 @@ export class ShareEventComponent {
       .share({
         url,
         title,
-        text: `${title} | ${this.localizationService.translate(
-          'event.share.text'
-        )}`,
+        text: `${title} | ${this.localizationService.translate('event.share.text')}`,
       })
       .then(() => {})
       .catch(console.error);

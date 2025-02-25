@@ -18,10 +18,7 @@ describe('Form custom validators test', function () {
         members: formBuilder.array([]),
       },
       {
-        validators: [
-          organizerInMembersValidation(),
-          duplicateMembersValidator(),
-        ],
+        validators: [organizerInMembersValidation(), duplicateMembersValidator()],
       }
     );
 

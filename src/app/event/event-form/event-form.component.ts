@@ -9,23 +9,15 @@ import {
 import { ActivatedRoute, Router } from '@angular/router';
 import { debounceTime, pairwise, take } from 'rxjs/operators';
 import { DataService } from '../../../shared/data.service';
-import {
-  ActionTypes,
-  Event,
-  EventDto,
-  EventMember,
-} from '../../../models/Event';
-import {
-  setLocalEvents,
-  setOrganizerToLocalEvent,
-} from '../../../utils/EventLocalStorage';
+import { ActionTypes, Event, EventDto, EventMember } from '../../../models/Event';
+import { setLocalEvents, setOrganizerToLocalEvent } from '../../../utils/EventLocalStorage';
 import {
   duplicateMembersValidator,
   notDeleteMemberExistedInPurchase,
   organizerInMembersValidation,
 } from '../../../utils/FormValidators';
 import { utc } from 'moment';
-import { BehaviorSubject, forkJoin } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { EventActionCreator } from '../../../utils/EventActionCreator';
 import { ConfirmDialogComponent } from '../../base-elements/confirm-dialog/confirm-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
@@ -67,10 +59,7 @@ export class EventFormComponent implements OnInit {
         members: this.formBuilder.array([]),
       },
       {
-        validators: [
-          organizerInMembersValidation(),
-          duplicateMembersValidator(),
-        ],
+        validators: [organizerInMembersValidation(), duplicateMembersValidator()],
       }
     );
 
@@ -87,9 +76,7 @@ export class EventFormComponent implements OnInit {
           this.event = x;
           this.fillFormFromEvent();
           this.subscribeMembersChanges();
-          this.eventForm.addValidators(
-            notDeleteMemberExistedInPurchase(this.event)
-          );
+          this.eventForm.addValidators(notDeleteMemberExistedInPurchase(this.event));
 
           this.hasRePayedDebts = x.rePayedDebts?.length > 0;
           if (this.hasRePayedDebts) {
@@ -126,9 +113,7 @@ export class EventFormComponent implements OnInit {
     });
 
     this.fillFormArray(
-      members
-        .filter(x => x !== organizer)
-        .map(name => this.formBuilder.group({ name })) || []
+      members.filter(x => x !== organizer).map(name => this.formBuilder.group({ name })) || []
     );
   }
 
@@ -140,10 +125,7 @@ export class EventFormComponent implements OnInit {
     this.members?.valueChanges
       .pipe(debounceTime(100), pairwise())
       .subscribe(([prev, curr]: [EventMember[], EventMember[]]) => {
-        if (
-          prev[prev.length - 1].name === '' &&
-          curr[curr.length - 1].name !== ''
-        ) {
+        if (prev[prev.length - 1].name === '' && curr[curr.length - 1].name !== '') {
           this.addMember();
         }
 
@@ -198,8 +180,7 @@ export class EventFormComponent implements OnInit {
         await this.dataService
           .addEvent(event)
           .then(async (res: any) => {
-            const id =
-              res._key.path.segments[res._key.path.segments.length - 1];
+            const id = res._key.path.segments[res._key.path.segments.length - 1];
 
             [
               {

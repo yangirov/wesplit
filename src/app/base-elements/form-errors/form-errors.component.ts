@@ -18,9 +18,7 @@ export class FormErrorsComponent implements OnInit {
   ngOnInit(): void {}
 
   errorText(key: string): string {
-    return (
-      this.localizationService.translate(`${this.localization}.${key}`) ?? ''
-    );
+    return this.localizationService.translate(`${this.localization}.${key}`) ?? '';
   }
 
   formHasError(key: string): boolean {

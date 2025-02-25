@@ -39,15 +39,13 @@ export class EventLoginComponent implements OnInit {
         .catch(console.error);
     }
 
-    this.dataService
-      .getEventById(this.eventId, this.userId)
-      .subscribe(async (event: EventDto) => {
-        if (event) {
-          this.event = event;
-        } else {
-          await this.router.navigate(['/', 'events']);
-        }
-      });
+    this.dataService.getEventById(this.eventId, this.userId).subscribe(async (event: EventDto) => {
+      if (event) {
+        this.event = event;
+      } else {
+        await this.router.navigate(['/', 'events']);
+      }
+    });
   }
 
   openDialog(): void {

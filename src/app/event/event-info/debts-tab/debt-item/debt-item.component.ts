@@ -1,10 +1,5 @@
 import { Component, Input } from '@angular/core';
-import {
-  DebtDto,
-  DebtTypes,
-  EventDto,
-  MemberDebt,
-} from '../../../../../models/Event';
+import { DebtDto, DebtTypes, EventDto, MemberDebt } from '../../../../../models/Event';
 import { MatDialog } from '@angular/material/dialog';
 import { RepayDebtComponent } from '../repay-debt/repay-debt.component';
 import { DataService } from '../../../../../shared/data.service';

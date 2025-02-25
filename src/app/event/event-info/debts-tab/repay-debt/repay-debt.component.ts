@@ -1,14 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { DebtDto } from '../../../../../models/Event';
-import {
-  UntypedFormBuilder,
-  UntypedFormGroup,
-  Validators,
-} from '@angular/forms';
-import {
-  sumGreaterZero,
-  sumLessOrEqualDebt,
-} from '../../../../../utils/FormValidators';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { sumGreaterZero, sumLessOrEqualDebt } from '../../../../../utils/FormValidators';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { DataService } from '../../../../../shared/data.service';
 import { EventActionCreator } from '../../../../../utils/EventActionCreator';
@@ -38,16 +31,10 @@ export class RepayDebtComponent implements OnInit {
   ngOnInit(): void {
     this.rePayDebtForm = this.formBuilder.group(
       {
-        sum: [
-          this.payload.debt.sum || 0,
-          Validators.compose([Validators.required]),
-        ],
+        sum: [this.payload.debt.sum || 0, Validators.compose([Validators.required])],
       },
       {
-        validators: [
-          sumGreaterZero(),
-          sumLessOrEqualDebt(this.payload.debt.sum),
-        ],
+        validators: [sumGreaterZero(), sumLessOrEqualDebt(this.payload.debt.sum)],
       }
     );
   }
@@ -64,16 +51,8 @@ export class RepayDebtComponent implements OnInit {
 
       const action =
         Math.abs(currentDebtSum) === debt.sum
-          ? this.eventActionCreator.giveBack(
-              currentUser,
-              debt.from,
-              currentDebtSum
-            )
-          : this.eventActionCreator.giveBackPartially(
-              currentUser,
-              debt.from,
-              currentDebtSum
-            );
+          ? this.eventActionCreator.giveBack(currentUser, debt.from, currentDebtSum)
+          : this.eventActionCreator.giveBackPartially(currentUser, debt.from, currentDebtSum);
 
       Promise.all([
         this.dataService.addEventAction(event.id, action),

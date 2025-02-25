@@ -54,10 +54,7 @@ export class PurchasesTabComponent implements OnInit {
   }
 
   get allSum() {
-    const sum = this.event.purchases.reduce(
-      (acc, p) => acc + parseFloat(p.sum),
-      0
-    );
+    const sum = this.event.purchases.reduce((acc, p) => acc + parseFloat(p.sum), 0);
 
     const formatedSum = formatSum(this.lang, Number(sum));
     const currency = this.currencyService.getCurrencyAcronym();

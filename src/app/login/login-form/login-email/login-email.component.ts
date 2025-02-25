@@ -1,10 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import {
-  UntypedFormBuilder,
-  UntypedFormGroup,
-  Validators,
-} from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../../../../shared/authentication.service';
@@ -35,10 +31,7 @@ export class LoginEmailComponent implements OnInit {
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group(
       {
-        email: [
-          '',
-          Validators.compose([Validators.required, Validators.email]),
-        ],
+        email: ['', Validators.compose([Validators.required, Validators.email])],
         password: [
           '',
           Validators.compose([
@@ -57,10 +50,7 @@ export class LoginEmailComponent implements OnInit {
       this.formErrors = [];
       this.isPasswordWrong = false;
 
-      this.formErrors = calculateFormValidationErrors(
-        this.loginForm,
-        translation
-      );
+      this.formErrors = calculateFormValidationErrors(this.loginForm, translation);
     });
   }
 

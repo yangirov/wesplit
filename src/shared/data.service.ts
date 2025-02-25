@@ -1,33 +1,24 @@
 import { Injectable } from '@angular/core';
-import {
-  Event,
-  EventAction,
-  EventDto,
-  Purchase,
-  RePayedDebt,
-} from '../models/Event';
-import {
-  getLocalEvents,
-  setOrganizerToLocalEvent,
-} from '../utils/EventLocalStorage';
+import { Event, EventAction, EventDto, Purchase, RePayedDebt } from '../models/Event';
+import { getLocalEvents, setOrganizerToLocalEvent } from '../utils/EventLocalStorage';
 import { Feedback } from '../models/Feedback';
 import {
   addDoc,
   collection,
   collectionData,
+  CollectionReference,
   deleteDoc,
   doc,
   docData,
   Firestore,
   getDocs,
+  orderBy,
   query,
   updateDoc,
   where,
-  CollectionReference,
-  orderBy,
 } from '@angular/fire/firestore';
-import { map, mergeMap, take } from 'rxjs/operators';
-import { forkJoin, from, Observable, throwError } from 'rxjs';
+import { map, take } from 'rxjs/operators';
+import { forkJoin, Observable, throwError } from 'rxjs';
 import { AuthenticationService } from './authentication.service';
 
 @Injectable({
@@ -57,10 +48,7 @@ export class DataService {
     return collectionData(ref, { idField: 'id' }) as Observable<EventDto[]>;
   }
 
-  getEventById(
-    eventId: string,
-    customUserId: string = ''
-  ): Observable<EventDto> {
+  getEventById(eventId: string, customUserId: string = ''): Observable<EventDto> {
     const userId = customUserId ? customUserId : this.authService.currentUserId;
 
     if (!userId) {
@@ -88,18 +76,12 @@ export class DataService {
   }
 
   async addEvent(event: Event) {
-    const ref = collection(
-      this.firestore,
-      `users/${this.authService.currentUserId}/events`
-    );
+    const ref = collection(this.firestore, `users/${this.authService.currentUserId}/events`);
     return await addDoc(ref, event);
   }
 
   async updateEvent(event: Event) {
-    const ref = doc(
-      this.firestore,
-      `users/${this.authService.currentUserId}/events/${event.id}`
-    );
+    const ref = doc(this.firestore, `users/${this.authService.currentUserId}/events/${event.id}`);
     return await updateDoc(ref, { ...event });
   }
 
@@ -155,10 +137,7 @@ export class DataService {
   }
 
   getPurchases(eventId: string, userId: string) {
-    const collectionRef = collection(
-      this.firestore,
-      `users/${userId}/events/${eventId}/purchases`
-    );
+    const collectionRef = collection(this.firestore, `users/${userId}/events/${eventId}/purchases`);
 
     const ref = query(collectionRef, orderBy('date', 'desc'));
     return collectionData(ref, { idField: 'id' }) as Observable<Purchase[]>;
@@ -172,11 +151,7 @@ export class DataService {
     return await addDoc(ref, purchase);
   }
 
-  async updatePurchase(
-    eventId: string,
-    purchaseId: string,
-    purchase: Purchase
-  ) {
+  async updatePurchase(eventId: string, purchaseId: string, purchase: Purchase) {
     const ref = doc(
       this.firestore,
       `users/${this.authService.currentUserId}/events/${eventId}/purchases/${purchaseId}`
@@ -193,10 +168,7 @@ export class DataService {
   }
 
   getActions(eventId: string, userId: string) {
-    const collectionRef = collection(
-      this.firestore,
-      `users/${userId}/events/${eventId}/actions`
-    );
+    const collectionRef = collection(this.firestore, `users/${userId}/events/${eventId}/actions`);
 
     const ref = query(collectionRef, orderBy('date', 'asc'));
     return collectionData(ref, { idField: 'id' }) as Observable<EventAction[]>;
@@ -211,10 +183,7 @@ export class DataService {
   }
 
   getRePayedDebts(eventId: string, userId: string) {
-    const ref = collection(
-      this.firestore,
-      `users/${userId}/events/${eventId}/rePayedDebts`
-    );
+    const ref = collection(this.firestore, `users/${userId}/events/${eventId}/rePayedDebts`);
     return collectionData(ref, { idField: 'id' }) as Observable<RePayedDebt[]>;
   }
 
