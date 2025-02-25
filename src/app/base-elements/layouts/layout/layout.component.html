@@ -1,15 +1,15 @@
-<div *ngIf="loading$ | async; else form">
-  <spinner></spinner>
-</div>
-
-<ng-template #form>
+@if (loading$ | async) {
+  <div>
+    <spinner></spinner>
+  </div>
+} @else {
   <header>
     <mat-toolbar color="primary">
       <ng-content select="[header]"></ng-content>
     </mat-toolbar>
   </header>
-
   <main class="container">
     <ng-content select="[body]"></ng-content>
   </main>
-</ng-template>
+}
+

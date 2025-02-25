@@ -16,12 +16,13 @@
   </div>
 
   <div body>
-    <form-errors
-      *ngIf="isEdit && hasRePayedDebts"
-      class="hasRePayedDebts"
-      [errors]="['afterStartRepayDebts']"
-      localization="event.form"
-      [force]="true"></form-errors>
+    @if (isEdit && hasRePayedDebts) {
+      <form-errors
+        class="hasRePayedDebts"
+        [errors]="['afterStartRepayDebts']"
+        localization="event.form"
+        [force]="true"></form-errors>
+    }
 
     <form [formGroup]="eventForm" (ngSubmit)="onSubmit()" id="eventForm">
       <mat-form-field class="full-width">
@@ -61,29 +62,29 @@
         localization="event.form"></form-errors>
 
       <div formArrayName="members">
-        <mat-form-field
-          class="full-width"
-          *ngFor="let member of members.controls; let i = index"
-          [formGroupName]="i">
-          <input
-            matInput
-            formControlName="name"
-            [placeholder]="t('common.addMember')" />
-        </mat-form-field>
+        @for (member of members.controls; track member; let i = $index) {
+          <mat-form-field class="full-width" [formGroupName]="i">
+            <input
+              matInput
+              formControlName="name"
+              [placeholder]="t('common.addMember')" />
+          </mat-form-field>
+        }
       </div>
     </form>
 
-    <div *ngIf="isEdit">
-      <separator position="outer"></separator>
-
-      <button
-        class="delete-event-button"
-        (click)="onDeleteEvent()"
-        mat-raised-button
-        color="basic"
-        [disabled]="hasRePayedDebts">
-        <mat-icon>close</mat-icon>{{ t('event.delete') }}
-      </button>
-    </div>
+    @if (isEdit) {
+      <div>
+        <separator position="outer"></separator>
+        <button
+          class="delete-event-button"
+          (click)="onDeleteEvent()"
+          mat-raised-button
+          color="basic"
+          [disabled]="hasRePayedDebts">
+          <mat-icon>close</mat-icon>{{ t('event.delete') }}
+        </button>
+      </div>
+    }
   </div>
 </app-layout>

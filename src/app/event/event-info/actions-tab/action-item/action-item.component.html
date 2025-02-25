@@ -9,19 +9,27 @@
       <div class="event-action__text-wrapper">
         <action-type [action]="action"></action-type>
       </div>
-      <div class="event-action__sum" *ngIf="action.sum">
-        {{ action.sum }} {{ currencyService.getCurrencyAcronym() }}
-      </div>
-      <div class="event-action__debt-sum" *ngIf="action.debtSum">
-        <mat-icon>arrow_forward</mat-icon>
-        <span>
-          {{ action.debtSum }} {{ currencyService.getCurrencyAcronym() }}
-        </span>
-      </div>
+      @if (action.sum;as  sum) {
+        <div class="event-action__sum">
+          {{ sum }} {{ currencyService.getCurrencyAcronym() }}
+        </div>
+      }
+
+      @if (action.debtSum;as  debtSum) {
+        <div class="event-action__debt-sum">
+          <mat-icon>arrow_forward</mat-icon>
+          <span>
+            {{ debtSum }} {{ currencyService.getCurrencyAcronym() }}
+          </span>
+        </div>
+      }
     </div>
-    <div class="event-action__date" *ngIf="action.date">
-      {{ actionDate }}
-    </div>
+
+    @if (action.date) {
+      <div class="event-action__date">
+        {{ actionDate }}
+      </div>
+    }
   </div>
 </div>
 

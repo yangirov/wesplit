@@ -11,42 +11,46 @@
   </div>
 
   <div body>
-    <div class="receipt" *ngIf="receipt">
-      <form-errors
-        class="receipt-form_errors"
-        [form]="receiptForm"
-        [errors]="['minLengthArray', 'minPurchaseInReceipt']"
+    @if (receipt) {
+      <div class="receipt">
+        <form-errors
+          class="receipt-form_errors"
+          [form]="receiptForm"
+          [errors]="['minLengthArray', 'minPurchaseInReceipt']"
         localization="event.qr-receipt"></form-errors>
-
-      <div class="receipt-header">
-        <span class="receipt-header__date">
-          {{ receiptDate }}
-        </span>
-        <span class="receipt-header__total-sum">
-          {{ receiptTotalSum }}
-        </span>
-      </div>
-
-      <form [formGroup]="receiptForm" (ngSubmit)="onSubmit()" id="receiptForm">
-        <div formArrayName="purchases">
-          <div
-            *ngFor="let purchase of purchases.controls; let i = index"
-            [formGroupName]="i">
-            <mat-checkbox color="primary" formControlName="selected">
-              <div class="receipt-item">
-                <span class="name">
-                  {{ purchase.get('name')?.value }}
-                </span>
-                <span class="sum">
-                  {{ purchase.get('sum')?.value }}
-                </span>
-              </div>
-            </mat-checkbox>
-          </div>
+        <div class="receipt-header">
+          <span class="receipt-header__date">
+            {{ receiptDate }}
+          </span>
+          <span class="receipt-header__total-sum">
+            {{ receiptTotalSum }}
+          </span>
         </div>
-      </form>
-    </div>
+
+        <form [formGroup]="receiptForm" (ngSubmit)="onSubmit()" id="receiptForm">
+          <div formArrayName="purchases">
+            @for (purchaseControl of purchases.controls; track purchaseControl; let i = $index) {
+              <div
+                [formGroupName]="i">
+                <mat-checkbox color="primary" formControlName="selected">
+                  <div class="receipt-item">
+                    <span class="name">
+                      {{ purchaseControl.get('name')?.value }}
+                    </span>
+                    <span class="sum">
+                      {{ purchaseControl.get('sum')?.value }}
+                    </span>
+                  </div>
+                </mat-checkbox>
+              </div>
+            }
+          </div>
+        </form>
+      </div>
+    }
   </div>
 </app-layout>
 
-<div id="qr-reader" *ngIf="!isSuccessScan"></div>
+@if (!isSuccessScan) {
+  <div id="qr-reader"></div>
+}

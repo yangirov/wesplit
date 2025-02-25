@@ -1,12 +1,14 @@
-<div *ngIf="event.actions?.length; else noActions">
-  <action-item
-    *ngFor="let action of event.actions"
-    [action]="action"></action-item>
-</div>
-
-<ng-template #noActions>
+@if (event.actions?.length) {
+  <div>
+    @for (action of event.actions; track action.id) {
+      <action-item
+      [action]="action"></action-item>
+    }
+  </div>
+} @else {
   <empty-items
     icon="history"
     *transloco="let t"
-    [text]="t('event.actions.empty')"></empty-items>
-</ng-template>
+  [text]="t('event.actions.empty')"></empty-items>
+}
+

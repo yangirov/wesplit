@@ -12,23 +12,24 @@
     <ng-content select="[sidenav]"></ng-content>
 
     <mat-list class="sidenav-menu">
-      <mat-list-item class="sidenav-menu__item" *ngIf="user">
-        <mat-icon>person</mat-icon>
-        {{ user.displayName ?? user.email }}
-      </mat-list-item>
+      @if (user) {
+        <mat-list-item class="sidenav-menu__item">
+          <mat-icon>person</mat-icon>
+          {{ user.displayName ?? user.email }}
+        </mat-list-item>
+      } @else if (!user) {
+        <mat-list-item [routerLink]="['/login']" class="sidenav-menu__item">
+          <mat-icon>login</mat-icon>
+          {{ t('auth.login.title') }}
+        </mat-list-item>
+      }
 
-      <mat-list-item
-        [routerLink]="['/login']"
-        class="sidenav-menu__item"
-        *ngIf="!user">
-        <mat-icon>login</mat-icon>
-        {{ t('auth.login.title') }}
-      </mat-list-item>
-
-      <mat-list-item (click)="logout()" class="sidenav-menu__item" *ngIf="user">
-        <mat-icon>exit_to_app</mat-icon>
-        {{ t('auth.logout.title') }}
-      </mat-list-item>
+      @if (user) {
+        <mat-list-item (click)="logout()" class="sidenav-menu__item">
+          <mat-icon>exit_to_app</mat-icon>
+          {{ t('auth.logout.title') }}
+        </mat-list-item>
+      }
 
       <mat-divider></mat-divider>
 
@@ -42,37 +43,33 @@
         {{ t('feedback.title') }}
       </mat-list-item>
 
-      <mat-list-item
-        (click)="openPwaDialog()"
-        class="sidenav-menu__item"
-        *ngIf="!isPwa()">
-        <mat-icon>add_to_home_screen</mat-icon>
-        {{ t('homeScreen.title') }}
-      </mat-list-item>
+      @if (!isPwa()) {
+        <mat-list-item (click)="openPwaDialog()" class="sidenav-menu__item">
+          <mat-icon>add_to_home_screen</mat-icon>
+          {{ t('homeScreen.title') }}
+        </mat-list-item>
+      }
     </mat-list>
   </mat-sidenav>
 
   <mat-sidenav-content class="sidenav-content">
-    <div *ngIf="loading$ | async; else content">
-      <spinner></spinner>
-    </div>
-
-    <ng-template #content>
+    @if (loading$ | async) {
+      <div>
+        <spinner></spinner>
+      </div>
+    } @else {
       <header>
         <mat-toolbar color="primary">
           <ng-content select="[header]"></ng-content>
-
           <span class="spacer"></span>
-
           <button mat-icon-button (click)="opened = !opened">
             <mat-icon>menu</mat-icon>
           </button>
         </mat-toolbar>
       </header>
-
       <main>
         <ng-content select="[body]"></ng-content>
       </main>
-    </ng-template>
+    }
   </mat-sidenav-content>
 </mat-sidenav-container>

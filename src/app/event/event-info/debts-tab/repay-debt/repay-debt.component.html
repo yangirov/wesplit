@@ -30,13 +30,15 @@
           placeholder="0.00" />
       </mat-form-field>
 
-      <div *ngIf="hasErrorSumLessOrEqualDebt" class="mat-form-field-invalid">
-        {{ t('event.balance.sumLessOrEqualDebt') }}
+      @if (hasErrorSumLessOrEqualDebt) {
+        <div class="mat-form-field-invalid">
+          {{ t('event.balance.sumLessOrEqualDebt') }}
 
-        <span class="bold">
-          {{ this.payload.debt.sum }} {{ currencyService.getCurrencyAcronym() }}
-        </span>
-      </div>
+          <span class="bold">
+            {{ this.payload.debt.sum }} {{ currencyService.getCurrencyAcronym() }}
+          </span>
+        </div>
+      }
     </form>
   </div>
 

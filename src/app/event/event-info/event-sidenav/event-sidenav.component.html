@@ -1,8 +1,10 @@
 <div class="sidenav" *transloco="let t">
   <header class="sidenav_header">
-    <button *ngIf="!hasRePayedDebts" [routerLink]="['edit']" mat-icon-button>
-      <mat-icon>edit</mat-icon>
-    </button>
+    @if (!hasRePayedDebts) {
+      <button [routerLink]="['edit']" mat-icon-button>
+        <mat-icon>edit</mat-icon>
+      </button>
+    }
 
     <button (click)="openShareModal()" mat-icon-button>
       <mat-icon>share</mat-icon>
@@ -22,9 +24,12 @@
       <div class="members_title">
         {{ t('event.sidenav.members') }}
       </div>
-      <div class="members_item" *ngFor="let member of event.members">
-        {{ getMemberName(member) }}
-      </div>
+
+      @for (member of event.members; track member) {
+        <div class="members_item">
+          {{ getMemberName(member) }}
+        </div>
+      }
     </div>
 
     <mat-divider></mat-divider>

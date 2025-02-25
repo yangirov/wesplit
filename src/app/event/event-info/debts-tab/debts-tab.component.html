@@ -1,42 +1,50 @@
-<div *ngIf="allDebts?.length">
-  <event-check [debts]="allDebts"></event-check>
+@if (allDebts?.length) {
+  <div>
+    <event-check [debts]="allDebts"></event-check>
+    <separator></separator>
+    <div class="title_wrapper" *transloco="let t">
+      <grey-title [text]="t('event.balance.currentDebts')"></grey-title>
+    </div>
 
-  <separator></separator>
+    @for (positiveDebt of positiveDebts; track positiveDebt) {
+      <div>
+        <debt-item
+          [event]="event"
+          [debt]="positiveDebt"
+        [debtType]="debtTypes.Positive"></debt-item>
+      </div>
+    }
 
-  <div class="title_wrapper" *transloco="let t">
-    <grey-title [text]="t('event.balance.currentDebts')"></grey-title>
+    @for (negativeDebt of negativeDebts; track negativeDebt) {
+      <div>
+        <debt-item
+          [event]="event"
+          [debt]="negativeDebt"
+        [debtType]="debtTypes.Negative"></debt-item>
+      </div>
+    }
+
+    @for (otherDebt of othersDebts; track otherDebt) {
+      <div>
+        <debt-item
+          [event]="event"
+          [debt]="otherDebt"
+        [debtType]="debtTypes.Neutral"></debt-item>
+      </div>
+    }
   </div>
-
-  <div *ngFor="let debt of positiveDebts">
-    <debt-item
-      [event]="event"
-      [debt]="debt"
-      [debtType]="debtTypes.Positive"></debt-item>
-  </div>
-
-  <div *ngFor="let debt of negativeDebts">
-    <debt-item
-      [event]="event"
-      [debt]="debt"
-      [debtType]="debtTypes.Negative"></debt-item>
-  </div>
-
-  <div *ngFor="let debt of othersDebts">
-    <debt-item
-      [event]="event"
-      [debt]="debt"
-      [debtType]="debtTypes.Neutral"></debt-item>
-  </div>
-</div>
+}
 
 <div *transloco="let t">
-  <empty-items
-    *ngIf="allDebts.length === 0 && !hasReturnedDebts"
-    icon="add_shopping_cart"
+  @if (allDebts.length === 0 && !hasReturnedDebts) {
+    <empty-items
+      icon="add_shopping_cart"
     [text]="t('event.balance.empty')"></empty-items>
+  }
 
-  <empty-items
-    *ngIf="allDebts.length === 0 && hasReturnedDebts"
-    icon="check"
+  @if (allDebts.length === 0 && hasReturnedDebts) {
+    <empty-items
+      icon="check"
     [text]="t('event.balance.allDebtsRePayed')"></empty-items>
+  }
 </div>

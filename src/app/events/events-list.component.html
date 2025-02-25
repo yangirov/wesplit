@@ -3,18 +3,22 @@
     <h1 class="header-title">{{ t('events-list.title') }}</h1>
   </div>
 
-  <div body *ngIf="events$ | async as events">
-    <div *ngIf="events.length; else noEvents">
-      <event-item *ngFor="let event of events" [event]="event"></event-item>
-    </div>
-
-    <ng-template #noEvents>
-      <empty-items
-        icon="event"
-        *transloco="let t"
+  @if (events$ | async; as events) {
+    <div body>
+      @if (events.length) {
+        <div>
+          @for (event of events; track event.id) {
+            <event-item [event]="event"></event-item>
+          }
+        </div>
+      } @else {
+        <empty-items
+          icon="event"
+          *transloco="let t"
         [text]="t('events-list.noEvents')"></empty-items>
-    </ng-template>
+      }
 
-    <fab-button link="/events/new" icon="add"></fab-button>
-  </div>
+      <fab-button link="/events/new" icon="add"></fab-button>
+    </div>
+  }
 </app-sidenav-layout>

@@ -1,135 +1,163 @@
 <div *transloco="let t">
-  <div *ngIf="action.type === actionTypes.CreateEvent">
-    <p class="event-action__text">
-      <b class="event-action__text_bold">{{ action.manager }}</b>
-      {{ t('action.eventCreated') }}
-    </p>
-  </div>
+  @switch (action.type) {
+    @case (actionTypes.CreateEvent) {
+      <div>
+        <p class="event-action__text">
+          <b class="event-action__text_bold">{{ action.manager }}</b>
+          {{ t('action.eventCreated') }}
+        </p>
+      </div>
+    }
 
-  <div *ngIf="action.type === actionTypes.ChangeEventName">
-    <p class="event-action__text">
-      <b class="event-action__text_bold">{{ action.currentUser }}</b>
-      {{ t('action.eventNameChanged') }}
-      <b class="event-action__text_bold"> {{ action.eventName }}</b>
-    </p>
-  </div>
+    @case (actionTypes.ChangeEventName) {
+      <div>
+        <p class="event-action__text">
+          <b class="event-action__text_bold">{{ action.currentUser }}</b>
+          {{ t('action.eventNameChanged') }}
+          <b class="event-action__text_bold"> {{ action.eventName }}</b>
+        </p>
+      </div>
+    }
 
-  <div *ngIf="action.type === actionTypes.ChangeEventDate">
-    <p class="event-action__text">
-      <b class="event-action__text_bold">{{ action.currentUser }}</b>
-      {{ t('action.eventDateChanged') }}
-      <b class="event-action__text_bold"> {{ action.date }}</b>
-    </p>
-  </div>
+    @case (actionTypes.ChangeEventDate) {
+      <div>
+        <p class="event-action__text">
+          <b class="event-action__text_bold">{{ action.currentUser }}</b>
+          {{ t('action.eventDateChanged') }}
+          <b class="event-action__text_bold"> {{ action.date }}</b>
+        </p>
+      </div>
+    }
 
-  <div *ngIf="action.type === actionTypes.AddMemberToEvent">
-    <p class="event-action__text">
-      <b class="event-action__text_bold">{{ action.currentUser }}</b>
-      {{ t('action.addToEvent') }}
-      <b class="event-action__text_bold"> {{ action.memberName }}</b>
-    </p>
-  </div>
+    @case (actionTypes.AddMemberToEvent) {
+      <div>
+        <p class="event-action__text">
+          <b class="event-action__text_bold">{{ action.currentUser }}</b>
+          {{ t('action.addToEvent') }}
+          <b class="event-action__text_bold"> {{ action.memberName }}</b>
+        </p>
+      </div>
+    }
 
-  <div *ngIf="action.type === actionTypes.AddMembersToEvent">
-    <p class="event-action__text">
-      <b class="event-action__text_bold">{{ action.manager }}</b>
-      {{ t('action.add') }}
-      <b class="event-action__text_bold">{{ action.eventMembersCount }}</b>
-      {{ t('action.peoplesToEvent') }}
-    </p>
-  </div>
+    @case (actionTypes.AddMembersToEvent) {
+      <div>
+        <p class="event-action__text">
+          <b class="event-action__text_bold">{{ action.manager }}</b>
+          {{ t('action.add') }}
+          <b class="event-action__text_bold">{{ action.eventMembersCount }}</b>
+          {{ t('action.peoplesToEvent') }}
+        </p>
+      </div>
+    }
 
-  <div *ngIf="action.type === actionTypes.RemoveMemberFromEvent">
-    <p class="event-action__text">
-      <b class="event-action__text_bold">{{ action.currentUser }}</b>
-      {{ t('action.exclude') }}
-      <b class="event-action__text_bold"> {{ action.memberName }}</b>
-      {{ t('action.fromTheEvent') }}
-    </p>
-  </div>
+    @case (actionTypes.RemoveMemberFromEvent) {
+      <div>
+        <p class="event-action__text">
+          <b class="event-action__text_bold">{{ action.currentUser }}</b>
+          {{ t('action.exclude') }}
+          <b class="event-action__text_bold"> {{ action.memberName }}</b>
+          {{ t('action.fromTheEvent') }}
+        </p>
+      </div>
+    }
 
-  <div *ngIf="action.type === actionTypes.AddPurchase">
-    <p class="event-action__text">
-      <b class="event-action__text_bold">{{ action.currentUser }}</b>
-      {{ t('action.addPurchase') }}
-      <b class="event-action__text_bold"> {{ action.purchaseName }}</b>
-      {{ t('action.onSum') }} {{ action.sum }}
-    </p>
-  </div>
+    @case (actionTypes.AddPurchase) {
+      <div>
+        <p class="event-action__text">
+          <b class="event-action__text_bold">{{ action.currentUser }}</b>
+          {{ t('action.addPurchase') }}
+          <b class="event-action__text_bold"> {{ action.purchaseName }}</b>
+          {{ t('action.onSum') }} {{ action.sum }}
+        </p>
+      </div>
+    }
 
-  <div *ngIf="action.type === actionTypes.DeletePurchase">
-    <p class="event-action__text">
-      <b class="event-action__text_bold">{{ action.currentUser }}</b>
-      {{ t('action.deletePurchase') }}
-      <b class="event-action__text_bold"> {{ action.purchaseName }}</b>
-    </p>
-  </div>
+    @case (actionTypes.DeletePurchase) {
+      <div>
+        <p class="event-action__text">
+          <b class="event-action__text_bold">{{ action.currentUser }}</b>
+          {{ t('action.deletePurchase') }}
+          <b class="event-action__text_bold"> {{ action.purchaseName }}</b>
+        </p>
+      </div>
+    }
 
-  <div *ngIf="action.type === actionTypes.AddMembersToPurchase">
-    <p class="event-action__text">
-      <b class="event-action__text_bold">{{ action.currentUser }}</b>
-      {{ t('action.add') }}
-      <b class="event-action__text_bold">{{ action.purchaseMembersCount }}</b>
-      {{ t('action.peoplesToPurchase') }}
-      <b class="event-action__text_bold"> {{ action.purchaseName }}</b>
-    </p>
-  </div>
+    @case (actionTypes.AddMembersToPurchase) {
+      <div>
+        <p class="event-action__text">
+          <b class="event-action__text_bold">{{ action.currentUser }}</b>
+          {{ t('action.add') }}
+          <b class="event-action__text_bold">
+            {{ action.purchaseMembersCount }}
+          </b>
+          {{ t('action.peoplesToPurchase') }}
+          <b class="event-action__text_bold">{{ action.purchaseName }}</b>
+        </p>
+      </div>
+    }
 
-  <div *ngIf="action.type === actionTypes.AddMemberToPurchase">
-    <span
-      *ngIf="action.payerName === action.currentUser"
-      class="event-action__text">
-      {{ t('action.myself') }}
-    </span>
-    <span
-      *ngIf="action.payerName !== action.currentUser"
-      class="event-action__text_bold">
-      {{ action.payerName }}
-    </span>
+    @case (actionTypes.AddMemberToPurchase) {
+      <div>
+        @if (action.payerName === action.currentUser) {
+          <span class="event-action__text">
+            {{ t('action.myself') }}
+          </span>
+        }
+        @if (action.payerName !== action.currentUser) {
+          <span class="event-action__text_bold">
+            {{ action.payerName }}
+          </span>
+        }
+        <p class="event-action__text">
+          <b class="event-action__text_bold">{{ action.currentUser }}</b>
+          {{ t('action.add') }} {{ action.payerName }}
+          {{ t('action.inPurchase') }}
+          <b class="event-action__text_bold">{{ action.purchaseName }}</b>
+        </p>
+      </div>
+    }
 
-    <p class="event-action__text">
-      <b class="event-action__text_bold">{{ action.currentUser }}</b>
-      {{ t('action.add') }} {{ action.payerName }}
-      {{ t('action.inPurchase') }}
-      <b class="event-action__text_bold">{{ action.purchaseName }}</b>
-    </p>
-  </div>
+    @case (actionTypes.RemoveMemberFromPurchase) {
+      <div>
+        @if (action.payerName === action.currentUser) {
+          <span class="event-action__text">
+            {{ t('action.myself') }}
+          </span>
+        }
+        @if (action.payerName !== action.currentUser) {
+          <span class="event-action__text_bold">
+            {{ action.payerName }}
+          </span>
+        }
+        <p class="event-action__text">
+          <b class="event-action__text_bold">{{ action.currentUser }}</b>
+          {{ t('action.exclude') }} {{ action.payerName }}
+          {{ t('action.fromPurchase') }}
+          <b class="event-action__text_bold">{{ action.purchaseName }}</b>
+        </p>
+      </div>
+    }
 
-  <div *ngIf="action.type === actionTypes.RemoveMemberFromPurchase">
-    <span
-      *ngIf="action.payerName === action.currentUser"
-      class="event-action__text">
-      {{ t('action.myself') }}
-    </span>
-    <span
-      *ngIf="action.payerName !== action.currentUser"
-      class="event-action__text_bold">
-      {{ action.payerName }}
-    </span>
+    @case (actionTypes.GiveBackPartially) {
+      <div>
+        <p class="event-action__text">
+          <b class="event-action__text_bold">{{ action.currentUser }}</b>
+          {{ t('action.notedDebt') }}
+          <b class="event-action__text_bold">{{ action.payerName }}</b>
+          {{ t('action.partialReturn') }}
+        </p>
+      </div>
+    }
 
-    <p class="event-action__text">
-      <b class="event-action__text_bold">{{ action.currentUser }}</b>
-      {{ t('action.exclude') }} {{ action.payerName }}
-      {{ t('action.fromPurchase') }}
-      <b class="event-action__text_bold">{{ action.purchaseName }}</b>
-    </p>
-  </div>
-
-  <div *ngIf="action.type === actionTypes.GiveBackPartially">
-    <p class="event-action__text">
-      <b class="event-action__text_bold">{{ action.currentUser }}</b>
-      {{ t('action.notedDebt') }}
-      <b class="event-action__text_bold">{{ action.payerName }}</b>
-      {{ t('action.partialReturn') }}
-    </p>
-  </div>
-
-  <div *ngIf="action.type === actionTypes.GiveBack">
-    <p class="event-action__text">
-      <b class="event-action__text_bold">{{ action.currentUser }}</b>
-      {{ t('action.notedDebt') }}
-      <b class="event-action__text_bold">{{ action.payerName }}</b>
-      {{ t('action.fullReturn') }}
-    </p>
-  </div>
+    @case (actionTypes.GiveBack) {
+      <div>
+        <p class="event-action__text">
+          <b class="event-action__text_bold">{{ action.currentUser }}</b>
+          {{ t('action.notedDebt') }}
+          <b class="event-action__text_bold">{{ action.payerName }}</b>
+          {{ t('action.fullReturn') }}
+        </p>
+      </div>
+    }
+  }
 </div>

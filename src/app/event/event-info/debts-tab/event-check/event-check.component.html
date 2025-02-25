@@ -12,7 +12,9 @@
 
     <div class="balance-check-content">
       <div class="balance-check-content__debts">
-        <p *ngFor="let row of check">{{ row }}</p>
+        @for (row of check; track row) {
+          <p>{{ row }}</p>
+        }
       </div>
     </div>
 
