@@ -1,14 +1,12 @@
-<mat-sidenav-container
-  class="sidenav-container"
-  (backdropClick)="closeSidenav()"
-  *transloco="let t">
+<mat-sidenav-container class="sidenav-container" (backdropClick)="closeSidenav()" *transloco="let t">
   <mat-sidenav
+    disableClose
     class="sidenav"
-    (keydown.escape)="closeSidenav()"
+    position="end"
     [(opened)]="opened"
     [fixedInViewport]="true"
-    position="end"
-    disableClose>
+    (keydown.escape)="closeSidenav()"
+  >
     <ng-content select="[sidenav]"></ng-content>
 
     <mat-list class="sidenav-menu">

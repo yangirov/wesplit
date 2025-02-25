@@ -1,7 +1,5 @@
 <div *transloco="let t">
-  <h2 mat-dialog-title>
-    {{ t('auth.login.title') }} / {{ t('auth.register.title') }}
-  </h2>
+  <h2 mat-dialog-title>{{ t('auth.login.title') }} / {{ t('auth.register.title') }}</h2>
 
   @if (loading$ | async) {
     <div>
@@ -37,19 +35,11 @@
   }
 
   <div mat-dialog-actions class="buttons">
-    <button
-      color="basic"
-      mat-raised-button
-      (click)="onCancel()"
-      [disabled]="loading$ | async">
+    <button color="basic" mat-raised-button (click)="onCancel()" [disabled]="loading$ | async">
       {{ t('common.cancel') }}
     </button>
 
-    <button
-      color="primary"
-      mat-raised-button
-      form="loginForm"
-      [disabled]="loginForm.invalid || (loading$ | async)">
+    <button color="primary" mat-raised-button form="loginForm" [disabled]="loginForm.invalid || (loading$ | async)">
       {{ t('auth.login.title') }}
     </button>
   </div>

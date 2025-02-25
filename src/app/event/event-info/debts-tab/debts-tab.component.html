@@ -8,28 +8,19 @@
 
     @for (positiveDebt of positiveDebts; track positiveDebt) {
       <div>
-        <debt-item
-          [event]="event"
-          [debt]="positiveDebt"
-        [debtType]="debtTypes.Positive"></debt-item>
+        <debt-item [event]="event" [debt]="positiveDebt" [debtType]="debtTypes.Positive"></debt-item>
       </div>
     }
 
     @for (negativeDebt of negativeDebts; track negativeDebt) {
       <div>
-        <debt-item
-          [event]="event"
-          [debt]="negativeDebt"
-        [debtType]="debtTypes.Negative"></debt-item>
+        <debt-item [event]="event" [debt]="negativeDebt" [debtType]="debtTypes.Negative"></debt-item>
       </div>
     }
 
     @for (otherDebt of othersDebts; track otherDebt) {
       <div>
-        <debt-item
-          [event]="event"
-          [debt]="otherDebt"
-        [debtType]="debtTypes.Neutral"></debt-item>
+        <debt-item [event]="event" [debt]="otherDebt" [debtType]="debtTypes.Neutral"></debt-item>
       </div>
     }
   </div>
@@ -37,14 +28,10 @@
 
 <div *transloco="let t">
   @if (allDebts.length === 0 && !hasReturnedDebts) {
-    <empty-items
-      icon="add_shopping_cart"
-    [text]="t('event.balance.empty')"></empty-items>
+    <empty-items icon="add_shopping_cart" [text]="t('event.balance.empty')"></empty-items>
   }
 
   @if (allDebts.length === 0 && hasReturnedDebts) {
-    <empty-items
-      icon="check"
-    [text]="t('event.balance.allDebtsRePayed')"></empty-items>
+    <empty-items icon="check" [text]="t('event.balance.allDebtsRePayed')"></empty-items>
   }
 </div>

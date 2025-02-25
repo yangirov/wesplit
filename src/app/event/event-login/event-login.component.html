@@ -9,16 +9,10 @@
         <event-header [event]="event" class="header__info"></event-header>
       </div>
       <div class="event-login__selector">
-        <grey-title
-          class="selector__title"
-          *transloco="let t"
-        [text]="t('event.invite.userSelect')"></grey-title>
+        <grey-title class="selector__title" [text]="t('event.invite.userSelect')"></grey-title>
         <div class="selector__members">
           @for (member of event.members; track member) {
-            <button
-              class="member_item"
-              (click)="setEventMember(member)"
-              mat-stroked-button>
+            <button class="member_item" (click)="setEventMember(member)" mat-stroked-button>
               {{ member }}
             </button>
           }
@@ -31,8 +25,8 @@
       </div>
     </div>
   } @else if (!event) {
-  <div>
-    <spinner></spinner>
-  </div>
-}
+    <div>
+      <spinner></spinner>
+    </div>
+  }
 </div>

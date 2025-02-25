@@ -25,8 +25,7 @@
         <mat-label>{{ t('settings.currency.name') }}</mat-label>
         <select matNativeControl formControlName="currency" required>
           @for (currency of currencyService.currencies; track currency.name; let i = $index) {
-            <option
-              [value]="currency.name">
+            <option [value]="currency.name">
               {{ currency.name }}
             </option>
           }

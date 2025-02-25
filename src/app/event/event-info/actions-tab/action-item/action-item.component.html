@@ -9,18 +9,14 @@
       <div class="event-action__text-wrapper">
         <action-type [action]="action"></action-type>
       </div>
-      @if (action.sum;as  sum) {
-        <div class="event-action__sum">
-          {{ sum }} {{ currencyService.getCurrencyAcronym() }}
-        </div>
+      @if (action.sum; as sum) {
+        <div class="event-action__sum">{{ sum }} {{ currencyService.getCurrencyAcronym() }}</div>
       }
 
-      @if (action.debtSum;as  debtSum) {
+      @if (action.debtSum; as debtSum) {
         <div class="event-action__debt-sum">
           <mat-icon>arrow_forward</mat-icon>
-          <span>
-            {{ debtSum }} {{ currencyService.getCurrencyAcronym() }}
-          </span>
+          <span> {{ debtSum }} {{ currencyService.getCurrencyAcronym() }} </span>
         </div>
       }
     </div>

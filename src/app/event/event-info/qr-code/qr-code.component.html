@@ -1,4 +1,4 @@
-<app-layout [loading$]="loading$" *transloco="let t">
+<app-layout *transloco="let t" [loading$]="loading$">
   <div class="header-flex" header>
     <button class="router-button" mat-icon-button (click)="onClose()">
       <mat-icon>close</mat-icon>
@@ -17,7 +17,8 @@
           class="receipt-form_errors"
           [form]="receiptForm"
           [errors]="['minLengthArray', 'minPurchaseInReceipt']"
-        localization="event.qr-receipt"></form-errors>
+          localization="event.qr-receipt"
+        ></form-errors>
         <div class="receipt-header">
           <span class="receipt-header__date">
             {{ receiptDate }}
@@ -30,8 +31,7 @@
         <form [formGroup]="receiptForm" (ngSubmit)="onSubmit()" id="receiptForm">
           <div formArrayName="purchases">
             @for (purchaseControl of purchases.controls; track purchaseControl; let i = $index) {
-              <div
-                [formGroupName]="i">
+              <div [formGroupName]="i">
                 <mat-checkbox color="primary" formControlName="selected">
                   <div class="receipt-item">
                     <span class="name">

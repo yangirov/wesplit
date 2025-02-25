@@ -16,11 +16,7 @@
       {{ t('event.share.later') }}
     </button>
 
-    <button
-      color="primary"
-      mat-raised-button
-      [cdkCopyToClipboard]="eventLink"
-      (click)="onCopyClick()">
+    <button color="primary" mat-raised-button [cdkCopyToClipboard]="eventLink" (click)="onCopyClick()">
       {{ copyButtonText }}
     </button>
   </div>

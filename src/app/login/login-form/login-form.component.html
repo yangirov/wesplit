@@ -8,7 +8,7 @@
   </div>
 
   <div body>
-    <div class="auth-buttons" *transloco="let t">
+    <div class="auth-buttons">
       <button class="auth-button" mat-raised-button (click)="openLoginModal()">
         <div>
           <div class="auth-button__icon"><mat-icon>email</mat-icon></div>
@@ -16,28 +16,16 @@
         </div>
       </button>
 
-      <button
-        class="auth-button"
-        mat-raised-button
-        (click)="loginWithService('google')">
+      <button class="auth-button" mat-raised-button (click)="loginWithService('google')">
         <div>
-          <img
-            class="auth-button__icon"
-            src="/auth/google.svg"
-            alt="Google icon" />
+          <img class="auth-button__icon" src="/auth/google.svg" alt="Google icon" />
           <span class="auth-button__text">{{ t('auth.service') }} Google</span>
         </div>
       </button>
 
-      <button
-        class="auth-button"
-        mat-raised-button
-        (click)="loginWithService('github')">
+      <button class="auth-button" mat-raised-button (click)="loginWithService('github')">
         <div>
-          <img
-            class="auth-button__icon"
-            src="/auth/github.svg"
-            alt="Google icon" />
+          <img class="auth-button__icon" src="/auth/github.svg" alt="Google icon" />
           <span class="auth-button__text">{{ t('auth.service') }} Github</span>
         </div>
       </button>

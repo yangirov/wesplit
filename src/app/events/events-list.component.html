@@ -1,4 +1,4 @@
-<app-sidenav-layout [loading$]="loading$" *transloco="let t">
+<app-sidenav-layout *transloco="let t" [loading$]="loading$">
   <div class="header-flex" header>
     <h1 class="header-title">{{ t('events-list.title') }}</h1>
   </div>
@@ -12,10 +12,7 @@
           }
         </div>
       } @else {
-        <empty-items
-          icon="event"
-          *transloco="let t"
-        [text]="t('events-list.noEvents')"></empty-items>
+        <empty-items icon="event" [text]="t('events-list.noEvents')"></empty-items>
       }
 
       <fab-button link="/events/new" icon="add"></fab-button>

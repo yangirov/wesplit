@@ -1,50 +1,44 @@
-<div [formGroup]="sortForm" class="purchases-filter" *transloco="let t">
-  <mat-form-field class="filter-input" subscriptSizing="dynamic">
-    <mat-select formControlName="key">
-      <mat-option value="date">
-        {{ t('purchase.date') }}
-      </mat-option>
-      <mat-option value="sum">
-        {{ t('common.sum') }}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
+<ng-container *transloco="let t">
+  <div [formGroup]="sortForm" class="purchases-filter">
+    <mat-form-field class="filter-input" subscriptSizing="dynamic">
+      <mat-select formControlName="key">
+        <mat-option value="date">
+          {{ t('purchase.date') }}
+        </mat-option>
+        <mat-option value="sum">
+          {{ t('common.sum') }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
 
-  <mat-form-field class="filter-input" subscriptSizing="dynamic">
-    <mat-select formControlName="order">
-      <mat-option value="asc">
-        {{ t('common.sort.asc') }}
-      </mat-option>
-      <mat-option value="desc">
-        {{ t('common.sort.desc') }}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-</div>
-
-<div class="purchases-sum" *transloco="let t">
-  <span>{{ t('common.summary') }}: </span>
-  <span>{{ allSum }}</span>
-</div>
-
-<mat-divider></mat-divider>
-
-@if (event.purchases?.length) {
-  <div class="purchases-list">
-    @for (purchase of sortedPurchases; track purchase; let i = $index) {
-      <purchase-item
-        [purchase]="purchase"
-      [event]="event"></purchase-item>
-    }
+    <mat-form-field class="filter-input" subscriptSizing="dynamic">
+      <mat-select formControlName="order">
+        <mat-option value="asc">
+          {{ t('common.sort.asc') }}
+        </mat-option>
+        <mat-option value="desc">
+          {{ t('common.sort.desc') }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
   </div>
-} @else {
-  <empty-items
-    icon="add_shopping_cart"
-    *transloco="let t"
-  [text]="t('event.purchases.empty')"></empty-items>
-}
 
-<fab-button
-  link="/events/{{ event.id }}/purchases/new"
-icon="add_shopping_cart"></fab-button>
+  <div class="purchases-sum">
+    <span>{{ t('common.summary') }}: </span>
+    <span>{{ allSum }}</span>
+  </div>
 
+  <mat-divider></mat-divider>
+
+  @if (event.purchases?.length) {
+    <div class="purchases-list">
+      @for (purchase of sortedPurchases; track purchase; let i = $index) {
+        <purchase-item [purchase]="purchase" [event]="event"></purchase-item>
+      }
+    </div>
+  } @else {
+    <empty-items icon="add_shopping_cart" [text]="t('event.purchases.empty')"></empty-items>
+  }
+
+  <fab-button link="/events/{{ event.id }}/purchases/new" icon="add_shopping_cart"></fab-button>
+</ng-container>

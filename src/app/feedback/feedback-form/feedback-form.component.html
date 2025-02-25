@@ -8,10 +8,7 @@
 
     <span class="spacer"></span>
 
-    <button
-      mat-icon-button
-      form="feedbackForm"
-      [disabled]="feedbackForm.invalid">
+    <button mat-icon-button form="feedbackForm" [disabled]="feedbackForm.invalid">
       <mat-icon>check</mat-icon>
     </button>
   </div>
@@ -25,11 +22,7 @@
 
       <mat-form-field class="full-width">
         <mat-label>{{ t('common.message') }}</mat-label>
-        <textarea
-          matInput
-          formControlName="message"
-          rows="10"
-          required></textarea>
+        <textarea matInput formControlName="message" rows="10" required></textarea>
       </mat-form-field>
     </form>
   </div>

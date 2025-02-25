@@ -19,9 +19,10 @@
     @if (isEdit && hasRePayedDebts) {
       <form-errors
         class="hasRePayedDebts"
-        [errors]="['afterStartRepayDebts']"
         localization="event.form"
-        [force]="true"></form-errors>
+        [errors]="['afterStartRepayDebts']"
+        [force]="true"
+      ></form-errors>
     }
 
     <form [formGroup]="eventForm" (ngSubmit)="onSubmit()" id="eventForm">
@@ -32,11 +33,7 @@
 
       <mat-form-field class="full-width">
         <mat-label>{{ t('event.form.date') }}</mat-label>
-        <input
-          matInput
-          required
-          formControlName="date"
-          [matDatepicker]="picker" />
+        <input matInput required formControlName="date" [matDatepicker]="picker" />
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
@@ -45,29 +42,19 @@
       <grey-title [text]="t('common.addMember')"></grey-title>
 
       <mat-form-field class="full-width">
-        <input
-          matInput
-          required
-          formControlName="organizer"
-          [placeholder]="t('common.yourName')" />
+        <input matInput required formControlName="organizer" [placeholder]="t('common.yourName')" />
       </mat-form-field>
 
       <form-errors
+        localization="event.form"
         [form]="eventForm"
-        [errors]="[
-          'hasMembersDuplicates',
-          'organizerInMembers',
-          'notDeleteMemberExistedInPurchase',
-        ]"
-        localization="event.form"></form-errors>
+        [errors]="['hasMembersDuplicates', 'organizerInMembers', 'notDeleteMemberExistedInPurchase']"
+      ></form-errors>
 
       <div formArrayName="members">
         @for (member of members.controls; track member; let i = $index) {
           <mat-form-field class="full-width" [formGroupName]="i">
-            <input
-              matInput
-              formControlName="name"
-              [placeholder]="t('common.addMember')" />
+            <input matInput formControlName="name" [placeholder]="t('common.addMember')" />
           </mat-form-field>
         }
       </div>
@@ -77,11 +64,12 @@
       <div>
         <separator position="outer"></separator>
         <button
-          class="delete-event-button"
-          (click)="onDeleteEvent()"
           mat-raised-button
+          class="delete-event-button"
           color="basic"
-          [disabled]="hasRePayedDebts">
+          [disabled]="hasRePayedDebts"
+          (click)="onDeleteEvent()"
+        >
           <mat-icon>close</mat-icon>{{ t('event.delete') }}
         </button>
       </div>

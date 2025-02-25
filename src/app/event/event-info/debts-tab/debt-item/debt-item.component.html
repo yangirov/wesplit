@@ -1,16 +1,13 @@
-<div
-  class="debt-item {{ debtTypeName }}"
-  (click)="openRePayDebtModal()"
-  *transloco="let t">
-  <div class="wrapper">
-    <div class="info">
-      <div class="from">{{ debt.from }}</div>
-      <mat-icon class="icon">arrow_forward</mat-icon>
-      <div class="to">{{ debt.to }}</div>
+<ng-container *transloco="let t">
+  <div class="debt-item {{ debtTypeName }}" (click)="openRePayDebtModal()">
+    <div class="wrapper">
+      <div class="info">
+        <div class="from">{{ debt.from }}</div>
+        <mat-icon class="icon">arrow_forward</mat-icon>
+        <div class="to">{{ debt.to }}</div>
+      </div>
     </div>
+    <div class="sum">{{ debt.sum }} {{ currencyService.getCurrencyAcronym() }}</div>
   </div>
-  <div class="sum">
-    {{ debt.sum }} {{ currencyService.getCurrencyAcronym() }}
-  </div>
-</div>
-<mat-divider></mat-divider>
+  <mat-divider></mat-divider>
+</ng-container>
