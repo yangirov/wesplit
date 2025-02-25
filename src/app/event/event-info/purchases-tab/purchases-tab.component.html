@@ -30,7 +30,7 @@
 
   <mat-divider></mat-divider>
 
-  @if (event.purchases?.length) {
+  @if (event.purchases.length) {
     <div class="purchases-list">
       @for (purchase of sortedPurchases; track purchase; let i = $index) {
         <purchase-item [purchase]="purchase" [event]="event"></purchase-item>

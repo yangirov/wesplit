@@ -5,7 +5,9 @@
         <div sidenav>
           <event-sidenav (notifyParent)="getNotification($event)" [event]="event"></event-sidenav>
         </div>
+      }
 
+      @if (event) {
         <div class="header-flex" header>
           <button class="router-button" mat-icon-button [routerLink]="['/events']">
             <mat-icon>arrow_backward</mat-icon>
@@ -20,7 +22,9 @@
             }
           </h1>
         </div>
+      }
 
+      @if (event) {
         <mat-tab-group body mat-stretch-tabs>
           <mat-tab [label]="t('event.tabs.purchases')">
             <purchases-tab [event]="event"></purchases-tab>
