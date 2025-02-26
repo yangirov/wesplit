@@ -24,7 +24,7 @@ export const appRoutes: Routes = [
   },
   {
     path: 'settings',
-    loadChildren: () => import('./settings/settings.module').then(m => m.SettingsModule),
+    loadChildren: () => import('./settings/settings.routes').then(m => m.settingsRoutes),
   },
   {
     path: 'feedback',
