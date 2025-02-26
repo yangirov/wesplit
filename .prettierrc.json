@@ -1,11 +1,25 @@
 {
   "tabWidth": 2,
+  "endOfLine": "lf",
   "useTabs": false,
   "singleQuote": true,
   "semi": true,
   "bracketSpacing": true,
   "arrowParens": "avoid",
   "trailingComma": "es5",
-  "bracketSameLine": true,
-  "printWidth": 80
+  "printWidth": 80,
+  "overrides": [
+    {
+      "files": "**/*.ts",
+      "options": {
+        "printWidth": 100
+      }
+    },
+    {
+      "files": "**/*.html",
+      "options": {
+        "printWidth": 120
+      }
+    }
+  ]
 }

@@ -35,14 +35,7 @@ export default async (req: VercelRequest, res: VercelResponse) => {
     res.end();
   }
 
-  const {
-    user,
-    totalSum,
-    dateTime: date,
-    retailPlace,
-    retailPlaceAddress,
-    items,
-  } = data.json;
+  const { user, totalSum, dateTime: date, retailPlace, retailPlaceAddress, items } = data.json;
 
   const result = {
     user,

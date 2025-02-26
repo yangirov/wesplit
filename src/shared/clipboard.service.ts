@@ -21,14 +21,10 @@ export class ClipboardService {
     navigator.clipboard
       .writeText(text)
       .then(() => {
-        this.notificationService.open(
-          this.localizationService.translate(successLocalizationKey)
-        );
+        this.notificationService.open(this.localizationService.translate(successLocalizationKey));
       })
       .catch((err: any) => {
-        this.notificationService.open(
-          this.localizationService.translate(failedLocalizationText)
-        );
+        this.notificationService.open(this.localizationService.translate(failedLocalizationText));
       });
   }
 
@@ -48,13 +44,9 @@ export class ClipboardService {
     selection?.addRange(range);
 
     if (!document.execCommand('copy')) {
-      this.notificationService.open(
-        this.localizationService.translate(failedLocalizationText)
-      );
+      this.notificationService.open(this.localizationService.translate(failedLocalizationText));
     } else {
-      this.notificationService.open(
-        this.localizationService.translate(successLocalizationKey)
-      );
+      this.notificationService.open(this.localizationService.translate(successLocalizationKey));
     }
 
     selection?.removeAllRanges();

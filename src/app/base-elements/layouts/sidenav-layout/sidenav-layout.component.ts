@@ -13,9 +13,7 @@ import { User } from '@angular/fire/auth';
   styleUrls: ['./sidenav-layout.component.scss'],
 })
 export class SidenavLayoutComponent {
-  @Input() loading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
-    false
-  );
+  @Input() loading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   opened: boolean = false;
 

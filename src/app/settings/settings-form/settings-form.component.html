@@ -24,11 +24,11 @@
       <mat-form-field class="full-width">
         <mat-label>{{ t('settings.currency.name') }}</mat-label>
         <select matNativeControl formControlName="currency" required>
-          <option
-            *ngFor="let currency of currencyService.currencies; let i = index"
-            [value]="currency.name">
-            {{ currency.name }}
-          </option>
+          @for (currency of currencyService.currencies; track currency.name; let i = $index) {
+            <option [value]="currency.name">
+              {{ currency.name }}
+            </option>
+          }
         </select>
       </mat-form-field>
 

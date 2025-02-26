@@ -5,15 +5,8 @@ import { Receipt, ReceiptPurchase } from '../../../../models/Receipt';
 import { AuthenticationService } from '../../../../shared/authentication.service';
 import { filter, take } from 'rxjs/operators';
 import { Html5QrcodeScanner } from 'html5-qrcode';
-import {
-  UntypedFormArray,
-  UntypedFormBuilder,
-  UntypedFormGroup,
-} from '@angular/forms';
-import {
-  minLengthArray,
-  minPurchaseInReceipt,
-} from '../../../../utils/FormValidators';
+import { UntypedFormArray, UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
+import { minLengthArray, minPurchaseInReceipt } from '../../../../utils/FormValidators';
 import { EventAction, EventDto, Purchase } from '../../../../models/Event';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DataService } from '../../../../shared/data.service';
@@ -66,11 +59,9 @@ export class QrCodeComponent implements OnInit, AfterViewInit {
         err => console.error(err)
       );
 
-    this.authService.currentUser$
-      .pipe(filter(x => x != null))
-      .subscribe((x: any) => {
-        this.userToken = x.stsTokenManager.accessToken;
-      });
+    this.authService.currentUser$.pipe(filter(x => x != null)).subscribe((x: any) => {
+      this.userToken = x.stsTokenManager.accessToken;
+    });
 
     this.receiptForm = this.formBuilder.group(
       {
@@ -92,10 +83,7 @@ export class QrCodeComponent implements OnInit, AfterViewInit {
     };
 
     this.qrCodeScanner = new Html5QrcodeScanner('qr-reader', config, false);
-    this.qrCodeScanner.render(
-      this.onScanSuccess.bind(this),
-      this.onScanFailure.bind(this)
-    );
+    this.qrCodeScanner.render(this.onScanSuccess.bind(this), this.onScanFailure.bind(this));
   }
 
   get purchases(): UntypedFormArray {
@@ -106,15 +94,11 @@ export class QrCodeComponent implements OnInit, AfterViewInit {
     const lang = this.localizationService.getActiveLang();
     const date = this.receipt.date;
 
-    return `${utc(date).locale(lang).format('DD MMMM')}, ${utc(date)
-      .locale(lang)
-      .format('dddd')}`;
+    return `${utc(date).locale(lang).format('DD MMMM')}, ${utc(date).locale(lang).format('dddd')}`;
   }
 
   get receiptTotalSum(): string {
-    const summaryText = this.localizationService.translate(
-      'event.qr-receipt.summary'
-    );
+    const summaryText = this.localizationService.translate('event.qr-receipt.summary');
 
     return `${summaryText}: ${this.receipt.totalSum}`;
   }
@@ -134,9 +118,7 @@ export class QrCodeComponent implements OnInit, AfterViewInit {
 
     const data = JSON.parse(`{ "${obj} "}`);
 
-    const guestModeQueryParam = this.authService.isGuestMode
-      ? '?questMode=true'
-      : '';
+    const guestModeQueryParam = this.authService.isGuestMode ? '?questMode=true' : '';
 
     this.httpClient
       .post<any>(`/api/check${guestModeQueryParam}`, data, {
@@ -169,10 +151,7 @@ export class QrCodeComponent implements OnInit, AfterViewInit {
       })
     );
 
-    this.receiptForm.setControl(
-      'purchases',
-      this.formBuilder.array(config || [])
-    );
+    this.receiptForm.setControl('purchases', this.formBuilder.array(config || []));
   }
 
   async onBack() {
@@ -191,9 +170,7 @@ export class QrCodeComponent implements OnInit, AfterViewInit {
 
       const currentUser = this.dataService.getCurrentUser(this.eventId);
 
-      const purchases = this.purchases?.value.filter(
-        (x: ReceiptPurchase) => x.selected
-      );
+      const purchases = this.purchases?.value.filter((x: ReceiptPurchase) => x.selected);
 
       const eventPurchases = purchases.map((x: ReceiptPurchase) => {
         return {

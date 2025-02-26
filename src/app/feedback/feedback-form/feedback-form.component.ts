@@ -1,10 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../../../shared/data.service';
-import {
-  UntypedFormBuilder,
-  UntypedFormGroup,
-  Validators,
-} from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Feedback } from '../../../models/Feedback';
 import { BehaviorSubject } from 'rxjs';
 import { Location } from '@angular/common';
@@ -27,10 +23,7 @@ export class FeedbackFormComponent implements OnInit {
   ngOnInit(): void {
     this.feedbackForm = this.formBuilder.group({
       message: ['', Validators.required],
-      email: [
-        '',
-        Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$'),
-      ],
+      email: ['', Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')],
     });
   }
 

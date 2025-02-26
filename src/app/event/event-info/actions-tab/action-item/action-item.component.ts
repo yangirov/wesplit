@@ -40,8 +40,6 @@ export class ActionItemComponent {
   get actionDate(): string {
     const lang = this.localizationService.getActiveLang();
 
-    return this.action?.date
-      ? utc(this.action?.date).locale(lang).fromNow()
-      : '';
+    return this.action?.date ? utc(this.action?.date).locale(lang).fromNow() : '';
   }
 }

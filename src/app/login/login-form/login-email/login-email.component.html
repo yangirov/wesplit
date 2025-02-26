@@ -1,51 +1,45 @@
 <div *transloco="let t">
-  <h2 mat-dialog-title>
-    {{ t('auth.login.title') }} / {{ t('auth.register.title') }}
-  </h2>
+  <h2 mat-dialog-title>{{ t('auth.login.title') }} / {{ t('auth.register.title') }}</h2>
 
-  <div *ngIf="loading$ | async; else form">
-    <spinner class="login-spinner"></spinner>
-  </div>
-
-  <div mat-dialog-content>
-    <ng-template #form>
+  @if (loading$ | async) {
+    <div>
+      <spinner class="login-spinner"></spinner>
+    </div>
+  } @else {
+    <div mat-dialog-content>
       <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" id="loginForm">
         <mat-form-field class="full-width">
           <mat-label>{{ t('common.email') }}</mat-label>
           <input matInput formControlName="email" required />
         </mat-form-field>
-
         <mat-form-field class="full-width">
           <mat-label>{{ t('common.password') }}</mat-label>
           <input matInput formControlName="password" type="password" required />
         </mat-form-field>
       </form>
-
-      <div *ngIf="isPasswordWrong" class="mat-form-field-invalid">
-        {{ t('auth.login.wrongPassword') }}
-      </div>
-
-      <div *ngIf="formErrors">
-        <div *ngFor="let err of formErrors" class="mat-form-field-invalid">
-          {{ err }}
+      @if (isPasswordWrong) {
+        <div class="mat-form-field-invalid">
+          {{ t('auth.login.wrongPassword') }}
         </div>
-      </div>
-    </ng-template>
-  </div>
+      }
+      @if (formErrors) {
+        <div>
+          @for (err of formErrors; track err) {
+            <div class="mat-form-field-invalid">
+              {{ err }}
+            </div>
+          }
+        </div>
+      }
+    </div>
+  }
 
   <div mat-dialog-actions class="buttons">
-    <button
-      color="basic"
-      mat-raised-button
-      (click)="onCancel()"
-      [disabled]="loading$ | async">
+    <button color="basic" mat-raised-button (click)="onCancel()" [disabled]="loading$ | async">
       {{ t('common.cancel') }}
     </button>
-    <button
-      color="primary"
-      mat-raised-button
-      form="loginForm"
-      [disabled]="loginForm.invalid || (loading$ | async)">
+
+    <button color="primary" mat-raised-button form="loginForm" [disabled]="loginForm.invalid || (loading$ | async)">
       {{ t('auth.login.title') }}
     </button>
   </div>

@@ -2,12 +2,9 @@
   <h1 mat-dialog-title>
     {{ t('event.invite.addMember') }}
   </h1>
-  <div mat-dialog-content *transloco="let t">
+  <div mat-dialog-content>
     <mat-form-field>
-      <input
-        matInput
-        [placeholder]="t('common.yourName')"
-        [(ngModel)]="data.name" />
+      <input matInput [placeholder]="t('common.yourName')" [(ngModel)]="data.name" />
     </mat-form-field>
   </div>
   <div mat-dialog-actions class="buttons">

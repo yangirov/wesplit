@@ -1,27 +1,24 @@
-<mat-accordion>
-  <mat-expansion-panel
-    (opened)="checkOpenState = true"
-    (closed)="checkOpenState = false"
-    *transloco="let t">
-    <mat-expansion-panel-header>
-      <mat-panel-title><mat-icon>payment</mat-icon></mat-panel-title>
-      <mat-panel-description>
-        <p class="panel-title">{{ t('event.balance.score') }}</p>
-      </mat-panel-description>
-    </mat-expansion-panel-header>
+<ng-container *transloco="let t">
+  <mat-accordion>
+    <mat-expansion-panel (opened)="checkOpenState = true" (closed)="checkOpenState = false">
+      <mat-expansion-panel-header>
+        <mat-panel-title><mat-icon>payment</mat-icon></mat-panel-title>
+        <mat-panel-description>
+          <p class="panel-title">{{ t('event.balance.score') }}</p>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
 
-    <div class="balance-check-content">
-      <div class="balance-check-content__debts">
-        <p *ngFor="let row of check">{{ row }}</p>
+      <div class="balance-check-content">
+        <div class="balance-check-content__debts">
+          @for (row of check; track row) {
+            <p>{{ row }}</p>
+          }
+        </div>
       </div>
-    </div>
 
-    <button
-      class="balance-check-button"
-      (click)="copyCheck()"
-      mat-raised-button
-      color="basic">
-      <mat-icon>content_copy</mat-icon> {{ t('common.copy') }}
-    </button>
-  </mat-expansion-panel>
-</mat-accordion>
+      <button class="balance-check-button" (click)="copyCheck()" mat-raised-button color="basic">
+        <mat-icon>content_copy</mat-icon> {{ t('common.copy') }}
+      </button>
+    </mat-expansion-panel>
+  </mat-accordion>
+</ng-container>

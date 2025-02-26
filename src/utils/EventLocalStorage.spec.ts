@@ -7,13 +7,9 @@ export interface LocalStorage {
 let localStore: LocalStorage = {};
 
 beforeEach(() => {
-  spyOn(localStorage, 'getItem').and.callFake(key =>
-    key in localStore ? localStore[key] : null
-  );
+  spyOn(localStorage, 'getItem').and.callFake(key => (key in localStore ? localStore[key] : null));
 
-  spyOn(localStorage, 'setItem').and.callFake(
-    (key, value) => (localStore[key] = value + '')
-  );
+  spyOn(localStorage, 'setItem').and.callFake((key, value) => (localStore[key] = value + ''));
 
   spyOn(localStorage, 'clear').and.callFake(() => (localStore = {}));
 });

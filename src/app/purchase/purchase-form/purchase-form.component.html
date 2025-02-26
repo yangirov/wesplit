@@ -1,9 +1,6 @@
-<app-layout [loading$]="loading$" *transloco="let t">
+<app-layout *transloco="let t" [loading$]="loading$">
   <div class="header-flex" header>
-    <button
-      class="router-button"
-      mat-icon-button
-      [routerLink]="['/events', eventId]">
+    <button class="router-button" mat-icon-button [routerLink]="['/events', eventId]">
       <mat-icon>close</mat-icon>
     </button>
 
@@ -13,92 +10,86 @@
 
     <span class="spacer"></span>
 
-    <button
-      mat-icon-button
-      form="purchaseForm"
-      [disabled]="purchaseForm.invalid">
+    <button mat-icon-button form="purchaseForm" [disabled]="purchaseForm.invalid">
       <mat-icon>check</mat-icon>
     </button>
   </div>
 
-  <div *ngIf="event$ | async" body>
-    <form-errors
-      *ngIf="this.isEdit && hasRePayedDebts"
-      class="hasRePayedDebts"
-      [errors]="['afterStartRepayDebts']"
-      localization="purchase"
-      [force]="true"></form-errors>
-
-    <form [formGroup]="purchaseForm" (ngSubmit)="onSubmit()" id="purchaseForm">
-      <mat-form-field class="full-width">
-        <mat-label>{{ t('purchase.name') }}</mat-label>
-        <input matInput formControlName="title" type="text" required />
-      </mat-form-field>
-
-      <mat-form-field class="full-width">
-        <mat-label>{{ t('purchase.date') }}</mat-label>
-        <input matInput formControlName="date" [matDatepicker]="picker" />
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-      </mat-form-field>
-
-      <mat-form-field class="full-width">
-        <mat-label>{{ t('common.sum') }}</mat-label>
-        <input
-          matInput
-          formControlName="sum"
-          required
-          type="text"
-          name="currency"
-          inputmode="numeric"
-          pattern="^\d+(\.\d{1,2})?$"
-          placeholder="0.00" />
-      </mat-form-field>
-
-      <form-errors
-        [form]="purchaseForm"
-        [errors]="['minimalSum']"
-        localization="purchase"></form-errors>
-
-      <mat-form-field class="full-width">
-        <mat-label>{{ t('purchase.whoPaid') }}</mat-label>
-        <mat-select formControlName="payer" required>
-          <mat-option *ngFor="let member of event.members" [value]="member">
-            {{ member }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-
-      <separator position="outer"></separator>
-      <grey-title
-        *transloco="let t"
-        [text]="t('purchase.members')"></grey-title>
-
-      <div formArrayName="members">
+  @if (event$ | async) {
+    <div body>
+      @if (this.isEdit && hasRePayedDebts) {
         <form-errors
-          [form]="purchaseForm"
-          [errors]="['minimalMembersCount']"
-          localization="purchase"></form-errors>
+          class="hasRePayedDebts"
+          [errors]="['afterStartRepayDebts']"
+          localization="purchase"
+          [force]="true"
+        ></form-errors>
+      }
 
-        <div
-          *ngFor="let member of members.controls; let i = index"
-          [formGroupName]="i">
-          <mat-checkbox color="primary" formControlName="selected">
-            <span class="label">{{ member.get('name')?.value }}</span>
-          </mat-checkbox>
+      <form [formGroup]="purchaseForm" (ngSubmit)="onSubmit()" id="purchaseForm">
+        <mat-form-field class="full-width">
+          <mat-label>{{ t('purchase.name') }}</mat-label>
+          <input matInput formControlName="title" type="text" required />
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+          <mat-label>{{ t('purchase.date') }}</mat-label>
+          <input matInput formControlName="date" [matDatepicker]="picker" />
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+          <mat-label>{{ t('common.sum') }}</mat-label>
+          <input
+            matInput
+            formControlName="sum"
+            required
+            type="text"
+            name="currency"
+            inputmode="numeric"
+            pattern="^\d+(\.\d{1,2})?$"
+            placeholder="0.00"
+          />
+        </mat-form-field>
+
+        <form-errors [form]="purchaseForm" [errors]="['minimalSum']" localization="purchase"></form-errors>
+
+        <mat-form-field class="full-width">
+          <mat-label>{{ t('purchase.whoPaid') }}</mat-label>
+          <mat-select formControlName="payer" required>
+            @for (member of event.members; track member) {
+              <mat-option [value]="member">
+                {{ member }}
+              </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+
+        <separator position="outer"></separator>
+        <grey-title [text]="t('purchase.members')"></grey-title>
+
+        <div formArrayName="members">
+          <form-errors [form]="purchaseForm" [errors]="['minimalMembersCount']" localization="purchase"></form-errors>
+
+          @for (memberControl of members.controls; track memberControl; let i = $index) {
+            <div [formGroupName]="i">
+              <mat-checkbox color="primary" formControlName="selected">
+                <span class="label">{{ memberControl.get('name')?.value }}</span>
+              </mat-checkbox>
+            </div>
+          }
         </div>
-      </div>
-    </form>
+      </form>
 
-    <div *ngIf="isEdit && !hasRePayedDebts">
-      <separator position="outer"></separator>
-      <button
-        class="delete-purchase-button"
-        (click)="onDeletePurchase()"
-        mat-raised-button
-        color="basic">
-        <mat-icon>close</mat-icon>{{ t('purchase.delete') }}
-      </button>
+      @if (isEdit && !hasRePayedDebts) {
+        <div>
+          <separator position="outer"></separator>
+          <button class="delete-purchase-button" (click)="onDeletePurchase()" mat-raised-button color="basic">
+            <mat-icon>close</mat-icon>{{ t('purchase.delete') }}
+          </button>
+        </div>
+      }
     </div>
-  </div>
+  }
 </app-layout>

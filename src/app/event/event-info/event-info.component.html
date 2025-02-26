@@ -1,34 +1,42 @@
-<app-sidenav-layout [loading$]="loading$" *ngIf="event$ | async as event">
-  <div sidenav *ngIf="event">
-    <event-sidenav
-      (notifyParent)="getNotification($event)"
-      [event]="event"></event-sidenav>
-  </div>
+<ng-container *transloco="let t">
+  @if (event$ | async; as event) {
+    <app-sidenav-layout [loading$]="loading$">
+      @if (event) {
+        <div sidenav>
+          <event-sidenav (notifyParent)="getNotification($event)" [event]="event"></event-sidenav>
+        </div>
+      }
 
-  <div class="header-flex" header *ngIf="event">
-    <button class="router-button" mat-icon-button [routerLink]="['/events']">
-      <mat-icon>arrow_backward</mat-icon>
-    </button>
+      @if (event) {
+        <div class="header-flex" header>
+          <button class="router-button" mat-icon-button [routerLink]="['/events']">
+            <mat-icon>arrow_backward</mat-icon>
+          </button>
+          <h1 class="event-title">
+            {{ event.name }}
 
-    <h1 *transloco="let t" class="event-title">
-      {{ event.name }}
-      <span *ngIf="!(authService.currentUser$ | async)" class="event-anonymous">
-        {{ t('event.anonymous') }}
-      </span>
-    </h1>
-  </div>
+            @if (!(authService.currentUser$ | async)) {
+              <span class="event-anonymous">
+                {{ t('event.anonymous') }}
+              </span>
+            }
+          </h1>
+        </div>
+      }
 
-  <mat-tab-group body mat-stretch-tabs *ngIf="event">
-    <mat-tab [label]="t('event.tabs.purchases')" *transloco="let t">
-      <purchases-tab [event]="event"></purchases-tab>
-    </mat-tab>
-
-    <mat-tab [label]="t('event.tabs.balance')" *transloco="let t">
-      <debts-tab [event]="event"></debts-tab>
-    </mat-tab>
-
-    <mat-tab [label]="t('event.tabs.actions')" *transloco="let t">
-      <actions-tab [event]="event"></actions-tab>
-    </mat-tab>
-  </mat-tab-group>
-</app-sidenav-layout>
+      @if (event) {
+        <mat-tab-group body mat-stretch-tabs>
+          <mat-tab [label]="t('event.tabs.purchases')">
+            <purchases-tab [event]="event"></purchases-tab>
+          </mat-tab>
+          <mat-tab [label]="t('event.tabs.balance')">
+            <debts-tab [event]="event"></debts-tab>
+          </mat-tab>
+          <mat-tab [label]="t('event.tabs.actions')">
+            <actions-tab [event]="event"></actions-tab>
+          </mat-tab>
+        </mat-tab-group>
+      }
+    </app-sidenav-layout>
+  }
+</ng-container>

@@ -35,21 +35,15 @@ export class EventItemComponent implements OnInit {
       .format('dddd')}`;
 
     const eventBalance = getEventBalance(this.event);
-    const currentBalance =
-      eventBalance.find(x => x.name === organizer)?.sum || 0;
+    const currentBalance = eventBalance.find(x => x.name === organizer)?.sum || 0;
     const sum = Math.round(currentBalance);
 
     this.sum = sum == 0 ? null : `${formatSum(lang, Math.abs(sum))}`;
 
-    const hasOutgoingDebts = this.localizationService.translate(
-      'common.hasOutgoingDebts'
-    );
-    const hasIncomingDebts = this.localizationService.translate(
-      'common.hasIncomingDebts'
-    );
+    const hasOutgoingDebts = this.localizationService.translate('common.hasOutgoingDebts');
+    const hasIncomingDebts = this.localizationService.translate('common.hasIncomingDebts');
 
-    this.debtStatus =
-      sum !== 0 ? (sum > 0 ? hasOutgoingDebts : hasIncomingDebts) : null;
+    this.debtStatus = sum !== 0 ? (sum > 0 ? hasOutgoingDebts : hasIncomingDebts) : null;
 
     this.debtType = DebtTypes[formatDebtType(currentBalance)].toLowerCase();
   }

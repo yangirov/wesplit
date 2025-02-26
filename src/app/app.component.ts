@@ -45,9 +45,7 @@ export class AppComponent implements OnInit, OnDestroy {
       .subscribe(([route, data, url]) => {
         this.localizationService.load().subscribe(x => {
           if (data['scope']) {
-            const title = this.localizationService.translate(
-              `${data['scope']}.title`
-            );
+            const title = this.localizationService.translate(`${data['scope']}.title`);
 
             this.titleService.setTitle(`${title} - ${environment.name}`);
           }

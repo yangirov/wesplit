@@ -2,11 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ThemeService } from '../../../shared/theme.service';
 import { LocalizationService } from '../../../shared/localization.service';
 import { Location } from '@angular/common';
-import {
-  UntypedFormBuilder,
-  UntypedFormGroup,
-  Validators,
-} from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { CurrencyService } from '../../../shared/currency.service';
 
 @Component({
@@ -38,9 +34,7 @@ export class SettingsFormComponent implements OnInit {
       currency: [selectedCurrency, Validators.required],
     });
 
-    this.settingsForm.valueChanges.subscribe(settings =>
-      this.saveSettings(settings)
-    );
+    this.settingsForm.valueChanges.subscribe(settings => this.saveSettings(settings));
   }
 
   onBack() {

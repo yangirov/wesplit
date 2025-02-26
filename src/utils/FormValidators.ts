@@ -1,9 +1,4 @@
-import {
-  AbstractControl,
-  UntypedFormGroup,
-  ValidationErrors,
-  ValidatorFn,
-} from '@angular/forms';
+import { AbstractControl, UntypedFormGroup, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { EventDto, EventMember, PurchaseMember } from '../models/Event';
 import { ReceiptPurchase } from '../models/Receipt';
 
@@ -63,9 +58,7 @@ export function organizerInMembersValidation(): ValidatorFn {
     const organizer = form.get('organizer')?.value;
     const members = form.get('members')?.value.map((x: EventMember) => x.name);
 
-    return members.length > 1 && members.includes(organizer)
-      ? { organizerInMembers: true }
-      : null;
+    return members.length > 1 && members.includes(organizer) ? { organizerInMembers: true } : null;
   };
 }
 
@@ -78,9 +71,7 @@ export function sumGreaterZero(): ValidatorFn {
 
 export function minMembersCountInPurchase(): ValidatorFn {
   return (form: AbstractControl): ValidationErrors | null => {
-    const members = form
-      .get('members')
-      ?.value.filter((x: PurchaseMember) => x.selected);
+    const members = form.get('members')?.value.filter((x: PurchaseMember) => x.selected);
 
     return members?.length === 0 ? { minimalMembersCount: true } : null;
   };
@@ -117,16 +108,12 @@ export function calculateFormValidationErrors(
       case 'areEqual':
         return `${getErrorName(error)} ${translation['mustBeEqual']}`;
       default:
-        return `${getErrorName(error)}: ${error.error_name}: ${
-          error.error_value
-        }`;
+        return `${getErrorName(error)}: ${error.error_name}: ${error.error_value}`;
     }
   });
 }
 
-export function getFormValidationErrors(
-  controls: FormGroupControls
-): AllValidationErrors[] {
+export function getFormValidationErrors(controls: FormGroupControls): AllValidationErrors[] {
   let errors: AllValidationErrors[] = [];
   Object.keys(controls).forEach(key => {
     const control = controls[key];
@@ -159,9 +146,7 @@ export function minLengthArray(min: number, field: string): ValidatorFn {
 
 export function minPurchaseInReceipt(): ValidatorFn {
   return (form: AbstractControl): ValidationErrors | null => {
-    const purchases = form
-      .get('purchases')
-      ?.value.filter((x: ReceiptPurchase) => x.selected);
+    const purchases = form.get('purchases')?.value.filter((x: ReceiptPurchase) => x.selected);
 
     return purchases?.length === 0 ? { minPurchaseInReceipt: true } : null;
   };

@@ -39,9 +39,7 @@ export class PurchaseItemComponent {
     const eventMembersCount = this.event.members.length;
 
     const ofText = this.localizationService.translate('event.purchases.of');
-    const participateText = this.localizationService.translate(
-      'event.purchases.participate'
-    );
+    const participateText = this.localizationService.translate('event.purchases.participate');
 
     return purchaseMembersCount === 1
       ? `1 ${ofText} ${eventMembersCount} ${participateText}`

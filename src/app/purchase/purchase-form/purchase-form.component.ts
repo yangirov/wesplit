@@ -11,10 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { EventDto, Purchase, PurchaseMember } from '../../../models/Event';
 import { EventActionCreator } from '../../../utils/EventActionCreator';
-import {
-  minMembersCountInPurchase,
-  sumGreaterZero,
-} from '../../../utils/FormValidators';
+import { minMembersCountInPurchase, sumGreaterZero } from '../../../utils/FormValidators';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '../../base-elements/confirm-dialog/confirm-dialog.component';
 
@@ -142,16 +139,11 @@ export class PurchaseFormComponent implements OnInit {
   }
 
   checkAllMembers(selected: boolean) {
-    this.fillFormArray(
-      this.event.members.map(name => this.formBuilder.group({ name, selected }))
-    );
+    this.fillFormArray(this.event.members.map(name => this.formBuilder.group({ name, selected })));
   }
 
   fillFormArray(config: any) {
-    this.purchaseForm.setControl(
-      'members',
-      this.formBuilder.array(config || [])
-    );
+    this.purchaseForm.setControl('members', this.formBuilder.array(config || []));
   }
 
   mapPurchase(): Purchase {
@@ -187,11 +179,7 @@ export class PurchaseFormComponent implements OnInit {
       const purchase = this.mapPurchase();
 
       if (this.isEdit && this.purchaseId) {
-        await this.dataService.updatePurchase(
-          this.event.id,
-          this.purchaseId,
-          purchase
-        );
+        await this.dataService.updatePurchase(this.event.id, this.purchaseId, purchase);
 
         await this.onChange();
       } else {

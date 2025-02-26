@@ -1,14 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import {
-  ActionTypes,
-  DebtTypes,
-  EventDto,
-  MemberDebt,
-} from '../../../../models/Event';
-import {
-  getEventBalance,
-  getEventsMembersDebts,
-} from '../../../../utils/EventBalanceCalculator';
+import { ActionTypes, DebtTypes, EventDto, MemberDebt } from '../../../../models/Event';
+import { getEventBalance, getEventsMembersDebts } from '../../../../utils/EventBalanceCalculator';
 import { DataService } from '../../../../shared/data.service';
 import { LocalizationService } from '../../../../shared/localization.service';
 
@@ -52,9 +44,7 @@ export class DebtsTabComponent implements OnInit {
       .filter(debt => currentUser === debt.from)
       .map(x => ({
         sum: Math.abs(Math.round(x.sum)),
-        from: `${x.from} ${
-          currentUser === x.from ? `(${youText})` : ''
-        }`.trim(),
+        from: `${x.from} ${currentUser === x.from ? `(${youText})` : ''}`.trim(),
         to: x.to,
       }));
 
@@ -73,10 +63,7 @@ export class DebtsTabComponent implements OnInit {
 
   get hasReturnedDebts(): boolean {
     if (this.event.actions) {
-      return (
-        this.event.actions.filter(x => x.type == ActionTypes.GiveBack).length >
-        0
-      );
+      return this.event.actions.filter(x => x.type == ActionTypes.GiveBack).length > 0;
     }
 
     return false;

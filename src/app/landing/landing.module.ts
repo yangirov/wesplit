@@ -8,11 +8,6 @@ import { TranslocoModule } from '@ngneat/transloco';
 
 @NgModule({
   declarations: [LandingPageComponent],
-  imports: [
-    CommonModule,
-    LandingRoutingModule,
-    MatButtonModule,
-    TranslocoModule,
-  ],
+  imports: [CommonModule, LandingRoutingModule, MatButtonModule, TranslocoModule],
 })
 export class LandingModule {}
