@@ -28,7 +28,7 @@ import {
   MatDatepickerToggle,
 } from '@angular/material/datepicker';
 import { MatSelect } from '@angular/material/select';
-import { MatOption } from '@angular/material/core';
+import { MatOption, provideNativeDateAdapter } from '@angular/material/core';
 import { SeparatorComponent } from '../../base-elements/separator/separator.component';
 import { GreyTitleComponent } from '../../base-elements/grey-title/grey-title.component';
 import { MatCheckbox } from '@angular/material/checkbox';
@@ -62,6 +62,7 @@ import { AsyncPipe } from '@angular/common';
     MatButton,
     AsyncPipe,
   ],
+  providers: [provideNativeDateAdapter()],
 })
 export class PurchaseFormComponent implements OnInit {
   loading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);

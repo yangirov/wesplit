@@ -8,7 +8,7 @@ export const appRoutes: Routes = [
   },
   {
     path: 'events',
-    loadChildren: () => import('./events/events-list.module').then(m => m.EventsListModule),
+    loadChildren: () => import('./events/events.routes').then(m => m.eventsRoutes),
   },
   {
     path: 'events',
