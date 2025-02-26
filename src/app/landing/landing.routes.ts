@@ -1,5 +1,4 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { Routes } from '@angular/router';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { AuthGuard, isNotAnonymous } from '@angular/fire/auth-guard';
 import isPwa from '../../utils/PwaExtensions';
@@ -14,7 +13,7 @@ export const redirectToEventsIfIsPwa = (redirect: any[]) =>
 
 const redirectLoggedInToEvents = () => redirectToEventsIfIsPwa(['events']);
 
-const routes: Routes = [
+export const landingRoutes: Routes = [
   {
     path: '',
     component: LandingPageComponent,
@@ -24,9 +23,3 @@ const routes: Routes = [
     },
   },
 ];
-
-@NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule],
-})
-export class LandingRoutingModule {}

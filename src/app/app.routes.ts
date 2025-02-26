@@ -4,7 +4,7 @@ import { NotFoundPageComponent } from './base-elements/not-found-page/not-found-
 export const appRoutes: Routes = [
   {
     path: '',
-    loadChildren: () => import('./landing/landing.module').then(m => m.LandingModule),
+    loadChildren: () => import('./landing/landing.routes').then(m => m.landingRoutes),
   },
   {
     path: 'events',
