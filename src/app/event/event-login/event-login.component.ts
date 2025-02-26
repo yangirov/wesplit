@@ -5,11 +5,24 @@ import { DataService } from '../../../shared/data.service';
 import { MatDialog } from '@angular/material/dialog';
 import { AddMemberComponent } from './add-member/add-member.component';
 import { AuthenticationService } from '../../../shared/authentication.service';
+import { TranslocoDirective } from '@ngneat/transloco';
+import { EventHeaderComponent } from '../event-info/event-sidenav/event-header/event-header.component';
+import { GreyTitleComponent } from '../../base-elements/grey-title/grey-title.component';
+import { MatButton } from '@angular/material/button';
+import { SpinnerComponent } from '../../base-elements/spinner/spinner.component';
 
 @Component({
   selector: 'app-event-login',
   templateUrl: './event-login.component.html',
   styleUrls: ['./event-login.component.scss'],
+  standalone: true,
+  imports: [
+    TranslocoDirective,
+    EventHeaderComponent,
+    GreyTitleComponent,
+    MatButton,
+    SpinnerComponent,
+  ],
 })
 export class EventLoginComponent implements OnInit {
   eventId!: string;

@@ -7,6 +7,7 @@ import { LocalizationService } from '../../../../../shared/localization.service'
   selector: 'event-header',
   templateUrl: './event-header.component.html',
   styleUrls: ['./event-header.component.scss'],
+  standalone: true,
 })
 export class EventHeaderComponent implements OnInit {
   @Input() event!: Event;

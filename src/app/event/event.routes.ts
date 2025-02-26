@@ -1,5 +1,4 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { Routes } from '@angular/router';
 import { EventFormComponent } from './event-form/event-form.component';
 import { EventInfoComponent } from './event-info/event-info.component';
 import { EventLoginComponent } from './event-login/event-login.component';
@@ -8,7 +7,7 @@ import { QrCodeComponent } from './event-info/qr-code/qr-code.component';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 
-const routes: Routes = [
+export const eventRoutes: Routes = [
   {
     path: 'new',
     component: EventFormComponent,
@@ -50,9 +49,3 @@ const routes: Routes = [
     },
   },
 ];
-
-@NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule],
-})
-export class EventPageRoutingModule {}

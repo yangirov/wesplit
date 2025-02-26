@@ -12,7 +12,7 @@ export const appRoutes: Routes = [
   },
   {
     path: 'events',
-    loadChildren: () => import('./event/event-page.module').then(m => m.EventPageModule),
+    loadChildren: () => import('./event/event.routes').then(m => m.eventRoutes),
   },
   {
     path: 'events/:id/purchases',

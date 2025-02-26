@@ -1,7 +1,16 @@
 import { Component, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import {
+  MAT_DIALOG_DATA,
+  MatDialogActions,
+  MatDialogContent,
+  MatDialogRef,
+  MatDialogTitle,
+} from '@angular/material/dialog';
 import { LocalizationService } from '../../../../shared/localization.service';
 import { ClipboardService } from '../../../../shared/clipboard.service';
+import { TranslocoDirective } from '@ngneat/transloco';
+import { MatButton } from '@angular/material/button';
+import { CdkCopyToClipboard } from '@angular/cdk/clipboard';
 
 const navigator = window.navigator as any;
 
@@ -9,6 +18,15 @@ const navigator = window.navigator as any;
   selector: 'share-event',
   templateUrl: './share-event.component.html',
   styleUrls: ['./share-event.component.scss'],
+  standalone: true,
+  imports: [
+    TranslocoDirective,
+    MatDialogTitle,
+    MatDialogContent,
+    MatDialogActions,
+    MatButton,
+    CdkCopyToClipboard,
+  ],
 })
 export class ShareEventComponent {
   constructor(
