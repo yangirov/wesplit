@@ -1,8 +1,7 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { Routes } from '@angular/router';
 import { NotFoundPageComponent } from './base-elements/not-found-page/not-found-page.component';
 
-const routes: Routes = [
+export const appRoutes: Routes = [
   {
     path: '',
     loadChildren: () => import('./landing/landing.module').then(m => m.LandingModule),
@@ -36,9 +35,3 @@ const routes: Routes = [
     component: NotFoundPageComponent,
   },
 ];
-
-@NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule],
-})
-export class AppRoutingModule {}
