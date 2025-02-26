@@ -16,7 +16,7 @@ export const appRoutes: Routes = [
   },
   {
     path: 'events/:id/purchases',
-    loadChildren: () => import('./purchase/purchase.module').then(m => m.PurchaseModule),
+    loadChildren: () => import('./purchase/purchase.routes').then(m => m.purchaseRoutes),
   },
   {
     path: 'login',
