@@ -28,7 +28,7 @@ export const appRoutes: Routes = [
   },
   {
     path: 'feedback',
-    loadChildren: () => import('./feedback/feedback.module').then(m => m.FeedbackModule),
+    loadChildren: () => import('./feedback/feedback.routes').then(m => m.feedbackRoutes),
   },
   {
     path: '**',
