@@ -20,7 +20,7 @@ export const appRoutes: Routes = [
   },
   {
     path: 'login',
-    loadChildren: () => import('./login/login.module').then(m => m.LoginModule),
+    loadChildren: () => import('./login/login.routes').then(m => m.loginRoutes),
   },
   {
     path: 'settings',
