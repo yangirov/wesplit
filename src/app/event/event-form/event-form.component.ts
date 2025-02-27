@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import {
+  ReactiveFormsModule,
   UntypedFormArray,
   UntypedFormBuilder,
   UntypedFormControl,
@@ -18,17 +19,51 @@ import {
 } from '../../../utils/FormValidators';
 import { utc } from 'moment';
 import { BehaviorSubject } from 'rxjs';
-import { EventActionCreator } from '../../../utils/EventActionCreator';
 import { ConfirmDialogComponent } from '../../base-elements/confirm-dialog/confirm-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { AuthenticationService } from '../../../shared/authentication.service';
 import { Location } from '@angular/common';
+import { TranslocoDirective } from '@ngneat/transloco';
+import { LayoutComponent } from '../../base-elements/layouts/layout/layout.component';
+import { MatButton, MatIconButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
+import { FormErrorsComponent } from '../../base-elements/form-errors/form-errors.component';
+import { MatFormField, MatLabel, MatSuffix } from '@angular/material/form-field';
+import { MatInput } from '@angular/material/input';
+import {
+  MatDatepicker,
+  MatDatepickerInput,
+  MatDatepickerToggle,
+} from '@angular/material/datepicker';
+import { SeparatorComponent } from '../../base-elements/separator/separator.component';
+import { GreyTitleComponent } from '../../base-elements/grey-title/grey-title.component';
+import { provideNativeDateAdapter } from '@angular/material/core';
 
 @Component({
   selector: 'event-form',
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './event-form.component.html',
   styleUrls: ['./event-form.component.scss'],
+  standalone: true,
+  imports: [
+    TranslocoDirective,
+    LayoutComponent,
+    MatIconButton,
+    MatIcon,
+    FormErrorsComponent,
+    ReactiveFormsModule,
+    MatFormField,
+    MatLabel,
+    MatInput,
+    MatDatepickerInput,
+    MatDatepickerToggle,
+    MatSuffix,
+    MatDatepicker,
+    SeparatorComponent,
+    GreyTitleComponent,
+    MatButton,
+  ],
+  providers: [provideNativeDateAdapter()],
 })
 export class EventFormComponent implements OnInit {
   loading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
@@ -42,7 +77,6 @@ export class EventFormComponent implements OnInit {
   constructor(
     private formBuilder: UntypedFormBuilder,
     private dataService: DataService,
-    private eventActionCreator: EventActionCreator,
     private route: ActivatedRoute,
     private router: Router,
     private location: Location,

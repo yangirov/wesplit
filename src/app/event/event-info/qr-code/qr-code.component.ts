@@ -5,7 +5,12 @@ import { Receipt, ReceiptPurchase } from '../../../../models/Receipt';
 import { AuthenticationService } from '../../../../shared/authentication.service';
 import { filter, take } from 'rxjs/operators';
 import { Html5QrcodeScanner } from 'html5-qrcode';
-import { UntypedFormArray, UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
+import {
+  ReactiveFormsModule,
+  UntypedFormArray,
+  UntypedFormBuilder,
+  UntypedFormGroup,
+} from '@angular/forms';
 import { minLengthArray, minPurchaseInReceipt } from '../../../../utils/FormValidators';
 import { EventAction, EventDto, Purchase } from '../../../../models/Event';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -14,11 +19,27 @@ import { utc } from 'moment';
 import { LocalizationService } from '../../../../shared/localization.service';
 import { EventActionCreator } from '../../../../utils/EventActionCreator';
 import { Location } from '@angular/common';
+import { TranslocoDirective } from '@ngneat/transloco';
+import { LayoutComponent } from '../../../base-elements/layouts/layout/layout.component';
+import { MatIconButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
+import { FormErrorsComponent } from '../../../base-elements/form-errors/form-errors.component';
+import { MatCheckbox } from '@angular/material/checkbox';
 
 @Component({
   selector: 'app-qr-code',
   templateUrl: './qr-code.component.html',
   styleUrls: ['./qr-code.component.scss'],
+  standalone: true,
+  imports: [
+    TranslocoDirective,
+    LayoutComponent,
+    MatIconButton,
+    MatIcon,
+    FormErrorsComponent,
+    ReactiveFormsModule,
+    MatCheckbox,
+  ],
 })
 export class QrCodeComponent implements OnInit, AfterViewInit {
   loading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);

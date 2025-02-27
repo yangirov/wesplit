@@ -1,12 +1,11 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { Routes } from '@angular/router';
 import { PurchaseFormComponent } from './purchase-form/purchase-form.component';
 import { redirectUnauthorizedTo } from '@angular/fire/auth-guard';
 import { EventAuthGuard } from '../../utils/EventAuthGuard';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 
-const routes: Routes = [
+export const purchaseRoutes: Routes = [
   {
     path: 'new',
     component: PurchaseFormComponent,
@@ -27,9 +26,3 @@ const routes: Routes = [
     },
   },
 ];
-
-@NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule],
-})
-export class PurchaseRoutingModule {}

@@ -3,11 +3,26 @@ import { EventDto } from '../../../../models/Event';
 import { DataService } from '../../../../shared/data.service';
 import { MatDialog } from '@angular/material/dialog';
 import { LocalizationService } from '../../../../shared/localization.service';
+import { TranslocoDirective } from '@ngneat/transloco';
+import { MatIconButton } from '@angular/material/button';
+import { RouterLink } from '@angular/router';
+import { MatIcon } from '@angular/material/icon';
+import { EventHeaderComponent } from './event-header/event-header.component';
+import { MatDivider } from '@angular/material/divider';
 
 @Component({
   selector: 'event-sidenav',
   templateUrl: './event-sidenav.component.html',
   styleUrls: ['./event-sidenav.component.scss'],
+  standalone: true,
+  imports: [
+    TranslocoDirective,
+    MatIconButton,
+    RouterLink,
+    MatIcon,
+    EventHeaderComponent,
+    MatDivider,
+  ],
 })
 export class EventSidenavComponent {
   @Input() event!: EventDto;

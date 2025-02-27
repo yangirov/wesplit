@@ -2,13 +2,35 @@ import { Component, OnInit } from '@angular/core';
 import { ThemeService } from '../../../shared/theme.service';
 import { LocalizationService } from '../../../shared/localization.service';
 import { Location } from '@angular/common';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import {
+  ReactiveFormsModule,
+  UntypedFormBuilder,
+  UntypedFormGroup,
+  Validators,
+} from '@angular/forms';
 import { CurrencyService } from '../../../shared/currency.service';
+import { TranslocoDirective } from '@ngneat/transloco';
+import { LayoutComponent } from '../../base-elements/layouts/layout/layout.component';
+import { MatIconButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
+import { MatFormField, MatLabel } from '@angular/material/form-field';
+import { MatInput } from '@angular/material/input';
 
 @Component({
   selector: 'app-settings-form',
   templateUrl: './settings-form.component.html',
   styleUrls: ['./settings-form.component.scss'],
+  standalone: true,
+  imports: [
+    TranslocoDirective,
+    LayoutComponent,
+    MatIconButton,
+    MatIcon,
+    ReactiveFormsModule,
+    MatFormField,
+    MatLabel,
+    MatInput,
+  ],
 })
 export class SettingsFormComponent implements OnInit {
   settingsForm!: UntypedFormGroup;

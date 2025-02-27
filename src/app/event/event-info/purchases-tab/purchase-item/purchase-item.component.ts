@@ -4,11 +4,16 @@ import { formatSum } from '../../../../../utils/Formatters';
 import { LocalizationService } from '../../../../../shared/localization.service';
 import { CurrencyService } from '../../../../../shared/currency.service';
 import { utc } from 'moment';
+import { TranslocoDirective } from '@ngneat/transloco';
+import { RouterLink } from '@angular/router';
+import { MatDivider } from '@angular/material/divider';
 
 @Component({
   selector: 'purchase-item',
   templateUrl: './purchase-item.component.html',
   styleUrls: ['./purchase-item.component.scss'],
+  standalone: true,
+  imports: [TranslocoDirective, RouterLink, MatDivider],
 })
 export class PurchaseItemComponent {
   @Input() event!: EventDto;

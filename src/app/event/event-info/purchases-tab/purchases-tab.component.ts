@@ -3,12 +3,32 @@ import { EventDto, PurchasesSortFilter } from '../../../../models/Event';
 import { LocalizationService } from '../../../../shared/localization.service';
 import { formatSum } from '../../../../utils/Formatters';
 import { CurrencyService } from '../../../../shared/currency.service';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { TranslocoDirective } from '@ngneat/transloco';
+import { MatFormField } from '@angular/material/form-field';
+import { MatSelect } from '@angular/material/select';
+import { MatOption } from '@angular/material/core';
+import { MatDivider } from '@angular/material/divider';
+import { PurchaseItemComponent } from './purchase-item/purchase-item.component';
+import { EmptyItemsComponent } from '../../../base-elements/empty-items/empty-items.component';
+import { FabButtonComponent } from '../../../base-elements/fab-button/fab-button.component';
 
 @Component({
   selector: 'purchases-tab',
   templateUrl: './purchases-tab.component.html',
   styleUrls: ['./purchases-tab.component.scss'],
+  standalone: true,
+  imports: [
+    TranslocoDirective,
+    ReactiveFormsModule,
+    MatFormField,
+    MatSelect,
+    MatOption,
+    MatDivider,
+    PurchaseItemComponent,
+    EmptyItemsComponent,
+    FabButtonComponent,
+  ],
 })
 export class PurchasesTabComponent implements OnInit {
   @Input() event!: EventDto;

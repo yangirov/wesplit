@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {
+  ReactiveFormsModule,
   UntypedFormArray,
   UntypedFormBuilder,
   UntypedFormControl,
@@ -7,18 +8,61 @@ import {
   Validators,
 } from '@angular/forms';
 import { DataService } from '../../../shared/data.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { EventDto, Purchase, PurchaseMember } from '../../../models/Event';
 import { EventActionCreator } from '../../../utils/EventActionCreator';
 import { minMembersCountInPurchase, sumGreaterZero } from '../../../utils/FormValidators';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '../../base-elements/confirm-dialog/confirm-dialog.component';
+import { TranslocoDirective } from '@ngneat/transloco';
+import { LayoutComponent } from '../../base-elements/layouts/layout/layout.component';
+import { MatButton, MatIconButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
+import { FormErrorsComponent } from '../../base-elements/form-errors/form-errors.component';
+import { MatFormField, MatLabel, MatSuffix } from '@angular/material/form-field';
+import { MatInput } from '@angular/material/input';
+import {
+  MatDatepicker,
+  MatDatepickerInput,
+  MatDatepickerToggle,
+} from '@angular/material/datepicker';
+import { MatSelect } from '@angular/material/select';
+import { MatOption, provideNativeDateAdapter } from '@angular/material/core';
+import { SeparatorComponent } from '../../base-elements/separator/separator.component';
+import { GreyTitleComponent } from '../../base-elements/grey-title/grey-title.component';
+import { MatCheckbox } from '@angular/material/checkbox';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'purchase-form',
   templateUrl: './purchase-form.component.html',
   styleUrls: ['./purchase-form.component.scss'],
+  standalone: true,
+  imports: [
+    TranslocoDirective,
+    LayoutComponent,
+    MatIconButton,
+    RouterLink,
+    MatIcon,
+    FormErrorsComponent,
+    ReactiveFormsModule,
+    MatFormField,
+    MatLabel,
+    MatInput,
+    MatDatepickerInput,
+    MatDatepickerToggle,
+    MatSuffix,
+    MatDatepicker,
+    MatSelect,
+    MatOption,
+    SeparatorComponent,
+    GreyTitleComponent,
+    MatCheckbox,
+    MatButton,
+    AsyncPipe,
+  ],
+  providers: [provideNativeDateAdapter()],
 })
 export class PurchaseFormComponent implements OnInit {
   loading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
