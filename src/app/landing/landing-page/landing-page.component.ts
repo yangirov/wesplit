@@ -2,11 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { LocalizationService } from '../../../shared/localization.service';
+import { TranslocoDirective } from '@ngneat/transloco';
+import { MatButton } from '@angular/material/button';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-landing-page',
   templateUrl: './landing-page.component.html',
   styleUrls: ['./landing-page.component.scss'],
+  standalone: true,
+  imports: [TranslocoDirective, MatButton, RouterLink],
 })
 export class LandingPageComponent implements OnInit {
   isNormalStatus: boolean = true;

@@ -6,6 +6,7 @@ import { UntypedFormGroup } from '@angular/forms';
   selector: 'form-errors',
   templateUrl: './form-errors.component.html',
   styleUrls: ['./form-errors.component.scss'],
+  standalone: true,
 })
 export class FormErrorsComponent implements OnInit {
   @Input() localization!: string;

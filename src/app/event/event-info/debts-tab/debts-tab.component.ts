@@ -3,11 +3,26 @@ import { ActionTypes, DebtTypes, EventDto, MemberDebt } from '../../../../models
 import { getEventBalance, getEventsMembersDebts } from '../../../../utils/EventBalanceCalculator';
 import { DataService } from '../../../../shared/data.service';
 import { LocalizationService } from '../../../../shared/localization.service';
+import { EventCheckComponent } from './event-check/event-check.component';
+import { SeparatorComponent } from '../../../base-elements/separator/separator.component';
+import { TranslocoDirective } from '@ngneat/transloco';
+import { GreyTitleComponent } from '../../../base-elements/grey-title/grey-title.component';
+import { DebtItemComponent } from './debt-item/debt-item.component';
+import { EmptyItemsComponent } from '../../../base-elements/empty-items/empty-items.component';
 
 @Component({
   selector: 'debts-tab',
   templateUrl: './debts-tab.component.html',
   styleUrls: ['./debts-tab.component.scss'],
+  standalone: true,
+  imports: [
+    EventCheckComponent,
+    SeparatorComponent,
+    TranslocoDirective,
+    GreyTitleComponent,
+    DebtItemComponent,
+    EmptyItemsComponent,
+  ],
 })
 export class DebtsTabComponent implements OnInit {
   @Input() public event!: EventDto;

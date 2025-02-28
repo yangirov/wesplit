@@ -8,11 +8,17 @@ import { LocalizationService } from '../../../shared/localization.service';
 import isPwa from '../../../utils/PwaExtensions';
 import { LoginEmailComponent } from './login-email/login-email.component';
 import { Location } from '@angular/common';
+import { TranslocoDirective } from '@ngneat/transloco';
+import { SidenavLayoutComponent } from '../../base-elements/layouts/sidenav-layout/sidenav-layout.component';
+import { MatButton, MatIconButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
   selector: 'app-login-form',
   templateUrl: './login-form.component.html',
   styleUrls: ['./login-form.component.scss'],
+  standalone: true,
+  imports: [TranslocoDirective, SidenavLayoutComponent, MatIconButton, MatIcon, MatButton],
 })
 export class LoginFormComponent {
   loading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);

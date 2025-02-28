@@ -1,19 +1,44 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, ParamMap, Params, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { EventDto } from '../../../models/Event';
 import { DataService } from '../../../shared/data.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ShareEventComponent } from './share-event/share-event.component';
 import { Title } from '@angular/platform-browser';
 import { environment } from '../../../environments/environment';
-import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { catchError, take } from 'rxjs/operators';
 import { AuthenticationService } from '../../../shared/authentication.service';
+import { TranslocoDirective } from '@ngneat/transloco';
+import { SidenavLayoutComponent } from '../../base-elements/layouts/sidenav-layout/sidenav-layout.component';
+import { EventSidenavComponent } from './event-sidenav/event-sidenav.component';
+import { MatIconButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
+import { MatTab, MatTabGroup } from '@angular/material/tabs';
+import { PurchasesTabComponent } from './purchases-tab/purchases-tab.component';
+import { DebtsTabComponent } from './debts-tab/debts-tab.component';
+import { ActionsTabComponent } from './actions-tab/actions-tab.component';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'event-info',
   templateUrl: './event-info.component.html',
   styleUrls: ['./event-info.component.scss'],
+  standalone: true,
+  imports: [
+    TranslocoDirective,
+    SidenavLayoutComponent,
+    EventSidenavComponent,
+    MatIconButton,
+    RouterLink,
+    MatIcon,
+    MatTabGroup,
+    MatTab,
+    PurchasesTabComponent,
+    DebtsTabComponent,
+    ActionsTabComponent,
+    AsyncPipe,
+  ],
 })
 export class EventInfoComponent implements OnInit {
   loading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);

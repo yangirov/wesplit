@@ -1,17 +1,47 @@
 import { Component, OnInit } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import {
+  ReactiveFormsModule,
+  UntypedFormBuilder,
+  UntypedFormGroup,
+  Validators,
+} from '@angular/forms';
+import {
+  MatDialogActions,
+  MatDialogContent,
+  MatDialogRef,
+  MatDialogTitle,
+} from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../../../../shared/authentication.service';
 import { LocalizationService } from '../../../../shared/localization.service';
 import { calculateFormValidationErrors } from '../../../../utils/FormValidators';
 import { debounceTime } from 'rxjs/operators';
+import { TranslocoDirective } from '@ngneat/transloco';
+import { SpinnerComponent } from '../../../base-elements/spinner/spinner.component';
+import { MatFormField, MatLabel } from '@angular/material/form-field';
+import { MatInput } from '@angular/material/input';
+import { MatButton } from '@angular/material/button';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-login-modal',
   templateUrl: './login-email.component.html',
   styleUrls: ['./login-email.component.scss'],
+  standalone: true,
+  imports: [
+    TranslocoDirective,
+    MatDialogTitle,
+    SpinnerComponent,
+    MatDialogContent,
+    ReactiveFormsModule,
+    MatFormField,
+    MatLabel,
+    MatInput,
+    MatDialogActions,
+    MatButton,
+    AsyncPipe,
+  ],
 })
 export class LoginEmailComponent implements OnInit {
   loading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);

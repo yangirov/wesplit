@@ -1,16 +1,22 @@
-import { enableProdMode } from '@angular/core';
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-import { inject } from '@vercel/analytics';
+import { importProvidersFrom } from '@angular/core';
+import { AuthModule } from '@angular/fire/auth';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { bootstrapApplication, BrowserModule } from '@angular/platform-browser';
+import { appRoutes } from './app/app.routes';
+import { provideAnimations } from '@angular/platform-browser/animations';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { AppComponent } from './app/app.component';
+import { appInitializerProviders, firebaseProviders, localizationProviders } from './providers';
+import { provideRouter } from '@angular/router';
 
-import { AppModule } from './app/app.module';
-import { environment } from './environments/environment';
-
-if (environment.production) {
-  enableProdMode();
-}
-
-platformBrowserDynamic()
-  .bootstrapModule(AppModule)
-  .catch(err => console.error(err));
-
-inject();
+bootstrapApplication(AppComponent, {
+  providers: [
+    importProvidersFrom(BrowserModule, MatSnackBarModule, AuthModule),
+    provideAnimations(),
+    provideHttpClient(withInterceptorsFromDi()),
+    provideRouter(appRoutes),
+    ...localizationProviders,
+    ...firebaseProviders,
+    ...appInitializerProviders,
+  ],
+}).catch(err => console.error(err));

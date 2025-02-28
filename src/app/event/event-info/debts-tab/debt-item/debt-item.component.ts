@@ -4,11 +4,16 @@ import { MatDialog } from '@angular/material/dialog';
 import { RepayDebtComponent } from '../repay-debt/repay-debt.component';
 import { DataService } from '../../../../../shared/data.service';
 import { CurrencyService } from '../../../../../shared/currency.service';
+import { TranslocoDirective } from '@ngneat/transloco';
+import { MatIcon } from '@angular/material/icon';
+import { MatDivider } from '@angular/material/divider';
 
 @Component({
   selector: 'debt-item',
   templateUrl: './debt-item.component.html',
   styleUrls: ['./debt-item.component.scss'],
+  standalone: true,
+  imports: [TranslocoDirective, MatIcon, MatDivider],
 })
 export class DebtItemComponent {
   @Input() public event!: EventDto;

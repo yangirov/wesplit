@@ -1,18 +1,49 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { DebtDto } from '../../../../../models/Event';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import {
+  ReactiveFormsModule,
+  UntypedFormBuilder,
+  UntypedFormGroup,
+  Validators,
+} from '@angular/forms';
 import { sumGreaterZero, sumLessOrEqualDebt } from '../../../../../utils/FormValidators';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import {
+  MAT_DIALOG_DATA,
+  MatDialogActions,
+  MatDialogContent,
+  MatDialogRef,
+  MatDialogTitle,
+} from '@angular/material/dialog';
 import { DataService } from '../../../../../shared/data.service';
 import { EventActionCreator } from '../../../../../utils/EventActionCreator';
 import { BehaviorSubject } from 'rxjs';
 import { LocalizationService } from '../../../../../shared/localization.service';
 import { CurrencyService } from '../../../../../shared/currency.service';
+import { TranslocoDirective } from '@ngneat/transloco';
+import { MatIcon } from '@angular/material/icon';
+import { MatFormField, MatLabel } from '@angular/material/form-field';
+import { MatInput } from '@angular/material/input';
+import { MatButton } from '@angular/material/button';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'repay-debt',
   templateUrl: './repay-debt.component.html',
   styleUrls: ['./repay-debt.component.scss'],
+  standalone: true,
+  imports: [
+    TranslocoDirective,
+    MatDialogTitle,
+    MatDialogContent,
+    MatIcon,
+    ReactiveFormsModule,
+    MatFormField,
+    MatLabel,
+    MatInput,
+    MatDialogActions,
+    MatButton,
+    AsyncPipe,
+  ],
 })
 export class RepayDebtComponent implements OnInit {
   loading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);

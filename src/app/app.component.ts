@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { filter, map, mergeMap, takeUntil } from 'rxjs/operators';
 import { environment } from '../environments/environment';
 import { Title } from '@angular/platform-browser';
@@ -12,6 +12,8 @@ import { CurrencyService } from '../shared/currency.service';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
+  standalone: true,
+  imports: [RouterOutlet],
 })
 export class AppComponent implements OnInit, OnDestroy {
   constructor(
